@@ -1,5 +1,14 @@
 {
   "name": "Lịch Block Âm Dương Việt Nam",
   "filename": "lich-block-am-duong-viet-nam.js",
+  "resources": [
+    "images/amlich_khai_cn.png",
+    "images/amlich_khai_t2.png",
+    "images/amlich_khai_t3.png",
+    "images/amlich_khai_t4.png",
+    "images/amlich_khai_t5.png",
+    "images/amlich_khai_t6.png",
+    "images/amlich_khai_t7.png"
+  ],
   "render_readme": true
 }
