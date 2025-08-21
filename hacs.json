@@ -10,5 +10,6 @@
     "images/amlich_khai_t6.png",
     "images/amlich_khai_t7.png"
   ],
-  "render_readme": true
+  "render_readme": true,
+  "content_in_root": true
 }
