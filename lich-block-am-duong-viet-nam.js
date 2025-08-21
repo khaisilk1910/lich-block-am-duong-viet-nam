@@ -351,7 +351,7 @@
 	];
 	const bg = bgImages[dow];
 	// Đường dẫn ảnh tính từ file JS (cùng thư mục)
-	const bgUrl = new URL(`./images/${bg}`, import.meta.url).href;
+	const bgUrl = new URL(`/hacsfiles/lich-block-am-duong-viet-nam/images/${bg}`, import.meta.url).href;
 
     let res = "";
 		res += `<div style="background:url('${bgUrl}') no-repeat center center; background-size:cover; border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
