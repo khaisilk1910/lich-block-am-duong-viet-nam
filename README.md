@@ -42,7 +42,7 @@
      
    - Thêm thẻ mới và điền
 
-     ```type: custom:lich-block-am-duong-viet-nam```
+     `type: custom:lich-block-am-duong-viet-nam`
      
      <img width="1020" height="768" alt="image" src="https://github.com/user-attachments/assets/2aa98f8f-461a-4397-99a3-cf0fdc22755a" />
 
