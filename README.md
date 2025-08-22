@@ -13,12 +13,13 @@
    - Vào HACS
    - Vào 3 Chấm góc trên bên phải
    - Chọn **Custom repositories**
-     <img width="302" height="406" alt="image" src="https://github.com/user-attachments/assets/602d5e5e-fe07-4160-b78f-f8106f0f6322" />
+     <img width="303" height="437" alt="image" src="https://github.com/user-attachments/assets/71489d94-bc79-4f12-9941-9c1ce56152e8" />
+
    - Điền `https://github.com/khaisilk1910/lich-block-am-duong-viet-nam` và chọn Dashboard và nhấn Add
-     <img width="420" height="472" alt="image" src="https://github.com/user-attachments/assets/bd46eebe-9a50-4b37-b281-69ad60a29e0d" />
-   - Quay lại HACS và nhập ô tìm kiếm `Lịch Block Âm Dương Việt Nam`
-     <img width="1657" height="338" alt="image" src="https://github.com/user-attachments/assets/8b802f5a-0cd7-4ab4-a77d-7038d3b38902" />
-   - Tải về
+     <img width="433" height="487" alt="image" src="https://github.com/user-attachments/assets/755a49cb-58a6-481d-b6ad-650017615e86" />
+
+   - Quay lại HACS và nhập ô tìm kiếm `Lịch Block Âm Dương Việt Nam` và Tải về
+     <img width="1658" height="326" alt="image" src="https://github.com/user-attachments/assets/70917f4b-5ff1-4bd6-b4f9-6e1e9acd4d86" />
 
 
 2. Cài đặt thủ công
