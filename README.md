@@ -5,6 +5,7 @@
 - Hình nền thay đổi theo ngày trong tuần.
 - Hiện giờ hoàng đạo, ngày tháng năm theo can chi lịch âm.
 - Hiển thị tháng Đủ *(Đ)* hoặc Thiếu *(T)*, tháng *Nhuận* Âm Lịch
+<img width="503" height="538" alt="image" src="https://github.com/user-attachments/assets/40ac8a8f-7995-44e6-8ffa-1be8ce63ec69" />
 
 
 ## Hướng dẫn:
