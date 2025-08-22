@@ -40,7 +40,9 @@
      
      <img width="172" height="110" alt="image" src="https://github.com/user-attachments/assets/2447c0e3-0b85-4351-a8ed-51643e3e766c" />
      
-   - Thêm thẻ mới và điền **type: custom:lich-block-am-duong-viet-nam**
+   - Thêm thẻ mới và điền
+
+     `type: custom:lich-block-am-duong-viet-nam`
      
      <img width="1020" height="768" alt="image" src="https://github.com/user-attachments/assets/2aa98f8f-461a-4397-99a3-cf0fdc22755a" />
 
