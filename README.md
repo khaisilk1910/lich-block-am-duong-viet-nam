@@ -42,7 +42,19 @@
      
    - Thêm thẻ mới và điền
 
-     `type: custom:lich-block-am-duong-viet-nam`
+     ```
+     type: custom:custom-electric-bill-card-total-days
+      entity: sensor.tongou_bo_energy_monthly
+      title: Công tơ Bố
+      used_days: 15
+      prices:
+        - 1984
+        - 2050
+        - 2380
+        - 2998
+        - 3350
+        - 3460
+      ```
      
      <img width="1020" height="768" alt="image" src="https://github.com/user-attachments/assets/2aa98f8f-461a-4397-99a3-cf0fdc22755a" />
 
