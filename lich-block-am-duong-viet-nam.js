@@ -386,9 +386,9 @@
 		} else if (daysInLunarMonth === 30) {
 			thangAm += " (Đ)";
 		}
-    res += `<div class="ThangNgayGioTiet" style="text-align:center;">${thangAm}</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
-    res += `<div class="ThangNgayGioTiet" style="text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)} (${currentLunarDate.year})</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)} (${currentLunarDate.year})</div>`;
     res += '</td>';
     res += '<td class="thongtin_letet">';
     if (currentLunarDate.day === 1) res += '<div style="padding-bottom:8px;">Mùng Một</div>';
