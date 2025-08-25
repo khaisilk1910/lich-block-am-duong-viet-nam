@@ -1,6 +1,6 @@
 {
   "name": "Lịch Block Âm Dương Việt Nam",
-  "filename": "lich-block-am-duong-viet-nam/lich-block-am-duong-viet-nam.js",
+  "filename": "lich-block-am-duong-viet-nam.js",
   "render_readme": true,
-  "content_in_root": false
+  "content_in_root": true
 }
