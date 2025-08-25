@@ -10,6 +10,7 @@
 
 
 ## Hướng dẫn:
+### Khi update các bạn tải lại folder images copy lại vào `\config\www\community\lich-block-am-duong-viet-nam\`
 1. Cài qua HACS
    - Vào HACS
    - Vào 3 Chấm góc trên bên phải
