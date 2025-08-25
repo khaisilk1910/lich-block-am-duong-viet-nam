@@ -1,5 +1,8 @@
 {
   "name": "Lịch Block Âm Dương Việt Nam",
+  "filename": "lich-block-am-duong-viet-nam.js",
   "render_readme": true,
-  "country": "VN"
+  "country": ["VN"],
+  "homeassistant": "2024.1.0",
+  "hacs": "1.0.0"
 }
