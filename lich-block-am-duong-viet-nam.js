@@ -94,6 +94,135 @@
   const NGAY_LE_AL = ["1/1","15/1","3/3","10/3","15/4","5/5","7/7","15/7","15/8","9/9","10/10","15/10","23/12"];
   const NGAY_LE_AL_STRING = ["Tết Nguyên Đán","Tết Nguyên Tiêu","Tết Hàn Thực, Tiết Thanh Minh","Giỗ tổ Hùng Vương","Lễ Phật Đản","Tết Đoan Ngọ","Lễ Thất Tịch","Lễ Vu Lan","Tết Trung Thu","Tết Trùng Cửu","Tết Trùng Thập","Tết Hạ Nguyên","Ông Táo Về Trời"];
 
+	const VIEC_NEN_LAM = {
+		"Giáp Tý": "Tốt cho khai trương, cầu tài, xuất hành, cưới hỏi",
+		"Ất Sửu": "Tốt cho động thổ, xây dựng, cầu phúc",
+		"Bính Dần": "Tốt cho cầu tài, ký kết, khai trương",
+		"Đinh Mão": "Tốt cho cưới hỏi, nhập trạch, động thổ",
+		"Mậu Thìn": "Tốt cho khai trương, tế lễ, cầu phúc",
+		"Kỷ Tỵ": "Tốt cho cầu tài, khai trương, ký kết",
+		"Canh Ngọ": "Tốt cho cưới hỏi, xuất hành, cầu lộc",
+		"Tân Mùi": "Tốt cho động thổ, nhập trạch, an táng",
+		"Nhâm Thân": "Tốt cho cầu tài, khai trương, giao dịch",
+		"Quý Dậu": "Tốt cho cưới hỏi, tế lễ, nhập trạch",
+		"Giáp Tuất": "Tốt cho khai trương, cầu phúc, xây dựng",
+		"Ất Hợi": "Tốt cho cầu tài, cầu lộc, xuất hành",
+		"Bính Tý": "Tốt cho cưới hỏi, ký kết, khai trương",
+		"Đinh Sửu": "Tốt cho động thổ, xây dựng, tu tạo",
+		"Mậu Dần": "Tốt cho cầu tài, khai trương, xuất hành",
+		"Kỷ Mão": "Tốt cho cưới hỏi, cầu phúc, nhập trạch",
+		"Canh Thìn": "Tốt cho khai trương, cầu tài, giao dịch",
+		"Tân Tỵ": "Tốt cho cầu tài, ký kết, xuất hành",
+		"Nhâm Ngọ": "Tốt cho cưới hỏi, cầu lộc, khai trương",
+		"Quý Mùi": "Tốt cho động thổ, an táng, tu tạo",
+		"Giáp Thân": "Tốt cho cầu tài, khai trương, ký kết",
+		"Ất Dậu": "Tốt cho cưới hỏi, nhập trạch, cầu phúc",
+		"Bính Tuất": "Tốt cho khai trương, xuất hành, giao dịch",
+		"Đinh Hợi": "Tốt cho cầu tài, cầu lộc, ký kết",
+		"Mậu Tý": "Tốt cho cưới hỏi, tế lễ, nhập trạch",
+		"Kỷ Sửu": "Tốt cho động thổ, xây dựng, an táng",
+		"Canh Dần": "Tốt cho khai trương, cầu tài, ký kết",
+		"Tân Mão": "Tốt cho cưới hỏi, cầu lộc, nhập trạch",
+		"Nhâm Thìn": "Tốt cho khai trương, tế lễ, xuất hành",
+		"Quý Tỵ": "Tốt cho cầu tài, giao dịch, cầu lộc",
+		"Giáp Ngọ": "Tốt cho cưới hỏi, khai trương, xuất hành",
+		"Ất Mùi": "Tốt cho động thổ, xây dựng, an táng",
+		"Bính Thân": "Tốt cho cầu tài, ký kết, khai trương",
+		"Đinh Dậu": "Tốt cho cưới hỏi, nhập trạch, cầu phúc",
+		"Mậu Tuất": "Tốt cho khai trương, cầu tài, giao dịch",
+		"Kỷ Hợi": "Tốt cho cầu tài, xuất hành, cầu lộc",
+		"Canh Tý": "Tốt cho cưới hỏi, cầu phúc, khai trương",
+		"Tân Sửu": "Tốt cho động thổ, tu tạo, an táng",
+		"Nhâm Dần": "Tốt cho cầu tài, ký kết, khai trương",
+		"Quý Mão": "Tốt cho cưới hỏi, nhập trạch, cầu phúc",
+		"Giáp Thìn": "Tốt cho khai trương, xuất hành, cầu tài",
+		"Ất Tỵ": "Tốt cho cầu tài, ký kết, cầu lộc",
+		"Bính Ngọ": "Tốt cho cưới hỏi, cầu phúc, khai trương",
+		"Đinh Mùi": "Tốt cho động thổ, xây dựng, nhập trạch",
+		"Mậu Thân": "Tốt cho khai trương, cầu tài, xuất hành",
+		"Kỷ Dậu": "Tốt cho cưới hỏi, cầu phúc, tế lễ",
+		"Canh Tuất": "Tốt cho khai trương, cầu tài, ký kết",
+		"Tân Hợi": "Tốt cho cầu tài, xuất hành, cầu lộc",
+		"Nhâm Tý": "Tốt cho cưới hỏi, nhập trạch, cầu phúc",
+		"Quý Sửu": "Tốt cho động thổ, xây dựng, an táng",
+		"Giáp Dần": "Tốt cho khai trương, cầu tài, ký kết",
+		"Ất Mão": "Tốt cho cưới hỏi, cầu lộc, nhập trạch",
+		"Bính Thìn": "Tốt cho khai trương, tế lễ, xuất hành",
+		"Đinh Tỵ": "Tốt cho cầu tài, giao dịch, cầu lộc",
+		"Mậu Ngọ": "Tốt cho cưới hỏi, khai trương, xuất hành",
+		"Kỷ Mùi": "Tốt cho động thổ, xây dựng, tu tạo",
+		"Canh Thân": "Tốt cho cầu tài, ký kết, khai trương",
+		"Tân Dậu": "Tốt cho cưới hỏi, nhập trạch, cầu phúc",
+		"Nhâm Tuất": "Tốt cho khai trương, cầu tài, xuất hành",
+		"Quý Hợi": "Tốt cho cầu tài, cầu lộc, giao dịch"
+	};
+
+	const VIEC_KIENGLAM = {
+		"Giáp Tý": "Kỵ chôn cất, đi xa, kiện tụng",
+		"Ất Sửu": "Kỵ cưới hỏi, khai trương lớn",
+		"Bính Dần": "Kỵ an táng, kiện tụng",
+		"Đinh Mão": "Kỵ xây dựng lớn, đi xa",
+		"Mậu Thìn": "Kỵ cưới hỏi, chôn cất",
+		"Kỷ Tỵ": "Kỵ xây nhà, xuất hành hướng Nam",
+		"Canh Ngọ": "Kỵ an táng, động thổ lớn",
+		"Tân Mùi": "Kỵ khai trương, xuất hành xa",
+		"Nhâm Thân": "Kỵ cưới hỏi, chôn cất",
+		"Quý Dậu": "Kỵ xây dựng, khai trương",
+		"Giáp Tuất": "Kỵ an táng, kiện tụng",
+		"Ất Hợi": "Kỵ cưới hỏi, xuất hành xa",
+		"Bính Tý": "Kỵ động thổ, chôn cất",
+		"Đinh Sửu": "Kỵ khai trương, xuất hành xa",
+		"Mậu Dần": "Kỵ cưới hỏi, an táng",
+		"Kỷ Mão": "Kỵ xây dựng, xuất hành xa",
+		"Canh Thìn": "Kỵ an táng, cầu tài",
+		"Tân Tỵ": "Kỵ cưới hỏi, xây dựng lớn",
+		"Nhâm Ngọ": "Kỵ chôn cất, động thổ",
+		"Quý Mùi": "Kỵ khai trương, đi xa",
+		"Giáp Thân": "Kỵ cưới hỏi, chôn cất",
+		"Ất Dậu": "Kỵ xây dựng, xuất hành xa",
+		"Bính Tuất": "Kỵ khai trương, kiện tụng",
+		"Đinh Hợi": "Kỵ an táng, cưới hỏi",
+		"Mậu Tý": "Kỵ xây dựng, xuất hành xa",
+		"Kỷ Sửu": "Kỵ cưới hỏi, an táng",
+		"Canh Dần": "Kỵ khai trương, động thổ",
+		"Tân Mão": "Kỵ chôn cất, kiện tụng",
+		"Nhâm Thìn": "Kỵ cưới hỏi, xây dựng",
+		"Quý Tỵ": "Kỵ khai trương, đi xa",
+		"Giáp Ngọ": "Kỵ an táng, cưới hỏi",
+		"Ất Mùi": "Kỵ xây dựng, khai trương",
+		"Bính Thân": "Kỵ cưới hỏi, an táng",
+		"Đinh Dậu": "Kỵ khai trương, kiện tụng",
+		"Mậu Tuất": "Kỵ xây dựng, xuất hành xa",
+		"Kỷ Hợi": "Kỵ cưới hỏi, chôn cất",
+		"Canh Tý": "Kỵ khai trương, động thổ",
+		"Tân Sửu": "Kỵ an táng, cưới hỏi",
+		"Nhâm Dần": "Kỵ xây dựng, xuất hành xa",
+		"Quý Mão": "Kỵ cưới hỏi, an táng",
+		"Giáp Thìn": "Kỵ khai trương, đi xa",
+		"Ất Tỵ": "Kỵ xây dựng, cưới hỏi",
+		"Bính Ngọ": "Kỵ an táng, cầu tài",
+		"Đinh Mùi": "Kỵ khai trương, chôn cất",
+		"Mậu Thân": "Kỵ cưới hỏi, xuất hành xa",
+		"Kỷ Dậu": "Kỵ xây dựng, kiện tụng",
+		"Canh Tuất": "Kỵ chôn cất, đi xa",
+		"Tân Hợi": "Kỵ cưới hỏi, khai trương",
+		"Nhâm Tý": "Kỵ động thổ, xây dựng",
+		"Quý Sửu": "Kỵ cưới hỏi, đi xa",
+		"Giáp Dần": "Kỵ chôn cất, khai trương",
+		"Ất Mão": "Kỵ xây dựng, an táng",
+		"Bính Thìn": "Kỵ cưới hỏi, kiện tụng",
+		"Đinh Tỵ": "Kỵ khai trương, xuất hành xa",
+		"Mậu Ngọ": "Kỵ an táng, xây dựng",
+		"Kỷ Mùi": "Kỵ cưới hỏi, đi xa",
+		"Canh Thân": "Kỵ khai trương, cầu tài",
+		"Tân Dậu": "Kỵ xây dựng, chôn cất",
+		"Nhâm Tuất": "Kỵ cưới hỏi, khai trương",
+		"Quý Hợi": "Kỵ động thổ, đi xa"
+	};
+
+
+
+
   // ===== Core astronomy helpers =====
   function jdn(dd, mm, yy){
     let a = INT((14 - mm) / 12);
@@ -241,6 +370,15 @@
     return ret;
   }
 
+	function getViecTotXau(lunarDate) {
+		const cc = getCanChi(lunarDate);
+		const ngay = cc[0]; // VD: "Đinh Mão"
+		const nen = VIEC_NEN_LAM[ngay] || "Không rõ";
+		const kieng = VIEC_KIENGLAM[ngay] || "Không rõ";
+		return { nen, kieng };
+	}
+
+
   // ===== UI helpers (render month table) =====
   const DAYNAMES = ["T2","T3","T4","T5","T6","T7","CN"];
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
@@ -259,6 +397,8 @@
     res += '.thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; color:' + (formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#ff0':'#000')) + '}\n';
     res += '.ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; color:#00f; text-shadow:-2px 0 yellow,0 2px yellow,2px 0 yellow,0 -2px yellow; height: 30px; padding-top: 16px; }\n';
     res += '.giohoangdao{ color:#fff; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(0,0,255,.4)}\n';
+    res += '.viecnenlam{ color:#03ff00; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(26,26,26,.5) }\n';
+    res += '.viecnentranh{ color:#ff0000; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(255,245,204,.4)}\n';
     res += '.thang{ font-size:'+PRINT_OPTS.fontSize+'; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }\n';
     res += '.tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; color:#330033; background-color:#CCFFCC }\n';
     res += '.navi-l,.navi-r{ text-align:center; font-size:75%; line-height:100%; font-weight:bold; background-color:#CCFFCC }\n';
@@ -408,6 +548,13 @@
     res += '</td>';
     res += '</tr>';
     res += `<tr><td class="giohoangdao" colspan="5">Giờ hoàng đạo:<br>${getGioHoangDao(jd)}</td></tr>`;
+		const viec = getViecTotXau(currentLunarDate);
+		res += `<tr><td class="viecnenlam" colspan="5" >`;
+		res += `<b>Việc nên làm:</b> ${viec.nen}<br>`;
+		res += `</td></tr>`;
+		res += `<tr><td class="viecnentranh" colspan="5" >`;
+		res += `<b>Tránh:</b> ${viec.kieng}`;
+		res += `</td></tr>`;
     res += '</table>';
     res += '</td></tr>';
 
