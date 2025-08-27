@@ -106,8 +106,8 @@
 
 ## Hình ảnh minh họa
 
-<img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/dab7c097-e47b-4edd-8065-1fe305febc7e" /><img width="502" height="535" alt="image" src="https://github.com/user-attachments/assets/336e5d17-9ec1-4c1b-8c2e-4b1032496fd0" />
-<img width="502" height="539" alt="image" src="https://github.com/user-attachments/assets/0ba1009f-2c55-4ded-8662-00a99f230db9" /><img width="502" height="539" alt="image" src="https://github.com/user-attachments/assets/4ba88ff2-3aba-44d3-95c1-a7afed9a6452" />
+<img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/dab7c097-e47b-4edd-8065-1fe305febc7e" /><img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/336e5d17-9ec1-4c1b-8c2e-4b1032496fd0" />
+<img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/0ba1009f-2c55-4ded-8662-00a99f230db9" /><img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/4ba88ff2-3aba-44d3-95c1-a7afed9a6452" />
 
 
 
