@@ -550,10 +550,10 @@
     res += `<tr><td class="giohoangdao" colspan="5">Giờ hoàng đạo:<br>${getGioHoangDao(jd)}</td></tr>`;
 		const viec = getViecTotXau(currentLunarDate);
 		res += `<tr><td class="viecnenlam" colspan="5" >`;
-		res += `<b>Việc nên làm:</b> ${viec.nen}<br>`;
+		res += `<b>Việc nên làm:</b><br>${viec.nen}`;
 		res += `</td></tr>`;
 		res += `<tr><td class="viecnentranh" colspan="5" >`;
-		res += `<b>Tránh:</b> ${viec.kieng}`;
+		res += `<b>Tránh:</b><br>${viec.kieng}`;
 		res += `</td></tr>`;
     res += '</table>';
     res += '</td></tr>';
