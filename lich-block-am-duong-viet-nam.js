@@ -398,8 +398,8 @@
     res += '.thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; color:' + (formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#ff0':'#000')) + '}\n';
     res += '.ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; color:#00f; text-shadow:-2px 0 yellow,0 2px yellow,2px 0 yellow,0 -2px yellow; height: 30px; padding-top: 16px; }\n';
     res += '.giohoangdao{ color:#fff; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(0,0,255,.5)}\n';
-    res += '.viecnenlam{ color:#03ff00; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(0,0,255,.5)}\n';
-    res += '.viecnentranh{ color:#ff0000; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(255,245,204,.5)}\n';
+    res += '.viecnenlam{ color:#03ff00; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%; background-color:rgba(0,0,255,.5)}\n';
+    res += '.viecnentranh{ color:#ff0000; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%; background-color:rgba(0,0,255,.5)}\n';
     res += '.thang{ font-size:'+PRINT_OPTS.fontSize+'; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }\n';
     res += '.tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; color:#330033; background-color:#CCFFCC }\n';
     res += '.navi-l,.navi-r{ text-align:center; font-size:75%; line-height:100%; font-weight:bold; background-color:#CCFFCC }\n';
