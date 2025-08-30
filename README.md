@@ -6,7 +6,10 @@
 - Hiện giờ hoàng đạo,... ngày tháng năm theo can chi lịch âm.
 - Hiển thị tháng Đủ *(Đ)* hoặc Thiếu *(T)*, tháng *Nhuận* Âm Lịch
   
-<img width="504" height="668" alt="image" src="https://github.com/user-attachments/assets/f011681f-aa12-4d5f-bc5c-3c68ec1faff4" />
+<img width="566" height="790" alt="image" src="https://github.com/user-attachments/assets/8a34b2dc-47af-40b7-9886-ec8341a862e2" />
+<img width="624" height="727" alt="image" src="https://github.com/user-attachments/assets/6b132ecb-2fec-4b34-8ebe-5bf885bc9588" />
+
+
 
 
 ## Hướng dẫn:
