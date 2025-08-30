@@ -3,10 +3,10 @@
 - Hiển thị các ngày Lễ trong năm theo lịch dương và lịch âm.
 - Xem lịch các tháng, các năm bằng cách nhấn di chuyển trong giao diện
 - Hình nền thay đổi theo ngày trong tuần.
-- Hiện giờ hoàng đạo, ngày tháng năm theo can chi lịch âm.
+- Hiện giờ hoàng đạo,... ngày tháng năm theo can chi lịch âm.
 - Hiển thị tháng Đủ *(Đ)* hoặc Thiếu *(T)*, tháng *Nhuận* Âm Lịch
   
-<img width="499" height="568" alt="image" src="https://github.com/user-attachments/assets/8375e509-7b5a-49da-a931-409d26c42872" />
+<img width="504" height="668" alt="image" src="https://github.com/user-attachments/assets/f011681f-aa12-4d5f-bc5c-3c68ec1faff4" />
 
 
 ## Hướng dẫn:
