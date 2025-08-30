@@ -394,8 +394,8 @@
     res += '.thangnam_amlich{ text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; color:#000 }\n';
     res += '.ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; color:#000 }\n';
     res += '.ThangNgayGioTiet1{ text-align:right; font-size:clamp(60%,80%,90%); text-shadow:-1px 0 yellow,0 1px yellow,1px 0 yellow,0 -1px yellow; color:#00f; font-weight:bold }\n';
-    res += '.todayduonglich{ text-align:center; font-size:clamp(420%,460%,480%); line-height:100%; font-weight:bold; color:' + (formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#ff0':'#ff0')) + '; text-shadow:-3px 0 blue,0 3px blue,3px 0 blue,0 -3px blue }\n';
-    res += '.thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; color:' + (formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#ff0':'#000')) + '}\n';
+    res += '.todayduonglich{ text-align:center; font-size:clamp(420%,460%,480%); line-height:100%; font-weight:bold; color:' + (formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#008000':'#ff0')) + '; text-shadow:-3px 0 blue,0 3px blue,3px 0 blue,0 -3px blue }\n';
+    res += '.thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; color:' + (formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#008000':'#000')) + '}\n';
     res += '.ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; color:#00f; text-shadow:-2px 0 yellow,0 2px yellow,2px 0 yellow,0 -2px yellow; height: 30px; padding-top: 16px; }\n';
     res += '.giohoangdao{ color:#fff; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; background-color:rgba(0,0,255,.5)}\n';
     res += '.viecnenlam{ color:#00ffff; text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%; background-color:rgba(0,0,255,.5)}\n';
