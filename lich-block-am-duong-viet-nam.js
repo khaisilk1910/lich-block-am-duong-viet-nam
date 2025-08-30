@@ -1,9 +1,6 @@
 //
-// Copyright 2004 Ho Ngoc Duc [http://come.to/duc]. All Rights Reserved.<p>
-// Permission to use, copy, modify, and redistribute this software and its
-// documentation for personal, non-commercial use is hereby granted provided that
-// this copyright notice appears in all copies.
 //
+// Lấy code âm dương từ HO NGOC DUC và phát triển thẻ dành cho Home Assistant của Nguyễn Tiến Khải - khaisilk1910
 // Lunar Calendar Custom Card for Home Assistant
 // HA custom card (type: custom:lich-block-am-duong-viet-nam)
 
@@ -596,7 +593,18 @@ const THAN_SAT = {
     res += '.viecnentranh{ color:#ff0000; text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%; background-color:rgba(0,0,255,.5)}\n';
     res += '.cat_tinh{ color:#00ff00; text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%; background-color:rgba(0,0,255,.5)}\n';
     res += '.hung_tinh{ color:#ff0000; text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%; background-color:rgba(0,0,255,.5)}\n';
-    
+    res += '.toggle-btn { display:block; width:100%; background-color: rgba(0,0,255,0.2); color:#fff; border:none; padding:6px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin:4px 0; }\n';
+    res += `.toggle-content { 
+      display:none; 
+      opacity:0; 
+      transform: translateY(-10px); 
+      transition: opacity 0.4s ease, transform 0.4s ease; 
+    }\n`;
+    res += `.toggle-content.show { 
+      display:table-row; 
+      opacity:1; 
+      transform: translateY(0); 
+    }\n`;
     res += '.thang{ font-size:'+PRINT_OPTS.fontSize+'; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }\n';
     res += '.tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; color:#330033; background-color:#CCFFCC }\n';
     res += '.navi-l,.navi-r{ text-align:center; font-size:75%; line-height:100%; font-weight:bold; background-color:#CCFFCC }\n';
@@ -746,37 +754,40 @@ const THAN_SAT = {
     res += '</td>';
     res += '</tr>';
     res += `<tr><td class="giohoangdao" colspan="5">Giờ hoàng đạo:<br>${getGioHoangDao(jd)}</td></tr>`;
-		const viec = getViecTotXau(currentLunarDate);
-		res += `<tr><td class="viecnenlam" colspan="5" >`;
-		res += `<b style="color:#fff;">✅- Việc nên làm:</b> ${viec.nen}`;
-		res += `</td></tr>`;
-    // Thần sát, Nhị thập bát tú, Nạp âm
+    
+    // Nút bấm
+    res += `<tr><td colspan="5">
+      <button class="toggle-btn" onclick="
+        const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
+        const isHidden = rows.every(r => !r.classList.contains('show'));
+        rows.forEach((r, i) => {
+          setTimeout(() => {
+            if(isHidden){
+              r.classList.add('show');
+            } else {
+              r.classList.remove('show');
+            }
+          }, i * 100); // delay cascade
+        });
+        this.innerHTML = isHidden ? 'Thu gọn 🔼' : 'Xem thêm 🔽';
+      ">Xem thêm 🔽</button>
+    </td></tr>`;
+
+    // Khối nội dung ẩn
+    const viec = getViecTotXau(currentLunarDate);
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">✅- Việc nên làm:</b> ${viec.nen}</td></tr>`;
     const thanSat = getThanSat(currentLunarDate);
-    res += `<tr><td class="viecnenlam" colspan="5">`;
-    res += `<b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> ${thanSat.truc.name} | Tốt: ${thanSat.truc.info.tot} | <span style="color:red;">Xấu: ${thanSat.truc.info.xau}</span>`;
-    //res += `<b style="color:#fff;">🌅- Trực:</b> ${thanSat.truc.name} | Tốt: ${thanSat.truc.info.tot} | Xấu: ${thanSat.truc.info.xau}`;
-    res += `</td></tr>`;
-    res += `<tr><td class="viecnenlam" colspan="5">`;
-    res += `<b style="color:#fff;">${thanSat.sao.emoji}- Nhị thập bát tú:</b> ${thanSat.sao.name} | Tốt: ${thanSat.sao.info.tot} | <span style="color:red;">Xấu: ${thanSat.sao.info.xau}</span>`;
-    //res += `<b style="color:#fff;">✨- Nhị thập bát tú:</b> ${thanSat.sao.name} | Tốt: ${thanSat.sao.info.tot} | Xấu: ${thanSat.sao.info.xau}`;
-    res += `</td></tr>`;
-    res += `<tr><td class="viecnenlam" colspan="5">`;
-    res += `<b style="color:#fff;">🌌- Ngũ hành nạp âm:</b> ${thanSat.napAm}`;
-    res += `</td></tr>`;
-    res += `<tr><td class="cat_tinh" colspan="5">`;
-    res += `<b style="color:#fff;">🍀- Cát tinh:</b> ${thanSat.thanSat.cat || "Không có"}`;
-    res += `</td></tr>`;
-    res += `<tr><td class="hung_tinh" colspan="5">`;
-    res += `<b style="color:#fff;">⚡- Hung tinh:</b> ${thanSat.thanSat.hung || "Không có"}`;
-    res += `</td></tr>`;
-		res += `<tr><td class="viecnentranh" colspan="5" >`;
-		res += `<b style="color:#fff;">🚫- Tránh:</b> ${viec.kieng}`;
-		res += `</td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> ${thanSat.truc.name} | Tốt: ${thanSat.truc.info.tot} | <span style="color:red;">Xấu: ${thanSat.truc.info.xau}</span></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.sao.emoji}- Nhị thập bát tú:</b> ${thanSat.sao.name} | Tốt: ${thanSat.sao.info.tot} | <span style="color:red;">Xấu: ${thanSat.sao.info.xau}</span></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">🌌- Ngũ hành nạp âm:</b> ${thanSat.napAm}</td></tr>`;
+    res += `<tr class="toggle-content"><td class="cat_tinh" colspan="5"><b style="color:#fff;">🍀- Cát tinh:</b> ${thanSat.thanSat.cat || "Không có"}</td></tr>`;
+    res += `<tr class="toggle-content"><td class="hung_tinh" colspan="5"><b style="color:#fff;">⚡- Hung tinh:</b> ${thanSat.thanSat.hung || "Không có"}</td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnentranh" colspan="5"><b style="color:#fff;">🚫- Tránh:</b> ${viec.kieng}</td></tr>`;
+    
+    
     res += '</table>';
     res += '</td></tr>';
-
     res += printHead(mm, yy);
-
     for (let i=0;i<6;i++){
       res += '<tr>';
       for (let j=0;j<7;j++){
@@ -791,7 +802,6 @@ const THAN_SAT = {
       }
       res += '</tr>';
     }
-
     res += '</table>';
 		res += '</div>';
     return res;
