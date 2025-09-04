@@ -220,119 +220,119 @@
 	  "Nhâm Tuất": "Cưới Hỏi, Khai Trương",
 	  "Quý Hợi": "Động Thổ, Đi Xa"
 	};
-// ===== Thập nhị trực =====
-const THAP_NHI_TRUC = {
-  "Kiến": { tot: "Xuất hành, Khai trương, Động thổ, Nhập học", xau: "An táng" },
-  "Trừ":  { tot: "Trừ bệnh, Cắt may, Làm thuốc", xau: "Khai trương, Xuất hành" },
-  "Mãn":  { tot: "Cưới hỏi, Cầu tài, Cầu phúc", xau: "Kiện tụng, Chôn cất" },
-  "Bình": { tot: "Cúng tế, Cầu phúc, Giao dịch", xau: "Xuất hành xa, Tranh tụng" },
-  "Định": { tot: "Cưới hỏi, Ký kết, Nhập trạch", xau: "Khai trương lớn" },
-  "Chấp": { tot: "Xây dựng, Trồng trọt, Giao dịch nhỏ", xau: "Khai trương, Xuất hành xa" },
-  "Phá":  { tot: "Trị bệnh, Phá dỡ, Dọn dẹp", xau: "Cầu tài, Cưới hỏi, An táng" },
-  "Nguy":  { tot: "Làm việc mạo hiểm, Cầu công danh", xau: "Cưới hỏi, An táng, Khai trương" },
-  "Thành":{ tot: "Khai trương, Cầu tài, Xây dựng, Cưới hỏi", xau: "Kiện tụng" },
-  "Thu":  { tot: "Cúng tế, Gieo trồng, Thu hoạch", xau: "Khai trương, Xuất hành" },
-  "Khai": { tot: "Khai trương, Xuất hành, Mở cửa hàng", xau: "An táng, Chôn cất" },
-  "Bế":  { tot: "An táng, Tu sửa mộ phần", xau: "Khai trương, Xuất hành, Cưới hỏi" }
-};
-
-// ===== Nhị thập bát tú =====
-const NHI_THAP_BAT_TU = {
-  "Giác": { tot: "Cưới hỏi, Khởi công, Xuất hành", xau: "An táng" },
-  "Cang": { tot: "Cắt may, Khởi công nhỏ", xau: "Cưới hỏi" },
-  "Đê":   { tot: "Cầu phúc, Gieo trồng", xau: "Khai trương" },
-  "Phòng":{ tot: "Khai trương, Xuất hành, Cầu tài", xau: "An táng" },
-  "Tâm":  { tot: "Trị bệnh, Phá dỡ", xau: "Cưới hỏi, Khai trương" },
-  "Vĩ":   { tot: "Cúng tế, Cầu phúc", xau: "Cưới hỏi, An táng" },
-  "Cơ":   { tot: "Xây dựng, Chữa bệnh", xau: "Khai trương" },
-  "Đẩu":  { tot: "Xuất hành, Khởi công nhỏ", xau: "Cưới hỏi" },
-  "Ngưu": { tot: "An táng, Tu sửa mộ phần", xau: "Cưới hỏi, Khai trương" },
-  "Nữ":   { tot: "Cắt may, Chữa bệnh", xau: "Cưới hỏi, An táng" },
-  "Hư":   { tot: "Phá dỡ, Trị bệnh", xau: "Cưới hỏi, Khai trương" },
-  "Nguy": { tot: "Xây dựng, Trồng trọt", xau: "Cưới hỏi" },
-  "Thất": { tot: "Khai trương, Xuất hành", xau: "An táng" },
-  "Bích": { tot: "Cúng tế, Cầu phúc", xau: "Khai trương" },
-  "Khuê": { tot: "Khai trương, Học hành", xau: "An táng" },
-  "Lâu":  { tot: "Cưới hỏi, Khai trương", xau: "Chôn cất" },
-  "Vị":   { tot: "Xây dựng, Động thổ", xau: "An táng" },
-  "Mão":  { tot: "Cắt may, Học hành", xau: "An táng, Cưới hỏi" },
-  "Tất":  { tot: "Khai trương, Xuất hành", xau: "An táng" },
-  "Chủy": { tot: "Cầu tài, Học hành", xau: "An táng" },
-  "Sâm":  { tot: "Cưới hỏi, Xây dựng", xau: "An táng" },
-  "Tỉnh": { tot: "Khai trương, Xuất hành", xau: "An táng" },
-  "Quỷ":  { tot: "Cúng tế, Trị bệnh", xau: "Cưới hỏi" },
-  "Liễu": { tot: "Xây dựng, Cưới hỏi", xau: "An táng" },
-  "Tinh": { tot: "Khai trương, Học hành", xau: "An táng" },
-  "Trương":{ tot: "Cưới hỏi, Khai trương", xau: "An táng" },
-  "Dực":  { tot: "Xuất hành, Khởi công", xau: "An táng" },
-  "Chẩn": { tot: "Cúng tế, Gieo trồng", xau: "Khai trương" }
-};
-
-// ===== Ngũ hành nạp âm (60 hoa giáp) =====
-const NGU_HANH_NAP_AM = {
-  "Giáp Tý": "Hải Trung Kim",   "Ất Sửu": "Hải Trung Kim",
-  "Bính Dần": "Lô Trung Hỏa",   "Đinh Mão": "Lô Trung Hỏa",
-  "Mậu Thìn": "Đại Lâm Mộc",    "Kỷ Tỵ": "Đại Lâm Mộc",
-  "Canh Ngọ": "Lộ Bàng Thổ",    "Tân Mùi": "Lộ Bàng Thổ",
-  "Nhâm Thân": "Kiếm Phong Kim","Quý Dậu": "Kiếm Phong Kim",
-  "Giáp Tuất": "Sơn Đầu Hỏa",   "Ất Hợi": "Sơn Đầu Hỏa",
-  "Bính Tý": "Giản Hạ Thủy",    "Đinh Sửu": "Giản Hạ Thủy",
-  "Mậu Dần": "Thành Đầu Thổ",   "Kỷ Mão": "Thành Đầu Thổ",
-  "Canh Thìn": "Bạch Lạp Kim",  "Tân Tỵ": "Bạch Lạp Kim",
-  "Nhâm Ngọ": "Dương Liễu Mộc","Quý Mùi": "Dương Liễu Mộc",
-  "Giáp Thân": "Tuyền Trung Thủy","Ất Dậu": "Tuyền Trung Thủy",
-  "Bính Tuất": "Ốc Thượng Thổ","Đinh Hợi": "Ốc Thượng Thổ",
-  "Mậu Tý": "Tích Lịch Hỏa",   "Kỷ Sửu": "Tích Lịch Hỏa",
-  "Canh Dần": "Tùng Bách Mộc", "Tân Mão": "Tùng Bách Mộc",
-  "Nhâm Thìn": "Trường Lưu Thủy","Quý Tỵ": "Trường Lưu Thủy",
-  "Giáp Ngọ": "Sa Trung Kim",  "Ất Mùi": "Sa Trung Kim",
-  "Bính Thân": "Sơn Hạ Hỏa",   "Đinh Dậu": "Sơn Hạ Hỏa",
-  "Mậu Tuất": "Bình Địa Mộc",  "Kỷ Hợi": "Bình Địa Mộc",
-  "Canh Tý": "Bích Thượng Thổ","Tân Sửu": "Bích Thượng Thổ",
-  "Nhâm Dần": "Kim Bạch Kim",  "Quý Mão": "Kim Bạch Kim",
-  "Giáp Thìn": "Phúc Đăng Hỏa","Ất Tỵ": "Phúc Đăng Hỏa",
-  "Bính Ngọ": "Thiên Hà Thủy", "Đinh Mùi": "Thiên Hà Thủy",
-  "Mậu Thân": "Đại Dịch Thổ",  "Kỷ Dậu": "Đại Dịch Thổ",
-  "Canh Tuất": "Thoa Xuyến Kim","Tân Hợi": "Thoa Xuyến Kim",
-  "Nhâm Tý": "Tang Đố Mộc",    "Quý Sửu": "Tang Đố Mộc",
-  "Giáp Dần": "Đại Khê Thủy",  "Ất Mão": "Đại Khê Thủy",
-  "Bính Thìn": "Sa Trung Thổ", "Đinh Tỵ": "Sa Trung Thổ",
-  "Mậu Ngọ": "Thiên Thượng Hỏa","Kỷ Mùi": "Thiên Thượng Hỏa",
-  "Canh Thân": "Thạch Lựu Mộc","Tân Dậu": "Thạch Lựu Mộc",
-  "Nhâm Tuất": "Đại Hải Thủy", "Quý Hợi": "Đại Hải Thủy"
-};
-
-// ===== Cát tinh / Hung tinh / Thần sát =====
-const CAT_TINH = {
-  "Thiên Đức": "Tốt mọi việc, nhất là cầu tài, cầu phúc",
-  "Nguyệt Đức": "Cưới hỏi, cầu phúc, khai trương",
-  "Thiên Hỷ": "Hỷ sự, cưới hỏi, gặp gỡ",
-  "Tam Hợp": "Mọi việc hanh thông, cầu tài lộc thuận",
-  "Lục Hợp": "Hòa thuận, cưới hỏi, giao dịch"
-};
-
-const HUNG_TINH = {
-  "Thiên Cương": "Hung sự, kỵ xây dựng, khai trương",
-  "Địa Tặc": "Kỵ xuất hành, mất mát",
-  "Nguyệt Kỵ": "Ngày xấu, đại kỵ khởi sự lớn",
-  "Không Vong": "Kỵ giao dịch, ký kết",
-  "Tiểu Hồng Sa": "Kỵ cưới hỏi"
-};
-
-const THAN_SAT = {
-  "Tý":  { cat: ["Thiên Đức"], hung: ["Địa Tặc"] },
-  "Sửu": { cat: ["Nguyệt Đức"], hung: ["Thiên Cương"] },
-  "Dần": { cat: ["Tam Hợp"], hung: ["Nguyệt Kỵ"] },
-  "Mão": { cat: ["Thiên Hỷ"], hung: ["Không Vong"] },
-  "Thìn":{ cat: ["Lục Hợp"], hung: ["Tiểu Hồng Sa"] },
-  "Tỵ":  { cat: ["Thiên Đức"], hung: ["Địa Tặc"] },
-  "Ngọ": { cat: ["Nguyệt Đức"], hung: ["Thiên Cương"] },
-  "Mùi": { cat: ["Tam Hợp"], hung: ["Nguyệt Kỵ"] },
-  "Thân":{ cat: ["Thiên Hỷ"], hung: ["Không Vong"] },
-  "Dậu": { cat: ["Lục Hợp"], hung: ["Tiểu Hồng Sa"] },
-  "Tuất":{ cat: ["Thiên Đức"], hung: ["Địa Tặc"] },
-  "Hợi": { cat: ["Nguyệt Đức"], hung: ["Thiên Cương"] }
-};
+	// ===== Thập nhị trực =====
+	const THAP_NHI_TRUC = {
+	  "Kiến": { tot: "Xuất hành, Khai trương, Động thổ, Nhập học", xau: "An táng" },
+	  "Trừ":  { tot: "Trừ bệnh, Cắt may, Làm thuốc", xau: "Khai trương, Xuất hành" },
+	  "Mãn":  { tot: "Cưới hỏi, Cầu tài, Cầu phúc", xau: "Kiện tụng, Chôn cất" },
+	  "Bình": { tot: "Cúng tế, Cầu phúc, Giao dịch", xau: "Xuất hành xa, Tranh tụng" },
+	  "Định": { tot: "Cưới hỏi, Ký kết, Nhập trạch", xau: "Khai trương lớn" },
+	  "Chấp": { tot: "Xây dựng, Trồng trọt, Giao dịch nhỏ", xau: "Khai trương, Xuất hành xa" },
+	  "Phá":  { tot: "Trị bệnh, Phá dỡ, Dọn dẹp", xau: "Cầu tài, Cưới hỏi, An táng" },
+	  "Nguy":  { tot: "Làm việc mạo hiểm, Cầu công danh", xau: "Cưới hỏi, An táng, Khai trương" },
+	  "Thành":{ tot: "Khai trương, Cầu tài, Xây dựng, Cưới hỏi", xau: "Kiện tụng" },
+	  "Thu":  { tot: "Cúng tế, Gieo trồng, Thu hoạch", xau: "Khai trương, Xuất hành" },
+	  "Khai": { tot: "Khai trương, Xuất hành, Mở cửa hàng", xau: "An táng, Chôn cất" },
+	  "Bế":  { tot: "An táng, Tu sửa mộ phần", xau: "Khai trương, Xuất hành, Cưới hỏi" }
+	};
+	
+	// ===== Nhị thập bát tú =====
+	const NHI_THAP_BAT_TU = {
+	  "Giác": { tot: "Cưới hỏi, Khởi công, Xuất hành", xau: "An táng" },
+	  "Cang": { tot: "Cắt may, Khởi công nhỏ", xau: "Cưới hỏi" },
+	  "Đê":   { tot: "Cầu phúc, Gieo trồng", xau: "Khai trương" },
+	  "Phòng":{ tot: "Khai trương, Xuất hành, Cầu tài", xau: "An táng" },
+	  "Tâm":  { tot: "Trị bệnh, Phá dỡ", xau: "Cưới hỏi, Khai trương" },
+	  "Vĩ":   { tot: "Cúng tế, Cầu phúc", xau: "Cưới hỏi, An táng" },
+	  "Cơ":   { tot: "Xây dựng, Chữa bệnh", xau: "Khai trương" },
+	  "Đẩu":  { tot: "Xuất hành, Khởi công nhỏ", xau: "Cưới hỏi" },
+	  "Ngưu": { tot: "An táng, Tu sửa mộ phần", xau: "Cưới hỏi, Khai trương" },
+	  "Nữ":   { tot: "Cắt may, Chữa bệnh", xau: "Cưới hỏi, An táng" },
+	  "Hư":   { tot: "Phá dỡ, Trị bệnh", xau: "Cưới hỏi, Khai trương" },
+	  "Nguy": { tot: "Xây dựng, Trồng trọt", xau: "Cưới hỏi" },
+	  "Thất": { tot: "Khai trương, Xuất hành", xau: "An táng" },
+	  "Bích": { tot: "Cúng tế, Cầu phúc", xau: "Khai trương" },
+	  "Khuê": { tot: "Khai trương, Học hành", xau: "An táng" },
+	  "Lâu":  { tot: "Cưới hỏi, Khai trương", xau: "Chôn cất" },
+	  "Vị":   { tot: "Xây dựng, Động thổ", xau: "An táng" },
+	  "Mão":  { tot: "Cắt may, Học hành", xau: "An táng, Cưới hỏi" },
+	  "Tất":  { tot: "Khai trương, Xuất hành", xau: "An táng" },
+	  "Chủy": { tot: "Cầu tài, Học hành", xau: "An táng" },
+	  "Sâm":  { tot: "Cưới hỏi, Xây dựng", xau: "An táng" },
+	  "Tỉnh": { tot: "Khai trương, Xuất hành", xau: "An táng" },
+	  "Quỷ":  { tot: "Cúng tế, Trị bệnh", xau: "Cưới hỏi" },
+	  "Liễu": { tot: "Xây dựng, Cưới hỏi", xau: "An táng" },
+	  "Tinh": { tot: "Khai trương, Học hành", xau: "An táng" },
+	  "Trương":{ tot: "Cưới hỏi, Khai trương", xau: "An táng" },
+	  "Dực":  { tot: "Xuất hành, Khởi công", xau: "An táng" },
+	  "Chẩn": { tot: "Cúng tế, Gieo trồng", xau: "Khai trương" }
+	};
+	
+	// ===== Ngũ hành nạp âm (60 hoa giáp) =====
+	const NGU_HANH_NAP_AM = {
+	  "Giáp Tý": "Hải Trung Kim",   "Ất Sửu": "Hải Trung Kim",
+	  "Bính Dần": "Lô Trung Hỏa",   "Đinh Mão": "Lô Trung Hỏa",
+	  "Mậu Thìn": "Đại Lâm Mộc",    "Kỷ Tỵ": "Đại Lâm Mộc",
+	  "Canh Ngọ": "Lộ Bàng Thổ",    "Tân Mùi": "Lộ Bàng Thổ",
+	  "Nhâm Thân": "Kiếm Phong Kim","Quý Dậu": "Kiếm Phong Kim",
+	  "Giáp Tuất": "Sơn Đầu Hỏa",   "Ất Hợi": "Sơn Đầu Hỏa",
+	  "Bính Tý": "Giản Hạ Thủy",    "Đinh Sửu": "Giản Hạ Thủy",
+	  "Mậu Dần": "Thành Đầu Thổ",   "Kỷ Mão": "Thành Đầu Thổ",
+	  "Canh Thìn": "Bạch Lạp Kim",  "Tân Tỵ": "Bạch Lạp Kim",
+	  "Nhâm Ngọ": "Dương Liễu Mộc","Quý Mùi": "Dương Liễu Mộc",
+	  "Giáp Thân": "Tuyền Trung Thủy","Ất Dậu": "Tuyền Trung Thủy",
+	  "Bính Tuất": "Ốc Thượng Thổ","Đinh Hợi": "Ốc Thượng Thổ",
+	  "Mậu Tý": "Tích Lịch Hỏa",   "Kỷ Sửu": "Tích Lịch Hỏa",
+	  "Canh Dần": "Tùng Bách Mộc", "Tân Mão": "Tùng Bách Mộc",
+	  "Nhâm Thìn": "Trường Lưu Thủy","Quý Tỵ": "Trường Lưu Thủy",
+	  "Giáp Ngọ": "Sa Trung Kim",  "Ất Mùi": "Sa Trung Kim",
+	  "Bính Thân": "Sơn Hạ Hỏa",   "Đinh Dậu": "Sơn Hạ Hỏa",
+	  "Mậu Tuất": "Bình Địa Mộc",  "Kỷ Hợi": "Bình Địa Mộc",
+	  "Canh Tý": "Bích Thượng Thổ","Tân Sửu": "Bích Thượng Thổ",
+	  "Nhâm Dần": "Kim Bạch Kim",  "Quý Mão": "Kim Bạch Kim",
+	  "Giáp Thìn": "Phúc Đăng Hỏa","Ất Tỵ": "Phúc Đăng Hỏa",
+	  "Bính Ngọ": "Thiên Hà Thủy", "Đinh Mùi": "Thiên Hà Thủy",
+	  "Mậu Thân": "Đại Dịch Thổ",  "Kỷ Dậu": "Đại Dịch Thổ",
+	  "Canh Tuất": "Thoa Xuyến Kim","Tân Hợi": "Thoa Xuyến Kim",
+	  "Nhâm Tý": "Tang Đố Mộc",    "Quý Sửu": "Tang Đố Mộc",
+	  "Giáp Dần": "Đại Khê Thủy",  "Ất Mão": "Đại Khê Thủy",
+	  "Bính Thìn": "Sa Trung Thổ", "Đinh Tỵ": "Sa Trung Thổ",
+	  "Mậu Ngọ": "Thiên Thượng Hỏa","Kỷ Mùi": "Thiên Thượng Hỏa",
+	  "Canh Thân": "Thạch Lựu Mộc","Tân Dậu": "Thạch Lựu Mộc",
+	  "Nhâm Tuất": "Đại Hải Thủy", "Quý Hợi": "Đại Hải Thủy"
+	};
+	
+	// ===== Cát tinh / Hung tinh / Thần sát =====
+	const CAT_TINH = {
+	  "Thiên Đức": "Tốt mọi việc, nhất là cầu tài, cầu phúc",
+	  "Nguyệt Đức": "Cưới hỏi, cầu phúc, khai trương",
+	  "Thiên Hỷ": "Hỷ sự, cưới hỏi, gặp gỡ",
+	  "Tam Hợp": "Mọi việc hanh thông, cầu tài lộc thuận",
+	  "Lục Hợp": "Hòa thuận, cưới hỏi, giao dịch"
+	};
+	
+	const HUNG_TINH = {
+	  "Thiên Cương": "Hung sự, kỵ xây dựng, khai trương",
+	  "Địa Tặc": "Kỵ xuất hành, mất mát",
+	  "Nguyệt Kỵ": "Ngày xấu, đại kỵ khởi sự lớn",
+	  "Không Vong": "Kỵ giao dịch, ký kết",
+	  "Tiểu Hồng Sa": "Kỵ cưới hỏi"
+	};
+	
+	const THAN_SAT = {
+	  "Tý":  { cat: ["Thiên Đức"], hung: ["Địa Tặc"] },
+	  "Sửu": { cat: ["Nguyệt Đức"], hung: ["Thiên Cương"] },
+	  "Dần": { cat: ["Tam Hợp"], hung: ["Nguyệt Kỵ"] },
+	  "Mão": { cat: ["Thiên Hỷ"], hung: ["Không Vong"] },
+	  "Thìn":{ cat: ["Lục Hợp"], hung: ["Tiểu Hồng Sa"] },
+	  "Tỵ":  { cat: ["Thiên Đức"], hung: ["Địa Tặc"] },
+	  "Ngọ": { cat: ["Nguyệt Đức"], hung: ["Thiên Cương"] },
+	  "Mùi": { cat: ["Tam Hợp"], hung: ["Nguyệt Kỵ"] },
+	  "Thân":{ cat: ["Thiên Hỷ"], hung: ["Không Vong"] },
+	  "Dậu": { cat: ["Lục Hợp"], hung: ["Tiểu Hồng Sa"] },
+	  "Tuất":{ cat: ["Thiên Đức"], hung: ["Địa Tặc"] },
+	  "Hợi": { cat: ["Nguyệt Đức"], hung: ["Thiên Cương"] }
+	};
 
 
 
