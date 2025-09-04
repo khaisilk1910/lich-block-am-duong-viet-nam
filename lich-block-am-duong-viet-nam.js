@@ -507,19 +507,24 @@ const THAN_SAT = {
   
   function getThanSat(lunarDate) {
 		
-		// TRUC_NAMES chuẩn
-		const TRUC_NAMES = ["Kiến","Trừ","Mãn","Bình","Định","Chấp","Phá","Nguy","Thành","Thu","Khai","Bế"];
-		    // --- Chuyển Julian Day sang âm lịch ---
-    // Giả sử bạn có hàm jdToLunar(jd) trả về { day, month, year }
-    const lunar = jdToLunar(lunarDate.jd);
-
-    // --- Tính trực hôm nay ---
-    // Trực đầu tháng = TRUC_NAMES[(tháng âm - 1) % 12]
-    const trucDauThangIndex = (lunar.month - 1) % 12;
-    const trucIndex = (trucDauThangIndex + lunar.day - 1) % 12;
-    const trucName = TRUC_NAMES[trucIndex];
-    const trucInfo = THAP_NHI_TRUC[trucName];
-
+		 // ===== Thập nhị trực =====
+	  const TRUC_ORDER = [
+	    "Kiến","Trừ","Mãn","Bình","Định","Chấp",
+	    "Phá","Nguy","Thành","Thu","Khai","Bế"
+	  ];
+	  const CHI_ORDER = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
+	
+	  const canChiTruc = getCanChi(lunarDate); 
+	  const chiNgayTruc = canChiTruc[0].split(" ")[1];   // ví dụ: "Tỵ"
+	  const chiThangTruc = canChiTruc[1].split(" ")[1];  // ví dụ: "Thân"
+	
+	  const chiIndexNgay = CHI_ORDER.indexOf(chiNgayTruc);
+	  const chiIndexThang = CHI_ORDER.indexOf(chiThangTruc);
+	
+	  // Công thức tính Trực chuẩn
+	  const trucIndex = (chiIndexNgay - chiIndexThang + 12) % 12;
+	  const trucName = TRUC_ORDER[trucIndex];
+	  const trucInfo = THAP_NHI_TRUC[trucName];
     // Thập nhị trực
     //const trucNames = Object.keys(THAP_NHI_TRUC);
     //const trucIndex = (lunarDate.month + (lunarDate.jd % 12)) % 12;
