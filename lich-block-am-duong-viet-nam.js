@@ -505,69 +505,68 @@ const THAN_SAT = {
 	}
   
   
-  function getThanSat(lunarDate) {
-    // Thập nhị trực
-    const trucNames = Object.keys(THAP_NHI_TRUC);
-    const trucIndex = (lunarDate.month + (lunarDate.jd % 12)) % 12;
-    const trucName = trucNames[trucIndex];
-    const trucInfo = THAP_NHI_TRUC[trucName];
+	function getThanSat(lunarDate) {
+		// ===== Thập nhị trực =====
+		const trucNames = Object.keys(THAP_NHI_TRUC);
+		// Mùng 1 âm lịch = Kiến, sau đó xoay vòng 12 trực
+		const trucIndex = (lunarDate.day - 1) % 12;
+		const trucName = trucNames[trucIndex];
+		const trucInfo = THAP_NHI_TRUC[trucName];
 
-    // Nhị thập bát tú
-    const saoNames = Object.keys(NHI_THAP_BAT_TU);
-    const saoIndex = lunarDate.jd % 28;
-    const saoName = saoNames[saoIndex];
-    const saoInfo = NHI_THAP_BAT_TU[saoName];
+		// ===== Nhị thập bát tú =====
+		const saoNames = Object.keys(NHI_THAP_BAT_TU);
+		// Mùng 1 tháng Giêng âm lịch = Giác, sau đó xoay vòng 28 sao
+		// Tính số ngày từ đầu năm âm lịch đến ngày hiện tại
+		let daysFromNewYear = lunarDate.jd - getYearInfo(lunarDate.year)[0].jd;
+		const saoIndex = daysFromNewYear % 28;
+		const saoName = saoNames[saoIndex];
+		const saoInfo = NHI_THAP_BAT_TU[saoName];
 
-    // Ngũ hành nạp âm
-    const cc = getCanChi(lunarDate);
-    const ngayCC = cc[0]; // ví dụ: "Đinh Mão"
-    const napAm = NGU_HANH_NAP_AM[ngayCC] || "Không rõ";
+		// ===== Ngũ hành nạp âm =====
+		const cc = getCanChi(lunarDate);
+		const ngayCC = cc[0]; // ví dụ: "Đinh Mão"
+		const napAm = NGU_HANH_NAP_AM[ngayCC] || "Không rõ";
 
-    // Thần sát (Cát/Hung tinh)
-    const chiNgay = ngayCC.split(" ")[1];
-    const thanSatData = THAN_SAT[chiNgay] || { cat: [], hung: [] };
+		// ===== Thần sát (Cát/Hung tinh) =====
+		const chiNgay = ngayCC.split(" ")[1];
+		const thanSatData = THAN_SAT[chiNgay] || { cat: [], hung: [] };
 
-    const catList = thanSatData.cat.map(c => `${c} (${CAT_TINH[c] || ""})`).join("; ");
-    const hungList = thanSatData.hung.map(h => `${h} (${HUNG_TINH[h] || ""})`).join("; ");
-    
-    const EMOJI_TRUC = {
-      "Kiến":"🚪","Trừ":"✂️","Mãn":"🌕","Bình":"⚖️",
-      "Định":"📜","Chấp":"✍️","Phá":"💥","Nguy":"⚠️",
-      "Thành":"🏰","Thu":"🌾","Khai":"🔑","Bế":"🔒"
-    };
+		const catList = thanSatData.cat.map(c => `${c} (${CAT_TINH[c] || ""})`).join("; ");
+		const hungList = thanSatData.hung.map(h => `${h} (${HUNG_TINH[h] || ""})`).join("; ");
 
-    const EMOJI_SAO = {
-      "Giác":"🐉","Cang":"🦄","Đê":"🏞️","Phòng":"🏠","Tâm":"❤️","Vĩ":"🦚","Cơ":"🧵","Đẩu":"🛶",
-      "Ngưu":"🐂","Nữ":"👩","Hư":"🌫️","Nguy":"⚠️","Thất":"7️⃣","Bích":"💎","Khuê":"📚","Lâu":"🏯",
-      "Vị":"🍽️","Mão":"🐇","Tất":"🧦","Chủy":"👄","Sâm":"🌱","Tỉnh":"💧","Quỷ":"👹","Liễu":"🌿",
-      "Tinh":"⭐","Trương":"📜","Dực":"🪽","Chẩn":"🩺"
-    };
-    
-    return {
-      truc: { 
-        name: trucName, 
-        info: trucInfo, 
-        emoji: EMOJI_TRUC[trucName] || "" 
-      },
-      sao: { 
-        name: saoName, 
-        info: saoInfo, 
-        emoji: EMOJI_SAO[saoName] || "" 
-      },
-      napAm: napAm,
-      thanSat: { 
-        cat: catList, 
-        hung: hungList 
-      }
-    };
+		const EMOJI_TRUC = {
+			"Kiến":"🚪","Trừ":"✂️","Mãn":"🌕","Bình":"⚖️",
+			"Định":"📜","Chấp":"✍️","Phá":"💥","Nguy":"⚠️",
+			"Thành":"🏰","Thu":"🌾","Khai":"🔑","Bế":"🔒"
+		};
 
-//    return {
-//      truc: { name: trucName, info: trucInfo },
-//      sao: { name: saoName, info: saoInfo },
-//      napAm: napAm,
-//      thanSat: { cat: catList, hung: hungList }
-//    };
-  }
+		const EMOJI_SAO = {
+			"Giác":"🐉","Cang":"🦄","Đê":"🏞️","Phòng":"🏠","Tâm":"❤️","Vĩ":"🦚","Cơ":"🧵","Đẩu":"🛶",
+			"Ngưu":"🐂","Nữ":"👩","Hư":"🌫️","Nguy":"⚠️","Thất":"7️⃣","Bích":"💎","Khuê":"📚","Lâu":"🏯",
+			"Vị":"🍽️","Mão":"🐇","Tất":"🧦","Chủy":"👄","Sâm":"🌱","Tỉnh":"💧","Quỷ":"👹","Liễu":"🌿",
+			"Tinh":"⭐","Trương":"📜","Dực":"🪽","Chẩn":"🩺"
+		};
+
+		return {
+			truc: { 
+				name: trucName, 
+				info: trucInfo, 
+				emoji: EMOJI_TRUC[trucName] || "" 
+			},
+			sao: { 
+				name: saoName, 
+				info: saoInfo, 
+				emoji: EMOJI_SAO[saoName] || "" 
+			},
+			napAm: napAm,
+			thanSat: { 
+				cat: catList, 
+				hung: hungList 
+			}
+		};
+	}
+
+
 
 
   // ===== UI helpers (render month table) =====
