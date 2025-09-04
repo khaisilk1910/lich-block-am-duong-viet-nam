@@ -506,11 +506,21 @@ const THAN_SAT = {
   
   
   function getThanSat(lunarDate) {
+    // Lấy chi của ngày
+		const chiOfDayTruc = (lunarDate.jd + 1) % 12;
+		// Tháng âm lịch (0-based)
+		const thangAmIndex = lunarDate.month - 1;
+		// Tính trực theo công thức chuẩn
+		const trucIndex = (chiOfDayTruc - thangAmIndex + 12) % 12;
+		
+		const trucNames = Object.keys(THAP_NHI_TRUC);
+		const trucName = trucNames[trucIndex];
+		const trucInfo = THAP_NHI_TRUC[trucName];
     // Thập nhị trực
-    const trucNames = Object.keys(THAP_NHI_TRUC);
-    const trucIndex = (lunarDate.month + (lunarDate.jd % 12)) % 12;
-    const trucName = trucNames[trucIndex];
-    const trucInfo = THAP_NHI_TRUC[trucName];
+    //const trucNames = Object.keys(THAP_NHI_TRUC);
+    //const trucIndex = (lunarDate.month + (lunarDate.jd % 12)) % 12;
+    //const trucName = trucNames[trucIndex];
+    //const trucInfo = THAP_NHI_TRUC[trucName];
 
     // Nhị thập bát tú
     const saoNames = Object.keys(NHI_THAP_BAT_TU);
