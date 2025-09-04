@@ -6,17 +6,6 @@
 // Lunar Calendar Custom Card for Home Assistant
 // HA custom card (type: custom:lich-block-am-duong-viet-nam)
 
-(function() {
-  const self = document.currentScript.src.split("?")[0]; 
-  if (!self.includes("t=")) {
-    const script = document.createElement("script");
-    script.src = self + "?t=" + Date.now();
-    script.type = "module";
-    document.head.appendChild(script);
-  }
-})();
-
-
 (function(){
   'use strict';
 
