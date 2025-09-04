@@ -948,8 +948,8 @@ const THAN_SAT = {
     getCardSize(){ return 8; }
   }
 
-  if (!customElements.get('lich-block-am-duong-viet-nam-test')){
-    customElements.define('lich-block-am-duong-viet-nam-test', LunarCalendarCard);
+  if (!customElements.get('lich-block-am-duong-viet-nam')){
+    customElements.define('lich-block-am-duong-viet-nam', LunarCalendarCard);
   }
 
 })();
