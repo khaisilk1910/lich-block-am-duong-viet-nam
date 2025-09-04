@@ -509,16 +509,14 @@ const THAN_SAT = {
 		
 		// TRUC_NAMES chuẩn
 		const TRUC_NAMES = ["Kiến","Trừ","Mãn","Bình","Định","Chấp","Phá","Nguy","Thành","Thu","Khai","Bế"];
-		    // --- Xác định trực đầu tháng theo tháng âm lịch ---
-    // Bảng chuẩn trực đầu tháng, lấy từ tài liệu lịch Việt
-    const TRUC_DAU_THANG = [
-        "Kiến", "Trừ", "Mãn", "Bình", "Định", "Chấp",
-        "Phá", "Nguy", "Thành", "Thu", "Khai", "Bế"
-    ];
-    const trucDauThangIndex = (lunarDate.month - 1) % 12; // Tháng âm 1-12 -> index 0-11
+		    // --- Chuyển Julian Day sang âm lịch ---
+    // Giả sử bạn có hàm jdToLunar(jd) trả về { day, month, year }
+    const lunar = jdToLunar(lunarDate.jd);
 
-    // Tính trực hôm nay: (trực đầu tháng + số ngày trong tháng - 1) % 12
-    const trucIndex = (trucDauThangIndex + lunarDate.day - 1) % 12;
+    // --- Tính trực hôm nay ---
+    // Trực đầu tháng = TRUC_NAMES[(tháng âm - 1) % 12]
+    const trucDauThangIndex = (lunar.month - 1) % 12;
+    const trucIndex = (trucDauThangIndex + lunar.day - 1) % 12;
     const trucName = TRUC_NAMES[trucIndex];
     const trucInfo = THAP_NHI_TRUC[trucName];
 
