@@ -508,7 +508,7 @@ const THAN_SAT = {
   function getThanSat(lunarDate) {
 		const TRUC_NAMES = ["Kiến","Trừ","Mãn","Bình","Định","Chấp","Phá","Nguy","Thành","Thu","Khai","Bế"];
     // Chi của ngày (0=Mão, 1=Thìn, …)
-	  const chiOfDayTruc = (lunarDate.jd + 1) % 12;
+	  const chiOfDayTruc = (lunarDate.jd + 2) % 12;
 	  const thangAmIndex = lunarDate.month - 1;
 	  const trucIndex = (chiOfDayTruc - thangAmIndex + 12) % 12;
 	  const trucName = TRUC_NAMES[trucIndex];
