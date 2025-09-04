@@ -470,18 +470,6 @@ const THAN_SAT = {
     return "Ngày " + cc[0] + ", tháng " + cc[1] + ", năm " + cc[2];
   }
 
-//  function getGioHoangDao(jd){
-//    const chiOfDay = (jd + 1) % 12;
-//    const gioHD = GIO_HD[chiOfDay % 6];
-//    let ret = ""; let count = 0;
-//    for (let i=0;i<12;i++){
-//      if (gioHD.charAt(i) === '1'){
-//        ret += CHI[i] + ' <b style="color:#ffff99;">(' + ((i*2+23)%24) + '-' + ((i*2+1)%24) + ')</b>';
-//        if (count++ < 5) ret += ", ";
-//      }
-//    }
-//    return ret;
-//  }
   function getGioHoangDao(jd){
     const chiOfDay = (jd + 1) % 12;
     const gioHD = GIO_HD[chiOfDay % 6];
@@ -506,18 +494,24 @@ const THAN_SAT = {
   
   
 	function getThanSat(lunarDate) {
-
-		// ===== Thập nhị trực =====
-		const trucNames = Object.keys(THAP_NHI_TRUC);
-		
-		// Quy tắc: Tháng Dần mùng 1 = Kiến, sau mỗi tháng dịch +2 trực
-		const thangChi = (lunarDate.month + 1) % 12; // Tháng Dần = 1
-		const offset = (2 * (thangChi - 1) + (lunarDate.day - 1)) % 12;
-		
-		const trucName = trucNames[offset];
-		const trucInfo = THAP_NHI_TRUC[trucName];
-
-
+	  // ===== Thập nhị trực =====
+	  const TRUC_ORDER = [
+	    "Kiến","Trừ","Mãn","Bình","Định","Chấp",
+	    "Phá","Nguy","Thành","Thu","Khai","Bế"
+	  ];
+	  const CHI_ORDER = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
+	
+	  const canChi = getCanChi(lunarDate); 
+	  const chiNgay = canChi[0].split(" ")[1];   // ví dụ: "Tỵ"
+	  const chiThang = canChi[1].split(" ")[1];  // ví dụ: "Thân"
+	
+	  const chiIndexNgay = CHI_ORDER.indexOf(chiNgay);
+	  const chiIndexThang = CHI_ORDER.indexOf(chiThang);
+	
+	  // Công thức tính Trực chuẩn
+	  const trucIndex = (chiIndexNgay - chiIndexThang + 12) % 12;
+	  const trucName = TRUC_ORDER[trucIndex];
+	  const trucInfo = THAP_NHI_TRUC[trucName];
 		
 		// ===== Nhị thập bát tú =====
 		const saoNames = Object.keys(NHI_THAP_BAT_TU);
