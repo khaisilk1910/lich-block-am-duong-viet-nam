@@ -511,8 +511,8 @@ const THAN_SAT = {
 		const TRUC_NAMES = ["Kiến","Trừ","Mãn","Bình","Định","Chấp","Phá","Nguy","Thành","Thu","Khai","Bế"];
 		
 		// Lấy Can Chi của ngày âm lịch
-		const cc = getCanChi(lunarDate); // ví dụ "Đinh Mão"
-		const chiNgayTruc = cc[0].split(" ")[1]; // "Mão"
+		const ccTruc = getCanChi(lunarDate); // ví dụ "Đinh Mão"
+		const chiNgayTruc = ccTruc[0].split(" ")[1]; // "Mão"
 		
 		// Chi của ngày theo thứ tự trong 12 chi (Tý=0, Sửu=1, ..., Hợi=11)
 		const CHI_ORDER = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
