@@ -506,11 +506,24 @@ const THAN_SAT = {
   
   
   function getThanSat(lunarDate) {
-    // Thập nhị trực
-    const trucNames = Object.keys(THAP_NHI_TRUC);
-    const trucIndex = (lunarDate.month + (lunarDate.jd % 12)) % 12;
-    const trucName = trucNames[trucIndex];
-    const trucInfo = THAP_NHI_TRUC[trucName];
+	  // ===== Thập nhị trực =====
+	  const TRUC_ORDER = [
+	    "Kiến","Trừ","Mãn","Bình","Định","Chấp",
+	    "Phá","Nguy","Thành","Thu","Khai","Bế"
+	  ];
+	  const CHI_ORDER = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
+	
+	  const canChi = getCanChi(lunarDate); 
+	  const chiNgayTruc = canChi[0].split(" ")[1];   // ví dụ: "Tỵ"
+	  const chiThang = canChi[1].split(" ")[1];  // ví dụ: "Thân"
+	
+	  const chiIndexNgay = CHI_ORDER.indexOf(chiNgayTruc);
+	  const chiIndexThang = CHI_ORDER.indexOf(chiThang);
+	
+	  // Công thức tính Trực chuẩn
+	  const trucIndex = (chiIndexNgay - chiIndexThang + 12) % 12;
+	  const trucName = TRUC_ORDER[trucIndex];
+	  const trucInfo = THAP_NHI_TRUC[trucName];
 
     // Nhị thập bát tú
     const saoNames = Object.keys(NHI_THAP_BAT_TU);
