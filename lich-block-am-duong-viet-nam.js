@@ -506,13 +506,19 @@ const THAN_SAT = {
   
   
 	function getThanSat(lunarDate) {
+
 		// ===== Thập nhị trực =====
 		const trucNames = Object.keys(THAP_NHI_TRUC);
-		// Mùng 1 âm lịch = Kiến, sau đó xoay vòng 12 trực
-		const trucIndex = (lunarDate.day - 1) % 12;
-		const trucName = trucNames[trucIndex];
+		
+		// Quy tắc: Tháng Dần mùng 1 = Kiến, sau mỗi tháng dịch +2 trực
+		const thangChi = (lunarDate.month + 1) % 12; // Tháng Dần = 1
+		const offset = (2 * (thangChi - 1) + (lunarDate.day - 1)) % 12;
+		
+		const trucName = trucNames[offset];
 		const trucInfo = THAP_NHI_TRUC[trucName];
 
+
+		
 		// ===== Nhị thập bát tú =====
 		const saoNames = Object.keys(NHI_THAP_BAT_TU);
 		// Mùng 1 tháng Giêng âm lịch = Giác, sau đó xoay vòng 28 sao
