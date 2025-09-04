@@ -528,8 +528,8 @@ const THAN_SAT = {
 		const napAm = NGU_HANH_NAP_AM[ngayCC] || "Không rõ";
 
 		// ===== Thần sát (Cát/Hung tinh) =====
-		const chiNgay = ngayCC.split(" ")[1];
-		const thanSatData = THAN_SAT[chiNgay] || { cat: [], hung: [] };
+		const chiNgayOnly = ngayCC.split(" ")[1];
+		const thanSatData = THAN_SAT[chiNgayOnly] || { cat: [], hung: [] };
 
 		const catList = thanSatData.cat.map(c => `${c} (${CAT_TINH[c] || ""})`).join("; ");
 		const hungList = thanSatData.hung.map(h => `${h} (${HUNG_TINH[h] || ""})`).join("; ");
