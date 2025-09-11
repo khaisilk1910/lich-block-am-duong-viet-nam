@@ -750,7 +750,7 @@ const THAN_SAT = {
     if (huong) {
       let tot = `Hỷ Thần: <b style="color:#00ff00;">${huong.hyThan}</b> - Tài Thần: <b style="color:#00ff00;">${huong.taiThan}</b>`;
       let xau = `Tránh: <b style="color:#ff9933;">${huong.hacThan} (Hạc Thần)</b>`;
-      return `${tot} <br> ${xau}`;
+      return `${tot} | ${xau}`;
     }
     return "Không rõ";
   }
@@ -1047,7 +1047,7 @@ const THAN_SAT = {
     // Khối nội dung ẩn
 
 		// Thêm giờ Hắc Đạo
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">⛈️<b style="color:#fff;">- Giờ hắc đạo:</b> ${getGioHacDao(jd)}</td></tr>`;
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">🌑<b style="color:#fff;">- Giờ hắc đạo:</b> ${getGioHacDao(jd)}</td></tr>`;
 		// Thêm Hướng Xuất Hành
 		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">🧭<b style="color:#fff;">- Hướng xuất hành:</b> ${getHuongXuatHanh(jd)}</td></tr>`;
 
