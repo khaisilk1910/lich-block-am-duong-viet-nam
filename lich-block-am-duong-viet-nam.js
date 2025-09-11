@@ -1052,7 +1052,6 @@ const THAN_SAT = {
 		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">🧭<b style="color:#fff;">- Hướng xuất hành:</b> ${getHuongXuatHanh(jd)}</td></tr>`;
 
     const viec = getViecTotXau(currentLunarDate);
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">✅- Việc nên làm:</b> ${viec.nen}</td></tr>`;
     const thanSat = getThanSat(currentLunarDate);
     res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> ${thanSat.truc.name} <span style="color:#fff;">| Tốt:</span> ${thanSat.truc.info.tot} <span style="color:#fff;">| Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></td></tr>`;
 
@@ -1097,6 +1096,7 @@ const THAN_SAT = {
     res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">🌌- Ngũ hành nạp âm:</b> ${thanSat.napAm}</td></tr>`;
     res += `<tr class="toggle-content"><td class="cat_tinh" colspan="5"><b style="color:#fff;">🍀- Cát tinh:</b> ${thanSat.thanSat.cat || "Không có"}</td></tr>`;
     res += `<tr class="toggle-content"><td class="hung_tinh" colspan="5"><b style="color:#fff;">⚡- Hung tinh:</b> <span style="color:#ff9933;">${thanSat.thanSat.hung || "Không có"}</span></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">✅- Việc nên làm:</b> ${viec.nen}</td></tr>`;
     res += `<tr class="toggle-content"><td class="viecnentranh" colspan="5"><b style="color:#fff;">🚫- Tránh:</b> <span style="color:#ff9933;">${viec.kieng}</span></td></tr>`;
     
     
