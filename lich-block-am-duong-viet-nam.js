@@ -218,6 +218,23 @@
 	  "Nhâm Tuất": "Cưới Hỏi, Khai Trương",
 	  "Quý Hợi": "Động Thổ, Đi Xa"
 	};
+
+
+// ===== Hướng Xuất Hành (theo Can ngày) =====
+const THAN_HUONG = {
+  "Giáp": { hyThan: "Đông Bắc", taiThan: "Đông Nam", hacThan: "Tây Bắc" },
+  "Ất":   { hyThan: "Tây Bắc", taiThan: "Đông Nam", hacThan: "Chính Đông" },
+  "Bính": { hyThan: "Tây Nam", taiThan: "Chính Tây", hacThan: "Chính Nam" },
+  "Đinh": { hyThan: "Chính Nam", taiThan: "Chính Tây", hacThan: "Chính Tây" },
+  "Mậu":  { hyThan: "Đông Nam", taiThan: "Chính Bắc", hacThan: "Tây Nam" },
+  "Kỷ":   { hyThan: "Đông Bắc", taiThan: "Chính Bắc", hacThan: "Chính Bắc" },
+  "Canh": { hyThan: "Tây Bắc", taiThan: "Chính Đông", hacThan: "Đông Nam" },
+  "Tân":  { hyThan: "Tây Nam", taiThan: "Chính Đông", hacThan: "Đông Bắc" },
+  "Nhâm": { hyThan: "Chính Nam", taiThan: "Chính Tây", hacThan: "Tây Bắc" },
+  "Quý":  { hyThan: "Đông Nam", taiThan: "Chính Tây", hacThan: "Tây Nam" }
+};
+
+
 // ===== Thập nhị trực =====
 const THAP_NHI_TRUC = {
   "Kiến": { tot: "Xuất hành, Khai trương, Động thổ, Nhập học", xau: "An táng" },
@@ -236,34 +253,258 @@ const THAP_NHI_TRUC = {
 
 // ===== Nhị thập bát tú =====
 const NHI_THAP_BAT_TU = {
-  "Giác": { tot: "Cưới hỏi, Khởi công, Xuất hành", xau: "An táng" },
-  "Cang": { tot: "Cắt may, Khởi công nhỏ", xau: "Cưới hỏi" },
-  "Đê":   { tot: "Cầu phúc, Gieo trồng", xau: "Khai trương" },
-  "Phòng":{ tot: "Khai trương, Xuất hành, Cầu tài", xau: "An táng" },
-  "Tâm":  { tot: "Trị bệnh, Phá dỡ", xau: "Cưới hỏi, Khai trương" },
-  "Vĩ":   { tot: "Cúng tế, Cầu phúc", xau: "Cưới hỏi, An táng" },
-  "Cơ":   { tot: "Xây dựng, Chữa bệnh", xau: "Khai trương" },
-  "Đẩu":  { tot: "Xuất hành, Khởi công nhỏ", xau: "Cưới hỏi" },
-  "Ngưu": { tot: "An táng, Tu sửa mộ phần", xau: "Cưới hỏi, Khai trương" },
-  "Nữ":   { tot: "Cắt may, Chữa bệnh", xau: "Cưới hỏi, An táng" },
-  "Hư":   { tot: "Phá dỡ, Trị bệnh", xau: "Cưới hỏi, Khai trương" },
-  "Nguy": { tot: "Xây dựng, Trồng trọt", xau: "Cưới hỏi" },
-  "Thất": { tot: "Khai trương, Xuất hành", xau: "An táng" },
-  "Bích": { tot: "Cúng tế, Cầu phúc", xau: "Khai trương" },
-  "Khuê": { tot: "Khai trương, Học hành", xau: "An táng" },
-  "Lâu":  { tot: "Cưới hỏi, Khai trương", xau: "Chôn cất" },
-  "Vị":   { tot: "Xây dựng, Động thổ", xau: "An táng" },
-  "Mão":  { tot: "Cắt may, Học hành", xau: "An táng, Cưới hỏi" },
-  "Tất":  { tot: "Khai trương, Xuất hành", xau: "An táng" },
-  "Chủy": { tot: "Cầu tài, Học hành", xau: "An táng" },
-  "Sâm":  { tot: "Cưới hỏi, Xây dựng", xau: "An táng" },
-  "Tỉnh": { tot: "Khai trương, Xuất hành", xau: "An táng" },
-  "Quỷ":  { tot: "Cúng tế, Trị bệnh", xau: "Cưới hỏi" },
-  "Liễu": { tot: "Xây dựng, Cưới hỏi", xau: "An táng" },
-  "Tinh": { tot: "Khai trương, Học hành", xau: "An táng" },
-  "Trương":{ tot: "Cưới hỏi, Khai trương", xau: "An táng" },
-  "Dực":  { tot: "Xuất hành, Khởi công", xau: "An táng" },
-  "Chẩn": { tot: "Cúng tế, Gieo trồng", xau: "Khai trương" }
+  "Giác": {
+    tenNgay: "Giác Mộc Giao - Sái Tuân",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Giao Long, chủ trị ngày thứ 5.",
+    nenLam: "Cưới gả, thi cử, khởi công, xây cất, an táng, làm việc thiện. Mọi việc đều tốt.",
+    kiengCu: "Không có việc gì phải kiêng kỵ đặc biệt.",
+    ngoaiLe: "Tại Thìn là Đăng Viên, tạo tác đại lợi. Tại Tý là Sinh Địa, cũng rất tốt. Tại Thân là Diệt Địa, nên tránh. Gặp ngày Canh Thìn hoặc Mậu Thìn, xây cất tốt lành.",
+    tho: "Giác tinh tạo tác chủ vinh xương,\nNgoại quan hỷ sự đại cát tường,\nGiá thú tu du tam tuế tử,\nAn táng, chiêu tài cập điền trang."
+  },
+  "Cang": {
+    tenNgay: "Cang Kim Long - Diêu Kỳ",
+    danhGia: "Tốt (Bình Tú)",
+    tuongTinh: "Con Rồng, chủ trị ngày thứ 6.",
+    nenLam: "Cắt may áo mới, khai trương nhỏ.",
+    kiengCu: "Đại kỵ cưới hỏi. Chôn cất, xây cất nhà cửa, khởi công lớn đều không tốt, dễ gặp điều không may.",
+    ngoaiLe: "Tại Thìn là Phục Đoạn Sát, kỵ chôn cất, xuất hành, thừa kế, chia gia tài. Tại Sửu là Nhập Miếu, khởi tạo rất tốt. Tại Tuất, kỵ xây cất.",
+    tho: "Cang tinh tạo tác bât an tường,\nThập nhật chi trung hữu lưỡng thương,\nGiá thú, khai môn, tu phòng thất,\nMai táng nhị thập nhật kiến hung."
+  },
+  "Đê": {
+    tenNgay: "Đê Thổ Lạc - Ngô Hán",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Lửng, chủ trị ngày thứ 7.",
+    nenLam: "Cầu phúc, gieo trồng, làm những việc nhỏ.",
+    kiengCu: "Khởi công xây dựng, cưới hỏi, chôn cất, khai trương, xuất hành xa. Làm các việc này dễ gặp thất bại, kiện tụng.",
+    ngoaiLe: "Tại Mão, Hợi, Mùi, mọi việc đều tốt. Gặp ngày Mão là Đăng Viên, các việc tốt đẹp.",
+    tho: "Đê tinh tạo tác chủ tai hung,\nTà ma quỷ quái nhập phòng trung,\nKhai môn, phóng thủy tu phòng tử,\nGiá thú, mai táng tiệm tiệm không."
+  },
+  "Phòng": {
+    tenNgay: "Phòng Nhật Thố - Cảnh Đan",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Thỏ, chủ trị ngày Chủ Nhật.",
+    nenLam: "Mọi việc đều tốt. Nhất là khởi công, xây dựng, cưới hỏi, khai trương, xuất hành, nhậm chức, an táng.",
+    kiengCu: "Không có.",
+    ngoaiLe: "Gặp ngày Hợi, Mão, Mùi thì kỵ chôn cất.",
+    tho: "Phòng tinh tạo tác đại cát xương,\nGiá thú, điền tàm đại cát tường,\nMai táng bá niên tăng phú quý,\nPhóng thủy, khai môn chiêu tài vượng."
+  },
+  "Tâm": {
+    tenNgay: "Tâm Nguyệt Hồ - Khấu Tuân",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Cáo, chủ trị ngày thứ 2.",
+    nenLam: "Trị bệnh, phá dỡ, dọn dẹp nhà cửa.",
+    kiengCu: "Mọi việc lớn như cưới hỏi, khai trương, xây cất, chôn cất, kiện tụng đều rất xấu, dễ gặp tai họa, phá sản.",
+    ngoaiLe: "Tại Dần, Ngọ, Tuất mọi việc đều tốt.",
+    tho: "Tâm tinh tạo tác đại vi hung,\nCánh tao hình tụng, cập lao lung,\nTụng sự, điền tàm tịnh thất bại,\nHôn nhân, quan quách bất an ninh."
+  },
+  "Vĩ": {
+    tenNgay: "Vĩ Hỏa Hổ - Sầm Bành",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Cọp, chủ trị ngày thứ 3.",
+    nenLam: "Mọi việc đều tốt, nhất là cúng tế, cầu phúc, xây dựng.",
+    kiengCu: "Cưới hỏi, may vá, đóng giường.",
+    ngoaiLe: "Tại Hợi, Mão, Mùi kỵ chôn cất. Gặp ngày Mão là Đăng Viên, các việc tốt đẹp.",
+    tho: "Vĩ tinh tạo tác đắc quan ban,\nCanh tác, giá thú vượng điền tàm,\nMai táng, tu bổ diên niên thọ,\nKhai môn, phóng thủy tu long an."
+  },
+  "Cơ": {
+    tenNgay: "Cơ Thủy Báo - Phùng Dị",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Báo, chủ trị ngày thứ 4.",
+    nenLam: "Rất tốt cho việc xây dựng, động thổ, lợp nhà, mua bán đất đai, gieo trồng.",
+    kiengCu: "Kỵ nhất là khai trương, cưới hỏi, chôn cất và đóng thuyền.",
+    ngoaiLe: "Tại Thìn, Tý, Thân thì tốt. Tại Tuất là Phục Đoạn Sát, kỵ chôn cất, xuất hành.",
+    tho: "Cơ tinh tạo tác đại cát tường,\nTuế tuế niên niên đại cát xương,\nMai táng, tu phòng, sinh quý tử,\nGiá thú, điền tàm vượng gia quang."
+  },
+  "Đẩu": {
+    tenNgay: "Đẩu Mộc Giải - Chu Vận",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Cua, chủ trị ngày thứ 5.",
+    nenLam: "Tốt cho việc xuất hành, khởi công nhỏ, mua bán, giao dịch.",
+    kiengCu: "Đại kỵ cưới hỏi, làm nhà, đào giếng.",
+    ngoaiLe: "Tại Tý là Đăng Viên, rất tốt. Tại Thân, Thìn cũng tốt.",
+    tho: "Đẩu tinh tạo tác chủ chiêu tài,\nVăn vũ quan viên vị đỉnh thai,\nĐiền trạch, tiền tài thiên vạn tiến,\nHôn nhân, quan quách phúc lai."
+  },
+  "Ngưu": {
+    tenNgay: "Ngưu Kim Ngưu - Tế Tuân",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Trâu, chủ trị ngày thứ 6.",
+    nenLam: "Chỉ tốt cho việc an táng, tu sửa mộ phần, tế tự.",
+    kiengCu: "Đại kỵ cưới hỏi, khai trương, làm nhà, đi xa. Làm những việc này thường gặp chuyện lôi thôi, gia đình bất hòa, hao tài.",
+    ngoaiLe: "Tại Hợi, Dậu, Sửu, tuy gặp Hung tinh nhưng vẫn có thể làm được. Gặp ngày Sửu là Đăng Viên, tốt vừa.",
+    tho: "Ngưu tinh tạo tác chủ tai nguy,\nCửu hoành tam tai bất khả chỉ,\nGia đạo bất an, nhân khẩu thoái,\nHôn nhân, thiệp lộ, chủ phân ly."
+  },
+  "Nữ": {
+    tenNgay: "Nữ Thổ Bức - Cảnh Đan",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Dơi, chủ trị ngày thứ 7.",
+    nenLam: "Tốt cho việc cắt may, chữa bệnh, dọn dẹp.",
+    kiengCu: "Đại kỵ cưới hỏi, an táng, làm nhà. Gặp sao này thường gây chia ly, bệnh tật, kiện tụng.",
+    ngoaiLe: "Tại Hợi, Dậu, Sửu vẫn có thể dùng được. Gặp ngày Dậu là Đăng Viên, tốt.",
+    tho: "Nữ tinh tạo tác tổn nhân đinh,\nTrung niên gia đạo chủ linh đinh,\nGiá thú chiêu lai tam tuế tử,\nHôn nhân, quan quách tất tai sinh."
+  },
+  "Hư": {
+    tenNgay: "Hư Nhật Thử - Cái Diên",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Chuột, chủ trị ngày Chủ Nhật.",
+    nenLam: "Tốt cho việc phá dỡ, trị bệnh.",
+    kiengCu: "Mọi việc lớn như cưới hỏi, khai trương, xây cất, an táng đều rất xấu. Sao này chủ về sự hư không, mất mát.",
+    ngoaiLe: "Tại Thân, Tý, Thìn mọi việc đều tốt. Gặp ngày Thìn là Đăng Viên.",
+    tho: "Hư tinh tạo tác chủ tai ương,\nNam nữ tắc hung, di vong thân,\nTụng sự, điền tàm tịnh thất bại,\nHôn nhân, giá thú bất an ninh."
+  },
+  "Nguy": {
+    tenNgay: "Nguy Nguyệt Yến - Kiên Đàm",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Én, chủ trị ngày thứ 2.",
+    nenLam: "Tốt cho việc xây dựng, trồng trọt.",
+    kiengCu: "Kỵ cưới hỏi, đi thuyền, an táng. Gặp sao này làm việc gì cũng thấy không chắc chắn, nguy hiểm.",
+    ngoaiLe: "Tại Thân, Tý, Thìn mọi việc đều tốt. Tại Tỵ là Diệt Địa, rất kỵ.",
+    tho: "Nguy tinh tạo tác chủ ôn hoàng,\nHôn nhân, giá thú bất an tường,\nKhai môn, phóng thủy chiêu tai họa,\nMai táng tu phòng tiểu nhi vong."
+  },
+  "Thất": {
+    tenNgay: "Thất Hỏa Trư - Cảnh Đan",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Heo, chủ trị ngày thứ 3.",
+    nenLam: "Mọi việc đều tốt, nhất là khởi công, xây cất, cưới hỏi, khai trương, an táng.",
+    kiengCu: "Không có.",
+    ngoaiLe: "Tại Tuất là Nhập Miếu, rất tốt. Gặp ngày Tuất là Đăng Viên.",
+    tho: "Thất tinh tạo tác đại cát tường,\nGiá thú, điền tàm vượng gia quang,\nAn sàng, phóng thủy, sinh quý tử,\nTòng thử vinh hoa phú quý trường."
+  },
+  "Bích": {
+    tenNgay: "Bích Thủy Du - Tạng Cung",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Rái Cá, chủ trị ngày thứ 4.",
+    nenLam: "Mọi việc đều tốt. Đặc biệt tốt cho việc cúng tế, cầu phúc, xây cất, cưới hỏi, mở cửa hàng.",
+    kiengCu: "Kỵ nhất việc sửa chữa, tu bổ kho tàng.",
+    ngoaiLe: "Tại Hợi, Mão, Mùi mọi việc đều tốt. Gặp ngày Hợi là Đăng Viên, đại cát.",
+    tho: "Bích tinh tạo tác tiến điền ngưu,\nTòng thử gia môn phú quý lưu,\nGiá thú, khai môn, quan lộc chí,\nBách sự tu du vượng nhân khẩu."
+  },
+  "Khuê": {
+    tenNgay: "Khuê Mộc Lang - Mã Vũ",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Sói, chủ trị ngày thứ 5.",
+    nenLam: "Tốt cho việc khai trương, học hành, thi cử.",
+    kiengCu: "Đại kỵ an táng. Không nên khởi công xây dựng nhà cửa, dễ gây bất hòa trong gia đình.",
+    ngoaiLe: "Gặp ngày Thìn thì Đăng Viên, tốt.",
+    tho: "Khuê tinh tạo tác hữu tai ương,\nGia nội tòng thử bất an ninh,\nMai táng, tu phòng kinh khốc khấp,\nHôn nhân, giá thú bất cát tường."
+  },
+  "Lâu": {
+    tenNgay: "Lâu Kim Cẩu - Lưu Long",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Chó, chủ trị ngày thứ 6.",
+    nenLam: "Mọi việc đều tốt. Đặc biệt tốt cho cưới hỏi, khai trương, xây dựng, chữa bệnh, xuất hành.",
+    kiengCu: "Kỵ nhất việc khởi công đóng thuyền.",
+    ngoaiLe: "Tại Dậu là Đăng Viên. Tại Tý, Ngọ, Mão cũng tốt.",
+    tho: "Lâu tinh tạo tác vượng gia đinh,\nGiá thú, khai môn, vạn sự thành,\nTòng thử gia môn tăng phúc lộc,\nHữu nhân xưng tụng, vượng môn đình."
+  },
+  "Vị": {
+    tenNgay: "Vị Thổ Trĩ - Cảnh Đan",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Gà Trĩ, chủ trị ngày thứ 7.",
+    nenLam: "Tốt cho việc xây dựng, động thổ, cưới hỏi, an táng.",
+    kiengCu: "Kỵ đi thuyền.",
+    ngoaiLe: "Gặp ngày Dậu là Đăng Viên.",
+    tho: "Vị tinh tạo tác sự như tâm,\nGia môn, điền trạch, vượng nhân đinh,\nGiá thú, khai môn, quan lộc chí,\nMai táng tu phòng tử tôn hưng."
+  },
+  "Mão": {
+    tenNgay: "Mão Nhật Kê - Vương Lương",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Gà, chủ trị ngày Chủ Nhật.",
+    nenLam: "Tốt cho việc cắt may, học hành, làm những việc nhỏ.",
+    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất nhà cửa, khai trương. Gặp sao này mọi việc lớn đều bất thành, trắc trở.",
+    ngoaiLe: "Tại Hợi, Mão, Mùi kỵ chôn cất. Tại Dậu là Đăng Viên, có thể dùng.",
+    tho: "Mão tinh tạo tác chủ tai hoạ,\nHôn nhân, giá thú bất khả thành,\nPhụ nhân mang thai vi bất lợi,\nGia đạo tòng thử bất an ninh."
+  },
+  "Tất": {
+    tenNgay: "Tất Nguyệt Ô - Trần Tuấn",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Quạ, chủ trị ngày thứ 2.",
+    nenLam: "Mọi việc đều tốt. Tốt nhất cho việc khai trương, xuất hành, xây dựng, cưới hỏi, an táng.",
+    kiengCu: "Không có.",
+    ngoaiLe: "Tại Tỵ, Dậu, Sửu đều tốt. Gặp ngày Dậu là Đăng Viên.",
+    tho: "Tất tinh tạo tác đại cát tường,\nHôn nhân, giá thú, vượng điền trang,\nKhai môn, phóng thủy, sinh quý tử,\nGia môn hưng vượng, phúc thọ trường."
+  },
+  "Chủy": {
+    tenNgay: "Chủy Hỏa Hầu - Phó Tuấn",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Khỉ, chủ trị ngày thứ 3.",
+    nenLam: "Tốt cho việc cầu tài, học hành, thi cử.",
+    kiengCu: "Kỵ nhất là an táng, xây cất, khai trương, cưới hỏi. Làm những việc này dễ gặp thị phi, kiện tụng.",
+    ngoaiLe: "Tại Thân là Đăng Viên, tốt.",
+    tho: "Chủy tinh tạo tác chủ tang vong,\nTáng sự, tu phòng, đại bất tường,\nHôn nhân, quan quách, đa khẩu thiệt,\nGia trạch tòng thử bất an khang."
+  },
+  "Sâm": {
+    tenNgay: "Sâm Thủy Viên - Đỗ Mậu",
+    danhGia: "Tốt (Bình Tú)",
+    tuongTinh: "Con Vượn, chủ trị ngày thứ 4.",
+    nenLam: "Tốt cho việc cưới hỏi, xây dựng, làm việc thiện.",
+    kiengCu: "Kỵ an táng, đào giếng, đi thuyền.",
+    ngoaiLe: "Tại Thân là Đăng Viên, rất tốt. Tại Tý, Thìn cũng tốt.",
+    tho: "Sâm tinh tạo tác đắc quan vị,\nTòng thử gia môn đại cát lợi,\nGiá thú, tu phòng, tăng phúc thọ,\nPhú quý, vinh hoa, vượng tử tôn."
+  },
+  "Tỉnh": {
+    tenNgay: "Tỉnh Mộc Hãn - Diêu Kỳ",
+    danhGia: "Tốt (Bình Tú)",
+    tuongTinh: "Con Hươu, chủ trị ngày thứ 5.",
+    nenLam: "Tạo tác nhiều việc rất tốt như trổ cửa dựng cửa, mở thông đường nước, đào mương móc giếng, đi thuyền, xây cất, nhậm chức hoặc nhập học.",
+    kiengCu: "Làm sanh phần, đóng thọ đường, chôn cất hay tu bổ mộ phần.",
+    ngoaiLe: "Sao Tỉnh tại Mùi, Hợi, Mão mọi việc tốt. Tại Mùi là Nhập Miếu nên khởi động vinh quang.",
+    tho: "Tỉnh tinh tạo tác vượng tàm điền,\nKim bảng đề danh đệ nhất tiên,\nMai táng, tu phòng kinh tốt tử,\nHốt phong tật nhập hoàng điên tuyền.\nKhai môn, phóng thủy chiêu tài bạch,\nNgưu mã trư dương vượng mạc cát,\nQuả phụ điền đường lai nhập trạch,\nNhi tôn hưng vượng hữu dư tiền."
+  },
+  "Quỷ": {
+    tenNgay: "Quỷ Kim Dương - Vương Bá",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Dê, chủ trị ngày thứ 6.",
+    nenLam: "Tốt cho việc cúng tế, trị bệnh.",
+    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất. Gặp sao này là sao xấu nhất trong 28 sao, làm việc gì cũng thất bại, bệnh tật, chết chóc.",
+    ngoaiLe: "Gặp ngày Tý thì Đăng Viên, có thể dùng.",
+    tho: "Quỷ tinh tạo tác đa tai ương,\nHữu bệnh, hữu tụng, kiến quan trường,\nMai táng, tu phòng, gia đình bại,\nHôn nhân, giá thú, kiến cô nương."
+  },
+  "Liễu": {
+    tenNgay: "Liễu Thổ Chương - Ngô Hán",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Hoẵng, chủ trị ngày thứ 7.",
+    nenLam: "Không có việc gì tốt.",
+    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất, khai trương. Đây là một hung tinh mạnh, làm việc gì cũng bất lợi, gia đạo suy bại, con cái khó nuôi.",
+    ngoaiLe: "Gặp ngày Tý, Thân, Thìn cũng không tốt.",
+    tho: "Liễu tinh tạo tác chủ tao ương,\nGia trạch tòng thử bất an khang,\nMai táng, tu phòng, sinh tật bệnh,\nHôn nhân, giá thú, cửu hậu ương."
+  },
+  "Tinh": {
+    tenNgay: "Tinh Nhật Mã - Phùng Dị",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Ngựa, chủ trị ngày Chủ Nhật.",
+    nenLam: "Tốt cho việc học hành, thi cử.",
+    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất.",
+    ngoaiLe: "Tại Dần, Ngọ, Tuất đều kỵ. Gặp ngày Ngọ là Đăng Viên, nhưng vẫn xấu.",
+    tho: "Tinh tinh tạo tác chủ ôn hoàng,\nHôn nhân, giá thú, bất an tường,\nQuan sự, hình tù, đa tật bệnh,\nMai táng, tu phòng, kiến tai ương."
+  },
+  "Trương": {
+    tenNgay: "Trương Nguyệt Lộc - Vạn Tu",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Hươu, chủ trị ngày thứ 2.",
+    nenLam: "Mọi việc đều tốt. Đặc biệt tốt cho cưới hỏi, khai trương, xây dựng, nhậm chức, làm việc thiện.",
+    kiengCu: "Kỵ nhất là chôn cất, làm sanh phần.",
+    ngoaiLe: "Tại Tý, Thân, Thìn cũng kỵ chôn cất. Gặp ngày Thân là Đăng Viên.",
+    tho: "Trương tinh tạo tác vượng điền tàm,\nGiá thú, hôn nhân, đại cát xương,\nKhai môn, phóng thủy, tài nguyên chí,\nGia môn hưng vượng, tử tôn cường."
+  },
+  "Dực": {
+    tenNgay: "Dực Hỏa Xà - Cảnh Đan",
+    danhGia: "Xấu (Hung Tú)",
+    tuongTinh: "Con Rắn, chủ trị ngày thứ 3.",
+    nenLam: "Không có việc gì tốt.",
+    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất, khai trương. Sao này chủ về sự chia ly, tan tác.",
+    ngoaiLe: "Tại Tỵ, Dậu, Sửu cũng không tốt.",
+    tho: "Dực tinh tạo tác chủ phân trương,\nHôn nhân, giá thú, bất an tường,\nMai táng, tu phòng, đa tật bệnh,\nBách sự kinh doanh, chủ phá bại."
+  },
+  "Chẩn": {
+    tenNgay: "Chẩn Thủy Dẫn - Lưu Trực",
+    danhGia: "Tốt (Kiết Tú)",
+    tuongTinh: "Con Giun, chủ trị ngày thứ 4.",
+    nenLam: "Tốt cho việc cúng tế, gieo trồng, cưới hỏi.",
+    kiengCu: "Kỵ khai trương, làm nhà, đi thuyền, an táng.",
+    ngoaiLe: "Tại Thân, Tý, Thìn đều tốt. Gặp ngày Thìn là Đăng Viên.",
+    tho: "Chẩn tinh tạo tác đại cát tường,\nTòng thử gia môn vượng điền trang,\nGiá thú, khai môn, quan lộc chí,\nPhú quý, vinh hoa, phúc thọ trường."
+  }
 };
 
 // ===== Ngũ hành nạp âm (60 hoa giáp) =====
@@ -470,18 +711,6 @@ const THAN_SAT = {
     return "Ngày " + cc[0] + ", tháng " + cc[1] + ", năm " + cc[2];
   }
 
-//  function getGioHoangDao(jd){
-//    const chiOfDay = (jd + 1) % 12;
-//    const gioHD = GIO_HD[chiOfDay % 6];
-//    let ret = ""; let count = 0;
-//    for (let i=0;i<12;i++){
-//      if (gioHD.charAt(i) === '1'){
-//        ret += CHI[i] + ' <b style="color:#ffff99;">(' + ((i*2+23)%24) + '-' + ((i*2+1)%24) + ')</b>';
-//        if (count++ < 5) ret += ", ";
-//      }
-//    }
-//    return ret;
-//  }
   function getGioHoangDao(jd){
     const chiOfDay = (jd + 1) % 12;
     const gioHD = GIO_HD[chiOfDay % 6];
@@ -495,6 +724,37 @@ const THAN_SAT = {
     }
     return ret;
   }
+
+
+  function getGioHacDao(jd){
+    const chiOfDay = (jd + 1) % 12;
+    const gioHD = GIO_HD[chiOfDay % 6]; // Dùng chung mảng GIO_HD
+    let ret = ""; let count = 0;
+    for (let i=0; i<12; i++){
+      if (gioHD.charAt(i) === '0'){ // Chỉ khác ở đây, tìm số '0' thay vì '1'
+        ret += '<b style="color:#ff9933;">' + CHI[i] + '</b>' + " " + CHI_EMOJI[i] + 
+               ' <b style="color:#ff9933;">(' + ((i*2+23)%24) + '-' + ((i*2+1)%24) + 'h)</b>';
+        if (count++ < 5) ret += ", ";
+      }
+    }
+    return ret;
+  }
+
+// =======================================================
+// ----- BẮT ĐẦU CODE MỚI - HÀM XUẤT HÀNH NÂNG CẤP -----
+// =======================================================
+
+  function getHuongXuatHanh(jd) {
+    const canNgay = CAN[(jd + 9) % 10];
+    const huong = THAN_HUONG[canNgay]; // Lấy dữ liệu từ bảng mới
+    if (huong) {
+      let tot = `Hỷ Thần: <b style="color:#00ff00;">${huong.hyThan}</b> - Tài Thần: <b style="color:#00ff00;">${huong.taiThan}</b>`;
+      let xau = `Tránh: <b style="color:#ff9933;">${huong.hacThan} (Hạc Thần)</b>`;
+      return `${tot} <br> ${xau}`;
+    }
+    return "Không rõ";
+  }
+
 
 	function getViecTotXau(lunarDate) {
 		const cc = getCanChi(lunarDate);
@@ -513,27 +773,19 @@ const THAN_SAT = {
 	    "Phá","Nguy","Thành","Thu","Khai","Bế"
 	  ];
 	  const CHI_ORDER = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
-	
 	  const canChiTruc = getCanChi(lunarDate); 
 	  const chiNgayTruc = canChiTruc[0].split(" ")[1];   // ví dụ: "Tỵ"
 	  const chiThangTruc = canChiTruc[1].split(" ")[1];  // ví dụ: "Thân"
-	
 	  const chiIndexNgay = CHI_ORDER.indexOf(chiNgayTruc);
 	  const chiIndexThang = CHI_ORDER.indexOf(chiThangTruc);
-	
-	  // Công thức tính Trực chuẩn
-	  const trucIndex = (chiIndexNgay - chiIndexThang + 12) % 12;
+		const trucIndex = (chiIndexNgay - (chiIndexThang + 1) + 12) % 12;
 	  const trucName = TRUC_ORDER[trucIndex];
 	  const trucInfo = THAP_NHI_TRUC[trucName];
-    // Thập nhị trực
-    //const trucNames = Object.keys(THAP_NHI_TRUC);
-    //const trucIndex = (lunarDate.month + (lunarDate.jd % 12)) % 12;
-    //const trucName = trucNames[trucIndex];
-    //const trucInfo = THAP_NHI_TRUC[trucName];
+
 
     // Nhị thập bát tú
     const saoNames = Object.keys(NHI_THAP_BAT_TU);
-    const saoIndex = lunarDate.jd % 28;
+    const saoIndex = (lunarDate.jd + 11) % 28;
     const saoName = saoNames[saoIndex];
     const saoInfo = NHI_THAP_BAT_TU[saoName];
 
@@ -793,15 +1045,59 @@ const THAN_SAT = {
     </td></tr>`;
 
     // Khối nội dung ẩn
+
+		// Thêm giờ Hắc Đạo
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">⛈️<b style="color:#fff;">- Giờ hắc đạo:</b> ${getGioHacDao(jd)}</td></tr>`;
+		// Thêm Hướng Xuất Hành
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">🧭<b style="color:#fff;">- Hướng xuất hành:</b> ${getHuongXuatHanh(jd)}</td></tr>`;
+
     const viec = getViecTotXau(currentLunarDate);
     res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">✅- Việc nên làm:</b> ${viec.nen}</td></tr>`;
     const thanSat = getThanSat(currentLunarDate);
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> ${thanSat.truc.name} | Tốt: ${thanSat.truc.info.tot} | <span style="color:red;">Xấu: ${thanSat.truc.info.xau}</span></td></tr>`;
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.sao.emoji}- Nhị thập bát tú:</b> ${thanSat.sao.name} | Tốt: ${thanSat.sao.info.tot} | <span style="color:red;">Xấu: ${thanSat.sao.info.xau}</span></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> ${thanSat.truc.name} <span style="color:#fff;">| Tốt:</span> ${thanSat.truc.info.tot} <span style="color:#fff;">| Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></td></tr>`;
+
+		// Dòng code hiển thị đầy đủ thông tin Nhị Thập Bát Tú
+		res += `<tr class="toggle-content">
+							<td class="viecnenlam" colspan="5" style="text-align:left; line-height:1.6;">
+								<span style="font-weight:bold; color:#fff; font-size:110%;">${thanSat.sao.emoji}- Nhị Thập Bát Tú: ${thanSat.sao.name}</span>
+								<span style="font-style:italic; color:#ffff99;"> (${thanSat.sao.info.tenNgay || ""})</span>
+							</td>
+						</tr>`;
+		const chiTietDanhGia = thanSat.sao.info.danhGia.substring(thanSat.sao.info.danhGia.indexOf('('));
+		const thoText = (thanSat.sao.info.tho || '').replace(/^\s+/gm, '');
+		res += `<tr class="toggle-content">
+							<td class="viecnenlam" colspan="5" style="text-align:left; padding:10px; line-height:1.6; border-top:1px solid rgba(255,255,255,0.2);">
+
+								<!-- Đánh giá -->
+								<div style="font-style:italic; color:#ffff99; margin-bottom:6px;">
+									<span style="
+										background-color:${thanSat.sao.info.danhGia.includes('Tốt') ? 'rgba(0,255,0,0.8)' : 
+																		 (thanSat.sao.info.danhGia.includes('Xấu') ? 'rgba(255,0,0,0.8)' : 
+																		 'rgba(255,255,0,0.7)')};
+										color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px; margin-right:8px;
+									">
+										${thanSat.sao.info.danhGia.split(' ')[0]}
+									</span>
+									${chiTietDanhGia} - ${thanSat.sao.info.tuongTinh}
+								</div>
+
+								<!-- Nên làm & Kiêng cữ -->
+								<div><b style="color:#fff;">👍 Nên làm:</b> ${thanSat.sao.info.nenLam}</div>
+								<div style="margin:5px 0;"><b style="color:#fff;">👎 Kiêng cữ:</b> <span style="color:#ff9933;">${thanSat.sao.info.kiengCu}</span></div>
+								<div><b style="color:#fff;">✨ Ngoại lệ:</b> ${thanSat.sao.info.ngoaiLe}</div>
+
+								<!-- Thơ -->
+								<div style="font-family:'Times New Roman',serif; font-style:italic; color:#ffff99; margin-top:2px; padding-top:2px; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; white-space:pre-wrap;">${thoText}
+								</div>
+
+							</td>
+						</tr>`;
+
+
     res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">🌌- Ngũ hành nạp âm:</b> ${thanSat.napAm}</td></tr>`;
     res += `<tr class="toggle-content"><td class="cat_tinh" colspan="5"><b style="color:#fff;">🍀- Cát tinh:</b> ${thanSat.thanSat.cat || "Không có"}</td></tr>`;
-    res += `<tr class="toggle-content"><td class="hung_tinh" colspan="5"><b style="color:#fff;">⚡- Hung tinh:</b> ${thanSat.thanSat.hung || "Không có"}</td></tr>`;
-    res += `<tr class="toggle-content"><td class="viecnentranh" colspan="5"><b style="color:#fff;">🚫- Tránh:</b> ${viec.kieng}</td></tr>`;
+    res += `<tr class="toggle-content"><td class="hung_tinh" colspan="5"><b style="color:#fff;">⚡- Hung tinh:</b> <span style="color:#ff9933;">${thanSat.thanSat.hung || "Không có"}</span></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnentranh" colspan="5"><b style="color:#fff;">🚫- Tránh:</b> <span style="color:#ff9933;">${viec.kieng}</span></td></tr>`;
     
     
     res += '</table>';
