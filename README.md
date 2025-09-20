@@ -9,7 +9,12 @@
 <img width="624" height="720" alt="image" src="https://github.com/user-attachments/assets/6b132ecb-2fec-4b34-8ebe-5bf885bc9588" />
 <img width="456" height="957" alt="image" src="https://github.com/user-attachments/assets/f872886d-6605-43f0-b212-a118d1c270d8" />
 
-
+## Thêm card vào lovelace:
+```
+type: custom:lich-block-am-duong-viet-nam
+background: transparent # Hai chế độ normal(mặc định) và transparent
+background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+```
 
 ## Hướng dẫn:
 ### Khi update các bạn tải lại folder images copy lại vào `\config\www\community\lich-block-am-duong-viet-nam\`
