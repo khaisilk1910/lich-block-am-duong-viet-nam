@@ -1204,12 +1204,12 @@ const THAN_SAT = {
 		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;">🌑<b style="color:#fff;">- Giờ hắc đạo:</b> <span style="text-align:justify;">${getGioHacDao(jd)}</span></td></tr>`;
 		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;">🧭<b style="color:#fff;">- Hướng xuất hành:</b> <span style="text-align:justify;">${getHuongXuatHanh(jd)}</span></td></tr>`;
     const thanSat = getThanSat(currentLunarDate);
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> <span style=" background-color:rgba(0,255,0,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.truc.name}</span><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"><span style="color:#fff;">✅ Tốt:</span> ${thanSat.truc.info.tot} <span style="color:#fff;"><br>❌ Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></div></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> <span style=" background-color:rgba(13,27,42,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.truc.name}</span><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"><span style="color:#fff;">✅ Tốt:</span> ${thanSat.truc.info.tot} <span style="color:#fff;"><br>❌ Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></div></td></tr>`;
 
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">🌌- Ngũ hành:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${thanSat.napAm}</div></td></tr>`;
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">🌟- Ngũ hành:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${thanSat.napAm}</div></td></tr>`;
 		res += `<tr class="toggle-content">
 			<td class="viecnenlam" colspan="5" style="text-align:left; line-height:1.6;">
-				<span style="font-weight:bold; color:#fff; font-size:110%;">${thanSat.sao.emoji}- Nhị Thập Bát Tú: <span style=" background-color:rgba(0,255,0,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.sao.name}</span></span>
+				<span style="font-weight:bold; color:#fff; font-size:110%;">${thanSat.sao.emoji}- Nhị Thập Bát Tú: <span style=" background-color:rgba(13,27,42,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.sao.name}</span></span>
 				<span style="font-style:italic; color:#ffff99;"> (${thanSat.sao.info.tenNgay || ""})</span>
 			</td></tr>`;
 		const chiTietDanhGia = thanSat.sao.info.danhGia.substring(thanSat.sao.info.danhGia.indexOf('('));
@@ -1227,7 +1227,7 @@ const THAN_SAT = {
 					</span>
 					${chiTietDanhGia} - ${thanSat.sao.info.tuongTinh}
 				</div>
-				<div><b style="color:#fff;">👍 Nên làm:</b><span style="text-align:justify;">${thanSat.sao.info.nenLam}</span></div>
+				<div><b style="color:#fff;">👍 Nên làm:</b> <span style="text-align:justify;">${thanSat.sao.info.nenLam}</span></div>
 				<div style="margin:5px 0;"><b style="color:#fff;">👎 Kiêng cữ:</b> <span style="color:#ff9933; text-align:justify;">${thanSat.sao.info.kiengCu}</span></div>
 				<div><b style="color:#fff;">✨ Ngoại lệ:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${(thanSat.sao.info.ngoaiLe || '').replace(/\n/g, '<br>')}</div></div>
 				<div style="font-family:'Times New Roman',serif; font-style:italic; color:#ffff99; margin-top:2px; padding-top:2px; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; white-space:pre-wrap;">${thoText}
