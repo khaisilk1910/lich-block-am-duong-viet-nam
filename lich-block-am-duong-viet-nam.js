@@ -1,11 +1,14 @@
 //
 //
-// Lấy code âm dương từ HO NGOC DUC và phát triển thẻ dành cho Home Assistant của Nguyễn Tiến Khải - khaisilk1910
+// Lấy code âm dương từ HO NGOC DUC và https://www.xemlicham.com/
+// Phát triển thẻ dành cho Home Assistant của Nguyễn Tiến Khải - khaisilk1910
 // Lunar Calendar Custom Card for Home Assistant
 // HA custom card:
 //   type: custom:lich-block-am-duong-viet-nam
 //   background: transparent # Hai chế độ normal(mặc định) và transparent
 //   background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+//   grid_options:
+//     columns: full
 
 (function(){
   'use strict';
@@ -223,326 +226,342 @@
 	};
 
 
-// ===== Hướng Xuất Hành (theo Can ngày) =====
-const THAN_HUONG = {
-  "Giáp": { hyThan: "Đông Bắc", taiThan: "Đông Nam", hacThan: "Tây Bắc" },
-  "Ất":   { hyThan: "Tây Bắc", taiThan: "Đông Nam", hacThan: "Chính Đông" },
-  "Bính": { hyThan: "Tây Nam", taiThan: "Chính Tây", hacThan: "Chính Nam" },
-  "Đinh": { hyThan: "Chính Nam", taiThan: "Chính Tây", hacThan: "Chính Tây" },
-  "Mậu":  { hyThan: "Đông Nam", taiThan: "Chính Bắc", hacThan: "Tây Nam" },
-  "Kỷ":   { hyThan: "Đông Bắc", taiThan: "Chính Bắc", hacThan: "Chính Bắc" },
-  "Canh": { hyThan: "Tây Bắc", taiThan: "Chính Đông", hacThan: "Đông Nam" },
-  "Tân":  { hyThan: "Tây Nam", taiThan: "Chính Đông", hacThan: "Đông Bắc" },
-  "Nhâm": { hyThan: "Chính Nam", taiThan: "Chính Tây", hacThan: "Tây Bắc" },
-  "Quý":  { hyThan: "Đông Nam", taiThan: "Chính Tây", hacThan: "Tây Nam" }
-};
-
-
 // ===== Thập nhị trực =====
 const THAP_NHI_TRUC = {
-  "Kiến": { tot: "Xuất hành, Khai trương, Động thổ, Nhập học", xau: "An táng" },
-  "Trừ":  { tot: "Trừ bệnh, Cắt may, Làm thuốc", xau: "Khai trương, Xuất hành" },
-  "Mãn":  { tot: "Cưới hỏi, Cầu tài, Cầu phúc", xau: "Kiện tụng, Chôn cất" },
-  "Bình": { tot: "Cúng tế, Cầu phúc, Giao dịch", xau: "Xuất hành xa, Tranh tụng" },
-  "Định": { tot: "Cưới hỏi, Ký kết, Nhập trạch", xau: "Khai trương lớn" },
-  "Chấp": { tot: "Xây dựng, Trồng trọt, Giao dịch nhỏ", xau: "Khai trương, Xuất hành xa" },
-  "Phá":  { tot: "Trị bệnh, Phá dỡ, Dọn dẹp", xau: "Cầu tài, Cưới hỏi, An táng" },
-  "Nguy":  { tot: "Làm việc mạo hiểm, Cầu công danh", xau: "Cưới hỏi, An táng, Khai trương" },
-  "Thành":{ tot: "Khai trương, Cầu tài, Xây dựng, Cưới hỏi", xau: "Kiện tụng" },
-  "Thu":  { tot: "Cúng tế, Gieo trồng, Thu hoạch", xau: "Khai trương, Xuất hành" },
-  "Khai": { tot: "Khai trương, Xuất hành, Mở cửa hàng", xau: "An táng, Chôn cất" },
-  "Bế":  { tot: "An táng, Tu sửa mộ phần", xau: "Khai trương, Xuất hành, Cưới hỏi" }
+  "Kiến": { tot: "Khai trương, nhậm chức, cưới hỏi, trồng cây, đền ơn đáp nghĩa. Xuất hành đặng lợi, sinh con rất tốt.", xau: "Động thổ, chôn cất, đào giếng, lợp nhà." },
+  "Trừ":  { tot: "Động đất, ban nền đắp nền, thờ cúng Táo Thần, cầu thầy chữa bệnh bằng cách mổ xẻ hay châm cứu, bốc thuốc, xả tang, khởi công làm lò nhuộm lò gốm, nữ nhân khởi đầu uống thuốc chữa bệnh.", xau: "Đẻ con nhằm ngày này khó nuôi, nên làm Âm Đức cho con, nam nhân kỵ khởi đầu uống thuốc." },
+  "Mãn":  { tot: "Xuất hành, đi đường thủy, cho vay, thu nợ, mua hàng, bán hàng, nhập kho, đặt táng, kê gác, sửa chữa, lắp đặt máy, thuê thêm người, vào học kỹ nghệ, làm chuồng gà ngỗng vịt.", xau: "Lên quan lãnh chức, uống thuốc, vào làm hành chính, dâng nộp đơn từ." },
+  "Bình": { tot: "Nhập vào kho, đặt táng, gắn cửa, kê gác, đặt yên chỗ máy, sửa chữa làm tàu, khai trương tàu thuyền, các việc bồi đắp thêm ( như bồi bùn, đắp đất, lót đá, xây bờ kè.) Lót giường đóng giường, thừa kế tước phong hay thừa kế sự nghiệp, các vụ làm cho khuyết thủng ( như đào mương, móc giếng, xả nước.)", xau: "Không có" },
+  "Định": { tot: "Động thổ, san nền, đắp nền, làm hay sửa phòng bếp, lắp đặt máy móc, nhập học, làm lễ cầu thân, nộp đơn dâng sớ, sửa hay làm tàu thuyền, khai trương tàu thuyền, khởi công làm lò. Mua nuôi thêm súc vật.", xau: "Thưa kiện, xuất hành đi xa." },
+  "Chấp": { tot: "Lập khế ước, giao dịch, động thổ san nền, cầu thầy chữa bệnh, đi săn thú cá, tìm bắt trộm cướp. Xây đắp nền-tường.", xau: "Dời nhà, đi chơi xa, mở cửa hiệu buôn bán, xuất tiền của." },
+  "Phá":  { tot: "Trị bệnh, Phá dỡ, Dọn dẹp", xau: "Là ngày Nhật Nguyệt tương xung. Ngày có trực Phá muôn việc làm vào ngày này đều bất lợi." },
+  "Nguy":  { tot: "Không nên làm gì", xau: "Nói đến Trực Nguy là nói đến sự Nguy hiểm, suy thoái. Chính vì thế ngày có trực Nguy là ngày xấu, tiến hành muôn việc đều hung." },
+  "Thành":{ tot: "Lập khế ước, giao dịch, cho vay, thu nợ, mua hàng, bán hàng, xuất hành, đi tàu thuyền, khởi tạo, động thổ, san nền đắp nền, gắn cửa, đặt táng, kê gác, dựng xây kho vựa, làm hay sửa chữa phòng bếp, thờ phụng Táo Thần, lắp đặt máy móc ( hay các loại máy ), gặt lúa, đào ao giếng, tháo nước, cầu thầy chữa bệnh, mua gia súc, các việc trong vụ chăn nuôi, nhập học, làm lễ cầu thân, cưới gả, kết hôn, thuê người, nộp đơn dâng sớ, học kỹ nghệ, làm hoặc sửa tàu thuyền, khai trương tàu thuyền, vẽ tranh, tu sửa cây cối.", xau: "Kiện tụng, tranh chấp." },
+  "Thâu":  { tot: "Cấy lúa, gặt lúa, mua trâu, nuôi tằm, đi săn thú cá, tu sửa cây cối. Động thổ, san nền đắp nền, nữ nhân khởi ngày uống thuốc chưa bệnh, lên quan lãnh chức, thừa kế chức tước hay sự nghiệp, vào làm hành chính, nộp đơn dâng sớ.", xau: "Bắt đầu công việc mới, kỵ đi du lịch, kỵ tang lễ." },
+  "Khai": { tot: "Xuất hành, đi tàu thuyền, khởi tạo, động thổ, san nền đắp nền, dựng xây kho vựa, làm hay sửa phòng bếp, thờ cúng Táo Thần, đóng giường lót giường, may áo, lắp đặt cỗ máy dệt hay các loại máy, cấy lúa gặt lúa, đào ao giếng, tháo nước, các việc trong vụ chăn nuôi, mở thông hào rãnh, cầu thầy chữa bệnh, bốc thuốc, uống thuốc, mua trâu, làm rượu, nhập học, học kỹ nghệ, vẽ tranh, tu sửa cây cối.", xau: "An táng, Chôn cất" },
+  "Bế":  { tot: "Xây đắp tường, đặt táng, gắn cửa, kê gác, làm cầu. Khởi công lò nhuộm lò gốm, uống thuốc, trị bệnh (nhưng chớ trị bệnh mắt), tu sửa cây cối.", xau: "Lên quan nhậm chức, thừa kế chức tước hay sự nghiệp, nhập học, chữa bệnh mắt." }
 };
 
 // ===== Nhị thập bát tú =====
 const NHI_THAP_BAT_TU = {
   "Giác": {
-    tenNgay: "Giác Mộc Giao - Sái Tuân",
-    danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Giao Long, chủ trị ngày thứ 5.",
-    nenLam: "Cưới gả, thi cử, khởi công, xây cất, an táng, làm việc thiện. Mọi việc đều tốt.",
-    kiengCu: "Không có việc gì phải kiêng kỵ đặc biệt.",
-    ngoaiLe: "Tại Thìn là Đăng Viên, tạo tác đại lợi. Tại Tý là Sinh Địa, cũng rất tốt. Tại Thân là Diệt Địa, nên tránh. Gặp ngày Canh Thìn hoặc Mậu Thìn, xây cất tốt lành.",
-    tho: "Giác tinh tạo tác chủ vinh xương,\nNgoại quan hỷ sự đại cát tường,\nGiá thú tu du tam tuế tử,\nAn táng, chiêu tài cập điền trang."
+    tenNgay: "Giác Mộc Giao - Đặng Vũ",
+    danhGia: "Tốt (Bình Tú)",
+    tuongTinh: "Tướng tinh con Giao Long, chủ trị ngày thứ 5.",
+    nenLam: "Mọi việc tạo tác đều đặng được vinh xương và tấn lợi. Việc hôn nhân hay cưới gả sinh con quý tử. Công danh thăng tiến, khoa cử đỗ đạt cao.",
+    kiengCu: "Chôn cất hoạn nạn phải ba năm. Dù xây đắp mộ phần hay sửa chữa mộ phần ắt có người chết. Vì vậy, để tránh điềm giữ quý bạn nên chọn một ngày tốt khác để tiến hành chôn cất. Sinh con nhằm ngày Sao Giác chiếu thì sẽ khó nuôi. Tốt nhất đặt tên con theo tên của Sao nó mới được an toàn. Không dùng tên sao này có thể dùng tên Sao của tháng hay của năm cũng mang ý nghĩa tương đương.",
+    ngoaiLe: "- Sao Giác trúng vào ngày Dần là Đăng Viên mang ý nghĩa được ngôi vị cao cả, hay mọi sự đều tốt đẹp.\n- Sao Giác trúng vào ngày Ngọ là Phục Đoạn Sát: rất kỵ trong việc chôn cất, thừa kế, chia lãnh gia tài, xuất hành và cả khởi công lò nhuộm hoặc lò gốm. Tuy nhiên sao Giác vào ngày này lại nên làm các việc như lấp hang lỗ, xây tường, dứt vú trẻ em, làm cầu tiêu, kết dứt điều hung hại.\n- Sao Giác trúng ngày Sóc tức là Diệt Một Nhật: không nên làm rượu, làm hành chính, lập lò gốm lò nhuộm cũng như thừa kế. Đặc biệt Đại Kỵ đi thuyền.\n- Giác: Mộc Giao (con cá sấu): tức là Mộc tinh, sao tốt. Ý nghĩa đỗ đạt, hôn nhân thành tựu. Đồng thời kỵ cải táng và hung táng.",
+    tho: "Giác tinh tọa tác chủ vinh xương\nNgoại tiến điền tài cập nữ lang\nGiá thú hôn nhân sinh quý tử\nVăn nhân cập đệ kiến Quân vương\nDuy hữu táng mai bất khả dụng\nTam niên chi hậu, chủ ôn đậu"
   },
   "Cang": {
-    tenNgay: "Cang Kim Long - Diêu Kỳ",
+    tenNgay: "Cang Kim Long - Ngô Hán",
     danhGia: "Tốt (Bình Tú)",
-    tuongTinh: "Con Rồng, chủ trị ngày thứ 6.",
-    nenLam: "Cắt may áo mới, khai trương nhỏ.",
-    kiengCu: "Đại kỵ cưới hỏi. Chôn cất, xây cất nhà cửa, khởi công lớn đều không tốt, dễ gặp điều không may.",
-    ngoaiLe: "Tại Thìn là Phục Đoạn Sát, kỵ chôn cất, xuất hành, thừa kế, chia gia tài. Tại Sửu là Nhập Miếu, khởi tạo rất tốt. Tại Tuất, kỵ xây cất.",
-    tho: "Cang tinh tạo tác bât an tường,\nThập nhật chi trung hữu lưỡng thương,\nGiá thú, khai môn, tu phòng thất,\nMai táng nhị thập nhật kiến hung."
+    tuongTinh: "Tướng tinh con Rồng, chủ trị ngày thứ 6.",
+    nenLam: "Công việc liên quan đến cắt may áo màn sẽ đặng nhiều lộc ăn.",
+    kiengCu: "Chôn cất bị Trùng tang. Vì vậy, để tránh điềm giữ quý bạn nên chọn một ngày tốt khác để tiến hành chôn cất. Nếu cưới gả e rằng phòng không giá lạnh. Nếu tranh đấu kiện tụng thì lâm bại. Nếu khởi dựng nhà cửa chết con đầu. Trong 10 hoặc 100 ngày sau thì gặp họa, rồi từ đó lần lần tiêu hết ruộng đất, còn nếu làm quan bị cách chức. Sao Cang thuộc vào Thất Sát Tinh, nhằm ngày này sanh con ắt sẽ khó nuôi. Cho nên lấy tên của Sao để đặt cho con thì được yên lành.",
+    ngoaiLe: "- Sao Cang nhằm vào ngày Rằm là Diệt Một Nhật: Cữ làm rượu, thừa kế sự nghiệp, lập lò gốm, lò nhuộm hay vào làm hành chính, thứ nhất đi thuyền chẳng khỏi nguy hại (vì Diệt Một có nghĩa là chìm mất).\n- Sao Cang tại Mùi, Hợi, Mẹo thì trăm việc đều tốt. Thứ nhất tại Mùi.\n- Sao Cang: Kim Long (con rồng): Kim tinh, sao xấu. Kỵ gả cưới và xây cất. Đề phòng dễ bị tai nạn.",
+    tho: "Can tinh tạo tác Trưởng phòng đường,\nThập nhật chi trung chủ hữu ương,\nĐiền địa tiêu ma, quan thất chức,\nĐầu quân định thị hổ lang thương.\nGiá thú, hôn nhân dụng thử nhật,\nNhi tôn, Tân phụ chủ không phòng,\nMai táng nhược hoàn phùng thử nhật,\nĐương thời tai họa, chủ trùng tang."
   },
   "Đê": {
-    tenNgay: "Đê Thổ Lạc - Ngô Hán",
+    tenNgay: "Đê Thổ Lạc - Giả Phục",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Lửng, chủ trị ngày thứ 7.",
-    nenLam: "Cầu phúc, gieo trồng, làm những việc nhỏ.",
-    kiengCu: "Khởi công xây dựng, cưới hỏi, chôn cất, khai trương, xuất hành xa. Làm các việc này dễ gặp thất bại, kiện tụng.",
-    ngoaiLe: "Tại Mão, Hợi, Mùi, mọi việc đều tốt. Gặp ngày Mão là Đăng Viên, các việc tốt đẹp.",
-    tho: "Đê tinh tạo tác chủ tai hung,\nTà ma quỷ quái nhập phòng trung,\nKhai môn, phóng thủy tu phòng tử,\nGiá thú, mai táng tiệm tiệm không."
+    tuongTinh: "Tướng tinh con Lạc Đà, chủ trị ngày thứ 7.",
+    nenLam: "Sao Đê đại hung, không hợp để làm bất kỳ công việc trọng đại nào.",
+    kiengCu: "Không nên khởi công xây dựng, chôn cất, cưới gả và xuất hành. Kỵ nhất là đường thủy. Ngày này sinh con chẳng phải điềm lành nên làm âm đức cho con. Đây chỉ là liệt kê các việc Đại Kỵ, còn các việc khác vẫn nên kiêng cữ. Vì vậy, nếu quý bạn có dự định các công việc liên quan đến khởi công xây dựng, chôn cất, cưới gả và xuất hành quý bạn nên chọn một ngày tốt khác để thực hiện.",
+    ngoaiLe: "- Đê Thổ Lạc tại: Thân, Tý và Thìn trăm việc đều tốt. Trong đó, Thìn là tốt hơn hết bởi Sao Đê Đăng Viên tại Thìn.\n- Đê Thổ Lạc (con nhím): Thổ tinh, sao xấu. Khắc kỵ các việc: khai trương, động thổ, chôn cất và xuất hành.",
+    tho: "Đê tinh tạo tác chủ tai hung,\nPhí tận điền viên, thương khố không,\nMai táng bất khả dụng thử nhật,\nHuyền thằng, điếu khả, họa trùng trùng,\nNhược thị hôn nhân ly biệt tán,\nDạ chiêu lãng tử nhập phòng trung.\nHành thuyền tắc định tạo hướng một,\nCánh sinh lung ách, tử tôn cùng."
   },
   "Phòng": {
-    tenNgay: "Phòng Nhật Thố - Cảnh Đan",
+    tenNgay: "Phòng Nhật Thố - Cảnh Yêm",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Thỏ, chủ trị ngày Chủ Nhật.",
-    nenLam: "Mọi việc đều tốt. Nhất là khởi công, xây dựng, cưới hỏi, khai trương, xuất hành, nhậm chức, an táng.",
-    kiengCu: "Không có.",
-    ngoaiLe: "Gặp ngày Hợi, Mão, Mùi thì kỵ chôn cất.",
-    tho: "Phòng tinh tạo tác đại cát xương,\nGiá thú, điền tàm đại cát tường,\nMai táng bá niên tăng phú quý,\nPhóng thủy, khai môn chiêu tài vượng."
+    tuongTinh: "Tướng tinh con Thỏ, chủ trị ngày Chủ Nhật.",
+    nenLam: "Mọi việc khởi công tạo tác đều tốt. Ngày này hợp nhất cho việc cưới gả, xuất hành, xây dựng nhà, chôn cất, đi thuyền, mưu sự, chặt cỏ phá đất và cả cắt áo.",
+    kiengCu: "Sao Phòng là Đại Kiết Tinh nên không kỵ bất kỳ việc gì. Vì vậy, ngày này nên tiến hành các việc lớn đặc biệt là mua bán như nhà cửa, đất đai hay xe cộ được nhiều may mắn và thuận lợi.",
+    ngoaiLe: "- Sao Phòng tại Đinh Sửu hay Tân Sửu đều tốt. Tại Dậu thì càng tốt hơn, vì Sao Phòng Đăng Viên tại Dậu.\n- Trong 6 ngày Kỷ Tỵ, Kỷ Dậu, Đinh Tỵ, Đinh Sửu, Quý Dậu, Tân Sửu Sao Phòng vẫn tốt với mọi việc khác. Ngoại trừ việc chôn cất là rất kỵ.\n- Sao Phòng nhằm vào ngày Tỵ là Phục Đoạn Sát: chẳng nên xuất hành, chôn cất, chia lãnh gia tài, thừa kế cũng như khởi công làm lò nhuộm, lò gốm. Tuy nhiên nên xây tường, lấp hang lỗ, dứt vú trẻ em, làm cầu tiêu, kết dứt điều hung hại.\n- Phòng Nhật Thố (con thỏ): Thái dương, sao tốt. Sao này hưng vượng về tài sản, thuận lợi trong cả việc chôn cất cũng như xây cất.",
+    tho: "Phòng tinh tạo tác điền viên tiến,\nHuyết tài ngưu mã biến sơn cương,\nCánh chiêu ngoại xứ điền trang trạch,\nVinh hoa cao quý, phúc thọ khang.\nMai táng nhược nhiên phùng thử nhật,\nCao quan tiến chức bái Quân vương.\nGiá thú: Thường nga quy Nguyệt điện,\nTam niên bào tử chế triều đường."
   },
   "Tâm": {
     tenNgay: "Tâm Nguyệt Hồ - Khấu Tuân",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Cáo, chủ trị ngày thứ 2.",
-    nenLam: "Trị bệnh, phá dỡ, dọn dẹp nhà cửa.",
-    kiengCu: "Mọi việc lớn như cưới hỏi, khai trương, xây cất, chôn cất, kiện tụng đều rất xấu, dễ gặp tai họa, phá sản.",
-    ngoaiLe: "Tại Dần, Ngọ, Tuất mọi việc đều tốt.",
-    tho: "Tâm tinh tạo tác đại vi hung,\nCánh tao hình tụng, cập lao lung,\nTụng sự, điền tàm tịnh thất bại,\nHôn nhân, quan quách bất an ninh."
+    tuongTinh: "Tướng tinh con Chồn, chủ trị ngày thứ 2.",
+    nenLam: "Hung tú này tạo tác bất kỳ việc chi cũng không hạp.",
+    kiengCu: "Khởi công tạo tác việc chi cũng không tránh khỏi hại. Nhất là cưới gả, đóng giường, lót giường, xây cất, chôn cất và tranh tụng. Vì vậy, nên chọn một ngày tốt khác để tiến hành các việc trên, đặc biệt tránh cưới gả nhằm ngày này.",
+    ngoaiLe: "- Ngày Dần Sao Tâm Đăng Viên, tốt khi dùng làm các việc nhỏ.\n- Tâm: Nguyệt Hồ (con chồn): Thái âm, sao xấu. Kỵ cưới gả, xây cất, thưa kiện. Kinh doanh ắt thua lỗ.",
+    tho: "Tâm tinh tạo tác đại vi hung,\nCánh tao hình tụng, ngục tù trung,\nNgỗ nghịch quan phi, điền trạch thoái,\nMai táng tốt bộc tử tương tòng.\nHôn nhân nhược thị phùng thử nhật,\nTử tử nhi vong tự mãn hung.\nTam niên chi nội liên tạo họa,\nSự sự giáo quân một thủy chung."
   },
   "Vĩ": {
     tenNgay: "Vĩ Hỏa Hổ - Sầm Bành",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Cọp, chủ trị ngày thứ 3.",
-    nenLam: "Mọi việc đều tốt, nhất là cúng tế, cầu phúc, xây dựng.",
-    kiengCu: "Cưới hỏi, may vá, đóng giường.",
-    ngoaiLe: "Tại Hợi, Mão, Mùi kỵ chôn cất. Gặp ngày Mão là Đăng Viên, các việc tốt đẹp.",
-    tho: "Vĩ tinh tạo tác đắc quan ban,\nCanh tác, giá thú vượng điền tàm,\nMai táng, tu bổ diên niên thọ,\nKhai môn, phóng thủy tu long an."
+    tuongTinh: "Tướng tinh con Cọp, chủ trị ngày thứ 3.",
+    nenLam: "Mọi việc đều tốt. Các vụ khởi tạo, chôn cất, trổ cửa, đào ao giếng, cưới gả, xây cất, khai mương rạch, các vụ thủy lợi, chặt cỏ phá đất là tốt nhất.",
+    kiengCu: "Đóng giường, lót giường, đi thuyền, mua sắm. Vì vậy, ngày này không nên tiến hành mua sắm như ô tô, xe máy, nhà đất ...",
+    ngoaiLe: "- Sao Vĩ Hỏa Hổ tại Mùi, Hợi, Mẹo (mão) khắc kỵ chôn cất. Tại Mùi là vị trí Hãm Địa của Sao Vỹ. Tại Kỷ Mẹo rất Hung, còn các ngày Mẹo khác có thể tạm dùng được.\n- Sao Vĩ: Hỏa Hổ (con cọp): Hỏa tinh, sao tốt. Mọi sự hưng vượng, thuận lợi trong việc xuất ngoại, xây cất, và hôn nhân.",
+    tho: "Vĩ tinh tạo tác đắc thiên ân,\nPhú quý, vinh hoa, phúc thọ ninh,\nChiêu tài tiến bảo, tiến điền địa,\nHòa hợp hôn nhân, quý tử tôn.\nMai táng nhược năng y thử nhật,\nNam thanh, nữ chính, tử tôn hưng.\nKhai môn, phóng thủy, chiêu điền địa,\nĐại đại công hầu, viễn bá danh."
   },
   "Cơ": {
     tenNgay: "Cơ Thủy Báo - Phùng Dị",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Báo, chủ trị ngày thứ 4.",
-    nenLam: "Rất tốt cho việc xây dựng, động thổ, lợp nhà, mua bán đất đai, gieo trồng.",
-    kiengCu: "Kỵ nhất là khai trương, cưới hỏi, chôn cất và đóng thuyền.",
-    ngoaiLe: "Tại Thìn, Tý, Thân thì tốt. Tại Tuất là Phục Đoạn Sát, kỵ chôn cất, xuất hành.",
-    tho: "Cơ tinh tạo tác đại cát tường,\nTuế tuế niên niên đại cát xương,\nMai táng, tu phòng, sinh quý tử,\nGiá thú, điền tàm vượng gia quang."
+    tuongTinh: "Tướng tinh con Beo, chủ trị ngày thứ 4.",
+    nenLam: "Trăm việc khởi tạo đều tốt. Nhất là việc chôn cất, khai trương, xuất hành, tu bổ mồ mã, trổ cửa, các vụ thủy lợi (như tháo nước, khai thông mương rảnh, đào kênh,...)",
+    kiengCu: "Các việc lót giường, đóng giường, đi thuyền.",
+    ngoaiLe: "- Cơ Thủy Báo tại: Thân, Tý, Thìn trăm việc kỵ. Duy tại Tý có thể tạm dùng.\n- Ngày Thìn Sao Cơ Đăng Viên lẽ ra rất tốt tuy nhiên lại phạm Phục Đoạn. Bởi phạm Phục Đoạn thì rất kỵ xuất hành, chôn cất, chia lãnh gia tài, các vụ thừa kế, khởi công làm lò nhuộm lò gốm. Nên: dứt vú trẻ em, kết dứt điều hung hại, xây tường, lấp hang lỗ, làm cầu tiêu.\n- Cơ: Thủy Báo (con beo): Thủy tinh, sao tốt. Gia đình an lành, yên vui, vượng điền sản, đồng thời sự nghiệp thăng tiến.",
+    tho: "Cơ tinh tạo tác chủ cao cường,\nTuế tuế niên niên đại cát xương,\nMai táng, tu phần đại cát lợi,\nĐiền tàm, ngưu mã biến sơn cương.\nKhai môn, phóng thủy chiêu tài cốc,\nKhiếp mãn kim ngân, cốc mãn thương.\nPhúc ấm cao quan gia lộc vị,\nLục thân phong lộc, phúc an khang."
   },
   "Đẩu": {
-    tenNgay: "Đẩu Mộc Giải - Chu Vận",
+    tenNgay: "Đẩu Mộc Giải - Tống Hữu",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Cua, chủ trị ngày thứ 5.",
-    nenLam: "Tốt cho việc xuất hành, khởi công nhỏ, mua bán, giao dịch.",
-    kiengCu: "Đại kỵ cưới hỏi, làm nhà, đào giếng.",
-    ngoaiLe: "Tại Tý là Đăng Viên, rất tốt. Tại Thân, Thìn cũng tốt.",
-    tho: "Đẩu tinh tạo tác chủ chiêu tài,\nVăn vũ quan viên vị đỉnh thai,\nĐiền trạch, tiền tài thiên vạn tiến,\nHôn nhân, quan quách phúc lai."
+    tuongTinh: "Tướng tinh con cua, chủ trị ngày thứ 5.",
+    nenLam: "Khởi tạo trăm việc đều rất tốt. Tốt nhất cho xây đắp, sửa chữa phần mộ, tháo nước, hay trổ cửa, các vụ thủy lợi, chặt cỏ phá đất, may cắt áo mão, hoặc kinh doanh, giao dịch, mưu cầu công danh.",
+    kiengCu: "Rất kỵ việc đi thuyền. Nên đặt tên con là Đẩu, Giải hay Trại hoặc theo tên của Sao năm hay tháng đó để đặt sẽ dễ nuôi hơn.",
+    ngoaiLe: "- Sao Đẩu Mộc Giải tại Tỵ mất sức. Tại Dậu thì tốt. Ngày Sửu Đăng Viên rất tốt nhưng phạm phải Phục Đoạn. Phạm Phục Đoạn thì kỵ việc chôn cất, thừa kế, chia lãnh gia tài, khởi công làm lò nhuộm lò gốm và xuất hành. Nên: dứt vú trẻ em, lấp hang lỗ, làm cầu tiêu, xây tường, kết dứt điều hung hại.\n- Đẩu: Mộc giải (con cua): Mộc tinh, sao tốt. Nên xây cất, sửa chữa, cưới gả và an táng đều tốt.",
+    tho: "Đẩu tinh tạo tác chủ chiêu tài,\nVăn vũ quan viên vị đỉnh thai,\nĐiền trạch tiền tài thiên vạn tiến,\nPhần doanh tu trúc, phú quý lai.\nKhai môn, phóng thủy, chiêu ngưu mã,\nVượng tài nam nữ chủ hòa hài,\nNgộ thử cát tinh lai chiến hộ,\nThời chi phúc khánh, vĩnh vô tai."
   },
   "Ngưu": {
-    tenNgay: "Ngưu Kim Ngưu - Tế Tuân",
+    tenNgay: "Ngưu Kim Ngưu - Sái Tuân",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Trâu, chủ trị ngày thứ 6.",
-    nenLam: "Chỉ tốt cho việc an táng, tu sửa mộ phần, tế tự.",
-    kiengCu: "Đại kỵ cưới hỏi, khai trương, làm nhà, đi xa. Làm những việc này thường gặp chuyện lôi thôi, gia đình bất hòa, hao tài.",
-    ngoaiLe: "Tại Hợi, Dậu, Sửu, tuy gặp Hung tinh nhưng vẫn có thể làm được. Gặp ngày Sửu là Đăng Viên, tốt vừa.",
-    tho: "Ngưu tinh tạo tác chủ tai nguy,\nCửu hoành tam tai bất khả chỉ,\nGia đạo bất an, nhân khẩu thoái,\nHôn nhân, thiệp lộ, chủ phân ly."
+    tuongTinh: "Tướng tinh con Trâu, chủ trị ngày thứ 6.",
+    nenLam: "Rất tốt đi thuyền, cắt may áo mão.",
+    kiengCu: "Khởi công tạo tác bất kỳ việc gì cũng gặp hung hại. Nhất là việc dựng trại, xây cất nhà, trổ cửa, cưới gả, xuất hành đường bộ, làm thủy lợi, nuôi tằm, gieo cấy, khai khẩn cũng như khai trương. Vì vậy, ngày này không nên tiến hành các công việc trọng đại, nên chọn một ngày tốt khác để tiến hành.",
+    ngoaiLe: "- Ngày Ngọ Đăng Viên rất tốt. Ngày Tuất thì yên lành. Ngày Dần là Tuyệt Nhật, không nên động tác việc chi, riêng có ngày Nhâm Dần thì dùng được.\n- Trúng ngày 14 Âm lịch là Diệt Một Sát, kiêng cữ: lập lò nhuộm lò gốm, làm rượu, thừa kế sự nghiệp, vào làm hành chánh, nhất là đi thuyền chẳng thể tránh khỏi rủi ro.\n- Sao Ngưu là một trong Thất Sát Tinh, nếu sanh con thì khó nuôi. Lấy tên Sao tháng, của năm hay của ngày để đặt tên cho con kết hợp làm việc Âm Đức ngay trong tháng sinh mới mong nuôi con khôn lớn được.\n- Ngưu: Kim Ngưu (con trâu): Kim tinh, sao xấu. Kỵ xây cất, hôn nhân.",
+    tho: "Ngưu tinh tạo tác chủ tai nguy,\nCửu hoành tam tai bất khả thôi,\nGia trạch bất an, nhân khẩu thoái,\nĐiền tàm bất lợi, chủ nhân suy.\nGiá thú, hôn nhân giai tự tổn,\nKim ngân tài cốc tiệm vô chi.\nNhược thị khai môn, tính phóng thủy,\nNgưu trư dương mã diệc thương bi."
   },
   "Nữ": {
     tenNgay: "Nữ Thổ Bức - Cảnh Đan",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Dơi, chủ trị ngày thứ 7.",
-    nenLam: "Tốt cho việc cắt may, chữa bệnh, dọn dẹp.",
-    kiengCu: "Đại kỵ cưới hỏi, an táng, làm nhà. Gặp sao này thường gây chia ly, bệnh tật, kiện tụng.",
-    ngoaiLe: "Tại Hợi, Dậu, Sửu vẫn có thể dùng được. Gặp ngày Dậu là Đăng Viên, tốt.",
-    tho: "Nữ tinh tạo tác tổn nhân đinh,\nTrung niên gia đạo chủ linh đinh,\nGiá thú chiêu lai tam tuế tử,\nHôn nhân, quan quách tất tai sinh."
+    tuongTinh: "Tướng tinh con Dơi, chủ trị ngày thứ 7.",
+    nenLam: "Hợp kết màn hay may áo.",
+    kiengCu: "Khởi công tạo tác trăm việc đều có hại. Trong đó hung hại nhất là khơi đường tháo nước, trổ cửa, đầu đơn kiện cáo, chôn cất. Vì vậy, để tránh điềm giữ quý bạn nên chọn một ngày tốt khác để tiến hành chôn cất.",
+    ngoaiLe: "- Sao Nữ Thổ Bức tại Mùi, Hợi, Mẹo (mão) đều gọi chung là đường cùng. Ngày Quý Hợi cùng cực đúng mức, vì là ngày chót của 60 Hoa giáp. Ngày Hợi tuy Sao Nữ Đăng Viên song tốt nhất cũng chẳng nên dùng.\n- Ngày Mẹo là Phục Đoạn Sát, rất kỵ trong việc chôn cất, thừa kế sự nghiệp, xuất hành, khởi công làm lò nhuộm lò gốm, chia lãnh gia tài. Nên: dứt vú trẻ em, lấp hang lỗ, làm cầu tiêu, kết dứt điều hung hại, xây tường.\n- Nữ: Thổ Bức (con dơi): Thổ tinh, sao xấu. Khắc kỵ chôn cất cũng như cưới gả. Sao này bất lợi khi sinh đẻ.",
+    tho: "Nữ tinh tạo tác tổn bà nương,\nHuynh đệ tương hiềm tựa hổ lang,\nMai táng sinh tai phùng quỷ quái,\nĐiên tà tật bệnh cánh ôn hoàng.\nVi sự đáo quan, tài thất tán,\nTả lị lưu liên bất khả đương.\nKhai môn, phóng thủy phùng thử nhật,\nToàn gia tán bại, chủ ly hương."
   },
   "Hư": {
-    tenNgay: "Hư Nhật Thử - Cái Diên",
+    tenNgay: "Hư Nhật Thử - Cái Duyên",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Chuột, chủ trị ngày Chủ Nhật.",
-    nenLam: "Tốt cho việc phá dỡ, trị bệnh.",
-    kiengCu: "Mọi việc lớn như cưới hỏi, khai trương, xây cất, an táng đều rất xấu. Sao này chủ về sự hư không, mất mát.",
-    ngoaiLe: "Tại Thân, Tý, Thìn mọi việc đều tốt. Gặp ngày Thìn là Đăng Viên.",
-    tho: "Hư tinh tạo tác chủ tai ương,\nNam nữ tắc hung, di vong thân,\nTụng sự, điền tàm tịnh thất bại,\nHôn nhân, giá thú bất an ninh."
+    tuongTinh: "Tướng tinh con Chuột, chủ trị ngày Chủ Nhật.",
+    nenLam: "Hư có ý nghĩa là hư hoại. Sao Hư mang ý nghĩa không có việc chi hợp.",
+    kiengCu: "Tạo tác khởi công trăm việc đều không may. Nhất là việc xây cất nhà cửa, khai trương, cưới gả, trổ cửa, đào kênh rạch hay tháo nước. Vì vậy, nếu quý bạn muốn tiến hành các việc động thổ, xây cất nhà, cưới hỏi,... nên chọn một ngày đại cát khác để thực hiện.",
+    ngoaiLe: "- Sao Hư gặp Thân, Tý hay Thìn đều tốt. Tại Thìn Đắc Địa tốt hơn hết. 6 ngày: Giáp Tý, Canh Tý, Mậu Thân, Canh Thân, Bính Thìn, Mậu Thìn rất hợp có thể động sự. Trừ ngày Mậu Thìn ra, còn 5 ngày còn lại kỵ chôn cất.\n- Sao Hư gặp ngày Tý thì Sao Hư Đăng Viên rất tốt. Tuy nhiên lại phạm Phục Đoạn Sát nên Kỵ thừa kế, chia lãnh gia tài sự nghiệp, chôn cất, xuất hành, khởi công làm lò nhuộm lò gốm. Nên: dứt vú trẻ em, kết dứt điều hung hại, lấp hang lỗ, xây tường, làm cầu tiêu.\n- Gặp Huyền Nhật (những ngày 7, 8, 22, 23 Âm Lịch) thì Sao Hư phạm Diệt Một: ắt chẳng tránh khỏi rủi ro nếu lập lò gốm lò nhuộm, thừa kế. Kiêng cữ: làm rượu, vào làm hành chánh, hơn nhất là đi thuyền.\n- Hư: Nhật Thử (con chuột): Nhật tinh, sao xấu. Khắc kỵ xây cất. Gia đạo dễ gặp bất hòa.",
+    tho: "Hư tinh tạo tác chủ tai ương,\nNam nữ cô miên bất nhất song,\nNội loạn phong thanh vô lễ tiết,\nNhi tôn, tức phụ bạn nhân sàng,\nKhai môn, phóng thủy chiêu tai họa,\nHổ giảo, xà thương cập tốt vong.\nTam tam ngũ ngũ liên niên bệnh,\nGia phá, nhân vong, bất khả đương."
   },
   "Nguy": {
     tenNgay: "Nguy Nguyệt Yến - Kiên Đàm",
-    danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Én, chủ trị ngày thứ 2.",
-    nenLam: "Tốt cho việc xây dựng, trồng trọt.",
-    kiengCu: "Kỵ cưới hỏi, đi thuyền, an táng. Gặp sao này làm việc gì cũng thấy không chắc chắn, nguy hiểm.",
-    ngoaiLe: "Tại Thân, Tý, Thìn mọi việc đều tốt. Tại Tỵ là Diệt Địa, rất kỵ.",
-    tho: "Nguy tinh tạo tác chủ ôn hoàng,\nHôn nhân, giá thú bất an tường,\nKhai môn, phóng thủy chiêu tai họa,\nMai táng tu phòng tiểu nhi vong."
+    danhGia: "Xấu (Bình Tú)",
+    tuongTinh: "Tướng tinh con Chim Én, chủ trị ngày thứ 2.",
+    nenLam: "Lót giường bình yên, chôn cất rất tốt.",
+    kiengCu: "Những việc gác đòn đông, dựng nhà, tháo nước, đào mương rạch, đi thuyền hay trổ cửa. Vì vậy, nếu quý bạn có ý định xây dựng nhà cửa thì nên chọn ngày khác để tiến hành.",
+    ngoaiLe: "- Sao Nguy Nguyệt Yến tại Tỵ, Dậu và Sửu trăm việc đều tốt. Trong đó, tại Dậu tốt nhất. Ngày Sửu Sao Nguy Đăng Viên: mọi việc tạo tác đều được quý hiển.\n- Nguy: Nguyệt Yến (con én): Nguyệt tinh, sao xấu. Khắc kỵ việc khai trương, an táng và xây dựng.",
+    tho: "Nguy tinh bât khả tạo cao đường,\nTự điếu, tao hình kiến huyết quang\nTam tuế hài nhi tao thủy ách,\nHậu sinh xuất ngoại bất hoàn lương.\nMai táng nhược hoàn phùng thử nhật,\nChu niên bách nhật ngọa cao sàng,\nKhai môn, phóng thủy tạo hình trượng,\nTam niên ngũ tái diệc bi thương."
   },
   "Thất": {
-    tenNgay: "Thất Hỏa Trư - Cảnh Đan",
+    tenNgay: "Thất Hỏa Trư - Cảnh Thuần",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Heo, chủ trị ngày thứ 3.",
-    nenLam: "Mọi việc đều tốt, nhất là khởi công, xây cất, cưới hỏi, khai trương, an táng.",
-    kiengCu: "Không có.",
-    ngoaiLe: "Tại Tuất là Nhập Miếu, rất tốt. Gặp ngày Tuất là Đăng Viên.",
-    tho: "Thất tinh tạo tác đại cát tường,\nGiá thú, điền tàm vượng gia quang,\nAn sàng, phóng thủy, sinh quý tử,\nTòng thử vinh hoa phú quý trường."
+    tuongTinh: "Tướng tinh con Heo, chủ trị ngày thứ 3.",
+    nenLam: "Khởi công trăm việc đều đặng tốt. Tốt nhất là tháo nước, các việc thủy lợi, việc đi thuyền, xây cất nhà cửa, trổ cửa, cưới gả, chôn cất hay chặt cỏ phá đất.",
+    kiengCu: "Sao Thất Đại Kiết nên không có bất kỳ việc gì phải cữ.",
+    ngoaiLe: "- Sao Thất Đại Kiết tại Ngọ, Tuất và Dần nói chung đều tốt, đặc biệt ngày Ngọ Đăng viên rất hiển đạt.\n- Ba ngày là: Bính Dần, Nhâm Dần và Giáp Ngọ tốt cho xây dựng, chôn cất, song cũng ngày Dần nhưng ngày Dần khác lại không tốt. Bởi sao Thất gặp ngày Dần là phạm vào Phục Đoạn Sát (mọi kiêng cữ như trên).\n- Thất: Hỏa Trư (con lợn): Hỏa tinh, sao tốt. Rất tốt cho việc kinh doanh, hôn nhân, xây cất và chôn cất.",
+    tho: "Thất tinh tạo tác tiến điền ngưu,\nNhi tôn đại đại cận quân hầu,\nPhú quý vinh hoa thiên thượng chỉ,\nThọ như Bành tổ nhập thiên thu.\nKhai môn, phóng thủy chiêu tài bạch,\nHòa hợp hôn nhân sinh quý nhi.\nMai táng nhược năng y thử nhật,\nMôn đình hưng vượng, Phúc vô ưu!"
   },
   "Bích": {
-    tenNgay: "Bích Thủy Du - Tạng Cung",
+    tenNgay: "Bích Thủy Du - Tang Cung",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Rái Cá, chủ trị ngày thứ 4.",
-    nenLam: "Mọi việc đều tốt. Đặc biệt tốt cho việc cúng tế, cầu phúc, xây cất, cưới hỏi, mở cửa hàng.",
-    kiengCu: "Kỵ nhất việc sửa chữa, tu bổ kho tàng.",
-    ngoaiLe: "Tại Hợi, Mão, Mùi mọi việc đều tốt. Gặp ngày Hợi là Đăng Viên, đại cát.",
-    tho: "Bích tinh tạo tác tiến điền ngưu,\nTòng thử gia môn phú quý lưu,\nGiá thú, khai môn, quan lộc chí,\nBách sự tu du vượng nhân khẩu."
+    tuongTinh: "Tướng tinh con Rái Cá, chủ trị ngày thứ 4.",
+    nenLam: "Khởi công tạo tác mọi việc việc chi cũng tốt. Tốt nhất là việc khai trương, xuất hành, chôn cất, xây cất nhà, trổ cửa, dựng cửa, cưới gả, các vụ thuỷ lợi, tháo nước, chặt cỏ phá đất, cắt áo thêu áo, làm nhiều việc thiện ắt thiện quả sẽ tới mau hơn.",
+    kiengCu: "Sao Bích toàn kiết nên không có bất kỳ việc chi phải kiêng cữ.",
+    ngoaiLe: "- Sao Bích Thủy Du tại Mùi, Hợi, Mão trăm việc đều kỵ, nhất là trong Mùa Đông. Riêng ngày Hợi là Sao Bích Đăng Viên nhưng phạm phải Phục Đoạn Sát (nên kiêng cữ như trên).\n- Bích: Thủy Du (con rái cá): Thủy tinh, sao tốt. Rất tốt cho những việc như: xây cất, mai táng, hôn nhân. Kinh doanh đặc biệt thuận lợi.",
+    tho: "Bích tinh tạo ác tiến trang điền\nTi tâm đại thục phúc thao thiên,\nNô tỳ tự lai, nhân khẩu tiến,\nKhai môn, phóng thủy xuất anh hiền,\nMai táng chiêu tài, quan phẩm tiến,\nGia trung chủ sự lạc thao nhiên\nHôn nhân cát lợi sinh quý tử,\nTảo bá thanh danh khán tổ tiên."
   },
   "Khuê": {
     tenNgay: "Khuê Mộc Lang - Mã Vũ",
-    danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Sói, chủ trị ngày thứ 5.",
-    nenLam: "Tốt cho việc khai trương, học hành, thi cử.",
-    kiengCu: "Đại kỵ an táng. Không nên khởi công xây dựng nhà cửa, dễ gây bất hòa trong gia đình.",
-    ngoaiLe: "Gặp ngày Thìn thì Đăng Viên, tốt.",
-    tho: "Khuê tinh tạo tác hữu tai ương,\nGia nội tòng thử bất an ninh,\nMai táng, tu phòng kinh khốc khấp,\nHôn nhân, giá thú bất cát tường."
+    danhGia: "Xấu (Bình Tú)",
+    tuongTinh: "Tướng tinh con Chó Sói, chủ trị ngày thứ 5.",
+    nenLam: "Tốt cho nhập học, cắt áo, tạo dựng nhà phòng hay ra đi cầu công danh.",
+    kiengCu: "Chôn cất, trổ cửa dựng cửa, khai thông đường nước, việc khai trương, đào ao móc giếng, các vụ thưa kiện và đóng giường lót giường. Vì vậy, nếu quý bạn có ý định chôn cất người chết hay khai trường lập nghiệp thì nên chọn một ngày khác để tiến hành.",
+    ngoaiLe: "- Sao Khuê là một trong Thất Sát Tinh, nếu đẻ con nhằm ngày này thì nên lấy tên của Sao Khuê cũng có thể lấy tên Sao của năm hay tháng mà đặt cho con dễ nuôi hơn.\n- Sao Khuê Hãm Địa tại Thân nên Văn Khoa thất bại. Tại Ngọ thì chỗ Tuyệt gặp Sanh đắc lợi mưu sự, nhất là gặp Canh Ngọ. Tại Thìn thì tốt vừa vừa.\n- Ngày Thân Sao Khuê Đăng Viên tức Tiến thân danh.\nKhuê: Mộc Lang (con sói): Mộc tinh, sao xấu. Khắc kỵ động thổ, an táng, khai trương cũng như sửa cửa.",
+    tho: "Khuê tinh tạo tác đắc trinh tường,\nGia hạ vinh hòa đại cát xương,\nNhược thị táng mai âm tốt tử,\nĐương niên định chủ lưỡng tam tang.\nKhán khán vận kim, hình thương đáo,\nTrùng trùng quan sự, chủ ôn hoàng.\nKhai môn phóng thủy chiêu tai họa,\nTam niên lưỡng thứ tổn nhi lang."
   },
   "Lâu": {
     tenNgay: "Lâu Kim Cẩu - Lưu Long",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Chó, chủ trị ngày thứ 6.",
-    nenLam: "Mọi việc đều tốt. Đặc biệt tốt cho cưới hỏi, khai trương, xây dựng, chữa bệnh, xuất hành.",
-    kiengCu: "Kỵ nhất việc khởi công đóng thuyền.",
-    ngoaiLe: "Tại Dậu là Đăng Viên. Tại Tý, Ngọ, Mão cũng tốt.",
-    tho: "Lâu tinh tạo tác vượng gia đinh,\nGiá thú, khai môn, vạn sự thành,\nTòng thử gia môn tăng phúc lộc,\nHữu nhân xưng tụng, vượng môn đình."
+    tuongTinh: "Tướng tinh con Chó, chủ trị ngày thứ 6.",
+    nenLam: "Khởi công mọi việc đều rất tốt. Tốt nhất là việc dựng cột, cưới gả, trổ cửa, dựng cửa, cất lầu, làm giàn gác, cắt áo, tháo nước hay các vụ thủy lợi.",
+    kiengCu: "Nhất là lót giường, đóng giường và đi đường thủy.",
+    ngoaiLe: "- Sao Lâu Kim Cẩu tại Ngày Dậu Đăng Viên ý nghĩa tạo tác đại lợi. Tại Tỵ gọi là Nhập Trù nên rất tốt. Tại Sửu thì tốt vừa vừa.\n- Gặp ngày cuối tháng thì Sao Lâu phạm Diệt Một: Kỵ cữ làm rượu, vào làm hành chánh, lập lò gốm lò nhuộm, thừa kế sự nghiệp và rất kỵ đi thuyền.\n- Lâu: Kim Cẩu (con chó): Kim tinh, sao tốt. Tiền bạc thì dồi dào, học hành đỗ đạt cao, việc cưới gả, xây cất rất tốt.",
+    tho: "Lâu tinh thụ trụ, khởi môn đình,\nTài vượng, gia hòa, sự sự hưng,\nNgoại cảnh, tiền tài bách nhật tiến,\nNhất gia huynh đệ bá thanh danh.\nHôn nhân tiến ích, sinh quý tử,\nNgọc bạch kim lang tương mãn doanh,\nPhóng thủy, khai môn giai cát lợi,\nNam vinh, nữ quý, thọ khang ninh."
   },
   "Vị": {
     tenNgay: "Vị Thổ Trĩ - Cảnh Đan",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Gà Trĩ, chủ trị ngày thứ 7.",
-    nenLam: "Tốt cho việc xây dựng, động thổ, cưới hỏi, an táng.",
-    kiengCu: "Kỵ đi thuyền.",
-    ngoaiLe: "Gặp ngày Dậu là Đăng Viên.",
-    tho: "Vị tinh tạo tác sự như tâm,\nGia môn, điền trạch, vượng nhân đinh,\nGiá thú, khai môn, quan lộc chí,\nMai táng tu phòng tử tôn hưng."
+    tuongTinh: "Tướng tinh con Chim Trĩ, chủ trị ngày thứ 7.",
+    nenLam: "Khởi tạo tạo tác việc gì cũng tốt. Tốt nhất là cưới gả, xây cất, dọn cỏ, gieo trồng, lấy giống.",
+    kiengCu: "Đi thuyền",
+    ngoaiLe: "Sao Vị mất chí khí tại ngày Dần, nhất là ngày Mậu Dần, rất hung, không nên cưới gả, xây cất nhà cửa. Gặp ngày Tuất sao Vị đăng viên nên mưu cầu công danh tốt, nhưng cũng phạm Phục Đoạn, do đó gặp ngày này nên kỵ chôn cất, xuất hành, cưới gả, xây cất...",
+    tho: "Vị tinh tạo tác sự như hà,\nPhú quý, vinh hoa, hỷ khí đa,\nMai táng tiến lâm quan lộc vị,\nTam tai, cửu họa bất phùng tha.\nHôn nhân ngộ thử gia phú quý,\nPhu phụ tề mi, vĩnh bảo hòa,\nTòng thử môn đình sinh cát khánh,\nNhi tôn đại đại bảo kim pha."
   },
   "Mão": {
     tenNgay: "Mão Nhật Kê - Vương Lương",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Gà, chủ trị ngày Chủ Nhật.",
-    nenLam: "Tốt cho việc cắt may, học hành, làm những việc nhỏ.",
-    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất nhà cửa, khai trương. Gặp sao này mọi việc lớn đều bất thành, trắc trở.",
-    ngoaiLe: "Tại Hợi, Mão, Mùi kỵ chôn cất. Tại Dậu là Đăng Viên, có thể dùng.",
-    tho: "Mão tinh tạo tác chủ tai hoạ,\nHôn nhân, giá thú bất khả thành,\nPhụ nhân mang thai vi bất lợi,\nGia đạo tòng thử bất an ninh."
+    tuongTinh: "Tướng tinh con Gà, chủ trị ngày Chủ Nhật.",
+    nenLam: "Xây dựng cũng như tạo tác đều tốt.",
+    kiengCu: "Chôn Cất thì ĐẠI KỴ. Cưới gã, khai ngòi phóng thủy, khai trương, xuất hành, đóng giường lót giường, trổ cửa dựng cửa kỵ. Các việc khác đều không hay. Vì vậy, ngày này tuyệt đối không tiến hành chôn cất người chết.",
+    ngoaiLe: "- Sao Mão Nhật Kê tại Mùi thì mất chí khí. Tại Ất Mão hay Đinh Mão rất tốt. Ngày Mão Đăng Viên nên cưới gả tốt, ngày Quý Mão nếu tạo tác thì mất tiền của.\n- Hợp với 8 ngày là Ất Mùi, Đinh Mùi, Tân Mùi, Ất Mão, Đinh Mão, Tân Mão, Ất Hợi và Tân Hợi.\n- Mão: Nhật Kê (con gà): Nhật tinh, sao xấu. Tốt nhất cho việc xây cất. Khắc kỵ việc cưới gả, an táng, gắn cũng như sửa cửa.",
+    tho: "Mão tinh tạo tác tiến điền ngưu,\nMai táng quan tai bất đắc hưu,\nTrùng tang nhị nhật, tam nhân tử,\nMại tận điền viên, bất năng lưu.\nKhai môn, phóng thủy chiêu tai họa,\nTam tuế hài nhi bạch liễu đầu,\nHôn nhân bất khả phùng nhật thử,\nTử biệt sinh ly thật khả sầu."
   },
   "Tất": {
     tenNgay: "Tất Nguyệt Ô - Trần Tuấn",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Quạ, chủ trị ngày thứ 2.",
-    nenLam: "Mọi việc đều tốt. Tốt nhất cho việc khai trương, xuất hành, xây dựng, cưới hỏi, an táng.",
-    kiengCu: "Không có.",
-    ngoaiLe: "Tại Tỵ, Dậu, Sửu đều tốt. Gặp ngày Dậu là Đăng Viên.",
-    tho: "Tất tinh tạo tác đại cát tường,\nHôn nhân, giá thú, vượng điền trang,\nKhai môn, phóng thủy, sinh quý tử,\nGia môn hưng vượng, phúc thọ trường."
+    tuongTinh: "Tướng tinh con Quạ, chủ trị ngày thứ 2.",
+    nenLam: "Khởi công tạo tác bất kể việc chi đều tốt. Tốt nhất là việc trổ cửa dựng cửa, đào kinh, tháo nước, khai mương, chôn cất, cưới gả, chặt cỏ phá đất hay móc giếng. Những việc khác như khai trương, xuất hành, nhập học, làm ruộng và nuôi tằm cũng tốt.",
+    kiengCu: "Việc đi thuyền.",
+    ngoaiLe: "- Sao Tất Nguyệt Ô tại Thìn, Thân và Tý đều tốt. Tại Thân hiệu là Nguyệt Quải Khôn Sơn, tức là trăng treo đầu núi Tây Nam nên rất là tốt. Sao Tất Đăng Viên ở ngày Thân việc cưới gả hay chôn cất là 2 việc ĐẠI KIẾT.\n- Tất: Nguyệt Ô (con quạ): Nguyệt tinh, sao tốt. Trăm việc đều được tốt đẹp.",
+    tho: "Tất tinh tạo tác chủ quang tiền,\nMãi dắc điền viên hữu lật tiền\nMai táng thử nhật thiêm quan chức,\nĐiền tàm đại thực lai phong niên\nKhai môn phóng thủy đa cát lật,\nHợp gia nhân khẩu đắc an nhiên,\nHôn nhân nhược năng phùng thử nhật,\nSinh đắc hài nhi phúc thọ toàn."
   },
   "Chủy": {
     tenNgay: "Chủy Hỏa Hầu - Phó Tuấn",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Khỉ, chủ trị ngày thứ 3.",
-    nenLam: "Tốt cho việc cầu tài, học hành, thi cử.",
-    kiengCu: "Kỵ nhất là an táng, xây cất, khai trương, cưới hỏi. Làm những việc này dễ gặp thị phi, kiện tụng.",
-    ngoaiLe: "Tại Thân là Đăng Viên, tốt.",
-    tho: "Chủy tinh tạo tác chủ tang vong,\nTáng sự, tu phòng, đại bất tường,\nHôn nhân, quan quách, đa khẩu thiệt,\nGia trạch tòng thử bất an khang."
+    tuongTinh: "Tướng tinh con Khỉ, chủ trị ngày thứ 3.",
+    nenLam: " Sao Chủy không nên làm bất kỳ việc chi.",
+    kiengCu: "Khởi công tạo tác việc chi cũng không tốt. KỴ NHẤT là chôn cất và các vụ thuộc về chết chôn như sửa đắp mồ mả, làm sanh phần (làm mồ mã để sẵn), đóng thọ đường (đóng hòm để sẵn). Ngày này tuyệt đối không tiến hành chôn cất người chết để tránh gặp điềm dữ.",
+    ngoaiLe: "- Sao Chủy Hỏa Hầu tại Tỵ bị đoạt khí, còn Hung thì càng thêm Hung. Tại Dậu rất tốt, vì Sao Chủy Đăng Viên ở Dậu đem khởi động và thăng tiến. Tuy nhiên phạm vào Phục Đoạn Sát (mọi kiêng cữ giống như trên).\n- Tại Sửu là Đắc Địa, mọi việc ắt nên. Rất hợp với ngày Đinh Sửu và ngày Tân Sửu mọi tạo tác Đại Lợi, nếu chôn cất Phú Quý song toàn.\n- Chủy: Hỏa Hầu (con khỉ): Hỏa tinh, sao xấu. Khắc Kỵ xây cất, thưa kiện, hay mai táng. Thi cử gặp nhiều bất lợi.",
+    tho: "Chủy tinh tạo tác hữu đồ hình,\nTam niên tất đinh chủ linh đinh,\nMai táng tốt tử đa do thử,\nThủ định Dần niên tiện sát nhân.\nTam tang bất chỉ giai do thử,\nNhất nhân dược độc nhị nhân thân.\nGia môn điền địa giai thoán bại,\nThương khố kim tiền hóa tác cần."
   },
   "Sâm": {
     tenNgay: "Sâm Thủy Viên - Đỗ Mậu",
     danhGia: "Tốt (Bình Tú)",
-    tuongTinh: "Con Vượn, chủ trị ngày thứ 4.",
-    nenLam: "Tốt cho việc cưới hỏi, xây dựng, làm việc thiện.",
-    kiengCu: "Kỵ an táng, đào giếng, đi thuyền.",
-    ngoaiLe: "Tại Thân là Đăng Viên, rất tốt. Tại Tý, Thìn cũng tốt.",
-    tho: "Sâm tinh tạo tác đắc quan vị,\nTòng thử gia môn đại cát lợi,\nGiá thú, tu phòng, tăng phúc thọ,\nPhú quý, vinh hoa, vượng tử tôn."
+    tuongTinh: "Tướng tinh con Vượn, chủ trị ngày thứ 4.",
+    nenLam: "Nhiều việc khởi công tạo tác tốt như: dựng cửa trổ cửa, xây cất nhà, nhập học, làm thủy lợi, tháo nước đào mương hay đi thuyền.",
+    kiengCu: "Cưới gả, đóng giường lót giường, chôn cất hay kết bạn đều không tốt. Vì vậy, để việc cưới gả được trăm điềm tốt quý bạn nên chọn một ngày khác để tiến hành.",
+    ngoaiLe: "- Ngày Tuất Sao Sâm Đăng Viên, nên phó nhậm đặng cầu công danh hiển hách.\n- Sâm: Thủy Viên (con vượn): Thủy tinh, sao tốt. Rất tốt cho việc mua bán, kinh doanh, xây cất và thi cử đỗ đạt. Kỵ an táng và cưới gả.",
+    tho: "Sâm tinh tạo tác vượng nhân gia,\nVăn tinh triều diệu, đại quang hoa,\nChỉ nhân tạo tác điền tài vượng,\nMai táng chiêu tật, táng hoàng sa.\nKhai môn, phóng thủy gia quan chức,\nPhòng phòng tôn tử kiến điền gia,\nHôn nhân hứa định tao hình khắc,\nNam nữ chiêu khai mộ lạc hoa."
   },
   "Tỉnh": {
     tenNgay: "Tỉnh Mộc Hãn - Diêu Kỳ",
     danhGia: "Tốt (Bình Tú)",
-    tuongTinh: "Con Hươu, chủ trị ngày thứ 5.",
+    tuongTinh: "Tướng tinh con Dê Trừu, chủ trị ngày thứ 5.",
     nenLam: "Tạo tác nhiều việc rất tốt như trổ cửa dựng cửa, mở thông đường nước, đào mương móc giếng, đi thuyền, xây cất, nhậm chức hoặc nhập học.",
     kiengCu: "Làm sanh phần, đóng thọ đường, chôn cất hay tu bổ mộ phần.",
-    ngoaiLe: "Sao Tỉnh tại Mùi, Hợi, Mão mọi việc tốt. Tại Mùi là Nhập Miếu nên khởi động vinh quang.",
-    tho: "Tỉnh tinh tạo tác vượng tàm điền,\nKim bảng đề danh đệ nhất tiên,\nMai táng, tu phòng kinh tốt tử,\nHốt phong tật nhập hoàng điên tuyền.\nKhai môn, phóng thủy chiêu tài bạch,\nNgưu mã trư dương vượng mạc cát,\nQuả phụ điền đường lai nhập trạch,\nNhi tôn hưng vượng hữu dư tiền."
+    ngoaiLe: "- Sao Tỉnh Mộc Hãn tại Mùi, Hợi, Mão mọi việc tốt. Tại Mùi là Nhập Miếu nên khởi động vinh quang.\n- Tỉnh: Mộc Can (con chim cú): Mộc tinh, sao tốt. Sự nghiệp công danh thành đạt, thăng tiến, việc chăn nuôi và xây cất thuận lợi vô cùng.",
+    tho: "Tỉnh tinh tạo tác vượng tàm điền,\nKim bảng đề danh đệ nhất tiên,\nMai táng, tu phòng kinh tốt tử,\nHốt phong tật nhập hoàng điên tuyền\nKhai môn, phóng thủy chiêu tài bạch,\nNgưu mã trư dương vượng mạc cát,\nQuả phụ điền đường lai nhập trạch,\nNhi tôn hưng vượng hữu dư tiền."
   },
   "Quỷ": {
-    tenNgay: "Quỷ Kim Dương - Vương Bá",
+    tenNgay: "Quỷ Kim Dương - Vương Phách",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Dê, chủ trị ngày thứ 6.",
-    nenLam: "Tốt cho việc cúng tế, trị bệnh.",
-    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất. Gặp sao này là sao xấu nhất trong 28 sao, làm việc gì cũng thất bại, bệnh tật, chết chóc.",
-    ngoaiLe: "Gặp ngày Tý thì Đăng Viên, có thể dùng.",
-    tho: "Quỷ tinh tạo tác đa tai ương,\nHữu bệnh, hữu tụng, kiến quan trường,\nMai táng, tu phòng, gia đình bại,\nHôn nhân, giá thú, kiến cô nương."
+    tuongTinh: "Tướng tinh con Dê, chủ trị ngày thứ 6.",
+    nenLam: "Việc chôn cất, chặt cỏ phá đất hoặc cắt áo đều tốt.",
+    kiengCu: "Khởi tạo bất kể việc chi cũng hại. Hại nhất là trổ cửa dựng cửa, tháo nước, việc đào ao giếng, xây cất nhà, cưới gả, động đất, xây tường và dựng cột. Vì vậy, nếu quý bạn đang có ý định động thổ xây nhà hay cưới hỏi thì nên chọn một ngày khác để tiến hành.",
+    ngoaiLe: "- Ngày Tý Đăng Viên thừa kế tước phong rất tốt, đồng thời phó nhiệm may mắn.\n- Ngày Thân là Phục Đoạn Sát kỵ những việc thừa kế, chia lãnh gia tài, chôn cất, việc xuất hành, khởi công lập lò gốm, lò nhuộm. Nên: dứt vú trẻ em, xây tường, kết dứt điều hung hại, lấp hang lỗ, làm cầu tiêu.\n- Nhằm ngày 16 Âm Lịch là ngày Diệt Một kỵ lập lò gốm, lò nhuộm, vào làm hành chính, làm rượu, kỵ nhất là đi thuyền.\n- Quỷ: Kim Dương (con dê): Kim tinh, sao xấu. chôn cất thuận lợi trong việc. Ngược lại bất lợi cho việc xây cất và gả cưới.",
+    tho: "Quỷ tinh khởi tạo tất nhân vong,\nĐường tiền bất kiến chủ nhân lang,\nMai táng thử nhật, quan lộc chí,\nNhi tôn đại đại cận quân vương.\nKhai môn phóng thủy tu thương tử,\nHôn nhân phu thê bất cửu trường.\nTu thổ trúc tường thương sản nữ,\nThủ phù song nữ lệ uông uông."
   },
   "Liễu": {
-    tenNgay: "Liễu Thổ Chương - Ngô Hán",
+    tenNgay: "Liễu Thổ Chương - Nhậm Quang",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Hoẵng, chủ trị ngày thứ 7.",
+    tuongTinh: "Tướng tinh con Gấu Ngựa, chủ trị ngày thứ 7.",
     nenLam: "Không có việc gì tốt.",
-    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất, khai trương. Đây là một hung tinh mạnh, làm việc gì cũng bất lợi, gia đạo suy bại, con cái khó nuôi.",
-    ngoaiLe: "Gặp ngày Tý, Thân, Thìn cũng không tốt.",
-    tho: "Liễu tinh tạo tác chủ tao ương,\nGia trạch tòng thử bất an khang,\nMai táng, tu phòng, sinh tật bệnh,\nHôn nhân, giá thú, cửu hậu ương."
+    kiengCu: "Khởi công tạo tác việc chi cũng rất bất lợi, hung hại. Hung hại nhất là làm thủy lợi như trổ tháo nước, đào ao lũy, chôn cất, việc sửa cửa dựng cửa, xây đắp. Vì vậy, ngày nay không nên tiến hành bất cứ việc trọng đại gì.",
+    ngoaiLe: "- Sao Liễu Thổ Chướng tại Ngọ trăm việc đều tốt. Tại Tỵ thì Đăng Viên: thừa kế hay lên quan lãnh chức đều là hai điều tốt nhất. Tại Dần, Tuất rất suy vi nên kỵ xây cất và chôn cất.\n- Liễu: Thổ Chướng (con cheo): Thổ tinh, sao xấu. Tiền bạc thì hao hụt, gia đình thì không yên, dễ bị tai nạn. Khắc kỵ cưới gả.",
+    tho: "Liễu tinh tạo tác chủ tao quan,\nTrú dạ thâu nhàn bất tạm an,\nMai táng ôn hoàng đa bệnh tử,\nĐiền viên thoái tận, thủ cô hàn,\nKhai môn phóng thủy chiêu lung hạt,\nYêu đà bối khúc tự cung loan.\nCánh hữu bổng hình nghi cẩn thận,\nPhụ nhân tùy khách tẩu bất hoàn."
   },
   "Tinh": {
-    tenNgay: "Tinh Nhật Mã - Phùng Dị",
-    danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Ngựa, chủ trị ngày Chủ Nhật.",
-    nenLam: "Tốt cho việc học hành, thi cử.",
-    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất.",
-    ngoaiLe: "Tại Dần, Ngọ, Tuất đều kỵ. Gặp ngày Ngọ là Đăng Viên, nhưng vẫn xấu.",
-    tho: "Tinh tinh tạo tác chủ ôn hoàng,\nHôn nhân, giá thú, bất an tường,\nQuan sự, hình tù, đa tật bệnh,\nMai táng, tu phòng, kiến tai ương."
+    tenNgay: "Tinh Nhật Mã - Lý Trung",
+    danhGia: "Xấu (Bình Tú)",
+    tuongTinh: "Tướng tinh con Ngựa, chủ trị ngày Chủ Nhật.",
+    nenLam: "Xây dựng phòng mới.",
+    kiengCu: "Chôn cất, cưới gả, mở thông đường nước.",
+    ngoaiLe: "- Sao Tinh là một trong Thất Sát Tinh, nếu sinh con nhằm ngày này nên lấy tên Sao đặt tên cho trẻ để dễ nuôi, có thể lấy tên sao của năm, hay sao của tháng cũng được.\n- Sao Tinh gặp ngày Dần, Ngọ, Tuất đều tốt. Gặp ngày Thân là Đăng Giá (lên xe): xây cất tốt mà chôn cất nguy.\n- Hợp với 7 ngày: Giáp Dần, Nhâm Dần, Giáp Ngọ, Bính Ngọ, Mậu Ngọ, Bính Tuất, Canh Tuất.",
+    tho: "Tinh tú nhật hảo tạo tân phòng,\nTiến chức gia quan cận Đế vương,\nBất khả mai táng tính phóng thủy,\nHung tinh lâm vị nữ nhân vong.Sinh ly, tử biệt vô tâm luyến,\nTự yếu quy hưu biệt giá lang.\nKhổng tử cửu khúc châu nan độ,\nPhóng thủy, khai câu, thiên mệnh thương."
   },
   "Trương": {
     tenNgay: "Trương Nguyệt Lộc - Vạn Tu",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Hươu, chủ trị ngày thứ 2.",
-    nenLam: "Mọi việc đều tốt. Đặc biệt tốt cho cưới hỏi, khai trương, xây dựng, nhậm chức, làm việc thiện.",
-    kiengCu: "Kỵ nhất là chôn cất, làm sanh phần.",
-    ngoaiLe: "Tại Tý, Thân, Thìn cũng kỵ chôn cất. Gặp ngày Thân là Đăng Viên.",
-    tho: "Trương tinh tạo tác vượng điền tàm,\nGiá thú, hôn nhân, đại cát xương,\nKhai môn, phóng thủy, tài nguyên chí,\nGia môn hưng vượng, tử tôn cường."
+    tuongTinh: "Tướng tinh con Nai, chủ trị ngày thứ 2.",
+    nenLam: "Khởi công tạo tác trăm việc đều tốt. Trong đó, tốt nhất là che mái dựng hiên, xây cất nhà, trổ cửa dựng cửa, cưới gả, chôn cất, hay làm ruộng, nuôi tằm , làm thuỷ lợi, đặt táng kê gác, chặt cỏ phá đất, cắt áo cũng đều rất tốt.",
+    kiengCu: "Sửa hay làm thuyền chèo, hoặc đẩy thuyền mới xuống nước.",
+    ngoaiLe: "- Tại Mùi, Hợi, Mão đều tốt. Tại Mùi: đăng viên rất tốt nhưng phạm vào Phục Đoạn (Kiêng cữ như trên).\n- Trương: Nguyệt Lộc (con nai): Nguyệt tinh, sao tốt. Việc mai táng và hôn nhân thuận lợi.",
+    tho: "Trương tinh nhật hảo tạo long hiên,/nNiên niên tiện kiến tiến trang điền,/n- Mai táng bất cửu thăng quan chức,/nĐại đại vi quan cận Đế tiền,/nKhai môn phóng thủy chiêu tài bạch,/nHôn nhân hòa hợp, phúc miên miên./nĐiền tàm đại lợi, thương khố mãn,/nBách ban lợi ý, tự an nhiên."
   },
   "Dực": {
-    tenNgay: "Dực Hỏa Xà - Cảnh Đan",
+    tenNgay: "Dực Hỏa Xà - Bi Đồng",
     danhGia: "Xấu (Hung Tú)",
-    tuongTinh: "Con Rắn, chủ trị ngày thứ 3.",
-    nenLam: "Không có việc gì tốt.",
-    kiengCu: "Đại kỵ cưới hỏi, an táng, xây cất, khai trương. Sao này chủ về sự chia ly, tan tác.",
-    ngoaiLe: "Tại Tỵ, Dậu, Sửu cũng không tốt.",
-    tho: "Dực tinh tạo tác chủ phân trương,\nHôn nhân, giá thú, bất an tường,\nMai táng, tu phòng, đa tật bệnh,\nBách sự kinh doanh, chủ phá bại."
+    tuongTinh: "Tướng tinh con Rắn, chủ trị ngày thứ 3.",
+    nenLam: "Nếu cắt áo sẽ đặng được tiền tài.",
+    kiengCu: "Những việc như chôn cất, xây cất nhà, đặt táng kê gác, gác đòn đông, cưới gã, trổ cửa gắn cửa, các việc thủy lợi. Vì vậy, nếu quý bạn đang muốn tiến hành các việc trên thì nên chọn một ngày đại cát trong tháng để thực hiện.",
+    ngoaiLe: "Sao Dực Hỏa Xà tại Thân, Tý, Thìn mọi việc rất tốt. Tại Thìn: Vượng Địa là tốt hơn hết. Tại Tý: Đăng Viên rất tốt nên thừa kế sự nghiệp hay lên quan lãnh chức.\n- Dực: Hỏa Xà (con rắn): Hỏa tinh, sao xấu. Khắc kỵ cưới gả, dựng nhà, hay chôn cất.",
+    tho: "Dực tinh bất lợi giá cao đường,/nTam niên nhị tái kiến ôn hoàng,/nMai táng nhược hoàn phùng thử nhật,/nTử tôn bất định tẩu tha hương./nHôn nhân thử nhật nghi bất lợi,/nQuy gia định thị bất tương đương./nKhai môn phóng thủy gia tu phá,/nThiếu nữ tham hoa luyến ngoại lang."
   },
   "Chẩn": {
     tenNgay: "Chẩn Thủy Dẫn - Lưu Trực",
     danhGia: "Tốt (Kiết Tú)",
-    tuongTinh: "Con Giun, chủ trị ngày thứ 4.",
-    nenLam: "Tốt cho việc cúng tế, gieo trồng, cưới hỏi.",
-    kiengCu: "Kỵ khai trương, làm nhà, đi thuyền, an táng.",
-    ngoaiLe: "Tại Thân, Tý, Thìn đều tốt. Gặp ngày Thìn là Đăng Viên.",
-    tho: "Chẩn tinh tạo tác đại cát tường,\nTòng thử gia môn vượng điền trang,\nGiá thú, khai môn, quan lộc chí,\nPhú quý, vinh hoa, phúc thọ trường."
+    tuongTinh: "Tướng tinh con Giun, chủ trị ngày thứ 4.",
+    nenLam: "Mọi việc khởi công tạo tác rất tốt lành. Tốt nhất là cưới gả, xây cất lầu gác và chôn cất. Các việc khác như xuất hành, dựng phòng, chặt cỏ phá đất, cất trại, cũng tốt.",
+    kiengCu: "Việc đi thuyền.",
+    ngoaiLe: "- Sao Chẩn Thủy Dẫn tại Tỵ, Dậu, Sửu đều rất tốt. Tại Sửu: Vượng Địa, tạo tác được thịnh vượng. Tại Tỵ: Đăng Viên là ngôi tôn đại, trăm mưu động ắt thành danh.\n- Chẩn: Thủy Dẫn (con trùng): Thủy tinh, sao tốt. Tốt cho những việc gả cưới, xây dựng cũng như an táng.",
+    tho: "Chẩn tinh lâm thủy tạo long cung,\nĐại đại vi quan thụ sắc phong,\nPhú quý vinh hoa tăng phúc thọ,\nKhố mãn thương doanh tự xương long.\nMai táng văn tinh lai chiếu trợ,\nTrạch xá an ninh, bất kiến hung.\nCánh hữu vi quan, tiên đế sủng,\nHôn nhân long tử xuất long cung."
   }
 };
 
 // ===== Ngũ hành nạp âm (60 hoa giáp) =====
-const NGU_HANH_NAP_AM = {
-  "Giáp Tý": "Hải Trung Kim",   "Ất Sửu": "Hải Trung Kim",
-  "Bính Dần": "Lô Trung Hỏa",   "Đinh Mão": "Lô Trung Hỏa",
-  "Mậu Thìn": "Đại Lâm Mộc",    "Kỷ Tỵ": "Đại Lâm Mộc",
-  "Canh Ngọ": "Lộ Bàng Thổ",    "Tân Mùi": "Lộ Bàng Thổ",
-  "Nhâm Thân": "Kiếm Phong Kim","Quý Dậu": "Kiếm Phong Kim",
-  "Giáp Tuất": "Sơn Đầu Hỏa",   "Ất Hợi": "Sơn Đầu Hỏa",
-  "Bính Tý": "Giản Hạ Thủy",    "Đinh Sửu": "Giản Hạ Thủy",
-  "Mậu Dần": "Thành Đầu Thổ",   "Kỷ Mão": "Thành Đầu Thổ",
-  "Canh Thìn": "Bạch Lạp Kim",  "Tân Tỵ": "Bạch Lạp Kim",
-  "Nhâm Ngọ": "Dương Liễu Mộc","Quý Mùi": "Dương Liễu Mộc",
-  "Giáp Thân": "Tuyền Trung Thủy","Ất Dậu": "Tuyền Trung Thủy",
-  "Bính Tuất": "Ốc Thượng Thổ","Đinh Hợi": "Ốc Thượng Thổ",
-  "Mậu Tý": "Tích Lịch Hỏa",   "Kỷ Sửu": "Tích Lịch Hỏa",
-  "Canh Dần": "Tùng Bách Mộc", "Tân Mão": "Tùng Bách Mộc",
-  "Nhâm Thìn": "Trường Lưu Thủy","Quý Tỵ": "Trường Lưu Thủy",
-  "Giáp Ngọ": "Sa Trung Kim",  "Ất Mùi": "Sa Trung Kim",
-  "Bính Thân": "Sơn Hạ Hỏa",   "Đinh Dậu": "Sơn Hạ Hỏa",
-  "Mậu Tuất": "Bình Địa Mộc",  "Kỷ Hợi": "Bình Địa Mộc",
-  "Canh Tý": "Bích Thượng Thổ","Tân Sửu": "Bích Thượng Thổ",
-  "Nhâm Dần": "Kim Bạch Kim",  "Quý Mão": "Kim Bạch Kim",
-  "Giáp Thìn": "Phúc Đăng Hỏa","Ất Tỵ": "Phúc Đăng Hỏa",
-  "Bính Ngọ": "Thiên Hà Thủy", "Đinh Mùi": "Thiên Hà Thủy",
-  "Mậu Thân": "Đại Dịch Thổ",  "Kỷ Dậu": "Đại Dịch Thổ",
-  "Canh Tuất": "Thoa Xuyến Kim","Tân Hợi": "Thoa Xuyến Kim",
-  "Nhâm Tý": "Tang Đố Mộc",    "Quý Sửu": "Tang Đố Mộc",
-  "Giáp Dần": "Đại Khê Thủy",  "Ất Mão": "Đại Khê Thủy",
-  "Bính Thìn": "Sa Trung Thổ", "Đinh Tỵ": "Sa Trung Thổ",
-  "Mậu Ngọ": "Thiên Thượng Hỏa","Kỷ Mùi": "Thiên Thượng Hỏa",
-  "Canh Thân": "Thạch Lựu Mộc","Tân Dậu": "Thạch Lựu Mộc",
-  "Nhâm Tuất": "Đại Hải Thủy", "Quý Hợi": "Đại Hải Thủy"
+const NGAY_THONG_TIN = {
+  "Giáp Tý": { moTa: "Ngày: Giáp Tý - tức Chi sinh Can (Thủy sinh Mộc), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Hải Trung Kim, kỵ các tuổi: Mậu Ngọ và Nhâm Ngọ.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Mậu Tuất vì Kim khắc nên được lợi.","- Ngày Tý lục hợp với Sửu, tam hợp với Thìn và Thân thành Thủy cục. Xung Ngọ, hình Mão, hại Mùi, phá Dậu, tuyệt Tỵ."] },
+  "Ất Sửu": { moTa: "Ngày: Ất Sửu - tức Can khắc Chi (Mộc khắc Thổ), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Hải Trung Kim, kỵ các tuổi: Kỷ Mùi và Quý Mùi.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Kỷ Hợi vì Kim khắc mà được lợi.- Ngày Sửu lục hợp với Tý, tam hợp với Tỵ và Dậu thành Kim cục. Xung Mùi, hình Tuất, hại Ngọ, phá Thìn, tuyệt Mùi.","- Tam Sát kỵ mệnh các tuổi Dần, Ngọ, Tuất."] },
+  "Bính Dần": { moTa: "Ngày: Bính Dần - tức Chi sinh Can (Mộc sinh Hỏa), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Lô Trung Hỏa, kỵ các tuổi: Canh Thân và Nhâm Thân.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Nhâm Thân và Giáp Ngọ thuộc hành Kim nhưng không sợ Hỏa.","- Ngày Dần lục hợp với Hợi, tam hợp với Ngọ và Tuất thành Hỏa cục. Xung Thân, hình Tỵ, hại Tỵ, phá Hợi, tuyệt Dậu."] },
+  "Đinh Mão": { moTa: "Ngày: Đinh Mão - tức Chi sinh Can (Mộc sinh Hỏa), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Lô Trung Hỏa, kỵ các tuổi: Tân Dậu và Quý Dậu.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Quý Dậu và Ất Mùi thuộc hành Kim nhưng không sợ Hỏa.","- Ngày Mão lục hợp với Tuất, tam hợp với Mùi và Hợi thành Mộc cục. Xung Dậu, hình Tý, hại Thìn, phá Ngọ, tuyệt Thân."] },
+  "Mậu Thìn": { moTa: "Ngày: Mậu Thìn - tức Can Chi tương đồng (cùng Thổ), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Đại Lâm Mộc, kỵ các tuổi: Nhâm Tuất và Bính Tuất.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Canh Ngọ, Mậu Thân và Bính Thìn thuộc hành Thổ không sợ Mộc - Ngày Thìn lục hợp với Dậu, tam hợp với Tý và Thân thành Thủy cục. Xung Tuất, hình Thìn, hình Mùi, hại Mão, phá Sửu, tuyệt Tuất.","- Tam Sát kỵ mệnh các tuổi Tỵ, Dậu, Sửu."] },
+  "Kỷ Tỵ": { moTa: "Ngày: Kỷ Tỵ - tức Chi sinh Can (Hỏa sinh Thổ), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Đại Lâm Mộc, kỵ các tuổi: Quý Hợi và Đinh Hợi.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Tân Mùi, Kỷ Dậu và Đinh Tỵ thuộc hành Thổ không sợ Mộc.","- Ngày Tỵ lục hợp với Thân, tam hợp với Sửu và Dậu thành Kim cục. Xung Hợi, hình Thân, hại Dần, phá Thân, tuyệt Tý."] },
+  "Canh Ngọ": { moTa: "Ngày: Canh Ngọ - tức Chi khắc Can (Hỏa khắc Kim), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Lộ Bàng Thổ, kỵ các tuổi: Giáp Tý và Bính Tý.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Bính Ngọ và Nhâm Tuất thuộc hành Thủy không sợ Thổ.","- Ngày Ngọ lục hợp với Mùi, tam hợp với Dần và Tuất thành Hỏa cục. Xung Tý, hình Ngọ, hình Dậu, hại Sửu, phá Mão, tuyệt Hợi."] },
+  "Tân Mùi": { moTa: "Ngày: Tân Mùi - tức Chi sinh Can (Thổ sinh Kim), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Lộ Bàng Thổ, kỵ các tuổi: Ất Sửu và Đinh Sửu.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Đinh Mùi, Quý Hợi thuộc hành Thủy không sợ Thổ - Ngày Mùi lục hợp với Ngọ, tam hợp với Mão và Hợi thành Mộc cục. Xung Sửu, hình Sửu, hại Tý, phá Tuất, tuyệt Sửu.","- Tam Sát kỵ mệnh các tuổi Thân, Tý, Thìn."] },
+  "Nhâm Thân": { moTa: "Ngày: Nhâm Thân - tức Chi sinh Can (Kim sinh Thủy), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Kiếm Phong Kim, kỵ các tuổi: Bính Dần và Canh Dần.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Mậu Tuất vì Kim khắc mà được lợi.","- Ngày Thân lục hợp với Tỵ, tam hợp với Tý và Thìn thành Thủy cục. Xung Dần, hình Dần, hình Hợi, hại Hợi, phá Tỵ, tuyệt Mão."] },
+  "Quý Dậu": { moTa: "Ngày: Quý Dậu - tức Chi sinh Can (Kim sinh Thủy), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Kiếm Phong Kim, kỵ các tuổi: Đinh Mão và Tân Mão.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Kỷ Hợi vì Kim khắc mà được lợi.","- Ngày Dậu lục hợp với Thìn, tam hợp với Sửu và Tỵ thành Kim cục. Xung Mão, hình Dậu, hại Tuất, phá Tý, tuyệt Dần."] },
+  "Giáp Tuất": { moTa: "Ngày: Giáp Tuất - tức Can khắc Chi (Mộc khắc Thổ), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Sơn Đầu Hỏa, kỵ các tuổi: Mậu Thìn và Canh Thìn.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Nhâm Thân và Giáp Ngọ thuộc hành Kim không sợ Hỏa - Ngày Tuất lục hợp với Mão, tam hợp với Dần và Ngọ thành Hỏa cục. Xung Thìn, hình Mùi, hại Dậu, phá Mùi, tuyệt Thìn.","- Tam Sát kỵ mệnh các tuổi Hợi, Mão, Mùi."] },
+  "Ất Hợi": { moTa: "Ngày: Ất Hợi - tức Chi sinh Can (Thủy sinh Mộc), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Sơn Đầu Hỏa, kỵ các tuổi: Kỷ Tỵ và Tân Tỵ.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Quý Dậu và Ất Mùi thuộc hành Kim không sợ Hỏa.","-  Ngày Hợi lục hợp với Dần, tam hợp với Mão và Mùi thành Mộc cục. Xung Tỵ, hình Hợi, hại Thân, phá Dần, tuyệt Ngọ."] },
+  "Bính Tý": { moTa: "Ngày: Bính Tý - tức Chi khắc Can (Thủy khắc Hỏa), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Giản Hạ Thủy, kỵ các tuổi: Canh Ngọ và Mậu Ngọ.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Mậu Tý, Bính Thân và Mậu Ngọ thuộc hành Hỏa không sợ Thủy.","- Ngày Tý lục hợp với Sửu, tam hợp với Thìn và Thân thành Thủy cục. Xung Ngọ, hình Mão, hại Mùi, phá Dậu, tuyệt Tỵ."] },
+  "Đinh Sửu": { moTa: "Ngày: Đinh Sửu - tức Can sinh Chi (Hỏa sinh Thổ), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Giản Hạ Thủy, kỵ các tuổi: Tân Mùi và Kỷ Mùi.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Kỷ Sửu, Đinh Dậu và Kỷ Mùi thuộc hành Hỏa không sợ Thủy - Ngày Sửu lục hợp với Tý, tam hợp với Tỵ và Dậu thành Kim cục. Xung Mùi, hình Tuất, hại Ngọ, phá Thìn, tuyệt Mùi.","- Tam Sát kỵ mệnh các tuổi Dần, Ngọ, Tuất."] },
+  "Mậu Dần": { moTa: "Ngày: Mậu Dần - tức Chi khắc Can (Mộc khắc Thổ), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Thành Đầu Thổ, kỵ các tuổi: Nhâm Thân và Giáp Thân.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Bính Ngọ và Nhâm Tuất thuộc hành Thủy không sợ Thổ.","- Ngày Dần lục hợp với Hợi, tam hợp với Ngọ và Tuất thành Hỏa cục. Xung Thân, hình Tỵ, hại Tỵ, phá Hợi, tuyệt Dậu."] },
+  "Kỷ Mão": { moTa: "Ngày: Kỷ Mão - tức Chi khắc Can (Mộc khắc Thổ), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Thành Đầu Thổ, kỵ các tuổi: Quý Dậu và Ất Dậu.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Đinh Mùi và Quý Hợi thuộc hành Thủy không sợ Thổ.","- Ngày Mão lục hợp với Tuất, tam hợp với Mùi và Hợi thành Mộc cục. Xung Dậu, hình Tý, hại Thìn, phá Ngọ, tuyệt Thân."] },
+  "Canh Thìn": { moTa: "Ngày: Canh Thìn - tức Chi sinh Can (Thổ sinh Kim), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Bạch Lạp Kim, kỵ các tuổi: Giáp Tuất và Mậu Tuất.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Mậu Tuất vì Kim khắc mà được lợi - Ngày Thìn lục hợp với Dậu, tam hợp với Tý và Thân thành Thủy cục. Xung Tuất, hình Thìn, hình Mùi, hại Mão, phá Sửu, tuyệt Tuất.","- Tam Sát kỵ mệnh các tuổi Tỵ, Dậu, Sửu."] },
+  "Tân Tỵ": { moTa: "Ngày: Tân Tỵ - tức Chi khắc Can (Hỏa khắc Kim), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Bạch Lạp Kim, kỵ các tuổi: Ất Hợi và Kỷ Hợi.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Kỷ Hợi vì Kim khắc mà được lợi.","- Ngày Tỵ lục hợp với Thân, tam hợp với Sửu và Dậu thành Kim cục. Xung Hợi, hình Thân, hại Dần, phá Thân, tuyệt Tý."] },
+  "Nhâm Ngọ": { moTa: "Ngày: Nhâm Ngọ - tức Can khắc Chi (Thủy khắc Hỏa), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Dương Liễu Mộc, kỵ các tuổi: Bính Tý và Canh Tý.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Canh Ngọ, Mậu Thân và Bính Thìn thuộc hành Thổ không sợ Mộc.","- Ngày Ngọ lục hợp với Mùi, tam hợp với Dần và Tuất thành Hỏa cục. Xung Tý, hình Ngọ, hình Dậu, hại Sửu, phá Mão, tuyệt Hợi."] },
+  "Quý Mùi": { moTa: "Ngày: Quý Mùi - tức Chi khắc Can (Thổ khắc Thủy), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Dương Liễu Mộc, kỵ các tuổi: Đinh Sửu và Tân Sửu.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Tân Mùi, Kỷ Dậu và Đinh Tỵ thuộc hành Thổ không sợ Mộc - Ngày Mùi lục hợp với Ngọ, tam hợp với Mão và Hợi thành Mộc cục. Xung Sửu, hình Sửu, hại Tý, phá Tuất, tuyệt Sửu.","- Tam Sát kỵ mệnh các tuổi Thân, Tý, Thìn."] },
+  "Giáp Thân": { moTa: "Ngày: Giáp Thân - tức Chi khắc Can (Kim khắc Mộc), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Tuyền Trung Thủy, kỵ các tuổi: Mậu Dần và Bính Dần.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Mậu Tý, Bính Thân và Mậu Ngọ thuộc hành Hỏa không sợ Thủy.","- Ngày Thân lục hợp với Tỵ, tam hợp với Tý và Thìn thành Thủy cục. Xung Dần, hình Dần, hình Hợi, hại Hợi, phá Tỵ, tuyệt Mão."] },
+  "Ất Dậu": { moTa: "Ngày: Ất Dậu - tức Chi khắc Can (Kim khắc Mộc), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Tuyền Trung Thủy, kỵ các tuổi: Kỷ Mão và Đinh Mão.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Kỷ Sửu, Đinh Dậu và Kỷ Mùi thuộc hành Hỏa không sợ Thủy.","- Ngày Dậu lục hợp với Thìn, tam hợp với Sửu và Tỵ thành Kim cục. Xung Mão, hình Dậu, hại Tuất, phá Tý, tuyệt Dần."] },
+  "Bính Tuất": { moTa: "Ngày: Bính Tuất - tức Can sinh Chi (Hỏa sinh Thổ), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Ốc Thượng Thổ, kỵ các tuổi: Canh Thìn và Nhâm Thìn.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Bính Ngọ và Nhâm Tuất thuộc hành Thủy không sợ Thổ - Ngày Tuất lục hợp với Mão, tam hợp với Dần và Ngọ thành Hỏa cục. Xung Thìn, hình Mùi, hại Dậu, phá Mùi, tuyệt Thìn.","- Tam Sát kỵ mệnh các tuổi Hợi, Mão, Mùi."] },
+  "Đinh Hợi": { moTa: "Ngày: Đinh Hợi - tức Chi khắc Can (Thủy khắc Hỏa), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Ốc Thượng Thổ, kỵ các tuổi: Tân Tỵ và Quý Tỵ.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Đinh Mùi và Quý Hợi thuộc hành Thủy không sợ Thổ.","- Ngày Hợi lục hợp với Dần, tam hợp với Mão và Mùi thành Mộc cục. Xung Tỵ, hình Hợi, hại Thân, phá Dần, tuyệt Ngọ."] },
+  "Mậu Tý": { moTa: "Ngày: Mậu Tý - tức Can khắc Chi (Thổ khắc Thủy), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Phích Lịch Hỏa, kỵ các tuổi: Nhâm Ngọ và Giáp Ngọ.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Nhâm Thân và Giáp Ngọ thuộc hành Kim không sợ Hỏa.","- Ngày Tý lục hợp với Sửu, tam hợp với Thìn và Thân thành Thủy cục. Xung Ngọ, hình Mão, hại Mùi, phá Dậu, tuyệt Tỵ."] },
+  "Kỷ Sửu": { moTa: "Ngày: Kỷ Sửu - tức Can Chi tương đồng (cùng Thổ), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Phích Lịch Hỏa, kỵ các tuổi: Quý Mùi và Ất Mùi.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Quý Dậu thuộc hành Kim không sợ Hỏa - Ngày Sửu lục hợp với Tý, tam hợp với Tỵ và Dậu thành Kim cục. Xung Mùi, hình Tuất, hại Ngọ, phá Thìn, tuyệt Mùi.","- Tam Sát kỵ mệnh các tuổi Dần, Ngọ, Tuất."] },
+  "Canh Dần": { moTa: "Ngày: Canh Dần - tức Can khắc Chi (Kim khắc Mộc), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Tùng Bách Mộc, kỵ các tuổi: Giáp Thân và Mậu Thân.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Canh Ngọ, Mậu Thân và Bính Thìn thuộc hành Thổ không sợ Mộc.","- Ngày Dần lục hợp với Hợi, tam hợp với Ngọ và Tuất thành Hỏa cục. Xung Thân, hình Tỵ, hại Tỵ, phá Hợi, tuyệt Dậu."] },
+  "Tân Mão": { moTa: "Ngày: Tân Mão - tức Can khắc Chi (Kim khắc Mộc), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Tùng Bách Mộc, kỵ các tuổi: Ất Dậu và Kỷ Dậu.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Tân Mùi, Kỷ Dậu, Đinh Tỵ thuộc hành Thổ không sợ Mộc.","- Ngày Mão lục hợp với Tuất, tam hợp với Mùi và Hợi thành Mộc cục. Xung Dậu, hình Tý, hại Thìn, phá Ngọ, tuyệt Thân."] },
+  "Nhâm Thìn": { moTa: "Ngày: Nhâm Thìn - tức Chi khắc Can (Thổ khắc Thủy), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Trường Lưu Thủy, kỵ các tuổi: Bính Tuất và Giáp Tuất.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Mậu Tý, Bính Thân và Mậu Ngọ thuộc hành Hỏa không sợ Thủy - Ngày Thìn lục hợp với Dậu, tam hợp với Tý và Thân thành Thủy cục. Xung Tuất, hình Thìn, hình Mùi, hại Mão, phá Sửu, tuyệt Tuất.","- Tam Sát kỵ mệnh các tuổi Tỵ, Dậu, Sửu."] },
+  "Quý Tỵ": { moTa: "Ngày: Quý Tỵ - tức Can khắc Chi (Thủy khắc Hỏa), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Trường Lưu Thủy, kỵ các tuổi: Đinh Hợi và Ất Hợi.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Kỷ Sửu, Đinh Dậu và Kỷ Mùi thuộc hành Hỏa không sợ Thủy.","- Ngày Tỵ lục hợp với Thân, tam hợp với Sửu và Dậu thành Kim cục. Xung Hợi, hình Thân, hại Dần, phá Thân, tuyệt Tý."] },
+  "Giáp Ngọ": { moTa: "Ngày: Giáp Ngọ - tức Can sinh Chi (Mộc sinh Hỏa), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Sa Trung Kim, kỵ các tuổi: Mậu Tý và Nhâm Tý.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Mậu Tuất vì Kim khắc mà được lợi.","- Ngày Ngọ lục hợp với Mùi, tam hợp với Dần và Tuất thành Hỏa cục. Xung Tý, hình Ngọ, hình Dậu, hại Sửu, phá Mão, tuyệt Hợi."] },
+  "Ất Mùi": { moTa: "Ngày: Ất Mùi - tức Can khắc Chi (Mộc khắc Thổ), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Sa Trung Kim, kỵ các tuổi: Kỷ Sửu và Quý Sửu.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Kỷ Hợi vì Kim khắc mà được lợi - Ngày Mùi lục hợp với Ngọ, tam hợp với Mão và Hợi thành Mộc cục. Xung Sửu, hình Sửu, hại Tý, phá Tuất, tuyệt Sửu.","- Tam Sát kỵ mệnh các tuổi Thân, Tý, Thìn."] },
+  "Bính Thân": { moTa: "Ngày: Bính Thân - tức Can khắc Chi (Hỏa khắc Kim), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Sơn Hạ Hỏa, kỵ các tuổi: Canh Dần và Nhâm Dần.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Nhâm Thân và Giáp Ngọ thuộc hành Kim không sợ Hỏa.","- Ngày Thân lục hợp với Tỵ, tam hợp với Tý và Thìn thành Thủy cục. Xung Dần, hình Dần, hình Hợi, hại Hợi, phá Tỵ, tuyệt Mão."] },
+  "Đinh Dậu": { moTa: "Ngày: Đinh Dậu  - tức Can khắc Chi (Hỏa khắc Kim), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Sơn Hạ Hỏa, kỵ các tuổi: Tân Mão và Quý Mão.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Quý Dậu và Ất Mùi thuộc hành Kim không sợ Hỏa.","- Ngày Dậu lục hợp với Thìn, tam hợp với Sửu và Tỵ thành Kim cục. Xung Mão, hình Dậu, hại Tuất, phá Tý, tuyệt Dần."] },
+  "Mậu Tuất": { moTa: "Ngày: Mậu Tuất - tức Can Chi tương đồng (cùng Thổ), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Bình Địa Mộc, kỵ các tuổi: Nhâm Thìn và Giáp Ngọ.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Canh Ngọ, Mậu Thân và Bính Thìn thuộc hành Thổ không sợ Mộc.","- Ngày Tuất lục hợp với Mão, tam hợp với Dần và Ngọ thành Hỏa cục. Xung Thìn, hình Mùi, hại Dậu, phá Mùi, tuyệt Thìn. Tam Sát kỵ mệnh tuổi Hợi, Mão, Mùi."] },
+  "Kỷ Hợi": { moTa: "Ngày: Kỷ Hợi - tức Can khắc Chi (Thổ khắc Thủy), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Bình Địa Mộc, kỵ các tuổi: Quý Tỵ và Ất Mùi.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Tân Mùi, Kỷ Dậu và Đinh Tỵ thuộc hành Thổ không sợ Mộc.","- Ngày Hợi lục hợp với Dần, tam hợp với Mão và Mùi thành Mộc cục. Xung Tỵ, hình Hợi, hại Thân, phá Dần, tuyệt Ngọ."] },
+  "Canh Tý": { moTa: "Ngày: Canh Tý - tức Can sinh Chi (Kim sinh Thủy), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Bích Thượng Thổ, kỵ các tuổi: Giáp Ngọ và Bính Ngọ.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Bính Ngọ và Nhâm Tuất thuộc hành Thủy không sợ Thổ.","- Ngày Tý lục hợp với Sửu, tam hợp với Thìn và Thân thành Thủy cục. Xung Ngọ, hình Mão, hại Mùi, phá Dậu, tuyệt Tỵ."] },
+  "Tân Sửu": { moTa: "Ngày: Tân Sửu - tức Chi sinh Can (Thổ sinh Kim), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Bích Thượng Thổ, kỵ các tuổi: Ất Mùi và Đinh Mùi.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Đinh Mùi và Quý Hợi thuộc hành Thủy không sợ Thổ.","- Ngày Sửu lục hợp với Tý, tam hợp với Tỵ và Dậu thành Kim cục. Xung Mùi, hình Tuất, hại Ngọ, phá Thìn, tuyệt Mùi. Tam Sát kỵ mệnh tuổi Dần, Ngọ, Tuất."] },
+  "Nhâm Dần": { moTa: "Ngày: Nhâm Dần - tức Can sinh Chi (Thủy sinh Mộc), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Kim Bạc Kim, kỵ các tuổi: Bính Thân và Canh Thân.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Mậu Tuất vì Kim khắc mà được lợi.","- Ngày Dần lục hợp với Hợi, tam hợp với Ngọ và Tuất thành Hỏa cục. Xung Thân, hình Tỵ, hại Tỵ, phá Hợi, tuyệt Dậu."] },
+  "Quý Mão": { moTa: "Ngày: Quý Mão - tức Can sinh Chi (Thủy sinh Mộc), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Kim Bạc Kim, kỵ các tuổi: Đinh Dậu và Tân Dậu.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Kỷ Hợi vì Kim khắc mà được lợi.","- Ngày Mão lục hợp với Tuất, tam hợp với Mùi và Hợi thành Mộc cục. Xung Dậu, hình Tý, hại Thìn, phá Ngọ, tuyệt Thân."] },
+  "Giáp Thìn": { moTa: "Ngày: Giáp Thìn - tức Can khắc Chi (Mộc khắc Thổ), ngày này là ngày cát trung bình (chế nhật).", chiTiet: ["- Nạp âm: Ngày Phúc Đăng Hỏa, kỵ các tuổi: Mậu Tuất và Canh Tuất.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Nhâm Thân và Giáp Ngọ thuộc hành Kim không sợ Hỏa.","- Ngày Thìn lục hợp với Dậu, tam hợp với Tý và Thân thành Thủy cục. Xung Tuất, hình Thìn, hình Mùi, hại Mão, phá Sửu, tuyệt Tuất. Tam Sát kỵ mệnh các tuổi Tỵ, Dậu, Sửu."] },
+  "Ất Tỵ": { moTa: "Ngày: Ất Tỵ - tức Can sinh Chi (Mộc sinh Hỏa), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Phúc Đăng Hỏa, kỵ các tuổi: Kỷ Hợi và Tân Hợi.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Quý Dậu và Ất Mùi thuộc hành Kim không sợ Hỏa.","- Ngày Tỵ lục hợp với Thân, tam hợp với Sửu và Dậu thành Kim cục. Xung Hợi, hình Thân, hại Dần, phá Thân, tuyệt Tý."] },
+  "Bính Ngọ": { moTa: "Ngày: Bính Ngọ - tức Can Chi tương đồng (cùng Hỏa), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Thiên Hà Thủy, kỵ các tuổi: Canh Tý.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Mậu Tý, Bính Thân và Mậu Ngọ thuộc hành Hỏa không sợ Thủy.","- Ngày Ngọ lục hợp với Mùi, tam hợp với Dần và Tuất thành Hỏa cục. Xung Tý, hình Ngọ, hình Dậu, hại Sửu, phá Mão, tuyệt Hợi."] },
+  "Đinh Mùi": { moTa: "Ngày: Đinh Mùi - tức Can sinh Chi (Hỏa sinh Thổ), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Thiên Hà Thủy, kỵ các tuổi: Tân Sửu.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Kỷ Sửu, Đinh Dậu và Kỷ Mùi thuộc hành Hỏa không sợ Thủy.","- Ngày Mùi lục hợp với Ngọ, tam hợp với Mão và Hợi thành Mộc cục. Xung Sửu, hình Sửu, hại Tý, phá Tuất, tuyệt Sửu. Tam Sát kỵ mệnh tuổi Thân, Tý, Thìn."] },
+  "Mậu Thân": { moTa: "Ngày: Mậu Thân - tức Can sinh Chi (Thổ sinh Kim), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Đại Dịch Thổ, kỵ các tuổi: Nhâm Dần và Giáp Dần.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Bính Ngọ và Nhâm Tuất thuộc hành Thủy không sợ Thổ.","- Ngày Thân lục hợp với Tỵ, tam hợp với Tý và Thìn thành Thủy cục. Xung Dần, hình Dần, hình Hợi, hại Hợi, phá Tỵ, tuyệt Mão."] },
+  "Kỷ Dậu": { moTa: "Ngày: Kỷ Dậu - tức Can sinh Chi (Thổ sinh Kim), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Đại Dịch Thổ, kỵ các tuổi: Quý Mão và Ất Mão.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Đinh Mùi và Quý Hợi thuộc hành Thủy không sợ Thổ.","- Ngày Dậu lục hợp với Thìn, tam hợp với Sửu và Tỵ thành Kim cục. Xung Mão, hình Dậu, hại Tuất, phá Tý, tuyệt Dần."] },
+  "Canh Tuất": { moTa: "Ngày: Canh Tuất - tức Chi sinh Can (Thổ sinh Kim), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Thoa Xuyến Kim, kỵ các tuổi: Giáp Thìn và Mậu Thìn.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Mậu Tuất vì Kim khắc mà được lợi.","- Ngày Tuất lục hợp với Mão, tam hợp với Dần và Ngọ thành Hỏa cục. Xung Thìn, hình Mùi, hại Dậu, phá Mùi, tuyệt Thìn. Tam Sát kỵ mệnh các tuổi Hợi, Mão, Mùi."] },
+  "Tân Hợi": { moTa: "Ngày: Tân Hợi - tức Can sinh Chi (Kim sinh Thủy), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Thoa Xuyến Kim, kỵ các tuổi: Ất Tỵ và Kỷ Tỵ.","- Ngày này thuộc hành Kim khắc với hành Mộc, ngoại trừ các tuổi: Kỷ Hợi vì Kim khắc mà được lợi.","- Ngày Hợi lục hợp với Dần, tam hợp với Mão và Mùi thành Mộc cục. Xung Tỵ, hình Hợi, hại Thân, phá Dần, tuyệt Ngọ."] },
+  "Nhâm Tý": { moTa: "Ngày: Nhâm Tý - tức Can Chi tương đồng ( cùng Thủy), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Tang Chá Mộc, kỵ các tuổi: Bính Ngọ và Canh Ngọ.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Canh Ngọ, Mậu Thân và Bính Thìn thuộc hành Thổ không sợ Mộc.","- Ngày Tý lục hợp với Sửu, tam hợp với Thìn và Thân thành Thủy cục. Xung Ngọ, hình Mão, hại Mùi, phá Dậu, tuyệt Tỵ."] },
+  "Quý Sửu": { moTa: "Ngày: Quý Sửu - tức Chi khắc Can (Thổ khắc Thủy), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Tang Chá Mộc, kỵ các tuổi: Đinh Mùi và Tân Mùi.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Tân Mùi, Kỷ Dậu và Đinh Tỵ thuộc hành Thổ không sợ Mộc.","- Ngày Sửu lục hợp với Tý, tam hợp với Tỵ và Dậu thành Kim cục. Xung Mùi, hình Tuất, hại Ngọ, phá Thìn, tuyệt Mùi. Tam Sát kỵ mệnh các tuổi Dần, Ngọ, Tuất."] },
+  "Giáp Dần": { moTa: "Ngày: Giáp Dần - tức Can Chi tương đồng (cùng Mộc), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Đại Khê Thủy, kỵ các tuổi: Mậu Thân và Bính Thân.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Mậu Tý, Bính Thân và Mậu Ngọ thuộc hành Hỏa không sợ Thủy.","- Ngày Dần lục hợp với Hợi, tam hợp với Ngọ và Tuất thành Hỏa cục. Xung Thân, hình Tỵ, hại Tỵ, phá Hợi, tuyệt Dậu."] },
+  "Ất Mão": { moTa: "Ngày: Ất Mão - tức Can Chi tương đồng (cùng Mộc), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Đại Khê Thủy, kỵ các tuổi: Kỷ Dậu và Đinh Dậu.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Kỷ Sửu, Đinh Dậu và Kỷ Mùi thuộc hành Hỏa không sợ Thủy.","- Ngày Mão lục hợp với Tuất, tam hợp với Mùi và Hợi thành Mộc cục. Xung Dậu, hình Tý, hại Thìn, phá Ngọ, tuyệt Thân."] },
+  "Bính Thìn": { moTa: "Ngày: Bính Thìn - tức Can sinh Chi (Hỏa sinh Thổ), ngày này là ngày cát (bảo nhật).", chiTiet: ["- Nạp âm: Ngày Sa Trung Thổ, kỵ các tuổi: Canh Tuất và Nhâm Tuất.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Bính Ngọvà Nhâm Tuất thuộc hành Thủy không sợ Thổ.","- Ngày Thìn lục hợp với Dậu, tam hợp với Tý và Thân thành Thủy cục. Xung Tuất, hình Thìn, hình Mùi, hại Mão, phá Sửu, tuyệt Tuất. Tam Sát kỵ mệnh tuổi Tỵ, Dậu, Sửu."] },
+  "Đinh Tỵ": { moTa: "Ngày: Đinh Tỵ - tức Can Chi tương đồng (cùng Hỏa), ngày này là ngày cát.", chiTiet: ["- Nạp âm:  Ngày Sa Trung Thổ, kỵ các tuổi: Tân Hợi và Quý Hợi.","- Ngày này thuộc hành Thổ khắc với hành Thủy, ngoại trừ các tuổi: Đinh Mùi và Quý Hợi thuộc hành Thủy không sợ Thổ.","- Ngày Tỵ lục hợp với Thân, tam hợp với Sửu và Dậu thành Kim cục. Xung Hợi, hình Thân, hại Dần, phá Thân, tuyệt Tý."] },
+  "Mậu Ngọ": { moTa: "Ngày: Mậu Ngọ - tức Chi sinh Can (Hỏa sinh Thổ), ngày này là ngày cát (nghĩa nhật).", chiTiet: ["- Nạp âm: Ngày Thiên Thượng Hỏa, kỵ các tuổi: Nhâm Tý và Giáp Tý.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Nhâm Thân và Giáp Ngọ thuộc hành Kim không sợ Hỏa.","- Ngày Ngọ lục hợp với Mùi, tam hợp với Dần và Tuất thành Hỏa cục. Xung Tý, hình Ngọ, hình Dậu, hại Sửu, phá Mão, tuyệt Hợi."] },
+  "Kỷ Mùi": { moTa: "Ngày: Kỷ Mùi - tức Can Chi tương đồng (cùng Thổ), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Thiên Thượng Hỏa, kỵ các tuổi: Quý Sửu và Ất Sửu.","- Ngày này thuộc hành Hỏa khắc với hành Kim, ngoại trừ các tuổi: Quý Dậu và Ất Mùi thuộc hành Kim không sợ Hỏa.","- Ngày Mùi lục hợp với Ngọ, tam hợp với Mão và Hợi thành Mộc cục. Xung Sửu, hình Sửu, hại Tý, phá Tuất, tuyệt Sửu. Tam Sát kỵ mệnh các tuổi Thân, Tý, Thìn."] },
+  "Canh Thân": { moTa: "Ngày: Canh Thân - tức Can Chi tương đồng (cùng Kim), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Thạch Lựu Mộc, kỵ các tuổi: Giáp Dần và Mậu Dần.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Canh Ngọ, Mậu Thân và Bính Thìn thuộc hành Thổ không sợ Mộc.","- Ngày Thân lục hợp với Tỵ, tam hợp với Tý và Thìn thành Thủy cục. Xung Dần, hình Dần, hình Hợi, hại Hợi, phá Tỵ, tuyệt Mão."] },
+  "Tân Dậu": { moTa: "Ngày: Tân Dậu - tức Can Chi tương đồng (cùng Kim), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Thạch Lựu Mộc, kỵ các tuổi: Ất Mão và Kỷ Mão.","- Ngày này thuộc hành Mộc khắc với hành Thổ, ngoại trừ các tuổi: Tân Mùi, Kỷ Dậu và Đinh Tỵ thuộc hành Thổ không sợ Mộc.","- Ngày Dậu lục hợp với Thìn, tam hợp với Sửu và Tỵ thành Kim cục. Xung Mão, hình Dậu, hại Tuất, phá Tý, tuyệt Dần."] },
+  "Nhâm Tuất": { moTa: "Ngày: Nhâm Tuất - tức Chi khắc Can (Thổ khắc Thủy), là ngày hung (phạt nhật).", chiTiet: ["- Nạp âm: Ngày Đại Hải Thủy, kỵ các tuổi: Bính Thìn và Giáp Thìn.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Mậu Tý, Bính Thân và Mậu Ngọ thuộc hành Hỏa không sợ Thủy. Ngày Tuất lục hợp với Mão, tam hợp với Dần và Ngọ thành Hỏa cục. Xung Thìn, hình Mùi, hại Dậu, phá Mùi, tuyệt Thìn.","- Tam Sát kỵ mệnh các tuổi Hợi, Mão, Mùi."] },
+  "Quý Hợi": { moTa: "Ngày: Quý Hợi - tức Can Chi tương đồng (Thủy), ngày này là ngày cát.", chiTiet: ["- Nạp âm: Ngày Đại Hải Thủy, kỵ các tuổi: Đinh Tỵ và Ất Tỵ.","- Ngày này thuộc hành Thủy khắc với hành Hỏa, ngoại trừ các tuổi: Kỷ Sửu, Đinh Dậu và Kỷ Mùi thuộc hành Hỏa không sợ Thủy.","- Ngày Hợi lục hợp với Dần, tam hợp với Mão và Mùi thành Mộc cục. Xung Tỵ, hình Hợi, hại Thân, phá Dần, tuyệt Ngọ."] },
 };
+
 
 // ===== Cát tinh / Hung tinh / Thần sát =====
 const CAT_TINH = {
@@ -747,62 +766,144 @@ const THAN_SAT = {
 // ----- BẮT ĐẦU CODE MỚI - HÀM XUẤT HÀNH NÂNG CẤP -----
 // =======================================================
 
-  function getHuongXuatHanh(jd) {
-    const canNgay = CAN[(jd + 9) % 10];
-    const huong = THAN_HUONG[canNgay]; // Lấy dữ liệu từ bảng mới
-    if (huong) {
-      let tot = `Hỷ Thần: <b style="color:#00ff00;">${huong.hyThan}</b> - Tài Thần: <b style="color:#00ff00;">${huong.taiThan}</b>`;
-      let xau = `Tránh: <b style="color:#ff9933;">${huong.hacThan} (Hạc Thần)</b>`;
-      return `${tot} | ${xau}`;
-    }
-    return "Không rõ";
-  }
-
-
-	function getViecTotXau(lunarDate) {
-		const cc = getCanChi(lunarDate);
-		const ngay = cc[0]; // VD: "Đinh Mão"
-		const nen = VIEC_NEN_LAM[ngay] || "Không rõ";
-		const kieng = VIEC_KIENGLAM[ngay] || "Không rõ";
-		return { nen, kieng };
+	function getCanChiNgay(jd) {
+		const can = CAN[(jd + 9) % 10];
+		const chi = CHI[(jd + 1) % 12];
+		return [can, chi];
 	}
-  
-  
+// ===== Hướng Xuất Hành (theo Can ngày) =====
+		// Bảng Hỷ Thần & Tài Thần theo Can ngày
+// ===== Hướng Xuất Hành (theo Can ngày) =====
+// Bảng Hỷ Thần & Tài Thần theo Can ngày
+// ===== Hướng Xuất Hành (theo Can ngày) =====
+	// Định nghĩa các hướng để dễ dàng tái sử dụng và tránh lỗi chính tả
+	const HUONG = {
+		DONG_BAC: "Đông Bắc",
+		TAY_BAC: "Tây Bắc",
+		TAY_NAM: "Tây Nam",
+		CHINH_NAM: "Chính Nam",
+		DONG_NAM: "Đông Nam",
+		CHINH_DONG: "Chính Đông",
+		CHINH_BAC: "Chính Bắc",
+		CHINH_TAY: "Chính Tây",
+	};
+	// A. HỶ THẦN: Cấu trúc dữ liệu theo đúng quy tắc gốc
+	const HY_THAN_RULES = {
+		[HUONG.DONG_BAC]: ["Giáp", "Kỷ"],
+		[HUONG.TAY_BAC]: ["Ất", "Canh"],
+		[HUONG.TAY_NAM]: ["Bính", "Tân"],
+		[HUONG.CHINH_NAM]: ["Đinh", "Nhâm"],
+		[HUONG.DONG_NAM]: ["Mậu", "Quý"],
+	};
+	// B. TÀI THẦN: Cấu trúc dữ liệu theo đúng quy tắc gốc
+	const TAI_THAN_RULES = {
+		[HUONG.DONG_NAM]: ["Giáp", "Ất"],
+		[HUONG.CHINH_DONG]: ["Bính", "Đinh"],
+		[HUONG.CHINH_BAC]: ["Mậu"],
+		[HUONG.CHINH_NAM]: ["Kỷ"],
+		[HUONG.TAY_NAM]: ["Canh", "Tân"],
+		[HUONG.CHINH_TAY]: ["Nhâm"],
+		[HUONG.TAY_BAC]: ["Quý"],
+	};
+	// C. HẠC THẦN
+	// 16 ngày Hạc Thần không quản việc
+	const HAC_THAN_FREE = new Set([
+		"QuýTỵ", "GiápNgọ", "ẤtMùi", "BínhThân", "ĐinhDậu", "MậuTuất", "KỷHợi", "CanhTý",
+		"TânSửu", "NhâmDần", "QuýMão", "GiápThìn", "ẤtTỵ", "BínhNgọ", "ĐinhMùi", "MậuThân"
+	]);
+
+	// 44 ngày còn lại: Chuyển đổi thành Map để tra cứu trực tiếp (hiệu quả hơn)
+	// Key là Can-Chi, Value là hướng
+	const HAC_THAN_MAP = new Map([
+		// Hướng Đông Bắc
+		["KỷDậu", HUONG.DONG_BAC], ["CanhTuất", HUONG.DONG_BAC], ["TânHợi", HUONG.DONG_BAC], ["NhâmTý", HUONG.DONG_BAC], ["QuýSửu", HUONG.DONG_BAC], ["GiápDần", HUONG.DONG_BAC],
+		// Hướng Đông
+		["ẤtMão", HUONG.CHINH_DONG], ["BínhThìn", HUONG.CHINH_DONG], ["ĐinhTỵ", HUONG.CHINH_DONG], ["MậuNgọ", HUONG.CHINH_DONG], ["KỷMùi", HUONG.CHINH_DONG],
+		// Hướng Đông Nam
+		["CanhThân", HUONG.DONG_NAM], ["TânDậu", HUONG.DONG_NAM], ["NhâmTuất", HUONG.DONG_NAM], ["QuýHợi", HUONG.DONG_NAM], ["GiápTý", HUONG.DONG_NAM], ["ẤtSửu", HUONG.DONG_NAM],
+		// Hướng Nam
+		["BínhDần", HUONG.CHINH_NAM], ["ĐinhMão", HUONG.CHINH_NAM], ["MậuThìn", HUONG.CHINH_NAM], ["KỷTỵ", HUONG.CHINH_NAM], ["CanhNgọ", HUONG.CHINH_NAM],
+		// Hướng Tây Nam
+		["TânMùi", HUONG.TAY_NAM], ["NhâmThân", HUONG.TAY_NAM], ["QuýDậu", HUONG.TAY_NAM], ["GiápTuất", HUONG.TAY_NAM], ["ẤtHợi", HUONG.TAY_NAM], ["BínhTý", HUONG.TAY_NAM],
+		// Hướng Tây
+		["ĐinhSửu", HUONG.CHINH_TAY], ["MậuDần", HUONG.CHINH_TAY], ["KỷMão", HUONG.CHINH_TAY], ["CanhThìn", HUONG.CHINH_TAY], ["TânTỵ", HUONG.CHINH_TAY],
+		// Hướng Tây Bắc
+		["NhâmNgọ", HUONG.TAY_BAC], ["QuýMùi", HUONG.TAY_BAC], ["GiápThân", HUONG.TAY_BAC], ["ẤtDậu", HUONG.TAY_BAC], ["BínhTuất", HUONG.TAY_BAC], ["ĐinhHợi", HUONG.TAY_BAC],
+		// Hướng Bắc
+		["MậuTý", HUONG.CHINH_BAC], ["KỷSửu", HUONG.CHINH_BAC], ["CanhDần", HUONG.CHINH_BAC], ["TânMão", HUONG.CHINH_BAC], ["NhâmThìn", HUONG.CHINH_BAC]
+	]);
+	function getHuongXuatHanh(jd) {
+		const cc = getCanChiNgay(jd); 
+		const can = cc[0];
+		const chi = cc[1];
+		const canChi = `${can}${chi}`;
+		const findDirection = (rules, canNgay) => {
+				for (const [direction, cans] of Object.entries(rules)) {
+						if (cans.includes(canNgay)) {
+								return direction;
+						}
+				}
+				return "Không rõ";
+		};
+		// 1. Tìm Hỷ Thần & Tài Thần
+		const hyThan = findDirection(HY_THAN_RULES, can);
+		const taiThan = findDirection(TAI_THAN_RULES, can);
+		// 2. Tìm Hạc Thần
+		let hacThan;
+		if (HAC_THAN_FREE.has(canChi)) {
+				hacThan = "— (Hạc Thần bận việc trên trời)";
+		} else {
+				hacThan = HAC_THAN_MAP.get(canChi) || "Không rõ";
+		}
+		// 3. Chuỗi kết quả
+		let tot = `Hỷ Thần: <b style="color:#00ff00;">${hyThan}</b> - Tài Thần: <b style="color:#00ff00;">${taiThan}</b>`;
+		let xau = `Tránh: <b style="color:#ff9933;">${hacThan}</b>`;
+		return `${tot} | ${xau}`;
+	}
+
+
+
   function getThanSat(lunarDate) {
-		
-		 // ===== Thập nhị trực =====
+
+		// Thập nhị trực
 	  const TRUC_ORDER = [
 	    "Kiến","Trừ","Mãn","Bình","Định","Chấp",
 	    "Phá","Nguy","Thành","Thu","Khai","Bế"
 	  ];
-	  const CHI_ORDER = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
-	  const canChiTruc = getCanChi(lunarDate); 
-	  const chiNgayTruc = canChiTruc[0].split(" ")[1];   // ví dụ: "Tỵ"
-	  const chiThangTruc = canChiTruc[1].split(" ")[1];  // ví dụ: "Thân"
-	  const chiIndexNgay = CHI_ORDER.indexOf(chiNgayTruc);
-	  const chiIndexThang = CHI_ORDER.indexOf(chiThangTruc);
-		const trucIndex = (chiIndexNgay - (chiIndexThang + 1) + 12) % 12;
-	  const trucName = TRUC_ORDER[trucIndex];
+    const st_index = getSunLongitude(lunarDate.jd, 7);
+    const month_chi_list = [3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,0,0,1,1,2,2,3];
+    const month_chi_index = month_chi_list[st_index];
+    const day_chi_index = (lunarDate.jd + 1) % 12;
+    const duty_index = (day_chi_index - month_chi_index+12) % 12;
+	  const trucName = TRUC_ORDER[duty_index];
 	  const trucInfo = THAP_NHI_TRUC[trucName];
 
 
     // Nhị thập bát tú
     const saoNames = Object.keys(NHI_THAP_BAT_TU);
-    const saoIndex = (lunarDate.jd + 11) % 28;
-    const saoName = saoNames[saoIndex];
+    const jd_ref = 2451545;
+    const mansion_ref_index = 16;
+    const day_diff = lunarDate.jd - jd_ref;
+    const current_mansion_index = (mansion_ref_index + day_diff) % 28;
+    const saoName = saoNames[current_mansion_index];
     const saoInfo = NHI_THAP_BAT_TU[saoName];
 
+
+
     // Ngũ hành nạp âm
-    const cc = getCanChi(lunarDate);
-    const ngayCC = cc[0]; // ví dụ: "Đinh Mão"
-    const napAm = NGU_HANH_NAP_AM[ngayCC] || "Không rõ";
+		const cc = getCanChi(lunarDate);
+		const ngayCC = cc[0];
+		const napAm = NGAY_THONG_TIN[ngayCC];
+		let thongTin = "";
+    if (napAm) {
+        // TẠO CHUỖI GỐC VỚI \n
+        let rawString = napAm.moTa + "\n" + napAm.chiTiet.join("\n");
+        // THAY THẾ \n BẰNG <br> ĐỂ HIỂN THỊ TRÊN HTML
+        thongTin = rawString.replace(/\n/g, '<br>');
+		} else {
+			thongTin = "Không có dữ liệu cho ngày này.";
+		}
 
-    // Thần sát (Cát/Hung tinh)
-    const chiNgay = ngayCC.split(" ")[1];
-    const thanSatData = THAN_SAT[chiNgay] || { cat: [], hung: [] };
-
-    const catList = thanSatData.cat.map(c => `${c} (${CAT_TINH[c] || ""})`).join("; ");
-    const hungList = thanSatData.hung.map(h => `${h} (${HUNG_TINH[h] || ""})`).join("; ");
     
     const EMOJI_TRUC = {
       "Kiến":"🚪","Trừ":"✂️","Mãn":"🌕","Bình":"⚖️",
@@ -828,11 +929,7 @@ const THAN_SAT = {
         info: saoInfo, 
         emoji: EMOJI_SAO[saoName] || "" 
       },
-      napAm: napAm,
-      thanSat: { 
-        cat: catList, 
-        hung: hungList 
-      }
+      napAm: thongTin
     };
   }
 
@@ -866,7 +963,7 @@ const THAN_SAT = {
       .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
       .thang{ font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
       .tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; }
-      .navi-l,.navi-r{ text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
+      .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .tenthang { padding: 4px 0; }
       
       .ngaytuan, .ngaytuan_t7, .ngaytuan_cn{ width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
@@ -878,7 +975,7 @@ const THAN_SAT = {
       
       .t2t6, .t7, .cn{ text-align:center; font-size:125%; }
 
-      .nav-btn { border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+      .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
       .homnay{ font-weight:bold; }
     `;
 
@@ -1104,14 +1201,15 @@ const THAN_SAT = {
       ">Xem thêm 🔽</button>
     </td></tr>`;
 
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">🌑<b style="color:#fff;">- Giờ hắc đạo:</b> ${getGioHacDao(jd)}</td></tr>`;
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5">🧭<b style="color:#fff;">- Hướng xuất hành:</b> ${getHuongXuatHanh(jd)}</td></tr>`;
-    const viec = getViecTotXau(currentLunarDate);
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;">🌑<b style="color:#fff;">- Giờ hắc đạo:</b> <span style="text-align:justify;">${getGioHacDao(jd)}</span></td></tr>`;
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;">🧭<b style="color:#fff;">- Hướng xuất hành:</b> <span style="text-align:justify;">${getHuongXuatHanh(jd)}</span></td></tr>`;
     const thanSat = getThanSat(currentLunarDate);
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> ${thanSat.truc.name} <span style="color:#fff;">| Tốt:</span> ${thanSat.truc.info.tot} <span style="color:#fff;">| Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></td></tr>`;
+    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> <span style=" background-color:rgba(0,255,0,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.truc.name}</span><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"><span style="color:#fff;">✅ Tốt:</span> ${thanSat.truc.info.tot} <span style="color:#fff;"><br>❌ Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></div></td></tr>`;
+
+		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">🌌- Ngũ hành:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${thanSat.napAm}</div></td></tr>`;
 		res += `<tr class="toggle-content">
 			<td class="viecnenlam" colspan="5" style="text-align:left; line-height:1.6;">
-				<span style="font-weight:bold; color:#fff; font-size:110%;">${thanSat.sao.emoji}- Nhị Thập Bát Tú: ${thanSat.sao.name}</span>
+				<span style="font-weight:bold; color:#fff; font-size:110%;">${thanSat.sao.emoji}- Nhị Thập Bát Tú: <span style=" background-color:rgba(0,255,0,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.sao.name}</span></span>
 				<span style="font-style:italic; color:#ffff99;"> (${thanSat.sao.info.tenNgay || ""})</span>
 			</td></tr>`;
 		const chiTietDanhGia = thanSat.sao.info.danhGia.substring(thanSat.sao.info.danhGia.indexOf('('));
@@ -1129,17 +1227,12 @@ const THAN_SAT = {
 					</span>
 					${chiTietDanhGia} - ${thanSat.sao.info.tuongTinh}
 				</div>
-				<div><b style="color:#fff;">👍 Nên làm:</b> ${thanSat.sao.info.nenLam}</div>
-				<div style="margin:5px 0;"><b style="color:#fff;">👎 Kiêng cữ:</b> <span style="color:#ff9933;">${thanSat.sao.info.kiengCu}</span></div>
-				<div><b style="color:#fff;">✨ Ngoại lệ:</b> ${thanSat.sao.info.ngoaiLe}</div>
+				<div><b style="color:#fff;">👍 Nên làm:</b><span style="text-align:justify;">${thanSat.sao.info.nenLam}</span></div>
+				<div style="margin:5px 0;"><b style="color:#fff;">👎 Kiêng cữ:</b> <span style="color:#ff9933; text-align:justify;">${thanSat.sao.info.kiengCu}</span></div>
+				<div><b style="color:#fff;">✨ Ngoại lệ:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${(thanSat.sao.info.ngoaiLe || '').replace(/\n/g, '<br>')}</div></div>
 				<div style="font-family:'Times New Roman',serif; font-style:italic; color:#ffff99; margin-top:2px; padding-top:2px; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; white-space:pre-wrap;">${thoText}
 				</div>
 			</td></tr>`;
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">🌌- Ngũ hành nạp âm:</b> ${thanSat.napAm}</td></tr>`;
-    res += `<tr class="toggle-content"><td class="cat_tinh" colspan="5"><b style="color:#fff;">🍀- Cát tinh:</b> ${thanSat.thanSat.cat || "Không có"}</td></tr>`;
-    res += `<tr class="toggle-content"><td class="hung_tinh" colspan="5"><b style="color:#fff;">⚡- Hung tinh:</b> <span style="color:#ff9933;">${thanSat.thanSat.hung || "Không có"}</span></td></tr>`;
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5"><b style="color:#fff;">✅- Việc nên làm:</b> ${viec.nen}</td></tr>`;
-    res += `<tr class="toggle-content"><td class="viecnentranh" colspan="5"><b style="color:#fff;">🚫- Tránh:</b> <span style="color:#ff9933;">${viec.kieng}</span></td></tr>`;
     
     res += '</table></td></tr>';
     res += printHead(mm, yy);
