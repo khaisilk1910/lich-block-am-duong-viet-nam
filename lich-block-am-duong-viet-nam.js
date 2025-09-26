@@ -851,7 +851,7 @@ const THAN_SAT = {
 		// 2. Tìm Hạc Thần
 		let hacThan;
 		if (HAC_THAN_FREE.has(canChi)) {
-				hacThan = "— (Hạc Thần bận việc trên trời)";
+				hacThan = "— Tránh xuất hành hướng Lên Trời gặp Hạc Thần (xấu)";
 		} else {
 				hacThan = HAC_THAN_MAP.get(canChi) || "Không rõ";
 		}
@@ -1167,7 +1167,7 @@ const THAN_SAT = {
 
     res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
-    res += `<div class="ThangNgayGioTiet1" style="text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)} (${currentLunarDate.year})</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
     res += '</td>';
     res += '<td class="thongtin_letet">';
     if (currentLunarDate.day === 1) res += '<div style="padding-bottom:8px;">Mùng Một</div>';
