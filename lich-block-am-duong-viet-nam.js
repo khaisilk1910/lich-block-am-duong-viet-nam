@@ -893,19 +893,19 @@ const THAN_SAT = {
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
 			@keyframes marquee-horizontal {
 				0% {
-				    left: 30%;
+				    left: 24%;
 					transform: scaleX(-1);
 				}
 				49.9% {
-				    left: 70%;
+				    left: 60%;
 					transform: scaleX(-1);
 				}
 				50% {
-				    left: 70%;
+				    left: 60%;
 					transform: scaleX(1);
 				}
 				100% {
-				    left: 30%;
+				    left: 24%;
 					transform: scaleX(1);
 				}
 			}
