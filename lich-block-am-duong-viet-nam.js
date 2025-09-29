@@ -1085,7 +1085,7 @@ const THAN_SAT = {
 		const svgThang = getSvgConGiap(lunarMonthIndex);
 		const svgNam = getSvgConGiap(lunarYearIndex);
     res += `<tr>`;
-		res += `<td class="svg-cell">${svgNgay}</td>`;
+		res += `<td class="svg-cell" style="transform: scaleX(-1);">${svgNgay}</td>`;
 		res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
 		res += `<td class="svg-cell">${svgThang}</td>`;
 		res += `</tr>`;
