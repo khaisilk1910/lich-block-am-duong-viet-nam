@@ -1253,113 +1253,329 @@ const THAN_SAT = {
     return CAN[(year*12 + month + 3) % 10] + " " + CHI[(month+1)%12];
   }
 
-  // ====== Home Assistant Card ======
-  class LunarCalendarCard extends HTMLElement{
-    static getConfigElement() { return null; }
-    static getStubConfig() { return { background: 'normal' }; }
-
-		constructor(){
-			super();
-			const today = new Date();
-			this.displayMonth = today.getMonth() + 1;
-			this.displayYear = today.getFullYear();
-		}
-
-    setConfig(config){
-      this.config = config || {};
-      if (!this.shadowRoot){
-        this.attachShadow({mode:'open'});
+// =================================================================
+  // BẮT ĐẦU PHẦN THAY THẾ TỪ ĐÂY (Thay cho class LunarCalendar cũ)
+  // =================================================================
+  class LunarCalendar extends HTMLElement {
+    set hass(hass) {
+      this._hass = hass;
+      if (!this.content) {
+        this.content = document.createElement('div');
+        this.content.className = 'card-content';
+        this._render();
       }
-      if (!this.card){
-        this.card = document.createElement('ha-card');
-        this.shadowRoot.appendChild(this.card);
+    }
+
+    setConfig(config) {
+      this.config = config;
+      // Khởi tạo ngày tháng hiển thị mặc định là hôm nay
+      var today = new Date();
+      this.displayMonth = today.getMonth() + 1;
+      this.displayYear = today.getFullYear();
+    }
+
+    getCardSize() {
+      return 1; // Độ cao thẻ
+    }
+
+    // --- TÍNH NĂNG MỚI: HÀM HIỂN THỊ POPUP ---
+    _showPopup(d, m, y) {
+      // 1. Lấy tham chiếu đến các element trong Popup
+      let modal = this.card.querySelector("#lunar-modal");
+      let modalContent = this.card.querySelector("#lunar-modal-body");
+      
+      if (!modal || !modalContent) return;
+
+      // 2. Tính toán lại thông tin chi tiết cho ngày được chọn
+      // (Sử dụng các hàm tiện ích có sẵn trong scope bên ngoài: jdn, CAN, CHI, GIO_HD)
+      let dd = d;
+      let mm = m;
+      let yy = y;
+      
+      // Tính JDN để suy ra Can Chi ngày
+      let jd = jdn(dd, mm, yy);
+      let canDay = CAN[(jd + 9) % 10];
+      let chiDay = CHI[(jd + 1) % 12];
+      
+      // Tính Âm lịch (Sử dụng hàm getLunarDate có sẵn trong file gốc của bạn)
+      // Lưu ý: Hàm getLunarDate trả về object {day, month, year, leap, ...}
+      let lunarObj = getLunarDate(dd, mm, yy);
+      
+      // Tính Can Chi Tháng (Tính tương đối dựa trên năm)
+      let canMonth = CAN[(lunarObj.year * 12 + lunarObj.month + 3) % 10];
+      let chiMonth = CHI[(lunarObj.month + 1) % 12];
+
+      // Tính Can Chi Năm
+      let canYear = CAN[(lunarObj.year + 6) % 10];
+      let chiYear = CHI[(lunarObj.year + 8) % 12];
+
+      // Tính Giờ Hoàng Đạo
+      let chiDayIndex = (jd + 1) % 12;
+      let gioHDStr = GIO_HD[chiDayIndex]; // Chuỗi 0/1 (ví dụ: 110100101100)
+      let gioHDList = "";
+      for (let i = 0; i < 12; i++) {
+        if (gioHDStr[i] == '1') {
+           // Giờ Tý (23-1h), Sửu (1-3h)...
+           let startH = (i * 2 + 23) % 24;
+           let endH = (i * 2 + 1);
+           gioHDList += `<span class="gio-item">${CHI[i]} (${startH}h-${endH}h)</span> `;
+        }
+      }
+
+      // 3. Tạo nội dung HTML cho Popup
+      // Lấy thứ trong tuần
+      let currentDay = new Date(y, m - 1, d);
+      let thuStr = TUAN[currentDay.getDay()];
+
+      let html = `
+        <div class="modal-header">
+          <span class="modal-day-week">${thuStr}</span>
+          <span class="modal-full-date">Ngày ${d} tháng ${m} năm ${y}</span>
+        </div>
+        
+        <div class="modal-big-solar">${d}</div>
+        
+        <div class="modal-lunar-section">
+            <div class="lunar-row">
+                <div class="lunar-col">
+                    <span class="lunar-label">Âm lịch</span>
+                    <span class="lunar-value red-text">${lunarObj.day}</span>
+                </div>
+                <div class="lunar-col">
+                    <span class="lunar-label">Tháng</span>
+                    <span class="lunar-value">${lunarObj.month} ${lunarObj.leap ? '(Nhuận)':''}</span>
+                </div>
+                <div class="lunar-col">
+                    <span class="lunar-label">Năm</span>
+                    <span class="lunar-value">${canYear} ${chiYear}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-info-details">
+            <p><strong>Ngày:</strong> ${canDay} ${chiDay} - <strong>Tháng:</strong> ${canMonth} ${chiMonth}</p>
+            <div class="gio-hoang-dao-box">
+                <strong>Giờ Hoàng Đạo:</strong><br/>
+                ${gioHDList}
+            </div>
+        </div>
+      `;
+
+      modalContent.innerHTML = html;
+      modal.style.display = "flex";
+    }
+    // --- HẾT PHẦN LOGIC POPUP ---
+
+
+    _render() {
+      // Logic xử lý cấu hình opacity
+      var bgrOpacity = 0.8;
+      if (this.config.background_opacity != undefined) {
+        bgrOpacity = this.config.background_opacity;
+      }
+      var bgCard = 'var(--paper-card-background-color)';
+      if (this.config.background == 'transparent') {
+        bgCard = `rgba(0, 0, 0, ${bgrOpacity})`;
+      }
+
+      // --- CẬP NHẬT CSS: THÊM STYLE CHO POPUP (GIỮ NGUYÊN CSS CŨ) ---
+      // (Tôi gộp style popup vào biến css để code gọn gàng)
+      var css = `
+        <style>
+          .lunar-card {
+            background-color: ${bgCard};
+            padding: 16px;
+            border-radius: 12px;
+            color: var(--primary-text-color);
+            position: relative;
+          }
+          .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-weight: bold; font-size: 1.2em;}
+          .header button { background: none; border: none; color: inherit; font-size: 1.2em; cursor: pointer; padding: 0 10px;}
+          .grid-container { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+          .day-name { font-weight: bold; color: var(--secondary-text-color); margin-bottom: 5px; font-size: 0.9em; }
+          
+          /* Style cho ô ngày - Thêm cursor pointer */
+          .day-cell {
+             padding: 8px 4px; border-radius: 8px; cursor: pointer; 
+             transition: background 0.2s; min-height: 50px;
+             display: flex; flex-direction: column; justify-content: space-between;
+          }
+          .day-cell:hover { background-color: rgba(127,127,127, 0.2); }
+          .solar-text { font-size: 1.3em; font-weight: bold; }
+          .lunar-text { font-size: 0.75em; opacity: 0.8; }
+          .today { border: 2px solid #b71c1c; background-color: rgba(183, 28, 28, 0.1); }
+          .empty-cell { opacity: 0; pointer-events: none;}
+          
+          /* === CSS CHO POPUP (MỚI) === */
+          #lunar-modal {
+            display: none; position: fixed; z-index: 9999; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.7);
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+          }
+          .modal-content {
+            background-color: #fff; width: 90%; max-width: 380px;
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s; color: #333; font-family: sans-serif;
+          }
+          @keyframes fadeIn { from {opacity:0; transform:scale(0.9);} to {opacity:1; transform:scale(1);} }
+          
+          .modal-header { background: #b71c1c; color: white; padding: 15px; text-align: center; }
+          .modal-day-week { display: block; font-size: 1.2em; text-transform: uppercase; letter-spacing: 1px; }
+          .modal-full-date { display: block; font-size: 0.9em; opacity: 0.9; }
+          
+          .modal-body { padding: 20px; position: relative; }
+          .modal-close {
+             position: absolute; right: 15px; top: 10px; font-size: 30px; 
+             font-weight: bold; color: white; cursor: pointer; z-index: 10;
+          }
+          
+          .modal-big-solar { font-size: 90px; font-weight: bold; color: #b71c1c; text-align: center; line-height: 1; margin: 10px 0; }
+          
+          .modal-lunar-section { background: #f5f5f5; border-radius: 10px; padding: 10px; margin-top: 10px; }
+          .lunar-row { display: flex; justify-content: space-between; text-align: center; }
+          .lunar-col { display: flex; flex-direction: column; flex: 1; }
+          .lunar-label { font-size: 0.7em; color: #666; text-transform: uppercase; }
+          .lunar-value { font-size: 1.1em; font-weight: bold; color: #333; margin-top: 2px;}
+          .red-text { color: #b71c1c; }
+
+          .modal-info-details { margin-top: 20px; font-size: 0.95em; line-height: 1.5; text-align: left; }
+          .gio-hoang-dao-box { margin-top: 10px; font-size: 0.9em; color: #555; background: #fff3e0; padding: 10px; border-radius: 8px; }
+          .gio-item { display: inline-block; margin-right: 5px; color: #d84315; }
+        </style>
+      `;
+
+      // --- LOGIC TÍNH TOÁN LỊCH (GIỮ NGUYÊN) ---
+      var today = new Date();
+      var tDay = today.getDate();
+      var tMonth = today.getMonth() + 1;
+      var tYear = today.getFullYear();
+
+      var m = this.displayMonth;
+      var y = this.displayYear;
+
+      // Tính số ngày trong tháng và ngày đầu tháng
+      var daysInMonth = new Date(y, m, 0).getDate();
+      var firstDayOfWeek = new Date(y, m - 1, 1).getDay(); // 0 là Chủ Nhật
+
+      // --- XÂY DỰNG HTML ---
+      var html = css;
+      html += `<div class="lunar-card">`;
+      
+      // Header với các nút điều hướng
+      html += `
+        <div class="header">
+           <div>
+              <button id="prev-year">«</button>
+              <button id="prev-month">‹</button>
+           </div>
+           <span>THÁNG ${m} / ${y}</span>
+           <div>
+              <button id="next-month">›</button>
+              <button id="next-year">»</button>
+              <button id="reset-today" style="font-size:0.8em; margin-left:5px;">⟳</button>
+           </div>
+        </div>
+      `;
+
+      // Grid thứ trong tuần
+      html += `<div class="grid-container">`;
+      TUAN.forEach(t => {
+        html += `<div class="day-name">${t.replace('Thứ ','T').replace('Chủ Nhật','CN')}</div>`;
+      });
+
+      // Các ô trống đầu tháng
+      for (let i = 0; i < firstDayOfWeek; i++) {
+        html += `<div class="empty-cell"></div>`;
+      }
+
+      // Vòng lặp các ngày trong tháng (CÓ CHỈNH SỬA ĐỂ GẮN SỰ KIỆN CLICK)
+      for (let i = 1; i <= daysInMonth; i++) {
+        // Tính âm lịch cho ô này
+        let ld = getLunarDate(i, m, y);
+        let lunarDayDisplay = ld.day == 1 ? `${ld.day}/${ld.month}` : ld.day;
+        
+        let isToday = (i == tDay && m == tMonth && y == tYear);
+        let todayClass = isToday ? 'today' : '';
+        let colorStyle = (i == tDay && m == tMonth && y == tYear) ? 'color: #b71c1c;' : ''; // Tô đỏ ngày hôm nay
+        
+        // Thêm class 'day-cell' và data attributes (data-d, data-m, data-y) để dùng cho Popup
+        html += `
+          <div class="day-cell ${todayClass}" data-d="${i}" data-m="${m}" data-y="${y}">
+            <span class="solar-text" style="${colorStyle}">${i}</span>
+            <span class="lunar-text">${lunarDayDisplay}</span>
+          </div>
+        `;
       }
       
-      this.card.style.borderRadius = '16px'; 
+      html += `</div>`; // Đóng grid-container
 
-      if (this.config.background === 'transparent') {
-        this.card.style.background = 'transparent';
-        this.card.style.border = '1px solid rgba(255, 255, 255, 0.3)';
-        this.card.style.boxShadow = 'none';
-      } else {
-        this.card.style.background = '';
-        this.card.style.border = '';
-        this.card.style.boxShadow = '';
-      }
+      // --- HTML CHO POPUP (MỚI) ---
+      html += `
+        <div id="lunar-modal">
+          <div class="modal-content">
+             <div class="modal-close" id="close-modal">&times;</div>
+             <div class="modal-body" id="lunar-modal-body">
+                </div>
+          </div>
+        </div>
+      `;
 
-      this._render();
+      html += `</div>`; // Đóng lunar-card
+
+      // Gán vào DOM
+      this.card = document.createElement('div');
+      this.card.innerHTML = html;
+      this.content.innerHTML = '';
+      this.content.appendChild(this.card);
+
+      // --- GẮN SỰ KIỆN (EVENT LISTENERS) ---
+      
+      // 1. Sự kiện các nút điều hướng (Giữ nguyên logic cũ)
+      const prevBtn = this.card.querySelector('#prev-month');
+      if(prevBtn) prevBtn.onclick = () => {
+         this.displayMonth--;
+         if(this.displayMonth < 1) { this.displayMonth=12; this.displayYear--; }
+         this._render();
+      };
+      const nextBtn = this.card.querySelector('#next-month');
+      if(nextBtn) nextBtn.onclick = () => {
+         this.displayMonth++;
+         if(this.displayMonth > 12) { this.displayMonth=1; this.displayYear++; }
+         this._render();
+      };
+      const prevYBtn = this.card.querySelector('#prev-year');
+      if(prevYBtn) prevYBtn.onclick = () => { this.displayYear--; this._render(); };
+      const nextYBtn = this.card.querySelector('#next-year');
+      if(nextYBtn) nextYBtn.onclick = () => { this.displayYear++; this._render(); };
+      const resetBtn = this.card.querySelector('#reset-today');
+      if(resetBtn) resetBtn.onclick = () => { 
+         let d = new Date(); this.displayMonth=d.getMonth()+1; this.displayYear=d.getFullYear(); this._render(); 
+      };
+
+      // 2. Sự kiện Click vào ngày để mở Popup (MỚI)
+      const dayCells = this.card.querySelectorAll('.day-cell');
+      dayCells.forEach(cell => {
+        cell.onclick = () => {
+          let d = parseInt(cell.getAttribute('data-d'));
+          let m = parseInt(cell.getAttribute('data-m'));
+          let y = parseInt(cell.getAttribute('data-y'));
+          this._showPopup(d, m, y);
+        };
+      });
+
+      // 3. Sự kiện Đóng Popup (MỚI)
+      const modal = this.card.querySelector("#lunar-modal");
+      const closeBtn = this.card.querySelector("#close-modal");
+      
+      if(closeBtn) closeBtn.onclick = () => { modal.style.display = "none"; };
+      if(modal) modal.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; };
     }
-
-    set hass(hass){
-      this._hass = hass;
-    }
-
-    _render(){
-      const today = new Date();
-			const mm = this.displayMonth;
-			const yy = this.displayYear;
-
-      const currentLunarDate = getLunarDate(today.getDate(), today.getMonth()+1, today.getFullYear());
-      const backgroundType = this.config.background || 'normal';
-      const bgrOpacity = this.config.background_opacity;
-
-      const html = [
-        printStyle(today, currentLunarDate, backgroundType),
-        printTable(mm, yy, today, bgrOpacity)
-      ].join('');
-
-      this.card.innerHTML = `<div class="lunar-card">${html}</div>`;
-
-			const prevBtn = this.card.querySelector('#prev-month');
-			if (prevBtn){
-				prevBtn.addEventListener('click', () => {
-					this.displayMonth--;
-					if (this.displayMonth < 1){ this.displayMonth = 12; this.displayYear--; }
-					this._render();
-				});
-			}
-
-			const nextBtn = this.card.querySelector('#next-month');
-			if (nextBtn){
-				nextBtn.addEventListener('click', () => {
-					this.displayMonth++;
-					if (this.displayMonth > 12){ this.displayMonth = 1; this.displayYear++; }
-					this._render();
-				});
-			}
-
-			const prevYearBtn = this.card.querySelector('#prev-year');
-			if (prevYearBtn){
-				prevYearBtn.addEventListener('click', () => {
-					this.displayYear--;
-					this._render();
-				});
-			}
-
-			const nextYearBtn = this.card.querySelector('#next-year');
-			if (nextYearBtn){
-				nextYearBtn.addEventListener('click', () => {
-					this.displayYear++;
-					this._render();
-				});
-			}
-
-			const resetBtn = this.card.querySelector('#reset-today');
-			if (resetBtn){
-				resetBtn.addEventListener('click', () => {
-					const today = new Date();
-					this.displayMonth = today.getMonth() + 1;
-					this.displayYear = today.getFullYear();
-					this._render();
-				});
-			}
-		}
-
-    getCardSize(){ return 8; }
   }
 
-  if (!customElements.get('lich-block-am-duong-viet-nam')){
-    customElements.define('lich-block-am-duong-viet-nam', LunarCalendarCard);
-  }
+  customElements.define('lich-block-am-duong-viet-nam', LunarCalendar);
 
-})();
+})(); 
+// KẾT THÚC FILE
