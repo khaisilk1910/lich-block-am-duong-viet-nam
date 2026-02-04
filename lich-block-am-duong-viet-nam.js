@@ -1436,9 +1436,6 @@ const THAN_SAT = {
         const CAN_ARR = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
         const CHI_ARR = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
 
-        // Hàm hỗ trợ an toàn (fallback nếu hàm gốc không có)
-        const getCanChiLocal = (idx) => CAN_ARR[idx % 10] + " " + CHI_ARR[idx % 12];
-        
         // --- 2. TÍNH TOÁN DỮ LIỆU ---
         const jd = jdn(dd, mm, yy);
         const lunarArr = convertSolar2Lunar(dd, mm, yy);
@@ -1456,7 +1453,6 @@ const THAN_SAT = {
         const canChiThang = CAN_ARR[canThang] + " " + CHI_ARR[chiThang];
 
         // 3. Can Chi Ngày
-        // Ưu tiên dùng hàm gốc getCanChiNgay nếu có, nếu không tự tính
         let canChiNgayStr = "";
         if (typeof getCanChiNgay === 'function') {
             const temp = getCanChiNgay(jd);
@@ -1470,8 +1466,14 @@ const THAN_SAT = {
         const canGioTyIdx = (canNgayIdx % 5) * 2;
         const khoiGioTy = CAN_ARR[canGioTyIdx] + " Tý";
 
+        // -- CẬP NHẬT: TÍNH TIẾT KHÍ CHUẨN --
+        // Sử dụng công thức từ file gốc: TIETKHI[getSunLongitude(jd+1, 7.0)]
+        let tietKhi = "Không rõ";
+        if (typeof TIETKHI !== 'undefined' && typeof getSunLongitude === 'function') {
+            tietKhi = TIETKHI[getSunLongitude(jd + 1, 7.0)];
+        }
+
         // -- Các dữ liệu khác --
-        const tietKhi = (typeof getTietKhi === 'function') ? getTietKhi(jd) : "Không rõ";
         const gioHoangDao = (typeof getGioHoangDao === 'function') ? getGioHoangDao(jd) : "...";
         const gioHacDao = (typeof getGioHacDao === 'function') ? getGioHacDao(jd) : "...";
         const huongXuatHanh = (typeof getHuongXuatHanh === 'function') ? getHuongXuatHanh(jd) : "...";
@@ -1482,7 +1484,7 @@ const THAN_SAT = {
             napAm: "...", 
             sao: {name:"...", emoji:"", info:{danhGia:"", tenNgay:"", nenLam:"", kiengCu:"", ngoaiLe:"", tuongTinh:"", tho:""}} 
         };
-        // Fallback an toàn cho object info nếu thiếu
+        // Fallback an toàn
         if(!thanSat.truc.info) thanSat.truc.info = {tot:"...", xau:"..."};
         if(!thanSat.sao.info) thanSat.sao.info = {danhGia:"...", nenLam:"...", kiengCu:""};
 
@@ -1493,14 +1495,13 @@ const THAN_SAT = {
         const bgDanhGia = danhGiaRaw.includes('Tốt') ? 'rgba(76, 175, 80, 0.9)' : 
                          (danhGiaRaw.includes('Xấu') ? 'rgba(244, 67, 54, 0.9)' : 'rgba(255, 152, 0, 0.9)');
         
-        // Xử lý chuỗi đánh giá Sao (tách chữ đầu và phần chi tiết)
         const danhGiaShort = danhGiaRaw.split(' ')[0] || "";
         const danhGiaDetail = danhGiaRaw.includes('(') ? danhGiaRaw.substring(danhGiaRaw.indexOf('(')) : "";
         const thoText = (thanSat.sao.info.tho || '').replace(/^\s+/gm, '');
 
         let res = `<div class="lunar-popup-detail" style="font-family: sans-serif; font-size: 1.1em; color: var(--primary-text-color); padding-bottom: 10px;">`;
         
-        // --- PHẦN 1: HEADER & LỊCH CƠ BẢN ---
+        // --- HEADER & LỊCH CƠ BẢN ---
         res += `
             <div style="text-align:center; margin-bottom:15px;">
                 <div style="font-size:1.5em; font-weight:bold; color:var(--primary-color);">Ngày ${dd}/${mm}/${yy}</div>
@@ -1525,8 +1526,7 @@ const THAN_SAT = {
             </table>
         `;
 
-        // --- PHẦN 2: CHI TIẾT (Style Card nền tối/xám để nổi bật nội dung màu mè) ---
-        // Sử dụng style giống snippet bạn yêu cầu, gói trong 1 container đẹp
+        // --- CHI TIẾT ---
         res += `<div style="background: rgba(0,0,0,0.4); color: #fff; border-radius: 8px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">`;
 
         // 1. Giờ hắc đạo
@@ -1564,7 +1564,7 @@ const THAN_SAT = {
                 <div><b>🌟 Ngũ hành:</b> ${thanSat.napAm}</div>
             </div>`;
 
-        // 5. Sao (Nhị Thập Bát Tú) - Chi tiết đầy đủ
+        // 5. Sao (Nhị Thập Bát Tú)
         res += `
             <div>
                 <div style="margin-bottom: 6px;">
