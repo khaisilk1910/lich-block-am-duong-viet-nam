@@ -851,76 +851,86 @@ const THAN_SAT = {
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
 
 
+  /* =========================================
+     PHẦN LOGIC POPUP (SỬA LẠI TOÀN BỘ)
+     ========================================= */
 
-  /* ===== POPUP CLOSE ===== */
-  function haClosePopup(){
-    document.getElementById('ha-lich-popup')?.classList.remove('show');
-  }
-  window.haClosePopup = haClosePopup;
-  /* ===== POPUP CONTENT ===== */
-  function getSolarTerm(jd){
-    return INT((jd - 2415021.076998695) / 365.2422 * 24) % 24;
+  // 1. Hàm đóng Popup
+  window.haClosePopup = function() {
+    const popup = document.getElementById('ha-lich-popup');
+    if (popup) {
+      popup.classList.remove('show');
+      // Ẩn đi sau khi animation xong (nếu cần) hoặc ẩn ngay
+      setTimeout(() => {
+         if (!popup.classList.contains('show')) popup.style.display = 'none';
+      }, 300); 
+    }
+  };
+
+  // 2. Hàm tính Tiết khí (giữ nguyên logic)
+  function getSolarTerm(jd) {
+    return Math.floor((jd - 2415021.076998695) / 365.2422 * 24) % 24;
   }
 
-  function haShowDayPopup(dd, mm, yy){
+  // 3. Hàm hiển thị Popup
+  window.haShowDayPopup = function(dd, mm, yy) {
+    // Tìm element popup
+    let popup = document.getElementById('ha-lich-popup');
+    
+    // Kiểm tra nếu chưa có popup thì không chạy tiếp
+    if (!popup) {
+        console.error("Không tìm thấy thẻ có ID 'ha-lich-popup'. Kiểm tra lại phần tạo HTML.");
+        return;
+    }
+
+    // Tính toán dữ liệu (Giữ nguyên logic của bạn)
     const jd = jdFromDate(dd, mm, yy);
     const [ld, lm, ly, leap] = convertSolar2Lunar(dd, mm, yy, 7);
 
-    // Can chi
-    const ccNgay = CAN[(jd+9)%10] + ' ' + CHI[(jd+1)%12];
-    const ccThang = CAN[(ly*12+lm+3)%10] + ' ' + CHI[(lm+1)%12];
-    const ccNam = CAN[(ly+6)%10] + ' ' + CHI[(ly+8)%12];
-
     // Giờ hoàng đạo
-    const gioHD = GIO_HD[(jd+1)%6]
-      .split('')
-      .map((v,i)=>v==='1'?CHI[i]:null)
-      .filter(Boolean)
-      .join(', ');
-    // HTML giờ hoàng đạo dạng chip
-    const gioHDHtml = gioHD
-      ? gioHD.split(', ').map(g => `<span class="hd-chip">${g}</span>`).join('')
-      : '<span>—</span>';
+    const gioHD = GIO_HD[(jd+1)%6].split('').map((v,i)=>v==='1'?CHI[i]:null).filter(Boolean).join(', ');
+    const gioHDHtml = gioHD ? gioHD.split(', ').map(g => `<span class="hd-chip">${g}</span>`).join('') : '<span>—</span>';
 
-    // Lễ
+    // Lễ tết
     const leDLi = NGAY_LE_DL.indexOf(dd+'/'+mm);
     const leDL = leDLi>=0 ? NGAY_LE_DL_STRING[leDLi] : '';
-
     const leALi = NGAY_LE_AL.indexOf(ld+'/'+lm);
     const leAL = leALi>=0 ? NGAY_LE_AL_STRING[leALi] : '';
-
+    
     const tietkhiIndex = getSolarTerm(jd + 1);
     const tietkhi = TIETKHI[tietkhiIndex] || '';
 
-    // Title
-    document.getElementById('ha-popup-title').innerHTML =
-      `📅 ${dd}/${mm}/${yy} • ${TUAN[new Date(yy,mm-1,dd).getDay()]}`;
+    // Cập nhật nội dung vào HTML
+    const titleEl = document.getElementById('ha-popup-title');
+    const contentEl = document.getElementById('ha-popup-content');
 
+    if (titleEl) titleEl.innerHTML = `📅 ${dd}/${mm}/${yy} • ${TUAN[new Date(yy,mm-1,dd).getDay()]}`;
+    
+    if (contentEl) {
+      // Tạo object ngày âm để lấy tên (nếu hàm getDayName yêu cầu)
+      const lunarObj = { day: ld, month: lm, year: ly, leap: leap, jd: jd };
+      
+      // Kiểm tra hàm getDayName có tồn tại không, nếu không thì hiển thị cơ bản
+      const lunarString = (typeof getDayName === 'function') ? getDayName(lunarObj) : `Ngày ${ld} tháng ${lm} âm lịch`;
 
-    const lunarObj = {
-      day: ld,
-      month: lm,
-      year: ly,
-      leap: leap,
-      jd: jd
-    };
+      contentEl.innerHTML = `
+        <div class="xemthem-like" style="text-align: left;">
+          <div style="font-size: 1.1em; margin-bottom: 8px; font-weight: bold; color: var(--primary-color, #03a9f4);">${lunarString}</div>
+          <p>⏰ <b>Giờ hoàng đạo:</b></p>
+          <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">${gioHDHtml}</div>
+          ${tietkhi ? `<p>🌿 <b>Tiết khí:</b> ${tietkhi}</p>` : ''}
+          ${leDL ? `<p>🎉 <b>Dương lịch:</b> ${leDL}</p>` : ''}
+          ${leAL ? `<p>🧧 <b>Âm lịch:</b> ${leAL}</p>` : ''}
+        </div>
+      `;
+    }
 
-    document.getElementById('ha-popup-content').innerHTML = `
-      <div class="xemthem-like">
-        ${getDayName(lunarObj)}
-        <p>⏰ Giờ hoàng đạo:</p>
-        <div>${gioHDHtml}</div>
-        ${tietkhi ? `<p>🌿 Tiết khí: ${tietkhi}</p>` : ''}
-        ${leDL?`<p>🎉 ${leDL}</p>`:''}
-        ${leAL?`<p>🧧 ${leAL}</p>`:''}
-      </div>
-    `;
+    // Hiển thị popup
+    popup.style.display = 'flex'; // Đảm bảo display flex để căn giữa
+    // Thêm class show sau một chút để kích hoạt transition (nếu có)
+    setTimeout(() => { popup.classList.add('show'); }, 10);
+  };
 
-
-    document.getElementById('ha-lich-popup').classList.add('show');
-  }
-  window.haShowDayPopup = haShowDayPopup;
-  /* ===== POPUP CONTENT ===== */
 
   function printStyle(today, currentLunarDate, backgroundType = 'normal'){
     const formatthutrongtuan = TUAN[(currentLunarDate.jd + 1) % 7];
@@ -1449,16 +1459,24 @@ const THAN_SAT = {
         const style = document.createElement('style');
         style.id = 'ha-lich-popup-style';
         style.innerHTML = `
-          .ha-popup{
-            position:fixed;
-            inset:0;
-            background:rgba(0,0,0,.6);
-            z-index:9999;
-            display:none;
-            align-items:flex-end;
-            touch-action:none;
+
+          .ha-popup {
+            position: fixed !important; /* Bắt buộc là fixed để đè lên toàn màn hình */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6); /* Màu nền tối mờ */
+            z-index: 99999 !important; /* Lớp cao nhất */
+            display: none; /* Mặc định ẩn */
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px); /* Làm mờ nền phía sau cho đẹp */
           }
-          .ha-popup.show{display:flex;}
+
+          .ha-popup.show {
+            display: flex !important; /* Khi có class show thì hiện */
+          }
 
           .ha-popup-box{
             background:var(--card-background-color);
