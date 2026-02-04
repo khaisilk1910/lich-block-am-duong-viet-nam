@@ -1411,6 +1411,14 @@ const THAN_SAT = {
      LOGIC POPUP TOÀN CỤC (Cần thiết để code trên chạy)
      ================================================== */
 
+  // Hàm chuyển đổi Dương -> Âm (Wrapper an toàn)
+  function convertSolar2Lunar(dd, mm, yy) {
+    if (typeof getLunarDate === 'function') {
+        const lunar = getLunarDate(dd, mm, yy);
+        return [lunar.day, lunar.month, lunar.year, lunar.leap];
+    }
+    return [dd, mm, yy, 0];
+  }
   // 1. Hàm đóng (Window global)
   window.haClosePopup = function() {
     const popup = document.getElementById('ha-lich-popup');
