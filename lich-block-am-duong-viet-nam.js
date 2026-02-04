@@ -1427,86 +1427,92 @@ const THAN_SAT = {
 // ============================================================
 // 2. HÀM POPUP CHÍNH (HIỂN THỊ TOÀN BỘ - KHÔNG NÚT BẤM)
 // ============================================================
-// --- BẮT ĐẦU CODE POPUP ĐÃ SỬA ---
-// --- BẮT ĐẦU CODE POPUP ĐÃ SỬA ---
   window.haShowDayPopup = function(dd, mm, yy) {
     const popup = document.getElementById('ha-lich-popup');
     if (!popup) return;
 
     try {
-        // --- 1. ĐỊNH NGHĨA CÁC HẰNG SỐ CẦN THIẾT (đề phòng chưa có scope) ---
+        // --- 1. ĐỊNH NGHĨA HẰNG SỐ & HELPER ---
         const CAN_ARR = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
         const CHI_ARR = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
 
-        // --- 2. CÁC HÀM TÍNH TOÁN CỤC BỘ ---
-        // Tính Can Chi Năm
-        const getCanChiNamLocal = (year) => {
-            return CAN_ARR[(year + 6) % 10] + " " + CHI_ARR[(year + 8) % 12];
-        };
-
-        // Tính Can Chi Tháng (Ngũ Hổ Độn)
-        const getCanChiThangLocal = (month, year) => {
-            // Can năm: 0=Giáp, ... 9=Quý. (year + 6) % 10
-            const canNamIdx = (year + 6) % 10; 
-            // Tháng 1 (Dần) có can là: (canNamIdx % 5 + 1) * 2
-            const canThang1 = ((canNamIdx % 5) + 1) * 2;
-            const canThang = (canThang1 + (month - 1)) % 10;
-            // Chi tháng: Tháng 1 là Dần (index 2)
-            const chiThang = (month + 1) % 12;
-            return CAN_ARR[canThang] + " " + CHI_ARR[chiThang];
-        };
-
-        // Tính Can Chi Ngày
-        const getCanChiNgayLocal = (jd) => {
-            return CAN_ARR[(jd + 9) % 10] + " " + CHI_ARR[(jd + 1) % 12];
-        };
-
-        // Tính Khởi Giờ Tý (Ngũ Thử Độn) - Trả về Can Chi giờ Tý
-        const getKhoiGioTy = (jd) => {
-            const canNgayIdx = (jd + 9) % 10;
-            // Can giờ Tý = (Can Ngày % 5) * 2
-            const canGioTyIdx = (canNgayIdx % 5) * 2;
-            return CAN_ARR[canGioTyIdx] + " Tý";
-        };
-
-        // --- 3. TÍNH TOÁN DỮ LIỆU ---
+        // Hàm hỗ trợ an toàn (fallback nếu hàm gốc không có)
+        const getCanChiLocal = (idx) => CAN_ARR[idx % 10] + " " + CHI_ARR[idx % 12];
+        
+        // --- 2. TÍNH TOÁN DỮ LIỆU ---
         const jd = jdn(dd, mm, yy);
         const lunarArr = convertSolar2Lunar(dd, mm, yy);
         const lunarDate = { day: lunarArr[0], month: lunarArr[1], year: lunarArr[2], leap: lunarArr[3], jd: jd };
 
-        // Sử dụng hàm cục bộ hoặc hàm có sẵn nếu chắc chắn tồn tại
-        const canChiNam = getCanChiNamLocal(lunarDate.year);
-        const canChiThang = getCanChiThangLocal(lunarDate.month, lunarDate.year);
-        // Ưu tiên dùng hàm getCanChiNgay của file gốc nếu có (để đồng bộ), nếu không dùng hàm local
-        const canChiNgay = (typeof getCanChiNgay === 'function') ? 
-                           (Array.isArray(getCanChiNgay(jd)) ? getCanChiNgay(jd).join(" ") : getCanChiNgay(jd)) : 
-                           getCanChiNgayLocal(jd);
+        // -- Xử lý Can Chi (Bát tự) --
+        // 1. Can Chi Năm
+        const canChiNam = CAN_ARR[(lunarDate.year + 6) % 10] + " " + CHI_ARR[(lunarDate.year + 8) % 12];
         
-        const khoiGioTy = getKhoiGioTy(jd);
+        // 2. Can Chi Tháng
+        const canNamIdx = (lunarDate.year + 6) % 10;
+        const canThang1 = ((canNamIdx % 5) + 1) * 2;
+        const canThang = (canThang1 + (lunarDate.month - 1)) % 10;
+        const chiThang = (lunarDate.month + 1) % 12;
+        const canChiThang = CAN_ARR[canThang] + " " + CHI_ARR[chiThang];
 
-        // Các hàm này thường có sẵn trong library gốc
+        // 3. Can Chi Ngày
+        // Ưu tiên dùng hàm gốc getCanChiNgay nếu có, nếu không tự tính
+        let canChiNgayStr = "";
+        if (typeof getCanChiNgay === 'function') {
+            const temp = getCanChiNgay(jd);
+            canChiNgayStr = Array.isArray(temp) ? temp.join(" ") : temp;
+        } else {
+             canChiNgayStr = CAN_ARR[(jd + 9) % 10] + " " + CHI_ARR[(jd + 1) % 12];
+        }
+
+        // 4. Khởi giờ Tý
+        const canNgayIdx = (jd + 9) % 10;
+        const canGioTyIdx = (canNgayIdx % 5) * 2;
+        const khoiGioTy = CAN_ARR[canGioTyIdx] + " Tý";
+
+        // -- Các dữ liệu khác --
         const tietKhi = (typeof getTietKhi === 'function') ? getTietKhi(jd) : "Không rõ";
         const gioHoangDao = (typeof getGioHoangDao === 'function') ? getGioHoangDao(jd) : "...";
         const gioHacDao = (typeof getGioHacDao === 'function') ? getGioHacDao(jd) : "...";
         const huongXuatHanh = (typeof getHuongXuatHanh === 'function') ? getHuongXuatHanh(jd) : "...";
-        const thanSat = (typeof getThanSat === 'function') ? getThanSat(lunarDate) : { truc: {name:"...", emoji:""}, napAm: "...", sao: {name:"...", emoji:"", info:{}} };
+        
+        // Lấy Thần Sát (Trực, Sao, Ngũ hành)
+        const thanSat = (typeof getThanSat === 'function') ? getThanSat(lunarDate) : { 
+            truc: {name:"...", emoji:"", info:{tot:"", xau:""}}, 
+            napAm: "...", 
+            sao: {name:"...", emoji:"", info:{danhGia:"", tenNgay:"", nenLam:"", kiengCu:"", ngoaiLe:"", tuongTinh:"", tho:""}} 
+        };
+        // Fallback an toàn cho object info nếu thiếu
+        if(!thanSat.truc.info) thanSat.truc.info = {tot:"...", xau:"..."};
+        if(!thanSat.sao.info) thanSat.sao.info = {danhGia:"...", nenLam:"...", kiengCu:""};
 
-        // --- 4. TẠO NỘI DUNG HTML ---
+
+        // --- 3. TẠO GIAO DIỆN HTML ---
+        // Màu sắc đánh giá sao
+        const danhGiaRaw = thanSat.sao.info.danhGia || "";
+        const bgDanhGia = danhGiaRaw.includes('Tốt') ? 'rgba(76, 175, 80, 0.9)' : 
+                         (danhGiaRaw.includes('Xấu') ? 'rgba(244, 67, 54, 0.9)' : 'rgba(255, 152, 0, 0.9)');
+        
+        // Xử lý chuỗi đánh giá Sao (tách chữ đầu và phần chi tiết)
+        const danhGiaShort = danhGiaRaw.split(' ')[0] || "";
+        const danhGiaDetail = danhGiaRaw.includes('(') ? danhGiaRaw.substring(danhGiaRaw.indexOf('(')) : "";
+        const thoText = (thanSat.sao.info.tho || '').replace(/^\s+/gm, '');
+
         let res = `<div class="lunar-popup-detail" style="font-family: sans-serif; font-size: 1.1em; color: var(--primary-text-color); padding-bottom: 10px;">`;
         
-        // Header & Lịch cơ bản
+        // --- PHẦN 1: HEADER & LỊCH CƠ BẢN ---
         res += `
-            <div style="text-align:center; margin-bottom:10px;">
-                <div style="font-size:1.4em; font-weight:bold; color:var(--primary-color);">Ngày ${dd}/${mm}/${yy}</div>
+            <div style="text-align:center; margin-bottom:15px;">
+                <div style="font-size:1.5em; font-weight:bold; color:var(--primary-color);">Ngày ${dd}/${mm}/${yy}</div>
             </div>
             <table style="width:100%; border-collapse: collapse; margin-bottom: 15px;">
                  <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Âm lịch:</td>
-                    <td style="text-align:right; font-weight:bold;">${lunarDate.day}/${lunarDate.month}/${lunarDate.year} ${lunarDate.leap?'(Nhuận)':''}</td>
+                    <td style="text-align:right; font-weight:bold;">${lunarDate.day}/${lunarDate.month}/${canChiNam} ${lunarDate.leap?'(Nhuận)':''}</td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Bát tự:</td>
-                    <td style="text-align:right; font-weight:bold;">${canChiNgay} - ${canChiThang} - ${canChiNam}</td>
+                    <td style="text-align:right; font-weight:bold;">Ngày ${canChiNgayStr} - Tháng ${canChiThang} - Năm ${canChiNam}</td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Tiết khí:</td>
@@ -1514,61 +1520,84 @@ const THAN_SAT = {
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Giờ H.Đạo:</td>
-                    <td style="text-align:right; font-size:0.9em;">${gioHoangDao}</td>
+                    <td style="text-align:right; font-size:0.95em;">${gioHoangDao}</td>
                 </tr>
             </table>
         `;
 
-        // Phần chi tiết
-        res += `
-            <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
-                <div style="margin-bottom: 4px;">🌑 <b>Giờ hắc đạo:</b></div>
-                <div style="font-size: 0.95em; opacity: 0.9; text-align: justify;">${gioHacDao}</div>
-            </div>
-        `;
+        // --- PHẦN 2: CHI TIẾT (Style Card nền tối/xám để nổi bật nội dung màu mè) ---
+        // Sử dụng style giống snippet bạn yêu cầu, gói trong 1 container đẹp
+        res += `<div style="background: rgba(0,0,0,0.4); color: #fff; border-radius: 8px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">`;
 
+        // 1. Giờ hắc đạo
         res += `
-            <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
-                <div style="margin-bottom: 4px;">🧭 <b>Hướng xuất hành:</b></div>
-                <div style="font-size: 0.95em; opacity: 0.9; text-align: justify;">${huongXuatHanh}</div>
-            </div>
-        `;
+            <div style="margin-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 8px;">
+                <div>🌑 <b>Giờ hắc đạo:</b></div>
+                <div style="text-align:justify; opacity:0.9; padding-left: 24px;">${gioHacDao}</div>
+            </div>`;
 
+        // 2. Hướng xuất hành
         res += `
-            <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
-                 <div style="margin-bottom: 5px;">📅 <b>Trực:</b> <span style="font-weight:bold; color:var(--primary-color);">${thanSat.truc.name}</span></div>
-                 <div>🌟 <b>Ngũ hành:</b> ${thanSat.napAm}</div>
-            </div>
-        `;
+            <div style="margin-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 8px;">
+                <div>🧭 <b>Hướng xuất hành:</b></div>
+                <div style="text-align:justify; opacity:0.9; padding-left: 24px;">${huongXuatHanh}</div>
+            </div>`;
 
-        // Sao (Nhị Thập Bát Tú)
-        const infoSao = thanSat.sao.info || {};
-        const danhGiaColor = (infoSao.danhGia || '').includes('Tốt') ? '#4caf50' : ((infoSao.danhGia || '').includes('Xấu') ? '#f44336' : '#ff9800');
-        const thoText = (infoSao.tho || '').replace(/^\s+/gm, '');
-
+        // 3. Trực (Có Tốt/Xấu)
         res += `
-            <div style="margin-bottom: 10px; padding: 10px; border: 1px dashed rgba(128,128,128,0.4); border-radius: 8px;">
-                <div style="margin-bottom: 8px;">
-                    <b>${thanSat.sao.emoji} Sao:</b> 
-                    <span style="color:${danhGiaColor}; font-weight:bold;">${thanSat.sao.name}</span>
-                    <i style="font-size:0.9em; opacity:0.8;">(${infoSao.tenNgay || ''})</i>
+            <div style="margin-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 8px;">
+                <div style="margin-bottom: 4px;">
+                    <b>${thanSat.truc.emoji || '📅'} Trực:</b> 
+                    <span style="background-color:rgba(76, 175, 80, 0.9); color:#fff; font-weight:bold; padding:2px 10px; border-radius:12px; font-size:0.9em;">
+                        ${thanSat.truc.name}
+                    </span>
+                </div>
+                <div style="text-align:justify; padding-left: 5px; line-height:1.5; font-size: 0.95em;">
+                    <div>✅ <span style="opacity:0.9;">Tốt:</span> ${thanSat.truc.info.tot || "..."}</div>
+                    <div style="margin-top:2px;">❌ <span style="opacity:0.9;">Xấu:</span> <span style="color:#ffcc80;">${thanSat.truc.info.xau || "..."}</span></div>
+                </div>
+            </div>`;
+
+        // 4. Ngũ Hành
+        res += `
+            <div style="margin-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 8px;">
+                <div><b>🌟 Ngũ hành:</b> ${thanSat.napAm}</div>
+            </div>`;
+
+        // 5. Sao (Nhị Thập Bát Tú) - Chi tiết đầy đủ
+        res += `
+            <div>
+                <div style="margin-bottom: 6px;">
+                    <span style="font-weight:bold; font-size:1.05em;">${thanSat.sao.emoji || '✨'} Nhị Thập Bát Tú: 
+                        <span style="background-color:${bgDanhGia}; color:#fff; padding:2px 10px; border-radius:12px;">${thanSat.sao.name}</span>
+                    </span>
+                    <span style="font-style:italic; color:#ffff99; font-size:0.9em;"> (${thanSat.sao.info.tenNgay || ""})</span>
                 </div>
                 
-                <div style="font-size:0.95em; line-height:1.5;">
-                    <div>👍 <b>Nên làm:</b> ${infoSao.nenLam || '...'}</div>
-                    <div style="margin-top:4px;">👎 <b>Kiêng cữ:</b> <span style="color:#ffb74d;">${infoSao.kiengCu || '...'}</span></div>
-                    ${infoSao.ngoaiLe ? `<div style="margin-top:4px;">✨ <b>Ngoại lệ:</b> ${infoSao.ngoaiLe.replace(/\n/g, '<br>')}</div>` : ''}
+                <div style="font-style:italic; color:#ffff99; margin-bottom:8px; padding-left: 5px;">
+                   ${danhGiaShort} ${danhGiaDetail} - ${thanSat.sao.info.tuongTinh || ''}
                 </div>
 
-                ${thoText ? `<div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(128,128,128,0.2); text-align:center; font-style:italic; font-size:0.9em; white-space:pre-wrap; color:var(--secondary-text-color);">${thoText}</div>` : ''}
+                <div style="padding-left: 5px; line-height:1.5;">
+                    <div><b style="color:#fff;">👍 Nên làm:</b> <span style="text-align:justify; opacity:0.9;">${thanSat.sao.info.nenLam}</span></div>
+                    <div style="margin-top:5px;"><b style="color:#fff;">👎 Kiêng cữ:</b> <span style="color:#ffcc80; text-align:justify;">${thanSat.sao.info.kiengCu}</span></div>
+                    
+                    ${thanSat.sao.info.ngoaiLe ? 
+                    `<div style="margin-top:5px;"><b style="color:#fff;">✨ Ngoại lệ:</b><div style="text-align:justify; padding-left:10px; opacity:0.9;"> ${thanSat.sao.info.ngoaiLe.replace(/\n/g, '<br>')}</div></div>` : ''}
+                </div>
+
+                ${thoText ? 
+                `<div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.2); text-align:center; font-style:italic; font-family:'Times New Roman', serif; color:#ffff99; white-space:pre-wrap;">${thoText}</div>` : ''}
             </div>
         `;
+        
+        res += `</div>`; // End Details Container
 
         // Footer: Khởi giờ tý
         res += `<div style="text-align:center; font-size:0.85em; opacity:0.6; margin-top:10px;">Khởi giờ Tý: ${khoiGioTy}</div>`;
-        res += `</div>`; 
+        res += `</div>`; // End Main Container
 
-        // Update DOM
+        // --- UPDATE DOM ---
         const titleEl = document.getElementById('ha-popup-title');
         const contentEl = document.getElementById('ha-popup-content');
         
@@ -1584,8 +1613,7 @@ const THAN_SAT = {
         popup.classList.add('show');
     }
   };
-  // --- KẾT THÚC CODE POPUP MỚI ---
-  // --- KẾT THÚC CODE POPUP MỚI ---
+  // --- KẾT THÚC CODE POPUP ---
 
 
 })();
