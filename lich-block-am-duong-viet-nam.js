@@ -1504,12 +1504,12 @@ const THAN_SAT = {
         // --- HEADER & LỊCH CƠ BẢN ---
         res += `
             <div style="text-align:center; margin-bottom:15px;">
-                <div style="font-size:1.5em; font-weight:bold; color:var(--primary-color);">Ngày ${dd}/${mm}/${yy}</div>
+                <div style="font-size:1.5em; font-weight:bold; color:#ffff99;">Dương lịch: ${dd}/${mm}/${yy}</div>
             </div>
             <table style="width:100%; border-collapse: collapse; margin-bottom: 15px;">
                  <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Âm lịch:</td>
-                    <td style="text-align:right; font-weight:bold;">${lunarDate.day}/${lunarDate.month}/${canChiNam} ${lunarDate.leap?'(Nhuận)':''}</td>
+                    <td style="text-align:right;"><b style="color:#ffff99;">${lunarDate.day}</b>/<b style="color:#ffff99;">${lunarDate.month}</b>/<b style="color:#ffff99;">${canChiNam} ${lunarDate.leap?'(Nhuận)':''}</b></td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Ngày:</td>
@@ -1517,7 +1517,7 @@ const THAN_SAT = {
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Tiết khí:</td>
-                    <td style="text-align:right;">${tietKhi}</td>
+                    <td style="text-align:right;"><b style="color:#ffff99;">${tietKhi}</b></td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Giờ H.Đạo:</td>
@@ -1594,14 +1594,14 @@ const THAN_SAT = {
         res += `</div>`; // End Details Container
 
         // Footer: Khởi giờ tý
-        res += `<div style="text-align:center; font-size:0.85em; opacity:0.6; margin-top:10px;">Khởi giờ Tý: ${khoiGioTy}</div>`;
+        res += `<div style="text-align:center; font-size:0.85em; opacity:0.6; margin-top:10px;">Khởi giờ Tý: <b style="color:#ffff99;">${khoiGioTy}</b></div>`;
         res += `</div>`; // End Main Container
 
         // --- UPDATE DOM ---
         const titleEl = document.getElementById('ha-popup-title');
         const contentEl = document.getElementById('ha-popup-content');
         
-        if(titleEl) titleEl.innerText = `Chi tiết ngày ${dd}/${mm}`;
+        if(titleEl) titleEl.innerText = `Chi tiết`;
         if(contentEl) contentEl.innerHTML = res;
 
         popup.classList.add('show');
