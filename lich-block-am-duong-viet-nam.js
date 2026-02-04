@@ -1512,8 +1512,8 @@ const THAN_SAT = {
                     <td style="text-align:right; font-weight:bold;">${lunarDate.day}/${lunarDate.month}/${canChiNam} ${lunarDate.leap?'(Nhuận)':''}</td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
-                    <td style="padding:6px 0; opacity:0.8;">Bát tự:</td>
-                    <td style="text-align:right; font-weight:bold;">Ngày ${canChiNgayStr} - Tháng ${canChiThang} - Năm ${canChiNam}</td>
+                    <td style="padding:6px 0; opacity:0.8;">Ngày:</td>
+                    <td style="text-align:right;"><b style="color:#ffff99;">${canChiNgayStr}</b> - Tháng <b style="color:#ffff99;">${canChiThang}</b> - Năm <b style="color:#ffff99;">${canChiNam}</b></td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Tiết khí:</td>
