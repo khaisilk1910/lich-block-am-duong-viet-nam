@@ -936,6 +936,13 @@ const THAN_SAT = {
       .thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
+	  /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
+	  :host { display: block; }
+	  .lunar-card svg { width: 100% !important; height: auto !important; max-width: 200px; margin: 0 auto; display: block; }
+	  .toggle-content { display: none; }
+	  .toggle-content.show { display: table-row; }
+	  .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
+	  /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
       
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
