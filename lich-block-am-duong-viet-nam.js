@@ -502,6 +502,8 @@ const THAN_SAT = {
 
 
 
+
+
   // ===== Core astronomy helpers =====
   function jdn(dd, mm, yy){
     let a = INT((14 - mm) / 12);
@@ -850,8 +852,6 @@ const THAN_SAT = {
   const DAYNAMES = ["T2","T3","T4","T5","T6","T7","CN"];
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
 
-
-
   function printStyle(today, currentLunarDate, backgroundType = 'normal'){
     const formatthutrongtuan = TUAN[(currentLunarDate.jd + 1) % 7];
     let res = "";
@@ -868,6 +868,7 @@ const THAN_SAT = {
       .thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
+
       /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
       :host { display: block; }
       /* .lunar-card svg { width: 100% !important; height: auto !important; max-width: 200px; margin: 0 auto; display: block; } */
@@ -875,6 +876,7 @@ const THAN_SAT = {
       .toggle-content.show { display: table-row; }
       .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
       /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
+
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
       
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
@@ -1297,7 +1299,7 @@ const THAN_SAT = {
       this._render();
     }
 
-    set hass(hass) {
+    set hass(hass){
       this._hass = hass;
 
       // --- PHẦN CODE TẠO KHUNG POPUP (Chỉ chạy 1 lần) ---
@@ -1332,6 +1334,7 @@ const THAN_SAT = {
         `;
         document.head.appendChild(style);
       }
+      // --- PHẦN CODE TẠO KHUNG POPUP (Chỉ chạy 1 lần) ---
     }
 
     _render(){
@@ -1393,7 +1396,6 @@ const THAN_SAT = {
 					this._render();
 				});
 			}
-
 		}
 
     getCardSize(){ return 8; }
@@ -1402,6 +1404,7 @@ const THAN_SAT = {
   if (!customElements.get('lich-block-am-duong-viet-nam')){
     customElements.define('lich-block-am-duong-viet-nam', LunarCalendarCard);
   }
+
 
 
   /* ==================================================
@@ -1413,80 +1416,6 @@ const THAN_SAT = {
     const popup = document.getElementById('ha-lich-popup');
     if (popup) popup.classList.remove('show');
   };
-
-  // 2. Hàm hiển thị (Window global)
-// 2. Hàm hiển thị (Window global) - Đã sửa đổi để hiện full thông tin
-// --- BẮT ĐẦU CODE POPUP MỚI (Dán vào cuối file, trước dấu đóng '})();') ---
-// ============================================================
-// 1. CÁC HÀM BỔ TRỢ (Đảm bảo không bị lỗi thiếu hàm)
-// ============================================================
-
-// Hàm chuyển đổi Dương -> Âm (Wrapper an toàn)
-function convertSolar2Lunar(dd, mm, yy) {
-    if (typeof getLunarDate === 'function') {
-        const lunar = getLunarDate(dd, mm, yy);
-        return [lunar.day, lunar.month, lunar.year, lunar.leap];
-    }
-    return [dd, mm, yy, 0];
-}
-
-// Hàm lấy Giờ Hắc Đạo (Xử lý nếu thiếu dữ liệu)
-function getGioHacDao(jd) {
-    if (typeof getCanChiDay !== 'function' || typeof CHI === 'undefined' || typeof GIO_HD === 'undefined') 
-        return "Không có dữ liệu giờ hắc đạo";
-        
-    const cc = getCanChiDay(jd);
-    const chiNgay = CHI.indexOf(cc[1]); 
-    const bitmask = GIO_HD[chiNgay % 6]; 
-    let result = [];
-    for (let i = 0; i < 12; i++) {
-        if (bitmask.charAt(i) === '0') { // 0 là hắc đạo
-             result.push(`${CHI[i]} (${(i*2+23)%24}-${(i*2+1)}h)`);
-        }
-    }
-    return result.join('; ');
-}
-
-// Hàm lấy Thần Sát (Trực, Sao, Ngũ Hành)
-function getThanSat(lunarDate) {
-    const jd = lunarDate.jd;
-    let napAm = "Không rõ";
-    
-    // Lấy Ngũ Hành Nạp Âm
-    if (typeof getCanChiDay === 'function' && typeof NGAY_THONG_TIN !== 'undefined') {
-        const canChi = getCanChiDay(jd);
-        const tenCanChi = canChi[0] + " " + canChi[1];
-        if (NGAY_THONG_TIN[tenCanChi]) {
-            napAm = NGAY_THONG_TIN[tenCanChi].chiTiet[0].split(',')[0].replace("- Nạp âm: ", "").replace("Ngày ", "");
-        }
-    }
-
-    // Tính Trực (Giả định logic hoặc placeholder)
-    const TRUCS = ["Kiến", "Trừ", "Mãn", "Bình", "Định", "Chấp", "Phá", "Nguy", "Thành", "Thu", "Khai", "Bế"];
-    let trucIndex = (jd) % 12; 
-    let trucName = TRUCS[trucIndex] || "Bình"; 
-
-    // Tính Sao (Nhị Thập Bát Tú)
-    const SAO_28 = [
-        "Giác", "Cang", "Đê", "Phòng", "Tâm", "Vĩ", "Cơ", "Đẩu", "Ngưu", "Nữ", "Hư", "Nguy", "Thất", "Bích",
-        "Khuê", "Lâu", "Vị", "Mão", "Tất", "Chủy", "Sâm", "Tỉnh", "Quỷ", "Liễu", "Tinh", "Trương", "Dực", "Chẩn"
-    ];
-    let offset = (jd - 14) % 28; 
-    if (offset < 0) offset += 28;
-    let saoName = SAO_28[offset];
-    
-    let saoInfo = { danhGia: "(Bình thường)", nenLam: "Chưa có dữ liệu", kiengCu: "Chưa có dữ liệu", ngoaiLe: "", tho: "" };
-    if (typeof NHI_THAP_BAT_TU !== 'undefined' && NHI_THAP_BAT_TU[saoName]) {
-        saoInfo = NHI_THAP_BAT_TU[saoName];
-    }
-
-    return {
-        truc: { name: trucName, emoji: "📅", info: { tot: "Tốt cho khởi tạo", xau: "Xấu cho tranh chấp" } }, // Placeholder info
-        napAm: napAm,
-        sao: { name: saoName, emoji: "⭐", info: saoInfo }
-    };
-}
-
 // ============================================================
 // 2. HÀM POPUP CHÍNH (HIỂN THỊ TOÀN BỘ - KHÔNG NÚT BẤM)
 // ============================================================
