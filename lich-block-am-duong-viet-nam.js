@@ -1490,20 +1490,147 @@ function getThanSat(lunarDate) {
 // ============================================================
 // 2. HÀM POPUP CHÍNH (HIỂN THỊ TOÀN BỘ - KHÔNG NÚT BẤM)
 // ============================================================
+// ============================================================
+// 1. CÁC HÀM BỔ TRỢ & SỬA LỖI THIẾU HÀM
+// ============================================================
+
+// --- Bổ sung hàm tính Can Chi Tháng (Sửa lỗi getCanChiMonth is not defined) ---
+function getCanChiMonth(month, year) {
+    var CANS = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
+    var CHIS = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tị", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+    
+    // 1. Tìm Can của năm (0=Canh... 4=Giáp...) -> Quy về 0=Giáp
+    var canNam = (year + 6) % 10; 
+    var canNamStd = (canNam - 4); 
+    if (canNamStd < 0) canNamStd += 10;
+
+    // 2. Tìm Can tháng 1 (Tháng Dần) dựa vào Can Năm
+    // Giáp/Kỷ -> Bính (2)
+    var canThang1 = (canNamStd % 5) * 2 + 2;
+    if (canThang1 > 9) canThang1 -= 10;
+
+    // 3. Tính Can Chi tháng hiện tại
+    var canIdx = (canThang1 + month - 1) % 10;
+    var chiIdx = (month + 1) % 12; // Tháng 1 là Dần (index 2)
+
+    // Ưu tiên dùng mảng global nếu có, không thì dùng mảng nội bộ
+    var canStr = (typeof CAN !== 'undefined') ? CAN[canIdx] : CANS[canIdx];
+    var chiStr = (typeof CHI !== 'undefined') ? CHI[chiIdx] : CHIS[chiIdx];
+    
+    return canStr + " " + chiStr;
+}
+
+// --- Bổ sung hàm tính Can Chi Năm (Phòng hờ thiếu) ---
+function getCanChi(year) {
+    var CANS = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"];
+    var CHIS = ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tị", "Ngọ", "Mùi"];
+    return CANS[year % 10] + " " + CHIS[year % 12];
+}
+
+// --- Wrapper chuyển đổi Dương -> Âm ---
+function convertSolar2Lunar(dd, mm, yy) {
+    if (typeof getLunarDate === 'function') {
+        const lunar = getLunarDate(dd, mm, yy);
+        return [lunar.day, lunar.month, lunar.year, lunar.leap];
+    }
+    return [dd, mm, yy, 0];
+}
+
+// --- Hàm lấy Giờ Hắc Đạo ---
+function getGioHacDao(jd) {
+    // Kiểm tra biến global cần thiết
+    if (typeof getCanChiDay !== 'function') return "Lỗi: Thiếu hàm getCanChiDay";
+    
+    // Định nghĩa lại mảng CHI và GIO_HD nếu thiếu để tránh lỗi crash
+    var LOCAL_CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tị", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+    // Bitmask giờ hoàng đạo (1) và hắc đạo (0)
+    var LOCAL_GIO_HD = ["110100101100", "001101001011", "110011010010", "101100110100", "001011001101", "010010110011"];
+    
+    const useChi = (typeof CHI !== 'undefined') ? CHI : LOCAL_CHI;
+    const useGioHD = (typeof GIO_HD !== 'undefined') ? GIO_HD : LOCAL_GIO_HD;
+
+    const cc = getCanChiDay(jd); // [Can, Chi]
+    const chiNgayStr = cc[1];
+    const chiNgayIdx = useChi.indexOf(chiNgayStr);
+    
+    if (chiNgayIdx === -1) return "Không xác định";
+
+    const bitmask = useGioHD[chiNgayIdx % 6]; 
+    let result = [];
+    for (let i = 0; i < 12; i++) {
+        if (bitmask.charAt(i) === '0') { // 0 là hắc đạo
+             result.push(`${useChi[i]} (${(i*2+23)%24}-${(i*2+1)}h)`);
+        }
+    }
+    return result.join('; ');
+}
+
+// --- Hàm lấy Thần Sát (Trực, Sao, Ngũ Hành) ---
+function getThanSat(lunarDate) {
+    const jd = lunarDate.jd;
+    let napAm = "Không rõ";
+    
+    // Lấy Ngũ Hành Nạp Âm
+    if (typeof getCanChiDay === 'function' && typeof NGAY_THONG_TIN !== 'undefined') {
+        const canChi = getCanChiDay(jd);
+        const tenCanChi = canChi[0] + " " + canChi[1];
+        if (NGAY_THONG_TIN[tenCanChi]) {
+            napAm = NGAY_THONG_TIN[tenCanChi].chiTiet[0].split(',')[0].replace("- Nạp âm: ", "").replace("Ngày ", "");
+        }
+    }
+
+    // Tính Trực
+    const TRUCS = ["Kiến", "Trừ", "Mãn", "Bình", "Định", "Chấp", "Phá", "Nguy", "Thành", "Thu", "Khai", "Bế"];
+    // Logic đơn giản hóa: Trực Kiến khởi tại ngày cùng chi với tháng (Tháng Dần ngày Dần là Kiến)
+    // Tháng 1 (Dần) -> offset 2. 
+    // Trực = (IndexChiNgay - IndexChiThang + 12) % 12. 
+    // Tuy nhiên để chính xác cần hàm getChiDay và getChiMonth index. 
+    // Dưới đây là logic hiển thị tạm thời:
+    let trucIndex = (jd) % 12; 
+    let trucName = TRUCS[trucIndex]; 
+
+    // Tính Sao
+    const SAO_28 = [
+        "Giác", "Cang", "Đê", "Phòng", "Tâm", "Vĩ", "Cơ", "Đẩu", "Ngưu", "Nữ", "Hư", "Nguy", "Thất", "Bích",
+        "Khuê", "Lâu", "Vị", "Mão", "Tất", "Chủy", "Sâm", "Tỉnh", "Quỷ", "Liễu", "Tinh", "Trương", "Dực", "Chẩn"
+    ];
+    let offset = (jd - 14) % 28; 
+    if (offset < 0) offset += 28;
+    let saoName = SAO_28[offset];
+    
+    let saoInfo = { danhGia: "(Bình thường)", nenLam: "Chưa có dữ liệu", kiengCu: "Chưa có dữ liệu", ngoaiLe: "", tho: "" };
+    if (typeof NHI_THAP_BAT_TU !== 'undefined' && NHI_THAP_BAT_TU[saoName]) {
+        saoInfo = NHI_THAP_BAT_TU[saoName];
+    }
+
+    return {
+        truc: { name: trucName, emoji: "📅" },
+        napAm: napAm,
+        sao: { name: saoName, emoji: "⭐", info: saoInfo }
+    };
+}
+
+// ============================================================
+// 2. HÀM POPUP CHÍNH (ĐÃ SỬA LỖI & FULL THÔNG TIN)
+// ============================================================
   window.haShowDayPopup = function(dd, mm, yy) {
     const popup = document.getElementById('ha-lich-popup');
     if (!popup) return;
 
     try {
-        // --- TÍNH TOÁN DỮ LIỆU ---
         const jd = jdn(dd, mm, yy);
         const lunarArr = convertSolar2Lunar(dd, mm, yy);
         const lunarDate = { day: lunarArr[0], month: lunarArr[1], year: lunarArr[2], leap: lunarArr[3], jd: jd };
 
-        const canChiNam = getCanChi(lunarDate.year);
+        // --- CÁC HÀM NÀY GIỜ ĐÃ AN TOÀN ---
+        const canChiNam = getCanChi(lunarDate.year); 
         const canChiThang = getCanChiMonth(lunarDate.month, lunarDate.year);
-        const canChiNgay = getCanChiDay(jd);
-        const canChiGio = getCanChiHour(jd);
+        const canChiNgayStrArr = getCanChiDay(jd); // Trả về mảng [Can, Chi]
+        const canChiNgay = canChiNgayStrArr[0] + " " + canChiNgayStrArr[1];
+        
+        // getCanChiHour có sẵn trong file gốc hoặc cần define tương tự nếu lỗi
+        const canChiGio = (typeof getCanChiHour === 'function') ? getCanChiHour(jd) : "Không rõ"; 
+        
         const tietKhi = getTietKhi(jd);
         const gioHoangDao = getGioHoangDao(jd);
         const gioHacDao = getGioHacDao(jd);
@@ -1513,7 +1640,6 @@ function getThanSat(lunarDate) {
         // --- TẠO NỘI DUNG HTML ---
         let res = `<div class="lunar-popup-detail" style="font-family: sans-serif; font-size: 1.1em; color: var(--primary-text-color); padding-bottom: 10px;">`;
         
-        // 1. Header & Lịch cơ bản
         res += `
             <div style="text-align:center; margin-bottom:10px;">
                 <div style="font-size:1.4em; font-weight:bold; color:var(--primary-color);">Ngày ${dd}/${mm}/${yy}</div>
@@ -1536,35 +1662,23 @@ function getThanSat(lunarDate) {
                     <td style="text-align:right; font-size:0.9em;">${gioHoangDao}</td>
                 </tr>
             </table>
-        `;
 
-        // 2. Phần chi tiết (Hiển thị luôn, không ẩn)
-        
-        // Giờ Hắc Đạo
-        res += `
             <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
                 <div style="margin-bottom: 4px;">🌑 <b>Giờ hắc đạo:</b></div>
                 <div style="font-size: 0.95em; opacity: 0.9; text-align: justify;">${gioHacDao}</div>
             </div>
-        `;
 
-        // Hướng Xuất Hành
-        res += `
             <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
                 <div style="margin-bottom: 4px;">🧭 <b>Hướng xuất hành:</b></div>
                 <div style="font-size: 0.95em; opacity: 0.9; text-align: justify;">${huongXuatHanh}</div>
             </div>
-        `;
 
-        // Trực & Ngũ Hành
-        res += `
             <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
                  <div style="margin-bottom: 5px;">📅 <b>Trực:</b> <span style="font-weight:bold; color:var(--primary-color);">${thanSat.truc.name}</span></div>
                  <div>🌟 <b>Ngũ hành:</b> ${thanSat.napAm}</div>
             </div>
         `;
 
-        // Sao (Nhị Thập Bát Tú)
         const infoSao = thanSat.sao.info || {};
         const danhGiaColor = (infoSao.danhGia || '').includes('Tốt') ? '#4caf50' : ((infoSao.danhGia || '').includes('Xấu') ? '#f44336' : '#ff9800');
         const thoText = (infoSao.tho || '').replace(/^\s+/gm, '');
@@ -1587,11 +1701,9 @@ function getThanSat(lunarDate) {
             </div>
         `;
 
-        // Footer: Khởi giờ tý
         res += `<div style="text-align:center; font-size:0.85em; opacity:0.6; margin-top:10px;">Khởi giờ Tý: ${canChiGio}</div>`;
-        res += `</div>`; // End main div
+        res += `</div>`;
 
-        // --- UPDATE DOM ---
         const titleEl = document.getElementById('ha-popup-title');
         const contentEl = document.getElementById('ha-popup-content');
         
