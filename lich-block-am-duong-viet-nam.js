@@ -868,13 +868,13 @@ const THAN_SAT = {
       .thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
-	  /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
-	  :host { display: block; }
-	  .lunar-card svg { width: 100% !important; height: auto !important; max-width: 200px; margin: 0 auto; display: block; }
-	  .toggle-content { display: none; }
-	  .toggle-content.show { display: table-row; }
-	  .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
-	  /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
+      /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
+      :host { display: block; }
+      /* .lunar-card svg { width: 100% !important; height: auto !important; max-width: 200px; margin: 0 auto; display: block; } */
+      .toggle-content { display: none; }
+      .toggle-content.show { display: table-row; }
+      .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
+      /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
       
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
@@ -1424,25 +1424,83 @@ const THAN_SAT = {
       // Dưới đây là ví dụ hiển thị cơ bản:
       
       let contentHTML = "";
-      try {
-          // Gọi hàm chuyển đổi ngày (giả sử đã có sẵn hoặc window.convertSolar2Lunar)
-          // Nếu không gọi được, hãy đảm bảo convertSolar2Lunar được define dạng window.convertSolar2Lunar = ...
-          const [ld, lm, ly, leap] = (typeof convertSolar2Lunar === 'function') 
-                                      ? convertSolar2Lunar(dd, mm, yy, 7) 
-                                      : window.convertSolar2Lunar(dd, mm, yy, 7);
-          
-          // Tính giờ hoàng đạo, tiết khí... (như code cũ của bạn)
-          // ... (Logic tính toán của bạn) ...
 
-          contentHTML = `
-              <div style="text-align:left">
-                  <p><b>📅 Dương lịch:</b> ${dd}/${mm}/${yy}</p>
-                  <p><b>🌙 Âm lịch:</b> ${ld}/${lm}/${ly} ${leap?'(Nhuận)':''}</p>
-                  </div>
-          `;
+      try {
+        // 1. Tính toán các thông số ngày tháng (Sử dụng các hàm có sẵn trong file)
+        // Đảm bảo lấy đúng hàm convertSolar2Lunar trong phạm vi hiện tại
+        var funcConvert = (typeof convertSolar2Lunar === 'function') ? convertSolar2Lunar : window.convertSolar2Lunar;
+        
+        if (!funcConvert) throw new Error("Không tìm thấy hàm convertSolar2Lunar");
+
+        var lunar = funcConvert(dd, mm, yy, 7);
+        var ld = lunar[0];
+        var lm = lunar[1];
+        var ly = lunar[2];
+        var leap = lunar[3];
+
+        // Tính Julian Day Number (jd) để tính can chi và giờ hoàng đạo
+        var jd = jdn(dd, mm, yy);
+
+        // Tính Can Chi (Năm, Tháng, Ngày, Giờ)
+        var canChiNam = getCanChi(ly);
+        var canChiThang = getCanMonth(lm, ly);
+        var canChiNgay = getCanDay(jd);
+        var canChiGio = getCanHour(jd); // Chỉ lấy can chi giờ tý khởi đầu
+
+        // Tính Tiết Khí và Giờ Hoàng Đạo
+        var tietKhi = getTietKhi(jd);
+        var gioHoangDao = getGioHoangDao(jd);
+        
+        // Xác định ngày Hoàng Đạo hay Hắc Đạo
+        var truc = getTruc(jd); // Nếu trong file có hàm getTruc
+        var sao = getSao(jd);   // Nếu trong file có hàm getSao
+        
+        // 2. Tạo nội dung HTML cho Popup (Style bảng cho gọn đẹp)
+        contentHTML = `
+            <style>
+              .ha-popup-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+              .ha-popup-table td { padding: 4px 0; vertical-align: top; }
+              .ha-popup-table td:first-child { font-weight: bold; width: 110px; color: var(--primary-text-color); opacity: 0.8; }
+              .ha-popup-highlight { color: var(--primary-color); font-weight: bold; }
+            </style>
+            
+            <div style="font-size: 1.1em; margin-bottom: 10px; text-align: center;">
+                📅 <b>${dd}/${mm}/${yy}</b> &nbsp;|&nbsp; 🌙 <b>${ld}/${lm}/${ly}</b> ${leap ? '(Nhuận)' : ''}
+            </div>
+
+            <div class="ha-popup-scroll">
+                <table class="ha-popup-table">
+                    <tr>
+                        <td>Năm:</td>
+                        <td>${canChiNam}</td>
+                    </tr>
+                    <tr>
+                        <td>Tháng:</td>
+                        <td>${canChiThang}</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày:</td>
+                        <td>${canChiNgay}</td>
+                    </tr>
+                    <tr>
+                        <td>Tiết khí:</td>
+                        <td>${tietKhi}</td>
+                    </tr>
+                     <tr>
+                        <td>Giờ H.Đạo:</td>
+                        <td>${gioHoangDao}</td>
+                    </tr>
+                </table>
+                
+                <div style="margin-top: 10px; border-top: 1px solid var(--divider-color); padding-top: 8px;">
+                   <i>Khởi giờ Tý là: ${canChiGio}</i>
+                </div>
+            </div>
+        `;
+
       } catch(e) {
-          console.log(e);
-          contentHTML = `<p>Ngày: ${dd}/${mm}/${yy}</p><p>(Lỗi tính toán âm lịch - kiểm tra lại hàm convertSolar2Lunar)</p>`;
+          console.error("Lỗi tính toán Popup:", e);
+          contentHTML = `<p>Ngày: ${dd}/${mm}/${yy}</p><p style="color:red">Lỗi hiển thị chi tiết: ${e.message}</p>`;
       }
 
       // Cập nhật giao diện
