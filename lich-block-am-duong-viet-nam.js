@@ -857,6 +857,10 @@ const THAN_SAT = {
     document.getElementById('ha-lich-popup')?.classList.remove('show');
   }
   /* ===== POPUP CONTENT ===== */
+  function getSolarTerm(jd){
+    return INT((jd - 2415021.076998695) / 365.2422 * 24) % 24;
+  }
+
   function haShowDayPopup(dd, mm, yy){
     const jd = jdFromDate(dd, mm, yy);
     const [ld, lm, ly, leap] = convertSolar2Lunar(dd, mm, yy, 7);
