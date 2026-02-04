@@ -1415,57 +1415,66 @@ const THAN_SAT = {
   };
 
   // 2. Hàm hiển thị (Window global)
-// 2. Hàm hiển thị (Window global) - Đã sửa đổi để hiện full thông tin
-// --- BẮT ĐẦU CODE POPUP MỚI (Dán vào cuối file, trước dấu đóng '})();') ---
+// --- BẮT ĐẦU CODE SỬA POPUP ---
   window.haShowDayPopup = function(dd, mm, yy) {
-    const popup = document.getElementById('ha-lich-popup');
-    if (!popup) return;
-
-// ... Bên trong hàm hiển thị Popup (ví dụ: window.haShowDayPopup = function(dd, mm, yy) { ... )
-
     try {
-      // 1. Tính Julian Day Number (jd) từ ngày dương lịch
-      const jd = jdn(dd, mm, yy);
+      console.log("Đang mở popup ngày:", dd, mm, yy); // Log để kiểm tra
 
-      // 2. Tính ngày Âm lịch (thay thế cho convertSolar2Lunar)
-      // Lấy thông tin năm âm lịch tương ứng với năm dương lịch
-      let ly = getYearInfo(yy);
+      // 1. Tính Julian Day Number (jd)
+      // Hàm jdn có sẵn trong file của bạn
+      var jd = jdn(dd, mm, yy);
+
+      // 2. Tính ngày Âm lịch (Logic trực tiếp, không cần hàm findLunarDate bên ngoài)
+      var ly = getYearInfo(yy); // Lấy thông tin các tháng âm lịch trong năm
       
-      // Nếu ngày hiện tại (jd) nhỏ hơn ngày đầu năm âm lịch của năm yy, 
-      // nghĩa là nó thuộc về năm âm lịch trước đó (ví dụ: tháng 1 dương nhưng vẫn là tháng chạp âm).
+      // Nếu ngày hiện tại (jd) nhỏ hơn ngày đầu năm âm lịch, tức là vẫn thuộc năm âm lịch trước
       if (jd < ly[0].jd) {
           ly = getYearInfo(yy - 1);
       }
-      
-      // Tìm ngày âm lịch chính xác từ Julian Day
-      const lunarDate = findLunarDate(jd, ly);
 
-      // 3. Tính toán các thông tin Can Chi, Tiết khí, Hoàng đạo
-      const canChiNgay = getCanChiDay(jd);
-      const canChiGio = getCanChiHour(jd); // Giờ Tý bắt đầu
-      const tietKhi = getTietKhi(jd);
-      const gioHoangDao = getGioHoangDao(jd);
-      
-      // 4. Tính toán thông tin mở rộng (Thần sát, Hướng xuất hành...)
-      const gioHacDao = (typeof getGioHacDao === 'function') ? getGioHacDao(jd) : "";
-      const huongXuatHanh = (typeof getHuongXuatHanh === 'function') ? getHuongXuatHanh(jd) : "";
+      // Tìm tháng và ngày âm lịch tương ứng
+      var lunarDate = null;
+      for (var i = ly.length - 1; i >= 0; i--) {
+          if (jd >= ly[i].jd) {
+              lunarDate = {
+                  day: jd - ly[i].jd + 1,
+                  month: ly[i].month,
+                  year: ly[i].year,
+                  leap: ly[i].leap,
+                  jd: jd
+              };
+              break;
+          }
+      }
 
-      // Xử lý Thần Sát (Trực, Sao, Ngũ hành...)
-      let thanSat = { truc: { name: '', info: { tot: '', xau: '' } }, napAm: '', sao: { name: '', info: {} } };
+      if (!lunarDate) {
+          console.error("Không tính được ngày âm lịch");
+          return;
+      }
+
+      // 3. Tính toán thông tin phụ trợ (Kiểm tra hàm tồn tại để tránh lỗi trắng trang)
+      var canChiNgay = (typeof getCanChiDay === 'function') ? getCanChiDay(jd) : "";
+      var canChiGio = (typeof getCanChiHour === 'function') ? getCanChiHour(jd) : "";
+      var tietKhi = (typeof getTietKhi === 'function') ? getTietKhi(jd) : "";
+      var gioHoangDao = (typeof getGioHoangDao === 'function') ? getGioHoangDao(jd) : "";
+      
+      var gioHacDao = (typeof getGioHacDao === 'function') ? getGioHacDao(jd) : "";
+      var huongXuatHanh = (typeof getHuongXuatHanh === 'function') ? getHuongXuatHanh(jd) : "";
+
+      // Xử lý Thần Sát
+      var thanSat = { truc: { name: '', emoji: '', info: { tot: '', xau: '' } }, napAm: '', sao: { name: '', emoji: '', info: {} } };
       if (typeof getThanSat === 'function') {
-          thanSat = getThanSat(lunarDate);
+          try {
+            thanSat = getThanSat(lunarDate);
+          } catch(e) { console.warn("Lỗi lấy Thần Sát:", e); }
       }
 
-      // 5. Tạo nội dung HTML cho Popup (giữ nguyên hoặc cập nhật theo cấu trúc của bạn)
-      // Lưu ý: Sử dụng biến 'lunarDate' vừa tính được ở trên
-      let lunarDayStr = lunarDate.day;
-      let lunarMonthStr = lunarDate.month;
-      if (lunarDate.leap) {
-          lunarMonthStr += " (Nhuận)";
-      }
+      // 4. Tạo nội dung HTML
+      var lunarMonthStr = lunarDate.month;
+      if (lunarDate.leap) lunarMonthStr += " (Nhuận)";
 
-      let contentHTML = `
-        <div class="lunar-popup-detail" style="font-family: var(--paper-font-body1_-_font-family); font-size: 1.1em; color: var(--primary-text-color);">
+      var contentHTML = `
+        <div class="lunar-popup-detail" style="font-family: sans-serif; font-size: 1.1em; color: var(--primary-text-color);">
             <div style="text-align:center; margin-bottom:10px; font-size:1.2em; font-weight:bold; color: var(--primary-color);">
                Dương lịch: ${dd}/${mm}/${yy}
             </div>
@@ -1473,7 +1482,7 @@ const THAN_SAT = {
             <table style="width:100%; border-collapse: collapse; margin-bottom: 12px;">
                 <tr style="border-bottom: 1px solid var(--divider-color, rgba(125,125,125,0.2));">
                     <td style="padding: 8px 0;">🌙 <b>Âm lịch:</b></td>
-                    <td style="text-align:right; font-weight:bold;">${lunarDayStr} / ${lunarMonthStr}</td>
+                    <td style="text-align:right; font-weight:bold;">${lunarDate.day} / ${lunarMonthStr}</td>
                 </tr>
                 <tr style="border-bottom: 1px solid var(--divider-color, rgba(125,125,125,0.2));">
                     <td style="padding: 8px 0;">📅 <b>Can Chi:</b></td>
@@ -1490,8 +1499,8 @@ const THAN_SAT = {
             </table>
 
             <div style="margin-top:10px;">
-                <div><b>Trực ${thanSat.truc.name}:</b> <span style="color: green;">${thanSat.truc.info.tot || ''}</span></div>
-                <div style="margin-top:4px; color: orange;">${thanSat.truc.info.xau ? 'Kỵ: ' + thanSat.truc.info.xau : ''}</div>
+                <div><b>Trực ${thanSat.truc.name}:</b> <span style="color: green;">${thanSat.truc.info && thanSat.truc.info.tot ? thanSat.truc.info.tot : ''}</span></div>
+                <div style="margin-top:4px; color: orange;">${thanSat.truc.info && thanSat.truc.info.xau ? 'Kỵ: ' + thanSat.truc.info.xau : ''}</div>
             </div>
 
             <div style="margin-top:10px; font-size: 0.95em;">
@@ -1505,20 +1514,27 @@ const THAN_SAT = {
         </div>
       `;
 
-      // Cập nhật DOM (giữ nguyên logic hiển thị popup của bạn)
-      const titleEl = document.getElementById('ha-popup-title');
-      const contentEl = document.getElementById('ha-popup-content');
-      const popup = document.getElementById('ha-lunar-popup');
+      // 5. Cập nhật DOM để hiển thị
+      var titleEl = document.getElementById('ha-popup-title');
+      var contentEl = document.getElementById('ha-popup-content');
+      var popup = document.getElementById('ha-lunar-popup');
       
-      if(titleEl) titleEl.innerText = `Chi tiết ngày ${dd}/${mm}/${yy}`;
+      if(titleEl) titleEl.innerText = `Chi tiết ngày ${dd}/${mm}`;
       if(contentEl) contentEl.innerHTML = contentHTML;
-      if(popup) popup.classList.add('show');
+      
+      if(popup) {
+          popup.classList.add('show');
+          console.log("Đã thêm class show vào popup");
+      } else {
+          console.error("Không tìm thấy element id='ha-lunar-popup'");
+      }
 
     } catch(e) {
-        console.error("Lỗi hiển thị Popup:", e);
+        console.error("Lỗi nghiêm trọng trong haShowDayPopup:", e);
+        alert("Có lỗi hiển thị chi tiết ngày: " + e.message);
     }
-
   };
+  // --- KẾT THÚC CODE SỬA POPUP ---
   // --- KẾT THÚC CODE POPUP MỚI ---
 
 
