@@ -1415,88 +1415,130 @@ const THAN_SAT = {
   };
 
   // 2. Hàm hiển thị (Window global)
-  window.haShowDayPopup = function(dd, mm, yy) {
-      const popup = document.getElementById('ha-lich-popup');
-      if (!popup) return;
+  window.haShowDayPopup = function(dd, mm, yy){
+    const popup = document.getElementById('ha-calendar-popup');
+    if(!popup) return;
 
-      // --- TÍNH TOÁN DỮ LIỆU (Copy logic tính toán của bạn vào đây) ---
-      // Lưu ý: Nếu các hàm như jdn, convertSolar2Lunar không global, bạn cần đưa chúng ra window hoặc copy lại vào đây.
-      // Dưới đây là ví dụ hiển thị cơ bản:
+    let contentHTML = "";
+    try {
+      const jd = jdn(dd, mm, yy);
+      // Lấy thông tin ngày âm lịch (cần thiết để tính thần sát)
+      const lunarDate = getLunarDate(dd, mm, yy); 
       
-      let contentHTML = "";
+      // --- Các biến cơ bản ---
+      var canChiNam = getCanChi(lunarDate);
+      var canChiThang = getCanMonth(lunarDate.month, lunarDate.year);
+      var canChiNgay = getCanDay(jd);
+      var canChiGio = getCanHour(jd);
+      var tietKhi = getTietKhi(jd);
+      var gioHoangDao = getGioHoangDao(jd);
+      
+      // --- Các biến mở rộng cho phần Xem thêm ---
+      var gioHacDao = getGioHacDao(jd);
+      var huongXuatHanh = getHuongXuatHanh(jd);
+      var thanSat = getThanSat(lunarDate);
+      var thoSao = (thanSat.sao.info.tho || '').replace(/\n/g, '<br>'); // Xuống dòng thơ
 
-      try {
-        // 1. Tính toán các thông số ngày tháng (Sử dụng các hàm có sẵn trong file)
-        // Đảm bảo lấy đúng hàm convertSolar2Lunar trong phạm vi hiện tại
-        var funcConvert = (typeof convertSolar2Lunar === 'function') ? convertSolar2Lunar : window.convertSolar2Lunar;
-        
-        if (!funcConvert) throw new Error("Không tìm thấy hàm convertSolar2Lunar");
+      contentHTML = `
+        <div class="ha-popup-header">
+            <span id="ha-popup-title">Chi tiết ngày ${dd}/${mm}</span>
+            <span class="ha-popup-close" onclick="document.getElementById('ha-calendar-popup').classList.remove('show')">&times;</span>
+        </div>
+        <div class="ha-popup-body">
+            <table style="width:100%; border-collapse: collapse;">
+                <tr>
+                    <td style="width: 35%; font-weight:bold;">Năm:</td>
+                    <td>${canChiNam}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">Tháng:</td>
+                    <td>${canChiThang}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">Ngày:</td>
+                    <td>${canChiNgay}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight:bold;">Tiết khí:</td>
+                    <td>${tietKhi}</td>
+                </tr>
+                 <tr>
+                    <td style="font-weight:bold;">Giờ H.Đạo:</td>
+                    <td>${gioHoangDao}</td>
+                </tr>
 
-        var lunar = funcConvert(dd, mm, yy, 7);
-        var ld = lunar[0];
-        var lm = lunar[1];
-        var ly = lunar[2];
-        var leap = lunar[3];
+                <tr>
+                    <td colspan="2" class="toggle-btn-container" style="text-align: center; padding-top: 5px;">
+                        <button class="toggle-btn" onclick="
+                            const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
+                            const isHidden = rows.every(r => !r.classList.contains('show'));
+                            rows.forEach((r, i) => {
+                                setTimeout(() => {
+                                    if(isHidden){ r.classList.add('show'); } else { r.classList.remove('show'); }
+                                }, i * 50);
+                            });
+                            this.innerHTML = isHidden ? 'Thu gọn 🔼' : 'Xem thêm 🔽';
+                        ">Xem thêm 🔽</button>
+                    </td>
+                </tr>
 
-        // Tính Julian Day Number (jd) để tính can chi và giờ hoàng đạo
-        var jd = jdn(dd, mm, yy);
+                <tr class="toggle-content">
+                    <td colspan="2" class="viecnenlam" style="text-align:left; border-top: 1px dashed rgba(255,255,255,0.2);">
+                        <b style="color:#ffcc99;">🌑 Giờ hắc đạo:</b><br>
+                        <span style="font-size: 90%;">${gioHacDao}</span>
+                    </td>
+                </tr>
 
-        // Tính Can Chi (Năm, Tháng, Ngày, Giờ)
-        var canChiNam = getCanChi(ly);
-        var canChiThang = getCanMonth(lm, ly);
-        var canChiNgay = getCanDay(jd);
-        var canChiGio = getCanHour(jd); // Chỉ lấy can chi giờ tý khởi đầu
+                <tr class="toggle-content">
+                    <td colspan="2" class="viecnenlam" style="text-align:left; border-top: 1px dashed rgba(255,255,255,0.2);">
+                        <b style="color:#ffcc99;">🧭 Hướng xuất hành:</b><br>
+                        <span style="font-size: 90%;">${huongXuatHanh}</span>
+                    </td>
+                </tr>
 
-        // Tính Tiết Khí và Giờ Hoàng Đạo
-        var tietKhi = getTietKhi(jd);
-        var gioHoangDao = getGioHoangDao(jd);
-        
-        // Xác định ngày Hoàng Đạo hay Hắc Đạo
-        var truc = getTruc(jd); // Nếu trong file có hàm getTruc
-        var sao = getSao(jd);   // Nếu trong file có hàm getSao
-        
-        // 2. Tạo nội dung HTML cho Popup (Style bảng cho gọn đẹp)
-        contentHTML = `
-            <style>
-              .ha-popup-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-              .ha-popup-table td { padding: 4px 0; vertical-align: top; }
-              .ha-popup-table td:first-child { font-weight: bold; width: 110px; color: var(--primary-text-color); opacity: 0.8; }
-              .ha-popup-highlight { color: var(--primary-color); font-weight: bold; }
-            </style>
+                <tr class="toggle-content">
+                    <td colspan="2" class="viecnenlam" style="text-align:left; border-top: 1px dashed rgba(255,255,255,0.2);">
+                        <b style="color:#ffcc99;">${thanSat.truc.emoji} Trực:</b> 
+                        <span style="background-color:rgba(0,255,0,0.6); color:#fff; font-weight:bold; padding:1px 6px; border-radius:4px; font-size: 85%;">${thanSat.truc.name}</span>
+                        <div style="font-size: 90%; margin-top:4px;">
+                            <span style="color:#99ff99;">✅ Tốt:</span> ${thanSat.truc.info.tot}<br>
+                            <span style="color:#ff9999;">❌ Xấu:</span> ${thanSat.truc.info.xau}
+                        </div>
+                    </td>
+                </tr>
+
+                <tr class="toggle-content">
+                    <td colspan="2" class="viecnenlam" style="text-align:left; border-top: 1px dashed rgba(255,255,255,0.2);">
+                        <b style="color:#ffcc99;">🌟 Ngũ hành:</b><br>
+                        <span style="font-size: 90%;">${thanSat.napAm}</span>
+                    </td>
+                </tr>
+
+                <tr class="toggle-content">
+                    <td colspan="2" class="viecnenlam" style="text-align:left; border-top: 1px dashed rgba(255,255,255,0.2);">
+                        <b style="color:#ffcc99;">${thanSat.sao.emoji} Nhị Thập Bát Tú:</b> 
+                        <span style="background-color:rgba(0,255,0,0.6); color:#fff; font-weight:bold; padding:1px 6px; border-radius:4px; font-size: 85%;">${thanSat.sao.name}</span>
+                        <span style="font-style:italic; font-size: 85%; opacity: 0.8;">(${thanSat.sao.info.tenNgay})</span>
+                        
+                        <div style="margin-top:5px; padding: 5px; background: rgba(0,0,0,0.1); border-radius: 4px; font-size: 90%;">
+                            <div style="font-style:italic; color:#ffffcc; margin-bottom:4px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:4px;">
+                                ${thoSao}
+                            </div>
+                            <b>Đánh giá:</b> ${thanSat.sao.info.danhGia}<br>
+                            <b>Nên làm:</b> ${thanSat.sao.info.nenLam}<br>
+                            <b>Kiêng cữ:</b> ${thanSat.sao.info.kiengCu}<br>
+                            <b>Ngoại lệ:</b> ${thanSat.sao.info.ngoaiLe}
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
             
-            <div style="font-size: 1.1em; margin-bottom: 10px; text-align: center;">
-                📅 <b>${dd}/${mm}/${yy}</b> &nbsp;|&nbsp; 🌙 <b>${ld}/${lm}/${ly}</b> ${leap ? '(Nhuận)' : ''}
+            <div style="margin-top: 10px; border-top: 1px solid var(--divider-color); padding-top: 8px;">
+               <i>Khởi giờ Tý là: ${canChiGio}</i>
             </div>
-
-            <div class="ha-popup-scroll">
-                <table class="ha-popup-table">
-                    <tr>
-                        <td>Năm:</td>
-                        <td>${canChiNam}</td>
-                    </tr>
-                    <tr>
-                        <td>Tháng:</td>
-                        <td>${canChiThang}</td>
-                    </tr>
-                    <tr>
-                        <td>Ngày:</td>
-                        <td>${canChiNgay}</td>
-                    </tr>
-                    <tr>
-                        <td>Tiết khí:</td>
-                        <td>${tietKhi}</td>
-                    </tr>
-                     <tr>
-                        <td>Giờ H.Đạo:</td>
-                        <td>${gioHoangDao}</td>
-                    </tr>
-                </table>
-                
-                <div style="margin-top: 10px; border-top: 1px solid var(--divider-color); padding-top: 8px;">
-                   <i>Khởi giờ Tý là: ${canChiGio}</i>
-                </div>
-            </div>
-        `;
+        </div>
+      `;
 
       } catch(e) {
           console.error("Lỗi tính toán Popup:", e);
