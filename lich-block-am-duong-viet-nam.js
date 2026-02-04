@@ -1420,6 +1420,7 @@ const THAN_SAT = {
 // 2. HÀM POPUP CHÍNH (HIỂN THỊ TOÀN BỘ - KHÔNG NÚT BẤM)
 // ============================================================
 // --- BẮT ĐẦU CODE POPUP ĐÃ SỬA ---
+// --- BẮT ĐẦU CODE POPUP ĐÃ SỬA ---
   window.haShowDayPopup = function(dd, mm, yy) {
     const popup = document.getElementById('ha-lich-popup');
     if (!popup) return;
