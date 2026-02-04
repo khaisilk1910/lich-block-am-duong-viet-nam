@@ -1490,44 +1490,73 @@ function getThanSat(lunarDate) {
 // ============================================================
 // 2. HÀM POPUP CHÍNH (HIỂN THỊ TOÀN BỘ - KHÔNG NÚT BẤM)
 // ============================================================
-
-
-  // Bổ sung hàm tính Can Chi Tháng
-  function getCanChiMonth(mm, yy) {
-    // mm: tháng âm lịch (1-12)
-    // yy: năm âm lịch
-    var canYear = (yy - 4) % 10;
-    var canMonth = ((canYear % 5) * 2 + mm + 1) % 10;
-    var chiMonth = (mm + 1) % 12;
-    return CAN[canMonth] + " " + CHI[chiMonth];
-  }
+// --- BẮT ĐẦU CODE POPUP ĐÃ SỬA ---
   window.haShowDayPopup = function(dd, mm, yy) {
     const popup = document.getElementById('ha-lich-popup');
     if (!popup) return;
 
     try {
-        // --- TÍNH TOÁN DỮ LIỆU ---
+        // --- 1. ĐỊNH NGHĨA CÁC HẰNG SỐ CẦN THIẾT (đề phòng chưa có scope) ---
+        const CAN_ARR = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
+        const CHI_ARR = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
+
+        // --- 2. CÁC HÀM TÍNH TOÁN CỤC BỘ ---
+        // Tính Can Chi Năm
+        const getCanChiNamLocal = (year) => {
+            return CAN_ARR[(year + 6) % 10] + " " + CHI_ARR[(year + 8) % 12];
+        };
+
+        // Tính Can Chi Tháng (Ngũ Hổ Độn)
+        const getCanChiThangLocal = (month, year) => {
+            // Can năm: 0=Giáp, ... 9=Quý. (year + 6) % 10
+            const canNamIdx = (year + 6) % 10; 
+            // Tháng 1 (Dần) có can là: (canNamIdx % 5 + 1) * 2
+            const canThang1 = ((canNamIdx % 5) + 1) * 2;
+            const canThang = (canThang1 + (month - 1)) % 10;
+            // Chi tháng: Tháng 1 là Dần (index 2)
+            const chiThang = (month + 1) % 12;
+            return CAN_ARR[canThang] + " " + CHI_ARR[chiThang];
+        };
+
+        // Tính Can Chi Ngày
+        const getCanChiNgayLocal = (jd) => {
+            return CAN_ARR[(jd + 9) % 10] + " " + CHI_ARR[(jd + 1) % 12];
+        };
+
+        // Tính Khởi Giờ Tý (Ngũ Thử Độn) - Trả về Can Chi giờ Tý
+        const getKhoiGioTy = (jd) => {
+            const canNgayIdx = (jd + 9) % 10;
+            // Can giờ Tý = (Can Ngày % 5) * 2
+            const canGioTyIdx = (canNgayIdx % 5) * 2;
+            return CAN_ARR[canGioTyIdx] + " Tý";
+        };
+
+        // --- 3. TÍNH TOÁN DỮ LIỆU ---
         const jd = jdn(dd, mm, yy);
         const lunarArr = convertSolar2Lunar(dd, mm, yy);
         const lunarDate = { day: lunarArr[0], month: lunarArr[1], year: lunarArr[2], leap: lunarArr[3], jd: jd };
 
-        const canChiNam = getCanChi(lunarDate.year);
-        const canChiThang = getCanChiMonth(lunarDate.month, lunarDate.year);
-        const canChiNgay = getCanChiDay(jd);
-        const canChiGio = getCanChiHour(jd);
-        const tietKhi = getTietKhi(jd);
-        const gioHoangDao = getGioHoangDao(jd);
-        const gioHacDao = getGioHacDao(jd);
-        const huongXuatHanh = getHuongXuatHanh(jd);
-        const thanSat = getThanSat(lunarDate);
-// ... (sau các dòng khai báo const CAN, CHI, CHI_EMOJI ...)
+        // Sử dụng hàm cục bộ hoặc hàm có sẵn nếu chắc chắn tồn tại
+        const canChiNam = getCanChiNamLocal(lunarDate.year);
+        const canChiThang = getCanChiThangLocal(lunarDate.month, lunarDate.year);
+        // Ưu tiên dùng hàm getCanChiNgay của file gốc nếu có (để đồng bộ), nếu không dùng hàm local
+        const canChiNgay = (typeof getCanChiNgay === 'function') ? 
+                           (Array.isArray(getCanChiNgay(jd)) ? getCanChiNgay(jd).join(" ") : getCanChiNgay(jd)) : 
+                           getCanChiNgayLocal(jd);
+        
+        const khoiGioTy = getKhoiGioTy(jd);
 
-  
-  // ... (tiếp tục code cũ)
-        // --- TẠO NỘI DUNG HTML ---
+        // Các hàm này thường có sẵn trong library gốc
+        const tietKhi = (typeof getTietKhi === 'function') ? getTietKhi(jd) : "Không rõ";
+        const gioHoangDao = (typeof getGioHoangDao === 'function') ? getGioHoangDao(jd) : "...";
+        const gioHacDao = (typeof getGioHacDao === 'function') ? getGioHacDao(jd) : "...";
+        const huongXuatHanh = (typeof getHuongXuatHanh === 'function') ? getHuongXuatHanh(jd) : "...";
+        const thanSat = (typeof getThanSat === 'function') ? getThanSat(lunarDate) : { truc: {name:"...", emoji:""}, napAm: "...", sao: {name:"...", emoji:"", info:{}} };
+
+        // --- 4. TẠO NỘI DUNG HTML ---
         let res = `<div class="lunar-popup-detail" style="font-family: sans-serif; font-size: 1.1em; color: var(--primary-text-color); padding-bottom: 10px;">`;
         
-        // 1. Header & Lịch cơ bản
+        // Header & Lịch cơ bản
         res += `
             <div style="text-align:center; margin-bottom:10px;">
                 <div style="font-size:1.4em; font-weight:bold; color:var(--primary-color);">Ngày ${dd}/${mm}/${yy}</div>
@@ -1552,9 +1581,7 @@ function getThanSat(lunarDate) {
             </table>
         `;
 
-        // 2. Phần chi tiết (Hiển thị luôn, không ẩn)
-        
-        // Giờ Hắc Đạo
+        // Phần chi tiết
         res += `
             <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
                 <div style="margin-bottom: 4px;">🌑 <b>Giờ hắc đạo:</b></div>
@@ -1562,7 +1589,6 @@ function getThanSat(lunarDate) {
             </div>
         `;
 
-        // Hướng Xuất Hành
         res += `
             <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
                 <div style="margin-bottom: 4px;">🧭 <b>Hướng xuất hành:</b></div>
@@ -1570,7 +1596,6 @@ function getThanSat(lunarDate) {
             </div>
         `;
 
-        // Trực & Ngũ Hành
         res += `
             <div style="margin-bottom: 10px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px;">
                  <div style="margin-bottom: 5px;">📅 <b>Trực:</b> <span style="font-weight:bold; color:var(--primary-color);">${thanSat.truc.name}</span></div>
@@ -1602,10 +1627,10 @@ function getThanSat(lunarDate) {
         `;
 
         // Footer: Khởi giờ tý
-        res += `<div style="text-align:center; font-size:0.85em; opacity:0.6; margin-top:10px;">Khởi giờ Tý: ${canChiGio}</div>`;
-        res += `</div>`; // End main div
+        res += `<div style="text-align:center; font-size:0.85em; opacity:0.6; margin-top:10px;">Khởi giờ Tý: ${khoiGioTy}</div>`;
+        res += `</div>`; 
 
-        // --- UPDATE DOM ---
+        // Update DOM
         const titleEl = document.getElementById('ha-popup-title');
         const contentEl = document.getElementById('ha-popup-content');
         
@@ -1621,6 +1646,7 @@ function getThanSat(lunarDate) {
         popup.classList.add('show');
     }
   };
+  // --- KẾT THÚC CODE POPUP MỚI ---
   // --- KẾT THÚC CODE POPUP MỚI ---
 
 
