@@ -856,6 +856,7 @@ const THAN_SAT = {
   function haClosePopup(){
     document.getElementById('ha-lich-popup')?.classList.remove('show');
   }
+  window.haClosePopup = haClosePopup;
   /* ===== POPUP CONTENT ===== */
   function getSolarTerm(jd){
     return INT((jd - 2415021.076998695) / 365.2422 * 24) % 24;
@@ -918,6 +919,7 @@ const THAN_SAT = {
 
     document.getElementById('ha-lich-popup').classList.add('show');
   }
+  window.haShowDayPopup = haShowDayPopup;
   /* ===== POPUP CONTENT ===== */
 
   function printStyle(today, currentLunarDate, backgroundType = 'normal'){
@@ -1112,8 +1114,7 @@ const THAN_SAT = {
     if (solarDate === 1 || lunar === 1){ lunar = `${lunarDate.day}/${lunarDate.month}`; }
 
     let title = getDayName(lunarDate);
-    return `<td class="${cellClass}" title="${title}" 
-  onclick="haShowDayPopup(${solarDate},${solarMonth},${solarYear})">`+
+    return `<td class="${cellClass}" title="${title}" onclick="window.haShowDayPopup(${solarDate},${solarMonth},${solarYear})">`+
       `<div class="${solarClass}">${solarDate}</div>`+
       `<div style="font-size:50%;" class="${lunarClass}">${lunar}</div>`+
       `</td>`;
