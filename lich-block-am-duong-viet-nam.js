@@ -1416,115 +1416,130 @@ const THAN_SAT = {
 
   // 2. Hàm hiển thị (Window global)
 // 2. Hàm hiển thị (Window global) - Đã sửa đổi để hiện full thông tin
-// ============================================================
-// HÀM HIỂN THỊ POPUP (window.haShowDayPopup)
-// ============================================================
-
+// ===== HÀM HIỂN THỊ POPUP CHI TIẾT =====
   window.haShowDayPopup = function(dd, mm, yy) {
-    // 1. Hàm con: Chuyển đổi Dương -> Âm (Wrapper fix lỗi thiếu hàm convertSolar2Lunar)
-    // Hàm này giúp code tương thích với cách gọi cũ trả về mảng [ngày, tháng, năm, nhuận]
-    function convertSolar2Lunar(dd, mm, yy, timezone) {
-        if (typeof getLunarDate === 'function') {
-            const lunar = getLunarDate(dd, mm, yy);
-            return [lunar.day, lunar.month, lunar.year, lunar.leap];
-        }
-        console.warn("Không tìm thấy hàm getLunarDate, trả về ngày dương tạm thời.");
-        return [dd, mm, yy, 0];
-    }
+      try {
+          const popup = document.getElementById('ha-lunar-popup');
+          if (!popup) return;
 
-    // 2. Hàm con: Lấy Can Chi (nếu chưa có hàm global thì dùng tạm logic này)
-    function getCanChiSafe(lunarYear) {
-        if (typeof getCanChiYear === 'function') return getCanChiYear(lunarYear);
-        return ""; // Trả về rỗng nếu không tính được
-    }
+          // 1. Tính toán các thông số ngày
+          const jd = jdn(dd, mm, yy);
+          const lunarDate = getLunarDate(dd, mm, yy);
+          
+          // 2. Lấy thông tin Can Chi, Tiết khí
+          // (Lưu ý: các hàm getCanChi, getTietKhi phải có sẵn trong scope file)
+          const canChiNgay = typeof getCanChi === 'function' ? getCanChi(lunarDate) : ""; 
+          
+          // 3. Tính Tiết khí & Giờ Hoàng Đạo (từ JD hoặc Lunar)
+          // Giả định hàm getTietKhi(jd) và getGioHoangDao(jd) trả về chuỗi text
+          const tietKhi = getTietKhi(jd);
+          const gioHoangDao = getGioHoangDao(jd);
 
-    try {
-      // --- TÍNH TOÁN DỮ LIỆU ---
-      
-      // Lấy ngày âm lịch
-      const [lunarDay, lunarMonth, lunarYear, leap] = convertSolar2Lunar(dd, mm, yy, 7.0);
-      
-      // Lấy thông tin Can Chi (Giả định các hàm này có sẵn trong thư viện của bạn)
-      // Nếu không có, bạn cần đảm bảo code thư viện Hồ Ngọc Đức đã được load
-      let canChiNam = typeof getCanChiYear === 'function' ? getCanChiYear(lunarYear) : "";
-      let canChiThang = typeof getCanChiMonth === 'function' ? getCanChiMonth(lunarMonth, lunarYear) : "";
-      let canChiNgay = typeof getCanChi === 'function' ? getCanChi(dd, mm, yy) : "";
-      
-      // Lấy thông tin Thần Sát / Trực / Hoàng Đạo
-      // Logic này phụ thuộc vào hàm xemNgay() hoặc tương tự trong code gốc của bạn
-      let thanSat = {
-          truc: { info: { tot: "...", xau: "..." } },
-          napAm: "",
-          hoangDao: ""
-      };
-      
-      if (typeof xemNgay === 'function') {
-          const infoNgay = xemNgay(dd, mm, yy);
-          if (infoNgay) thanSat = infoNgay;
-      }
+          // 4. Tính toán thông tin mở rộng (Đưa từ phần Xem thêm vào)
+          const gioHacDao = typeof getGioHacDao === 'function' ? getGioHacDao(jd) : "";
+          const huongXuatHanh = typeof getHuongXuatHanh === 'function' ? getHuongXuatHanh(jd) : "";
+          const thanSat = getThanSat(lunarDate); // Hàm này trả về object chứa Truc, Sao, NapAm...
 
-      // Lấy giờ hoàng đạo (Logic giả định hoặc gọi hàm)
-      let canChiGio = typeof getGioHoangDao === 'function' ? getGioHoangDao(dd, mm, yy) : "";
-
-      // --- TẠO NỘI DUNG HTML ---
-      
-      const contentHTML = `
-          <div style="font-family: sans-serif; line-height: 1.5; color: var(--primary-text-color);">
-              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--divider-color, rgba(125,125,125,0.2)); padding-bottom: 10px; margin-bottom: 10px;">
-                  <div style="text-align: center; flex: 1;">
-                      <div style="font-size: 1.8em; font-weight: bold;">${dd}</div>
-                      <div style="font-size: 0.9em; opacity: 0.8;">Dương lịch</div>
+          // 5. Tạo nội dung HTML
+          let contentHTML = `
+              <div class="lunar-popup-detail" style="font-size: 1.1em; color: var(--primary-text-color);">
+                  <div style="text-align:center; margin-bottom:10px; font-size:1.2em; font-weight:bold;">
+                      ${dd}/${mm}/${yy}
                   </div>
-                  <div style="font-size: 1.5em; opacity: 0.3;">➔</div>
-                  <div style="text-align: center; flex: 1;">
-                      <div style="font-size: 1.8em; font-weight: bold; color: var(--accent-color, #ff9800);">${lunarDay}/${lunarMonth}</div>
-                      <div style="font-size: 0.9em; opacity: 0.8;">${leap ? 'Nhuận' : 'Âm lịch'}</div>
-                  </div>
-              </div>
+                  
+                  <table style="width:100%; border-collapse: collapse; margin-bottom: 12px;">
+                      <tr style="border-bottom: 1px solid var(--divider-color, rgba(125,125,125,0.2));">
+                          <td style="padding: 6px 0; opacity: 0.8;">Âm lịch:</td>
+                          <td style="text-align: right; font-weight: bold;">${lunarDate.day}/${lunarDate.month} - ${canChiNgay}</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid var(--divider-color, rgba(125,125,125,0.2));">
+                          <td style="padding: 6px 0; opacity: 0.8;">Tháng:</td>
+                          <td style="text-align: right;">${lunarDate.monthName || "Tháng " + lunarDate.month}</td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid var(--divider-color, rgba(125,125,125,0.2));">
+                          <td style="padding: 6px 0; opacity: 0.8;">Tiết khí:</td>
+                          <td style="text-align: right;">${tietKhi}</td>
+                      </tr>
+                  </table>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.95em; margin-bottom: 15px;">
-                  <div>📅 Năm: <strong>${canChiNam}</strong></div>
-                  <div>🌙 Tháng: <strong>${canChiThang}</strong></div>
-                  <div>🌞 Ngày: <strong>${canChiNgay}</strong></div>
-                  <div>⭐ H.Đạo: <strong>${thanSat.hoangDao || '-'}</strong></div>
-              </div>
-
-              <div style="background: var(--secondary-background-color, rgba(125,125,125,0.1)); padding: 10px; border-radius: 8px;">
                   <div style="margin-bottom: 8px;">
-                      <div style="color: var(--primary-color, #03a9f4); margin-bottom: 4px;">
-                          ✅ <span style="opacity: 0.9;">${thanSat.truc?.info?.tot || 'Không có dữ liệu'}</span>
-                      </div>
-                      <div style="color: #ff5722;">
-                          ❌ <span style="opacity: 0.9;">${thanSat.truc?.info?.xau || 'Không có dữ liệu'}</span>
+                      <span style="opacity: 0.9;">🌕 <strong>Giờ Hoàng Đạo:</strong></span><br>
+                      <span style="opacity: 0.8; font-size: 0.95em;">${gioHoangDao}</span>
+                  </div>
+          `;
+
+          // Thêm Giờ Hắc Đạo (nếu có)
+          if(gioHacDao) {
+               contentHTML += `
+                  <div style="margin-bottom: 8px;">
+                      <span style="opacity: 0.9;">🌑 <strong>Giờ Hắc Đạo:</strong></span><br>
+                      <span style="opacity: 0.8; font-size: 0.95em;">${gioHacDao}</span>
+                  </div>
+               `;
+          }
+
+          // Thêm Hướng Xuất Hành (nếu có)
+          if(huongXuatHanh) {
+               contentHTML += `
+                  <div style="margin-bottom: 12px;">
+                      <span style="opacity: 0.9;">🧭 <strong>Hướng xuất hành:</strong></span><br>
+                      <span style="opacity: 0.8; font-size: 0.95em;">${huongXuatHanh}</span>
+                  </div>
+               `;
+          }
+
+          // Phần Thần Sát (Trực, Ngũ Hành, Sao) - Đầy đủ chi tiết
+          if (thanSat) {
+              // Trực
+              contentHTML += `
+              <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                  <div style="flex: 1; padding: 8px; background: var(--secondary-background-color, rgba(125,125,125,0.1)); border-radius: 8px; border-left: 3px solid var(--primary-color, #03a9f4);">
+                      <div><strong>${thanSat.truc.emoji || '⚡'} Trực: ${thanSat.truc.name}</strong></div>
+                      <div style="margin-top:4px; font-size: 0.9em;">
+                          <div style="color: #4caf50;">✅ ${thanSat.truc.info.tot}</div>
+                          <div style="color: #ff9800; margin-top:2px;">❌ ${thanSat.truc.info.xau}</div>
                       </div>
                   </div>
-                  <div>
-                      🌟 Ngũ Hành: <strong>${thanSat.napAm || ''}</strong>
-                  </div>
-              </div>
+              </div>`;
+
+              // Ngũ Hành
+              contentHTML += `
+              <div style="margin-bottom: 10px; padding: 8px; background: var(--secondary-background-color, rgba(125,125,125,0.1)); border-radius: 8px;">
+                   <div>🌟 <strong>Ngũ Hành:</strong> ${thanSat.napAm}</div>
+              </div>`;
               
+              // Nhị Thập Bát Tú (Sao)
+              contentHTML += `
+              <div style="margin-bottom: 10px; padding: 8px; background: var(--secondary-background-color, rgba(125,125,125,0.1)); border-radius: 8px;">
+                   <div>🌠 <strong>Sao (Nhị thập bát tú):</strong> ${thanSat.sao.name} (${thanSat.sao.info.danhGia})</div>
+                   <div style="margin-top:4px; font-size: 0.9em; opacity: 0.8;">👍 ${thanSat.sao.info.nenLam}</div>
+                   <div style="margin-top:2px; font-size: 0.9em; opacity: 0.8; color:#ff9800;">👎 Kỵ: ${thanSat.sao.info.kiengCu}</div>
+              </div>`;
+          }
+
+          // Khởi giờ Tý
+          let canChiGio = "";
+          if (typeof getCanChiGio === 'function') canChiGio = getCanChiGio(jd);
+          
+          contentHTML += `
               <div style="margin-top: 15px; border-top: 1px solid var(--divider-color, rgba(125,125,125,0.2)); padding-top: 10px; text-align: center; font-style: italic; opacity: 0.7; font-size: 0.9em;">
-                 Khởi giờ Tý là: ${canChiGio || '...'}
+                 Khởi giờ Tý là: ${canChiGio}
               </div>
-          </div>
-      `;
+          </div>`;
 
-      // --- CẬP NHẬT GIAO DIỆN (DOM) ---
-      
-      const titleEl = document.getElementById('ha-popup-title');
-      const contentEl = document.getElementById('ha-popup-content');
-      const popup = document.getElementById('ha-popup'); // Đảm bảo ID này khớp với HTML popup của bạn
-      
-      if (titleEl) titleEl.innerText = `Chi tiết ngày ${dd}/${mm}/${yy}`;
-      if (contentEl) contentEl.innerHTML = contentHTML;
+          // 6. Cập nhật DOM
+          const titleEl = document.getElementById('ha-popup-title');
+          const contentEl = document.getElementById('ha-popup-content');
+          
+          if(titleEl) titleEl.innerText = `Chi tiết ngày ${dd}/${mm}`;
+          if(contentEl) contentEl.innerHTML = contentHTML;
 
-      // Thêm class để hiển thị popup (CSS cần có class .show { display: block; ... })
-      if (popup) popup.classList.add('show');
+          // Hiển thị
+          popup.classList.add('show');
 
-    } catch (e) {
-        console.error("Lỗi hiển thị Popup (haShowDayPopup):", e);
-        alert("Có lỗi khi hiển thị chi tiết ngày. Vui lòng kiểm tra console.");
-    }
+      } catch(e) {
+          console.error("Lỗi hiển thị Popup:", e);
+      }
   };
 
 
