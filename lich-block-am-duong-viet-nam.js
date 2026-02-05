@@ -859,6 +859,8 @@ const THAN_SAT = {
 
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
+	  .homnay{ background-color:#FFF000 }
+	  .tet_cell{ background-color: #ff3333; color: white; }
       .tennam{ text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
       .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
       .thangnam{ text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px;}
@@ -1039,7 +1041,9 @@ const THAN_SAT = {
     if (solarDate === today.getDate() && solarMonth === (today.getMonth()+1) && solarYear === today.getFullYear()){
       cellClass = "homnay";
     }
-    if (lunarDate.day === 1 && lunarDate.month === 1){ cellClass = "tet"; }
+	// Kiểm tra nếu là tháng 1 Âm lịch và ngày từ 1 đến 3
+    if (lunarDate.month === 1 && lunarDate.day >= 1 && lunarDate.day <= 3){cellClass = "tet_cell";}
+    // if (lunarDate.day === 1 && lunarDate.month === 1){ cellClass = "tet"; }
     if (lunarDate.leap === 1){ lunarClass = "am2"; }
 
     let lunar = lunarDate.day;
