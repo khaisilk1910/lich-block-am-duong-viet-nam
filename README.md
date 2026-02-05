@@ -10,6 +10,7 @@
 
 
 ## Thêm card vào lovelace:
+Để được như minh họa bên trên nên dùng theme Black và cài thêm từ HACS (iOS Themes)[https://github.com/basnijholt/lovelace-ios-themes]
 ```
 type: custom:lich-block-am-duong-viet-nam
 background: transparent # Hai chế độ normal(mặc định) và transparent
