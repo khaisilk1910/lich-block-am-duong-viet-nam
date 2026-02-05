@@ -113,7 +113,7 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
 
 ## Hình ảnh minh họa
 
-<img width="504" height="654" alt="image" src="https://github.com/user-attachments/assets/173dd2f4-6de4-497f-a718-faa21d5be5a8" /><img width="1280" height="2772" alt="image" src="https://github.com/user-attachments/assets/bac54434-5309-403b-a63f-de5275909016" />
+<img width="504" height="654" alt="image" src="https://github.com/user-attachments/assets/173dd2f4-6de4-497f-a718-faa21d5be5a8" /><img width="504" height="654" alt="image" src="https://github.com/user-attachments/assets/bac54434-5309-403b-a63f-de5275909016" />
 
 
 
