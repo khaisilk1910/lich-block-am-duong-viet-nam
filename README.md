@@ -6,7 +6,9 @@
 - Hiện giờ hoàng đạo,... ngày tháng năm theo can chi lịch âm.
 - Hiển thị tháng Đủ *(Đ)* hoặc Thiếu *(T)*, tháng *Nhuận* Âm Lịch
 
-<img width="504" height="654" alt="image" src="https://github.com/user-attachments/assets/4246d3c6-742f-4d30-bb25-15fced7c0599" />
+<img width="504" height="652" alt="image" src="https://github.com/user-attachments/assets/6b422b15-4524-4375-b9ad-778c2c498323" /><img width="504" height="652" alt="image" src="https://github.com/user-attachments/assets/79a03233-76eb-41ef-bcf4-c3f979e3a477" />
+
+
 
 
 ## Thêm card vào lovelace:
