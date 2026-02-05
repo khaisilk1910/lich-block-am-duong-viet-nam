@@ -1759,7 +1759,7 @@
     res += `
       .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
       .homnay{ background-color:#FFF000 }
-      .tet_cell{ background-color: #ff3333; color: white; }
+      .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
       .tennam{ text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
       .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
       .thangnam{ text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px;}
