@@ -6,8 +6,8 @@
 - Hiện giờ hoàng đạo,... ngày tháng năm theo can chi lịch âm.
 - Hiển thị tháng Đủ *(Đ)* hoặc Thiếu *(T)*, tháng *Nhuận* Âm Lịch
 
-<img width="624" height="720" alt="image" src="https://github.com/user-attachments/assets/6b132ecb-2fec-4b34-8ebe-5bf885bc9588" />
-<img width="456" height="957" alt="image" src="https://github.com/user-attachments/assets/f872886d-6605-43f0-b212-a118d1c270d8" />
+<img width="504" height="654" alt="image" src="https://github.com/user-attachments/assets/4246d3c6-742f-4d30-bb25-15fced7c0599" />
+
 
 ## Thêm card vào lovelace:
 ```
@@ -113,8 +113,9 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
 
 ## Hình ảnh minh họa
 
-<img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/dab7c097-e47b-4edd-8065-1fe305febc7e" /><img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/336e5d17-9ec1-4c1b-8c2e-4b1032496fd0" />
-<img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/0ba1009f-2c55-4ded-8662-00a99f230db9" /><img width="502" height="542" alt="image" src="https://github.com/user-attachments/assets/4ba88ff2-3aba-44d3-95c1-a7afed9a6452" />
+<img width="504" height="654" alt="image" src="https://github.com/user-attachments/assets/173dd2f4-6de4-497f-a718-faa21d5be5a8" /><img width="1280" height="2772" alt="image" src="https://github.com/user-attachments/assets/bac54434-5309-403b-a63f-de5275909016" />
+
+
 
 
 
