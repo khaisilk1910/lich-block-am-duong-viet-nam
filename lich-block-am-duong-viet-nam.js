@@ -1787,7 +1787,10 @@
 
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
 
-  function printStyle(today, currentLunarDate, backgroundType = 'normal', colorSet = 1) {
+
+
+  function printStyle(today, currentLunarDate, backgroundOpacity = 0.6, colorSet = 1) {
+    // --- PHẦN 1: ĐỊNH NGHĨA 7 BỘ MÀU (CHỈ ĐỔI MÀU CHỮ) ---
     const palettes = {
         1: { main: '#00f2ff', sub: '#ff00e0' }, // Neon Cyber
         2: { main: '#ffd700', sub: '#00ff88' }, // Luxury Mint
@@ -1797,42 +1800,86 @@
         6: { main: '#ff2d55', sub: '#00f2ff' }, // Vivid Rose
         7: { main: '#00ff00', sub: '#ffffff' }  // Matrix High
     };
-
     const sel = palettes[colorSet] || palettes[1];
-    let res = "<style>\n";
+    const formatthutrongtuan = TUAN[(currentLunarDate.jd + 1) % 7];
+    
+    let res = '<style>\n';
 
+    // --- PHẦN 2: THIẾT LẬP THEME VÀ BIẾN MÀU ---
     res += `
       :host { 
-        display: block; 
+        display: block;
+        --h-main-color: ${sel.main};
+        --h-sub-color: ${sel.sub};
         --h-color-sun: #ff4d4d; 
-        --h-color-sat: #4dabff; 
-        --main-color: ${sel.main};
-        --sub-color: ${sel.sub};
-        --shadow-glow: 1px 1px 3px rgba(0,0,0,0.8), 0px 0px 10px rgba(0,0,0,0.3);
+        --h-color-sat: #4dabff;
+        /* Màu nền card tự thích ứng theme HA, kết hợp độ trong suốt của bạn */
+        --h-card-bg: rgba(var(--rgb-card-background-color, 0, 0, 0), ${1 - backgroundOpacity});
+        --h-shadow: 1px 1px 3px rgba(0,0,0,0.8);
       }
-      .tennam, .thangnam, .thutrongtuan, .todayduonglich, .tenthang, .navi-l, .navi-r, .nav-btn, .t2t6, .ngaytuan {
-          color: var(--main-color) !important;
-          text-shadow: var(--shadow-glow);
+
+      /* Bố cục chính luôn trong suốt */
+      .lunar-card {
+          background: var(--h-card-bg) !important;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-radius: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: var(--primary-text-color);
       }
+
+      /* Loại bỏ mọi màu nền cứng của các div con */
+      .tennam, .thangnam, .giohoangdao, .viecnenlam, .viecnentranh,
+      .cat_tinh, .hung_tinh, .tenthang, .navi-l, .navi-r, .ngaytuan, 
+      .ngaytuan_t7, .ngaytuan_cn, .ngaythang, .tet, .homnay, .thutrongtuan div {
+          background: transparent !important;
+      }
+    `;
+
+    // --- PHẦN 3: ÁP DỤNG 7 BỘ MÀU VÀO TEXT ---
+    res += `
+      /* Nhóm 1: Dương lịch & Tiêu đề chính */
+      .tennam, .thangnam, .thutrongtuan, .todayduonglich, .tenthang, .navi-l, .navi-r, .t2t6, .ngaytuan {
+          color: var(--h-main-color) !important;
+          text-shadow: var(--h-shadow);
+      }
+      
+      /* Nhóm 2: Âm lịch & Thông tin chi tiết */
       .ngayamlich, .thangnam_amlich, .ThangNgayGioTiet, .ThangNgayGioTiet1, .giohoangdao, 
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh, .am, .am2, .toggle-btn, .cadaotucngu {
-          color: var(--sub-color) !important;
-          text-shadow: var(--shadow-glow);
+          color: var(--h-sub-color) !important;
+          text-shadow: var(--h-shadow);
       }
-      /* Layout cơ bản */
-      .tennam{ text-align:center; font-size:150%; font-weight:bold; }
-      .thangnam{ text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; }
-      .todayduonglich{ text-align:center; font-size:clamp(420%,460%,480%); line-height:100%; font-weight:bold; }
-      .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; padding-top: 16px; }
-      .homnay{ background-color: var(--accent-color); color: #000 !important; border-radius: 50%; }
-      .ngaytuan_cn, .cn { color: var(--h-color-sun) !important; }
+
+      /* Giữ nguyên định dạng nút và các thành phần chức năng */
+      .nav-btn { 
+          color: var(--h-main-color) !important; 
+          background: rgba(128, 128, 128, 0.2) !important;
+          border: none; padding: 4px 8px; border-radius: 6px; font-weight: bold;
+      }
+      .toggle-btn { 
+          background: rgba(var(--rgb-primary-text-color, 255,255,255), 0.1) !important;
+          border-radius: 6px; padding: 4px 0; margin-top: 5px;
+      }
+
+      /* Màu cố định cho T7/CN */
       .ngaytuan_t7, .t7 { color: var(--h-color-sat) !important; }
-      
-      ${backgroundType === 'transparent' ? `
-        .lunar-card div, .ngaythang, .thang, ha-card { background: transparent !important; border: none !important; }
-        .giohoangdao, .tenthang { border-top: 1px solid rgba(255,255,255,0.1) !important; }
-      ` : ''}
-    </style>`;
+      .ngaytuan_cn, .cn { color: var(--h-color-sun) !important; }
+
+      /* Highlight hôm nay */
+      .homnay {
+          background: rgba(var(--rgb-primary-color, 255, 255, 255), 0.2) !important;
+          border-radius: 8px;
+          font-weight: bold;
+      }
+
+      /* Đường kẻ phân cách mờ theo theme */
+      .giohoangdao, .toggle-btn-container, .tenthang, .ngaytuan, .ngaytuan_t7, .ngaytuan_cn {
+          border-bottom: 1px solid var(--divider-color, rgba(255,255,255,0.1)) !important;
+      }
+    `;
+
+    res += '\n</style>';
     return res;
   }
 
@@ -2129,41 +2176,26 @@
 
 
 
+    setConfig(config) {
+        this.config = config || {};
+        if (!this.shadowRoot) this.attachShadow({ mode: 'open' });
+        if (!this.card) {
+            this.card = document.createElement('ha-card');
+            this.shadowRoot.appendChild(this.card);
+        }
+        
+        // Luôn để card gốc trong suốt để dùng background tùy chỉnh bên trong
+        this.card.style.background = 'transparent';
+        this.card.style.boxShadow = 'none';
+        this.card.style.border = 'none';
 
-  setConfig(config) {
-    this.config = config || {};
-    
-    // Lấy các giá trị từ cấu hình YAML hoặc dùng mặc định
-    const backgroundType = this.config.background || 'normal';
-    const opacity = this.config.background_opacity !== undefined ? this.config.background_opacity : 0.6;
-    this.colorSet = this.config.color_set || 1; 
-
-    if (!this.shadowRoot) {
-      this.attachShadow({ mode: 'open' });
+        if (!this.displayMonth) {
+            const now = new Date();
+            this.displayMonth = now.getMonth() + 1;
+            this.displayYear = now.getFullYear();
+        }
+        this._render();
     }
-    if (!this.card) {
-      this.card = document.createElement('ha-card');
-      this.shadowRoot.appendChild(this.card);
-    }
-    
-    this.card.style.borderRadius = '16px'; 
-
-    if (backgroundType === 'transparent') {
-      // Sử dụng độ trong suốt từ cấu hình background_opacity
-      this.card.style.background = `rgba(0, 0, 0, ${1 - opacity})`;
-      this.card.style.backdropFilter = 'blur(10px)'; // Tạo hiệu ứng kính mờ
-      this.card.style.border = '1px solid rgba(255, 255, 255, 0.2)';
-      this.card.style.boxShadow = 'none';
-    } else {
-      this.card.style.background = '';
-      this.card.style.backdropFilter = '';
-      this.card.style.border = '';
-      this.card.style.boxShadow = '';
-    }
-
-    this._render();
-  }
-
 
 
     set hass(hass){
@@ -2204,71 +2236,53 @@
       // --- PHẦN CODE TẠO KHUNG POPUP (Chỉ chạy 1 lần) ---
     }
 
+
+
     _render() {
         const today = new Date();
         const mm = this.displayMonth;
         const yy = this.displayYear;
 
-        // Lấy các giá trị từ config (đã được xử lý trong setConfig)
         const currentLunarDate = getLunarDate(today.getDate(), today.getMonth() + 1, today.getFullYear());
-        const backgroundType = this.config.background || 'normal';
         
-        // Đảm bảo lấy đúng giá trị opacity và color_set từ config
+        // Lấy cấu hình từ YAML
         const bgrOpacity = this.config.background_opacity !== undefined ? this.config.background_opacity : 0.6;
         const colorSet = this.config.color_set || 1;
 
-        // Cập nhật việc gọi hàm: truyền thêm colorSet vào printStyle
+        // Gọi hàm printStyle mới với tham số Opacity và colorSet
         const html = [
-            printStyle(today, currentLunarDate, backgroundType, colorSet), // Thêm colorSet ở đây
+            printStyle(today, currentLunarDate, bgrOpacity, colorSet),
             printTable(mm, yy, today, bgrOpacity)
         ].join('');
 
         this.card.innerHTML = `<div class="lunar-card">${html}</div>`;
 
-        // --- Giữ nguyên các Event Listeners của bạn ---
-        const prevBtn = this.card.querySelector('#prev-month');
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                this.displayMonth--;
-                if (this.displayMonth < 1) { this.displayMonth = 12; this.displayYear--; }
-                this._render();
-            });
-        }
+        // --- Event Listeners (Giữ nguyên logic của bạn) ---
+        const setupBtn = (id, callback) => {
+            const btn = this.card.querySelector(id);
+            if (btn) btn.addEventListener('click', callback);
+        };
 
-        const nextBtn = this.card.querySelector('#next-month');
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                this.displayMonth++;
-                if (this.displayMonth > 12) { this.displayMonth = 1; this.displayYear++; }
-                this._render();
-            });
-        }
+        setupBtn('#prev-month', () => {
+            this.displayMonth--;
+            if (this.displayMonth < 1) { this.displayMonth = 12; this.displayYear--; }
+            this._render();
+        });
 
-        const prevYearBtn = this.card.querySelector('#prev-year');
-        if (prevYearBtn) {
-            prevYearBtn.addEventListener('click', () => {
-                this.displayYear--;
-                this._render();
-            });
-        }
+        setupBtn('#next-month', () => {
+            this.displayMonth++;
+            if (this.displayMonth > 12) { this.displayMonth = 1; this.displayYear++; }
+            this._render();
+        });
 
-        const nextYearBtn = this.card.querySelector('#next-year');
-        if (nextYearBtn) {
-            nextYearBtn.addEventListener('click', () => {
-                this.displayYear++;
-                this._render();
-            });
-        }
-
-        const resetBtn = this.card.querySelector('#reset-today');
-        if (resetBtn) {
-            resetBtn.addEventListener('click', () => {
-                const now = new Date();
-                this.displayMonth = now.getMonth() + 1;
-                this.displayYear = now.getFullYear();
-                this._render();
-            });
-        }
+        setupBtn('#prev-year', () => { this.displayYear--; this._render(); });
+        setupBtn('#next-year', () => { this.displayYear++; this._render(); });
+        setupBtn('#reset-today', () => {
+            const now = new Date();
+            this.displayMonth = now.getMonth() + 1;
+            this.displayYear = now.getFullYear();
+            this._render();
+        });
     }
 
 
