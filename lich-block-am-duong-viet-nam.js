@@ -2008,24 +2008,9 @@
     const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
     let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
     if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
-    
-    
- // --- Code cũ nếu đoạn dưới lỗi lấy lại đoạn này ---
-//		const ly = getYearInfo(currentLunarDate.year);
-//		let daysInLunarMonth = 0;
-//		for (let i = 0; i < ly.length; i++) {
-//			if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
-//				if (i < ly.length - 1) {
-//					daysInLunarMonth = ly[i+1].jd - ly[i].jd;
-//				} else {
-//					daysInLunarMonth = 30;
-//				}
-//				break;
-//			}
-//		}
-//		if (daysInLunarMonth === 29) { thangAm += " (T)"; } 
-//   else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
- // --- ĐOẠN ĐÃ SỬA ---
+
+
+
     const ly = getYearInfo(currentLunarDate.year);
         let daysInLunarMonth = 0;
         for (let i = 0; i < ly.length; i++) {
@@ -2048,6 +2033,8 @@
         if (daysInLunarMonth === 29) { thangAm += " (T)"; } 
         else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
 // --- ĐOẠN ĐÃ SỬA ---
+
+
 
     res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
@@ -2103,13 +2090,14 @@
             if(isHidden){ r.classList.add('show'); } else { r.classList.remove('show'); }
           }, i * 100);
         });
-        this.innerHTML = isHidden ? 'Thu gọn 🔼' : 'Xem thêm 🔽';
-      ">Xem thêm 🔽</button>
+        this.innerHTML = isHidden ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
+      ">Xem lịch tháng 🔽</button>
     </td></tr>`;
 
 
 
     res += printHead(mm, yy);
+
     for (let i=0;i<6;i++){
       res += '<tr class="toggle-content">';
       for (let j=0;j<7;j++){
@@ -2124,41 +2112,6 @@
       }
       res += '</tr>';
     }
-
-
-    res += `<tr class="toggle-content"><td class="giohoangdao" colspan="5">Giờ hoàng đạo:<br>${getGioHoangDao(jd)}</td></tr>`;
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;">🌑<b style="color:#fff;">- Giờ hắc đạo:</b> <span style="text-align:justify;">${getGioHacDao(jd)}</span></td></tr>`;
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;">🧭<b style="color:#fff;">- Hướng xuất hành:</b> <span style="text-align:justify;">${getHuongXuatHanh(jd)}</span></td></tr>`;
-    const thanSat = getThanSat(currentLunarDate);
-    res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">${thanSat.truc.emoji}- Trực:</b> <span style=" background-color:rgba(0,255,0,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.truc.name}</span><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"><span style="color:#fff;">✅ Tốt:</span> ${thanSat?.truc?.info?.tot || "Không rõ"} <span style="color:#fff;"><br>❌ Xấu: </span><span style="color:#ff9933;">${thanSat.truc.info.xau}</span></div></td></tr>`;
-
-		res += `<tr class="toggle-content"><td class="viecnenlam" colspan="5" style="text-align:left; padding:2px 0px 2px 0px; line-height:1.6;"><b style="color:#fff;">🌟- Ngũ hành:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${thanSat.napAm}</div></td></tr>`;
-		res += `<tr class="toggle-content">
-			<td class="viecnenlam" colspan="5" style="text-align:left; line-height:1.6;">
-				<span style="font-weight:bold; color:#fff; font-size:110%;">${thanSat.sao.emoji}- Nhị Thập Bát Tú: <span style=" background-color:rgba(0,255,0,0.8); color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px;">${thanSat.sao.name}</span></span>
-				<span style="font-style:italic; color:#ffff99;"> (${thanSat.sao.info.tenNgay || ""})</span>
-			</td></tr>`;
-		const chiTietDanhGia = thanSat.sao.info.danhGia.substring(thanSat.sao.info.danhGia.indexOf('('));
-		const thoText = (thanSat.sao.info.tho || '').replace(/^\s+/gm, '');
-		res += `<tr class="toggle-content">
-			<td class="viecnenlam" colspan="5" style="text-align:left; padding:10px; line-height:1.6; border-top:1px solid rgba(255,255,255,0.2);">
-				<div style="font-style:italic; color:#ffff99; margin-bottom:6px;">
-					<span style="
-						background-color:${thanSat.sao.info.danhGia.includes('Tốt') ? 'rgba(0,255,0,0.8)' : 
-																		 (thanSat.sao.info.danhGia.includes('Xấu') ? 'rgba(255,0,0,0.8)' : 
-																		 'rgba(255,255,0,0.7)')};
-						color:#fff; font-weight:bold; padding:2px 10px; border-radius:8px; margin-right:8px;
-					">
-						${thanSat.sao.info.danhGia.split(' ')[0]}
-					</span>
-					${chiTietDanhGia} - ${thanSat.sao.info.tuongTinh}
-				</div>
-				<div><b style="color:#fff;">👍 Nên làm:</b> <span style="text-align:justify;">${thanSat.sao.info.nenLam}</span></div>
-				<div style="margin:5px 0;"><b style="color:#fff;">👎 Kiêng cữ:</b> <span style="color:#ff9933; text-align:justify;">${thanSat.sao.info.kiengCu}</span></div>
-				<div><b style="color:#fff;">✨ Ngoại lệ:</b><div style="text-align:justify; padding:2px 10px 4px 10px; line-height:1.6;"> ${(thanSat.sao.info.ngoaiLe || '').replace(/\n/g, '<br>')}</div></div>
-				<div style="font-family:'Times New Roman',serif; font-style:italic; color:#ffff99; margin-top:2px; padding-top:2px; border-bottom:1px solid rgba(255,255,255,0.2); text-align:center; white-space:pre-wrap;">${thoText}
-				</div>
-			</td></tr>`;
     
     res += '</table></td></tr>';
 
