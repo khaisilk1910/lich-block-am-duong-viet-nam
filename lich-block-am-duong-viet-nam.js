@@ -2081,7 +2081,7 @@
     // Dòng code hiển thị của bạn
     res += `<tr><td class="cadaotucngu" colspan="5" >${cadaotucngu_random}</td></tr>`;
     
-    res += `<tr><td colspan="5" class="toggle-btn-container">
+    res += `<tr><td colspan="7" class="toggle-btn-container">
       <button class="toggle-btn" onclick="
         const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
         const isHidden = rows.every(r => !r.classList.contains('show'));
