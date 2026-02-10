@@ -1914,7 +1914,7 @@
     res += `<tr class="toggle-content"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
     res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset;cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
     res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button>  <button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
-    res += '<tr>';
+    res += '<tr class="toggle-content">';
     for (let i=0;i<=6;i++){
       if (DAYNAMES[i]==='CN') res += '<td class="ngaytuan_cn">CN</td>';
       else if (DAYNAMES[i]==='T7') res += '<td class="ngaytuan_t7">T7</td>';
