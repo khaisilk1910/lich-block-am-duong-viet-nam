@@ -1750,58 +1750,56 @@
   const DAYNAMES = ["T2","T3","T4","T5","T6","T7","CN"];
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
 
-
-
-
   function printStyle(today, currentLunarDate, backgroundType = 'normal'){
-    // --- PHẦN 1: ĐỊNH NGHĨA 7 BỘ MÀU (CHỈ ĐỔI MÀU CHỮ) ---
-    const palettes = {
-        1: { main: '#00f2ff', sub: '#ff00e0' }, // Neon Cyber
-        2: { main: '#ffd700', sub: '#00ff88' }, // Luxury Mint
-        3: { main: '#ffffff', sub: '#5ac8fa' }, // Apple Clean
-        4: { main: '#ff8c00', sub: '#ffee00' }, // Sunset Glow
-        5: { main: '#bf5af2', sub: '#ffffff' }, // Deep Purple
-        6: { main: '#ff2d55', sub: '#00f2ff' }, // Vivid Rose
-        7: { main: '#00ff00', sub: '#ffffff' }  // Matrix High
-    };
-    const sel = palettes[colorSet] || palettes[1];
     const formatthutrongtuan = TUAN[(currentLunarDate.jd + 1) % 7];
     let res = "";
     res += '<style>\n';
 
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
-      :host { 
-        display: block;
-        --h-main-color: ${sel.main};
-        --h-sub-color: ${sel.sub};
-        --h-color-sun: #ff4d4d; 
-        --h-color-sat: #4dabff;
-        /* Màu nền card tự thích ứng theme HA, kết hợp độ trong suốt của bạn */
-        --h-card-bg: rgba(var(--rgb-card-background-color, 0, 0, 0), ${1 - backgroundOpacity});
-        --h-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-      }
+      .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
+      .homnay{ background-color:#FFF000 }
+      .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
+      .tennam{ text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
+      .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
+      .thangnam{ text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px;}
+      .thangnam_amlich, .ThangNgayGioTiet1 { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
+      .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
+      .todayduonglich{ text-align:center; font-size:clamp(420%,460%,480%); line-height:100%; font-weight:bold; }
+      .thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
+      .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
+      .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
 
-      /* Bố cục chính luôn trong suốt */
-      .lunar-card {
-        background: var(--h-card-bg) !important;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: var(--primary-text-color);
-      }
+      /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
+      :host { display: block; }
+      /* .lunar-card svg { width: 100% !important; height: auto !important; max-width: 200px; margin: 0 auto; display: block; } */
+      .toggle-content { display: none; }
+      .toggle-content.show { display: table-row; }
+      .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
+      /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
 
-      /* Màu cố định cho T7/CN */
-      .ngaytuan_t7, .t7 { color: var(--h-color-sat) !important; }
-      .ngaytuan_cn, .cn { color: var(--h-color-sun) !important; }
+      .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
+      
+      .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
+      .toggle-btn-container { padding: 4px 0; }
+      
+      .toggle-content { display:none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+      .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
+      .thang{ font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
+      .tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; }
+      .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
+      .tenthang { padding: 4px 0; }
+      .ngaytuan, .ngaytuan_t7, .ngaytuan_cn{ width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
+      .ngaythang { padding-top: 10px; }
 
-    `;
-
-
-    // --- SVG ---
-    res += `
 			.svg-cell { vertical-align: bottom; text-align: center; height: 55px; align-items: center; justify-content: center; }
+
+      .am, .am2{ color:blue; text-align:right; padding-right:3px; font-size:65%; }
+      .t2t6, .t7, .cn{ text-align:center; font-size:125%; }
+      .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+      .homnay{ font-weight:bold; }
+
+			
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
 			@keyframes marquee-horizontal {
 				0% {
@@ -1822,95 +1820,6 @@
 				}
 			}
     `;
-    // --- SVG ---
-
-
-    // --- Nút Xem Thêm ---
-    res += `
-      .toggle-content { display: none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
-      .toggle-content.show { display: table-row; }
-      .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
-      .toggle-btn-container { padding: 4px 0; }
-      .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
-    `;
-    // --- Nút Xem Thêm ---
-
-
-    // --- Nút Di Chuyển Năm Tháng ---
-    res += `
-      .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
-      .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    `;
-    // --- Nút Di Chuyển Năm Tháng ---
-
-
-    // --- Popup ---
-    res += `
-      .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
-    `;
-    // --- Popup ---
-
-
-    // --- Thông tin ngày lễ ---
-    res += `
-      .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
-
-      .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
-
-      .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
-
-      .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
-
-      .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
-    `;
-    // --- Thông tin ngày lễ ---
-
-
-    // --- Block Tháng Ngày Năm Âm Lịch Bên Trái ---
-    res += `
-      .ngayamlich { text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
-      .ThangNgayGioTiet1 { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
-    `;
-    // --- Block Tháng Ngày Năm Âm Lịch Bên Trái ---
-
-
-    // --- Block Tháng Ngày Giờ Tiết Bên Phải ---
-    res += `
-      .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
-    `;
-    // --- Block Tháng Ngày Giờ Tiết Bên Phải ---
-
-
-    res += `
-
-      .tenthang { padding: 4px 0; text-align:center; font-size:125%; line-height:100%; font-weight:bold; }
-
-      .tennam { text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
-
-      .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px;}
-
-      .thangnam_amlich { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
-
-      .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
-
-      .ngaytuan, .ngaytuan_t7, .ngaytuan_cn { width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
-
-      .ngaythang { padding-top: 10px; }
-
-      .t2t6, .t7, .cn { text-align:center; font-size:125%; }
-
-      .homnay { background-color:#FFF000 font-weight:bold; }
-
-      .todayduonglich { text-align:center; font-size:clamp(420%,460%,480%); line-height:100%; font-weight:bold; }
-
-      .thutrongtuan { text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
-
-      .am, .am2 { color:blue; text-align:right; padding-right:3px; font-size:65%; }
-
-      .thu_today { margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5); }
-
-    `;
-
 
     // --- PHẦN 2: CSS MÀU SẮC CHO CHẾ ĐỘ 'NORMAL' (MẶC ĐỊNH) ---
     res += `
@@ -1945,6 +1854,7 @@
       .cn{ color:red }
       .nav-btn { background-color: rgba(128, 128, 128,0.3); }
       .nav-btn:hover { background-color: rgba(128, 128, 128,0.6); }
+
       .giohoangdao { border-bottom: 1px solid rgba(0,0,255,0.2); }
       .toggle-btn-container { border-bottom: 1px solid rgba(0,0,255,0.2); }
       .navi-l, .navi-r, .tenthang { border-bottom: 1px solid #a2bda2; }
@@ -1998,8 +1908,6 @@
     return res;
   }
 
-
-  // --- Tạo Hàng đầu lịch tháng 
   function printHead(mm, yy){
     let res = "";
     const monthName = mm+"/"+yy;
@@ -2015,17 +1923,11 @@
     res += '</tr>';
     return res;
   }
-  // Tạo Hàng đầu lịch tháng --- 
 
-
-  // --- Tạo ô trống các ngày trong tháng 
   function printEmptyCell(){
     return '<td class="ngaythang"><div class="cn">&nbsp;</div><div class="am">&nbsp;</div></td>';
   }
-  // Tạo ô trống các ngày trong tháng ---
 
-
-  // --- Tạo ô các ngày trong tháng ---
   function printCell(lunarDate, solarDate, solarMonth, solarYear, today){
     let cellClass = "ngaythang";
     let solarClass = "t2t6";
@@ -2052,8 +1954,6 @@
       `<div style="font-size:50%;" class="${lunarClass}">${lunar}</div>`+
       `</td>`;
   }
-  // --- Tạo ô các ngày trong tháng ---
-
 
 
   function printTable(mm, yy, today, bgrOpacity){
@@ -2083,8 +1983,6 @@
     }
 
 		res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
-
-
     res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} năm ${yy}</td></tr>`;
 
@@ -2107,11 +2005,27 @@
     res += `<tr>`;
     res += `<td width="34%" colspan="2">`;
 
-
-    // --- Hiển thị Tháng Âm Lịch Bên Trái ---
     const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
     let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
     if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
+    
+    
+ // --- Code cũ nếu đoạn dưới lỗi lấy lại đoạn này ---
+//		const ly = getYearInfo(currentLunarDate.year);
+//		let daysInLunarMonth = 0;
+//		for (let i = 0; i < ly.length; i++) {
+//			if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
+//				if (i < ly.length - 1) {
+//					daysInLunarMonth = ly[i+1].jd - ly[i].jd;
+//				} else {
+//					daysInLunarMonth = 30;
+//				}
+//				break;
+//			}
+//		}
+//		if (daysInLunarMonth === 29) { thangAm += " (T)"; } 
+//   else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
+ // --- ĐOẠN ĐÃ SỬA ---
     const ly = getYearInfo(currentLunarDate.year);
         let daysInLunarMonth = 0;
         for (let i = 0; i < ly.length; i++) {
@@ -2119,37 +2033,36 @@
             if (i < ly.length - 1) {
               daysInLunarMonth = ly[i+1].jd - ly[i].jd;
             } else {
+                        // --- ĐOẠN ĐÃ SỬA ---
               const lyNext = getYearInfo(currentLunarDate.year + 1);
                         if (lyNext && lyNext.length > 0) {
                   daysInLunarMonth = lyNext[0].jd - ly[i].jd;
                         } else {
-                            daysInLunarMonth = 30;
+                            daysInLunarMonth = 30; // Fallback nếu không tính được năm sau
                         }
+                        // -------------------
             }
             break;
           }
         }
         if (daysInLunarMonth === 29) { thangAm += " (T)"; } 
         else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
+// --- ĐOẠN ĐÃ SỬA ---
+
     res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
-    res += `<span class="year-svg-container">${svgNam}</span>`;
-    res += `<div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
+    res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
     res += `</td>`;
-    // --- Hiển thị Tháng Âm Lịch Bên Trái ---
-
-
     res += `<td class="thongtin_letet">`;
     if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
     else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
+
     const d_m = `${today.getDate()}/${mm}`;
     const idxDL = NGAY_LE_DL.indexOf(d_m); const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : " ";
     const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
     const idxAL = NGAY_LE_AL.indexOf(d_m_al); const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : " ";
     res += `<div>${infoDL}<br>${infoAL}</div>`;
     res += `</td>`;
-
-
     res += `<td width="34%" colspan="2">`;
     res += `<div class="ThangNgayGioTiet1" style="text-align:right; margin-right:10px;"><i class="ThangNgayGioTiet">Tháng: </i>${getMonthCanChi(currentLunarDate)}</div>`;
     res += `<div class="ThangNgayGioTiet1" style="text-align:right; margin-right:10px;"><i class="ThangNgayGioTiet">Ngày: </i>${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
@@ -2158,7 +2071,7 @@
     res += `</td>`;
     res += `</tr>`;
 
-    // --- Ca dao tục ngữ ---
+// --- BẮT ĐẦU ĐOẠN CODE cho ca dao tục ngữ ---
     // 1. Lấy ngày hiện tại (theo thời gian thực) để làm "hạt giống" (seed)
     // Việc này đảm bảo cả ngày hôm đó sẽ chỉ hiện 1 câu, qua ngày mới đổi câu khác.
     const _todayObj = new Date();
@@ -2176,11 +2089,11 @@
     } else {
         cadaotucngu_random = ""; // Phòng hờ lỗi mảng rỗng
     }
+    // --- KẾT THÚC ĐOẠN CODE ca dao tục ngữ ---
+
+    // Dòng code hiển thị của bạn
     res += `<tr><td class="cadaotucngu" colspan="5" >${cadaotucngu_random}</td></tr>`;
-    // --- Ca dao tục ngữ ---
-
-
-    // --- Nút Xem Thêm ---
+    
     res += `<tr><td colspan="5" class="toggle-btn-container">
       <button class="toggle-btn" onclick="
         const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
@@ -2194,8 +2107,9 @@
       ">Xem thêm 🔽</button>
     </td></tr>`;
 
-    res += printHead(mm, yy);
 
+
+    res += printHead(mm, yy);
     for (let i=0;i<6;i++){
       res += '<tr class="toggle-content">';
       for (let j=0;j<7;j++){
@@ -2210,7 +2124,6 @@
       }
       res += '</tr>';
     }
-
 
 
     res += `<tr class="toggle-content"><td class="giohoangdao" colspan="5">Giờ hoàng đạo:<br>${getGioHoangDao(jd)}</td></tr>`;
@@ -2249,31 +2162,15 @@
     
     res += '</table></td></tr>';
 
-//    res += printHead(mm, yy);
 
 
 
-//    for (let i=0;i<6;i++){
-//      res += '<tr>';
-//      for (let j=0;j<7;j++){
-//        let k = 7*i + j;
-//        if (k < emptyCells || k >= emptyCells + currentMonthArr.length){
-//          res += printEmptyCell();
-//        } else {
-//          let solar = k - emptyCells + 1;
-//          let ld1c = currentMonthArr[k - emptyCells];
-//          res += printCell(ld1c, solar, mm, yy, today);
-//        }
-//      }
-//      res += '</tr>';
-//    }
 
 
 
     res += '</table></div>';
     return res;
   }
-
 
   function getMonth(mm, yy){
     let mm1, yy1;
@@ -2301,11 +2198,6 @@
     const month = currentLunarDate.month;
     return CAN[(year*12 + month + 3) % 10] + " " + CHI[(month+1)%12];
   }
-
-
-
-
-
 
   // ====== Home Assistant Card ======
   class LunarCalendarCard extends HTMLElement{
