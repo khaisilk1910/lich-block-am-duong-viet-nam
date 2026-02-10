@@ -1908,13 +1908,17 @@
     return res;
   }
 
-  function printHead(mm, yy){
+  function printHead(mm, yy, extraClass){
+    if (typeof extraClass === 'undefined') {
+         extraClass = (typeof window.isCalendarExpanded !== 'undefined' && window.isCalendarExpanded) ? ' show' : '';
+    }
+
     let res = "";
     const monthName = mm+"/"+yy;
-    res += `<tr class="toggle-content"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
+    res += `<tr class="toggle-content${extraClass}"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
     res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset;cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
     res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button><button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
-    res += '<tr class="toggle-content">';
+    res += `<tr class="toggle-content${extraClass}">`;
     for (let i=0;i<=6;i++){
       if (DAYNAMES[i]==='CN') res += '<td class="ngaytuan_cn">CN</td>';
       else if (DAYNAMES[i]==='T7') res += '<td class="ngaytuan_t7">T7</td>';
@@ -1957,6 +1961,11 @@
 
 
 
+// 1. KHAI BÁO BIẾN TOÀN CỤC ĐỂ LƯU TRẠNG THÁI
+// 
+  if (typeof window.isCalendarExpanded === 'undefined') {
+      window.isCalendarExpanded = false;
+  }
 
   function printTable(mm, yy, today, bgrOpacity){
     const jd = jdn(today.getDate(), mm, yy);
@@ -1984,14 +1993,20 @@
         backgroundStyle = `background: linear-gradient(rgba(0, 0, 0, ${overlayAlpha}), rgba(0, 0, 0, ${overlayAlpha})), url('${bgUrl}') no-repeat center center; background-size:cover;`;
     }
 
+    // 2. XÁC ĐỊNH TRẠNG THÁI HIỂN THỊ DỰA VÀO BIẾN TOÀN CỤC
+    // Nếu đang mở -> thêm class 'show', nút là 'Thu gọn'
+    // Nếu đang đóng -> không thêm class, nút là 'Xem lịch'
+    const extraClass = window.isCalendarExpanded ? ' show' : '';
+    const btnText = window.isCalendarExpanded ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
+
     res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
-    // Bắt đầu bảng chính (7 cột)
     res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} năm ${yy}</td></tr>`;
 
-    // --- PHẦN THÔNG TIN (Đã bỏ bảng lồng, viết trực tiếp vào bảng chính) ---
-
-    // SVG
+    // ... (Phần SVG và thông tin chi tiết giữ nguyên không đổi) ...
+    // [Đoạn code giữa giữ nguyên để tiết kiệm không gian hiển thị]
+    
+    // ... Phần code SVG/Con giáp/Tiết khí giữ nguyên như cũ ...
     const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
     const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
     const lunarYearIndex = (currentLunarDate.year + 8) % 12;
@@ -2000,18 +2015,14 @@
     const svgNam = getSvgConGiap(lunarYearIndex);
     
     res += `<tr>`;
-    // colspan=2 để cân đối trong bảng 7 cột
     res += `<td class="svg-cell" colspan="2" style="transform: scaleX(-1);">${svgNgay}</td>`; 
-    // colspan=3 cho ngày dương lịch to ở giữa
     res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
-    // colspan=2
     res += `<td class="svg-cell" colspan="2">${svgThang}</td>`;
     res += `</tr>`;
 
     res += `<tr><td class="thutrongtuan" colspan="7"><div style="margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div></td></tr>`;
     
     res += `<tr>`;
-    // Cột trái: Thông tin Âm lịch (colspan=2)
     res += `<td width="34%" colspan="2">`;
 
     const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
@@ -2043,7 +2054,6 @@
     res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
     res += `</td>`;
 
-    // Cột giữa: Thông tin Lễ tết (colspan=3 để rộng rãi hơn)
     res += `<td class="thongtin_letet" colspan="3">`;
     if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
     else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
@@ -2055,7 +2065,6 @@
     res += `<div>${infoDL}<br>${infoAL}</div>`;
     res += `</td>`;
 
-    // Cột phải: Can Chi (colspan=2)
     res += `<td width="34%" colspan="2">`;
     res += `<div class="ThangNgayGioTiet1" style="text-align:right; margin-right:10px;"><i class="ThangNgayGioTiet">Tháng: </i>${getMonthCanChi(currentLunarDate)}</div>`;
     res += `<div class="ThangNgayGioTiet1" style="text-align:right; margin-right:10px;"><i class="ThangNgayGioTiet">Ngày: </i>${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
@@ -2074,27 +2083,32 @@
     } else {
         cadaotucngu_random = ""; 
     }
-    // colspan=7 cho full chiều rộng
     res += `<tr><td class="cadaotucngu" colspan="7" >${cadaotucngu_random}</td></tr>`;
 
-
+    // 3. SỬA NÚT BẤM: Cập nhật biến window.isCalendarExpanded khi click
     res += `<tr><td colspan="7" class="toggle-btn-container">
       <button class="toggle-btn" onclick="
         const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
         const isHidden = rows.every(r => !r.classList.contains('show'));
+        
+        // Cập nhật trạng thái toàn cục
+        window.isCalendarExpanded = isHidden;
+
         rows.forEach((r, i) => {
           setTimeout(() => {
             if(isHidden){ r.classList.add('show'); } else { r.classList.remove('show'); }
           }, i * 100);
         });
         this.innerHTML = isHidden ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
-      ">Xem lịch tháng 🔽</button>
+      ">${btnText}</button>
     </td></tr>`;
 
-    res += printHead(mm, yy);
+    // Gọi printHead (Cần sửa cả printHead để nhận trạng thái)
+    res += printHead(mm, yy, extraClass); 
 
     for (let i=0;i<6;i++){
-      res += '<tr class="toggle-content">';
+      // 4. THÊM extraClass VÀO CÁC HÀNG LỊCH
+      res += `<tr class="toggle-content${extraClass}">`;
       for (let j=0;j<7;j++){
         let k = 7*i + j;
         if (k < emptyCells || k >= emptyCells + currentMonthArr.length){
@@ -2108,7 +2122,6 @@
       res += '</tr>';
     }
     
-    // Đóng bảng chính
     res += '</table></div>';
     return res;
   }
