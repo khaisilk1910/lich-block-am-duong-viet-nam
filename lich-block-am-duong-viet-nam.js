@@ -1987,7 +1987,7 @@
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} năm ${yy}</td></tr>`;
 
     res += '<tr><td colspan="7">';
-//    res += '<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">';
+    res += '<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">';
 
 		// SVG
 		const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
