@@ -1956,6 +1956,8 @@
   }
 
 
+
+
   function printTable(mm, yy, today, bgrOpacity){
     const jd = jdn(today.getDate(), mm, yy);
     const currentMonthArr = getMonth(mm, yy);
@@ -1966,13 +1968,13 @@
     const LunarHead = getYearCanChi(ld1.year);
     const currentLunarDate = getLunarDate(today.getDate(), mm, yy);
 
-		const dow = (currentLunarDate.jd + 1) % 7;
-		const bgImages = [
-			"amlich_khai_t2.png", "amlich_khai_t3.png", "amlich_khai_t4.png",
-			"amlich_khai_t5.png", "amlich_khai_t6.png", "amlich_khai_t7.png", "amlich_khai_cn.png"
-		];
-		const bg = bgImages[dow];
-		const bgUrl = new URL(`./images/${bg}`, import.meta.url).href;
+    const dow = (currentLunarDate.jd + 1) % 7;
+    const bgImages = [
+        "amlich_khai_t2.png", "amlich_khai_t3.png", "amlich_khai_t4.png",
+        "amlich_khai_t5.png", "amlich_khai_t6.png", "amlich_khai_t7.png", "amlich_khai_cn.png"
+    ];
+    const bg = bgImages[dow];
+    const bgUrl = new URL(`./images/${bg}`, import.meta.url).href;
 
     let res = "";
 
@@ -1982,65 +1984,67 @@
         backgroundStyle = `background: linear-gradient(rgba(0, 0, 0, ${overlayAlpha}), rgba(0, 0, 0, ${overlayAlpha})), url('${bgUrl}') no-repeat center center; background-size:cover;`;
     }
 
-		res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
+    res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
+    // Bắt đầu bảng chính (7 cột)
     res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} năm ${yy}</td></tr>`;
 
-    res += '<tr><td colspan="7">';
-    res += '<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">';
+    // --- PHẦN THÔNG TIN (Đã bỏ bảng lồng, viết trực tiếp vào bảng chính) ---
 
-		// SVG
-		const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
-		const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
-		const lunarYearIndex = (currentLunarDate.year + 8) % 12;
-		const svgNgay = getSvgConGiap(lunarDayIndex);
-		const svgThang = getSvgConGiap(lunarMonthIndex);
-		const svgNam = getSvgConGiap(lunarYearIndex);
+    // SVG
+    const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
+    const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
+    const lunarYearIndex = (currentLunarDate.year + 8) % 12;
+    const svgNgay = getSvgConGiap(lunarDayIndex);
+    const svgThang = getSvgConGiap(lunarMonthIndex);
+    const svgNam = getSvgConGiap(lunarYearIndex);
+    
     res += `<tr>`;
-		res += `<td class="svg-cell" style="transform: scaleX(-1);">${svgNgay}</td>`;
-		res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
-		res += `<td class="svg-cell">${svgThang}</td>`;
-		res += `</tr>`;
-    res += `<tr><td class="thutrongtuan" colspan="5"><div style="margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div></td></tr>`;
+    // colspan=2 để cân đối trong bảng 7 cột
+    res += `<td class="svg-cell" colspan="2" style="transform: scaleX(-1);">${svgNgay}</td>`; 
+    // colspan=3 cho ngày dương lịch to ở giữa
+    res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
+    // colspan=2
+    res += `<td class="svg-cell" colspan="2">${svgThang}</td>`;
+    res += `</tr>`;
+
+    res += `<tr><td class="thutrongtuan" colspan="7"><div style="margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div></td></tr>`;
+    
     res += `<tr>`;
+    // Cột trái: Thông tin Âm lịch (colspan=2)
     res += `<td width="34%" colspan="2">`;
 
     const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
     let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
     if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
 
-
-
     const ly = getYearInfo(currentLunarDate.year);
-        let daysInLunarMonth = 0;
-        for (let i = 0; i < ly.length; i++) {
-          if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
+    let daysInLunarMonth = 0;
+    for (let i = 0; i < ly.length; i++) {
+        if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
             if (i < ly.length - 1) {
-              daysInLunarMonth = ly[i+1].jd - ly[i].jd;
+                daysInLunarMonth = ly[i+1].jd - ly[i].jd;
             } else {
-                        // --- ĐOẠN ĐÃ SỬA ---
-              const lyNext = getYearInfo(currentLunarDate.year + 1);
-                        if (lyNext && lyNext.length > 0) {
-                  daysInLunarMonth = lyNext[0].jd - ly[i].jd;
-                        } else {
-                            daysInLunarMonth = 30; // Fallback nếu không tính được năm sau
-                        }
-                        // -------------------
+                const lyNext = getYearInfo(currentLunarDate.year + 1);
+                if (lyNext && lyNext.length > 0) {
+                    daysInLunarMonth = lyNext[0].jd - ly[i].jd;
+                } else {
+                    daysInLunarMonth = 30; 
+                }
             }
             break;
-          }
         }
-        if (daysInLunarMonth === 29) { thangAm += " (T)"; } 
-        else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
-// --- ĐOẠN ĐÃ SỬA ---
-
-
+    }
+    if (daysInLunarMonth === 29) { thangAm += " (T)"; } 
+    else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
 
     res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
     res += `</td>`;
-    res += `<td class="thongtin_letet">`;
+
+    // Cột giữa: Thông tin Lễ tết (colspan=3 để rộng rãi hơn)
+    res += `<td class="thongtin_letet" colspan="3">`;
     if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
     else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
 
@@ -2050,6 +2054,8 @@
     const idxAL = NGAY_LE_AL.indexOf(d_m_al); const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : " ";
     res += `<div>${infoDL}<br>${infoAL}</div>`;
     res += `</td>`;
+
+    // Cột phải: Can Chi (colspan=2)
     res += `<td width="34%" colspan="2">`;
     res += `<div class="ThangNgayGioTiet1" style="text-align:right; margin-right:10px;"><i class="ThangNgayGioTiet">Tháng: </i>${getMonthCanChi(currentLunarDate)}</div>`;
     res += `<div class="ThangNgayGioTiet1" style="text-align:right; margin-right:10px;"><i class="ThangNgayGioTiet">Ngày: </i>${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
@@ -2058,26 +2064,18 @@
     res += `</td>`;
     res += `</tr>`;
 
-// --- BẮT ĐẦU ĐOẠN CODE cho ca dao tục ngữ ---
-    // 1. Lấy ngày hiện tại (theo thời gian thực) để làm "hạt giống" (seed)
-    // Việc này đảm bảo cả ngày hôm đó sẽ chỉ hiện 1 câu, qua ngày mới đổi câu khác.
+    // Ca dao tục ngữ
     const _todayObj = new Date();
-    // Tạo một con số duy nhất cho ngày hôm nay (VD: 20260205)
     const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
-    // 2. Thuật toán chọn chỉ số (index) dựa trên ngày
-    // Dùng hàm Math.sin để tạo ra sự ngẫu nhiên giả lập từ số ngày
-    // Nhân với length để lấy index trong mảng
     let _randomIdx = Math.floor(Math.abs(Math.sin(_dateSeed)) * CA_DAO_TUC_NGU.length);
-    // Lấy nội dung câu ca dao
     let cadaotucngu_random = CA_DAO_TUC_NGU[_randomIdx];
-    // 3. Xử lý xuống dòng: thay ký tự \n thành thẻ <br> để hiển thị đẹp trên HTML
     if (cadaotucngu_random) {
         cadaotucngu_random = cadaotucngu_random.replace(/\n/g, '<br>');
     } else {
-        cadaotucngu_random = ""; // Phòng hờ lỗi mảng rỗng
+        cadaotucngu_random = ""; 
     }
-    res += `<tr><td class="cadaotucngu" colspan="5" >${cadaotucngu_random}</td></tr>`;
-    // --- KẾT THÚC ĐOẠN CODE ca dao tục ngữ ---
+    // colspan=7 cho full chiều rộng
+    res += `<tr><td class="cadaotucngu" colspan="7" >${cadaotucngu_random}</td></tr>`;
 
 
     res += `<tr><td colspan="7" class="toggle-btn-container">
@@ -2092,8 +2090,6 @@
         this.innerHTML = isHidden ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
       ">Xem lịch tháng 🔽</button>
     </td></tr>`;
-
-
 
     res += printHead(mm, yy);
 
@@ -2112,17 +2108,15 @@
       res += '</tr>';
     }
     
-    res += '</table></td></tr>';
-
-
-
-
-
-
-
+    // Đóng bảng chính
     res += '</table></div>';
     return res;
   }
+
+
+
+
+
 
   function getMonth(mm, yy){
     let mm1, yy1;
