@@ -2206,6 +2206,7 @@
 			this.displayYear = today.getFullYear();
 		}
 
+
     setConfig(config){
 
       this.config = {
@@ -2213,7 +2214,6 @@
         ...config
       };
 
-      this.config = config || {};
       if (!this.shadowRoot){
         this.attachShadow({mode:'open'});
       }
@@ -2236,6 +2236,7 @@
 
       this._render();
     }
+
 
     set hass(hass){
       this._hass = hass;
