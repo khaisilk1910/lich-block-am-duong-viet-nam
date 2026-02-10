@@ -1913,7 +1913,7 @@
     const monthName = mm+"/"+yy;
     res += `<tr class="toggle-content"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
     res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset;cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
-    res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button>  <button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
+    res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button><button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
     res += '<tr class="toggle-content">';
     for (let i=0;i<=6;i++){
       if (DAYNAMES[i]==='CN') res += '<td class="ngaytuan_cn">CN</td>';
@@ -1932,7 +1932,7 @@
     let cellClass = "ngaythang";
     let solarClass = "t2t6";
     let lunarClass = "am";
-    
+
     const dow = (lunarDate.jd + 1) % 7;
     if (dow === 0){ solarClass = "cn"; }
     else if (dow === 6){ solarClass = "t7"; }
@@ -1987,7 +1987,7 @@
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} năm ${yy}</td></tr>`;
 
     res += '<tr><td colspan="7">';
-    res += '<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">';
+//    res += '<table align="center" width="100%" border="0" cellpadding="0" cellspacing="0">';
 
 		// SVG
 		const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
@@ -2076,11 +2076,10 @@
     } else {
         cadaotucngu_random = ""; // Phòng hờ lỗi mảng rỗng
     }
+    res += `<tr><td class="cadaotucngu" colspan="5" >${cadaotucngu_random}</td></tr>`;
     // --- KẾT THÚC ĐOẠN CODE ca dao tục ngữ ---
 
-    // Dòng code hiển thị của bạn
-    res += `<tr><td class="cadaotucngu" colspan="5" >${cadaotucngu_random}</td></tr>`;
-    
+
     res += `<tr><td colspan="7" class="toggle-btn-container">
       <button class="toggle-btn" onclick="
         const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
