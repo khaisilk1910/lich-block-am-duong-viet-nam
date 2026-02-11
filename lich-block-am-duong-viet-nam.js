@@ -1749,10 +1749,10 @@
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
       .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
-      .thang_EN { color:#fff; text-align:center; font-size:clamp(60%,70%,80%); line-height:100%; padding-top: 10px; font-style: italic; }
-      .todayduonglich { text-align:center; vertical-align: middle; font-size:clamp(500%,550%,600%); line-height:130%; font-weight:bold; }
+      .thang_EN { color:#fff; text-align:center; font-size:clamp(80%,90%,100%); line-height:100%; padding-top: 5px; font-style: italic; }
+      .todayduonglich, .ngayamlich { text-align:center; vertical-align: middle; font-size:clamp(500%,550%,600%); line-height:130%; font-weight:bold; }
       .thutrongtuan { text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
-      .thutrongtuan_EN { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15) !important; }
+      .thutrongtuan_EN { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); }
 
       .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
       .homnay{ background-color:#FFF000; }
@@ -1762,7 +1762,6 @@
       .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
       .thangnam_amlich, .ThangNgayGioTiet1 { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
       .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
-      .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
 
       /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
@@ -1994,11 +1993,14 @@
 
     res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
     res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
+
+
+
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} | ${yy}</td></tr>`;
 
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="7" class="thang_EN">${monthNameEN} | ${yy}</td></tr>`;
+    res += `<tr><td colspan="7" class="thang_EN">${monthNameEN}</td></tr>`;
 
 
 
@@ -2076,6 +2078,32 @@
     // Thứ VI | EN
 
 
+    // Tháng Âm Lịch
+    const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
+    let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
+    if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
+    const ly = getYearInfo(currentLunarDate.year);
+    let daysInLunarMonth = 0;
+    for (let i = 0; i < ly.length; i++) {
+      if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
+          if (i < ly.length - 1) {
+              daysInLunarMonth = ly[i+1].jd - ly[i].jd;
+          } else {
+              const lyNext = getYearInfo(currentLunarDate.year + 1);
+              if (lyNext && lyNext.length > 0) {
+                  daysInLunarMonth = lyNext[0].jd - ly[i].jd;
+              } else {
+                  daysInLunarMonth = 30; 
+              }
+          }
+          break;
+      }
+    }
+    if (daysInLunarMonth === 29) { thangAm += " (T)"; } else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
+    res += `<tr class="ThangNgayGioTiet1" ><td class="thutrongtuan" colspan="7">${thangAm}</td></tr>`;
+    // Tháng Âm Lịch
+
+
     res += `<tr>`;
 
     res += `<td width="25%" colspan="2">`;
@@ -2088,31 +2116,8 @@
 
     // Block Tháng Ngày Năm
     res += `<td width="50%" colspan="3">`;
-    const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
-    let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
-    if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
-    const ly = getYearInfo(currentLunarDate.year);
-    let daysInLunarMonth = 0;
-    for (let i = 0; i < ly.length; i++) {
-        if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
-            if (i < ly.length - 1) {
-                daysInLunarMonth = ly[i+1].jd - ly[i].jd;
-            } else {
-                const lyNext = getYearInfo(currentLunarDate.year + 1);
-                if (lyNext && lyNext.length > 0) {
-                    daysInLunarMonth = lyNext[0].jd - ly[i].jd;
-                } else {
-                    daysInLunarMonth = 30; 
-                }
-            }
-            break;
-        }
-    }
-    if (daysInLunarMonth === 29) { thangAm += " (T)"; }
-    else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
-    res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
-    res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
+    res += `<span class="year-svg-container">${svgNam}</span>`;
     res += `</td>`;
     // Block Tháng Ngày Năm
 
@@ -2126,6 +2131,9 @@
     res += `</tr>`;
 
 
+    // Năm Âm Lịch
+    res += `<tr class="ThangNgayGioTiet1" ><td class="thutrongtuan" colspan="7">${getYearCanChi(currentLunarDate.year)}</td></tr>`;
+    // Năm Âm Lịch
 
 
     // Nút Xem thêm
