@@ -15,8 +15,10 @@
   const PI = Math.PI;
   function INT(d){ return Math.floor(d); }
 
+
   // ===== Data tables (Hồ Ngọc Đức) =====
   const ABOUT = "Âm lịch Việt Nam Home Assistant - Ver 20Aug2025 © 2025 Nguyễn Tiến Khải";
+
 
   // TK19: Years 1800-1899 (kept for completeness, used for <1900)
   const TK19 = [
@@ -32,6 +34,7 @@
     0x286b52, 0x4e55b0, 0x3a2776, 0x5e2570, 0x4852b0, 0x32aaa5, 0x56e950, 0x406aa0, 0x2abaa3, 0x50ab50
   ];
 
+
   // TK20: Years 1900-1999
   const TK20 = [
     0x3c4bd8, 0x624ae0, 0x4ca570, 0x3854d5, 0x5cd260, 0x44d950, 0x315554, 0x5656a0, 0x409ad0, 0x2a55d2,
@@ -45,6 +48,7 @@
     0x5c95b0, 0x4649b0, 0x30a974, 0x56a4b0, 0x40aa50, 0x29aa52, 0x4e6d20, 0x39ad47, 0x5eab60, 0x489370,
     0x344af5, 0x5a4970, 0x4464b0, 0x2c74a3, 0x50ea50, 0x3d6a58, 0x6256a0, 0x4aaad0, 0x3696d5, 0x5c92e0
   ];
+
 
   // TK21: Years 2000-2099
   const TK21 = [
@@ -1647,7 +1651,7 @@
 		["MậuTý", HUONG.CHINH_BAC], ["KỷSửu", HUONG.CHINH_BAC], ["CanhDần", HUONG.CHINH_BAC], ["TânMão", HUONG.CHINH_BAC], ["NhâmThìn", HUONG.CHINH_BAC]
 	]);
 	function getHuongXuatHanh(jd) {
-		const cc = getCanChiNgay(jd); 
+		const cc = getCanChiNgay(jd);
 		const can = cc[0];
 		const chi = cc[1];
 		const canChi = `${can}${chi}`;
@@ -1750,9 +1754,11 @@
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
       .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
       .thang_EN { color:#fff; text-align:center; font-size:clamp(80%,90%,100%); line-height:100%; padding-top: 5px; font-style: italic; }
-      .todayduonglich, .ngayamlich { text-align:center; vertical-align: middle; font-size:clamp(500%,550%,600%); line-height:130%; font-weight:bold; }
-      .thutrongtuan { text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
-      .thutrongtuan_EN { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); }
+      .todayduonglich { text-align:center; vertical-align: middle; font-size:clamp(500%,550%,600%); line-height:130%; font-weight:bold; }
+      .ngayamlich { text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
+      .thutrongtuan { text-align:center; vertical-align: middle; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
+      .thutrongtuan_EN { vertical-align: middle; border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:160%; }
+      .svg_today { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:100%; border-radius: 50%; }
 
       .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
       .homnay{ background-color:#FFF000; }
@@ -1766,12 +1772,11 @@
 
       /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
       :host { display: block; }
-
       .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
       /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
 
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
-      
+
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
       .toggle-btn-container { padding: 4px 0; }
       .toggle-content { display:none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
@@ -1996,11 +2001,11 @@
 
 
 
-    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} | ${yy}</td></tr>`;
-
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="7" class="thang_EN">${monthNameEN}</td></tr>`;
+    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} | ${yy} | ${monthNameEN}</td></tr>`;
+
+//    res += `<tr><td colspan="7" class="thang_EN">${monthNameEN}</td></tr>`;
 
 
 
@@ -2069,7 +2074,7 @@
         <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
       <td class="thutrongtuan">
-        <div style="margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5);">|</div>
+        <div class="svg_today" >|</div>
       </td>
       <td class="thutrongtuan" colspan="3">
         <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
