@@ -1751,16 +1751,17 @@
       .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
       .thang_EN { color:#fff; text-align:center; font-size:clamp(60%,70%,80%); line-height:100%; padding-top: 10px; font-style: italic; }
       .todayduonglich { text-align:center; vertical-align: middle; font-size:clamp(500%,550%,600%); line-height:130%; font-weight:bold; }
+      .thutrongtuan { text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
+      .thutrongtuan_EN { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15) !important; }
 
       .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
-      .homnay{ background-color:#FFF000 }
+      .homnay{ background-color:#FFF000; }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
       .tennam{ text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
       .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
       .thangnam_amlich, .ThangNgayGioTiet1 { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
       .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
-      .thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
 
@@ -2061,7 +2062,7 @@
 
 
     // Thứ VI | EN
-    res += `<tr>
+    res += `<tr class="thutrongtuan_EN" >
       <td class="thutrongtuan" colspan="3">
         <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
@@ -2107,8 +2108,8 @@
             break;
         }
     }
-    if (daysInLunarMonth === 29) { thangAm += " (Thiếu)"; }
-    else if (daysInLunarMonth === 30) { thangAm += " (Đủ)"; }
+    if (daysInLunarMonth === 29) { thangAm += " (T)"; }
+    else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
     res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
