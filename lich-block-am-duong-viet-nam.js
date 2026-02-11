@@ -1996,7 +1996,8 @@
     res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} | ${yy}</td></tr>`;
 
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    res += `<tr><td colspan="7" class="thang_EN">${showthangarray_EN[mm]} | ${yy}</td></tr>`;
+    const monthNameEN = showthangarray_EN[mm - 1];
+    res += `<tr><td colspan="7" class="thang_EN">${monthNameEN} | ${yy}</td></tr>`;
 
 
 
@@ -2018,8 +2019,10 @@
 
     // Ngày Lễ
     res += `<tr><td class="thongtin_letet" colspan="7">`;
-    if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
-    else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
+    if (currentLunarDate.day === 1)
+    res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
+    else if (currentLunarDate.day === 15)
+    res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
     const d_m = `${today.getDate()}/${mm}`;
     const idxDL = NGAY_LE_DL.indexOf(d_m); const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : " ";
     const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
@@ -2101,13 +2104,7 @@
 
     // Hoàng Đạo
     res += `<td width="25%" class="thongtin_letet" colspan="2">`;
-    if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
-    else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
-    const d_m = `${today.getDate()}/${mm}`;
-    const idxDL = NGAY_LE_DL.indexOf(d_m); const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : " ";
-    const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
-    const idxAL = NGAY_LE_AL.indexOf(d_m_al); const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : " ";
-    res += `<div>${infoDL}<br>${infoAL}</div>`;
+    res += `<div>Test</div>`;
     res += `</td>`;
     // Hoàng Đạo
 
