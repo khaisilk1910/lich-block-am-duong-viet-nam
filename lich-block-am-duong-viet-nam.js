@@ -2061,53 +2061,53 @@
     res += `<tr>`;
 
     res += `<td width="25%" colspan="2">`;
-      res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Tháng </i>${getMonthCanChi(currentLunarDate)}</div>`;
-      res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Ngày </i>${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
-      res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Giờ đầu </i>${getCanHour0(jd)} ${CHI[0]}</div>`;
-      res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Tiết </i>${TIETKHI[getSunLongitude(jd+1, 7.0)]}</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Tháng </i>${getMonthCanChi(currentLunarDate)}</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Ngày </i>${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Giờ đầu </i>${getCanHour0(jd)} ${CHI[0]}</div>`;
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Tiết </i>${TIETKHI[getSunLongitude(jd+1, 7.0)]}</div>`;
     res += `</td>`;
 
 
     // Block Tháng Ngày Năm
     res += `<td width="50%" colspan="3">`;
-      const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
-      let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
-      if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
-      const ly = getYearInfo(currentLunarDate.year);
-      let daysInLunarMonth = 0;
-      for (let i = 0; i < ly.length; i++) {
-          if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
-              if (i < ly.length - 1) {
-                  daysInLunarMonth = ly[i+1].jd - ly[i].jd;
-              } else {
-                  const lyNext = getYearInfo(currentLunarDate.year + 1);
-                  if (lyNext && lyNext.length > 0) {
-                      daysInLunarMonth = lyNext[0].jd - ly[i].jd;
-                  } else {
-                      daysInLunarMonth = 30; 
-                  }
-              }
-              break;
-          }
-      }
-      if (daysInLunarMonth === 29) { thangAm += " (Thiếu)"; }
-      else if (daysInLunarMonth === 30) { thangAm += " (Đủ)"; }
-      res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
-      res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
-      res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
+    const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
+    let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
+    if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
+    const ly = getYearInfo(currentLunarDate.year);
+    let daysInLunarMonth = 0;
+    for (let i = 0; i < ly.length; i++) {
+        if (ly[i].month === currentLunarDate.month && ly[i].leap === currentLunarDate.leap) {
+            if (i < ly.length - 1) {
+                daysInLunarMonth = ly[i+1].jd - ly[i].jd;
+            } else {
+                const lyNext = getYearInfo(currentLunarDate.year + 1);
+                if (lyNext && lyNext.length > 0) {
+                    daysInLunarMonth = lyNext[0].jd - ly[i].jd;
+                } else {
+                    daysInLunarMonth = 30; 
+                }
+            }
+            break;
+        }
+    }
+    if (daysInLunarMonth === 29) { thangAm += " (Thiếu)"; }
+    else if (daysInLunarMonth === 30) { thangAm += " (Đủ)"; }
+    res += `<div class="ThangNgayGioTiet1" style="text-align:center;">${thangAm}</div>`;
+    res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
+    res += `<span class="year-svg-container">${svgNam}</span><div class="ThangNgayGioTiet1" style="position: relative; text-align:center; line-height:160%;">${getYearCanChi(currentLunarDate.year)}</div>`;
     res += `</td>`;
     // Block Tháng Ngày Năm
 
 
     // Hoàng Đạo
     res += `<td width="25%" class="thongtin_letet" colspan="2">`;
-      if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
-      else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
-      const d_m = `${today.getDate()}/${mm}`;
-      const idxDL = NGAY_LE_DL.indexOf(d_m); const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : " ";
-      const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
-      const idxAL = NGAY_LE_AL.indexOf(d_m_al); const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : " ";
-      res += `<div>${infoDL}<br>${infoAL}</div>`;
+    if (currentLunarDate.day === 1) res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
+    else if (currentLunarDate.day === 15) res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
+    const d_m = `${today.getDate()}/${mm}`;
+    const idxDL = NGAY_LE_DL.indexOf(d_m); const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : " ";
+    const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
+    const idxAL = NGAY_LE_AL.indexOf(d_m_al); const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : " ";
+    res += `<div>${infoDL}<br>${infoAL}</div>`;
     res += `</td>`;
     // Hoàng Đạo
 
