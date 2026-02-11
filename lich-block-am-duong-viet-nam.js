@@ -2017,19 +2017,33 @@
     res += `</tr>`;
 
 
+
+
     // Ngày Lễ
-    res += `<tr><td class="thongtin_letet" colspan="7">`;
-    if (currentLunarDate.day === 1)
-    res += `<div style="padding-bottom:8px;">Mùng Một</div>`;
-    else if (currentLunarDate.day === 15)
-    res += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
+    let noiDungLe = "";
+    // Âm lịch
+    if (currentLunarDate.day === 1) {
+      noiDungLe += `<div style="padding-bottom:8px;">Mùng Một</div>`;
+    } else if (currentLunarDate.day === 15) {
+      noiDungLe += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
+    }
+    // Dương lịch
     const d_m = `${today.getDate()}/${mm}`;
-    const idxDL = NGAY_LE_DL.indexOf(d_m); const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : " ";
+    const idxDL = NGAY_LE_DL.indexOf(d_m);
+    const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : "";
+    // Âm lịch đặc biệt
     const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
-    const idxAL = NGAY_LE_AL.indexOf(d_m_al); const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : " ";
-    res += `<div>${infoDL}<br>${infoAL}</div>`;
-    res += `</td></tr>`;
+    const idxAL = NGAY_LE_AL.indexOf(d_m_al);
+    const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : "";
+    // Nếu có ít nhất 1 nội dung
+    if (noiDungLe || infoDL || infoAL) {
+      res += `<tr><td class="thongtin_letet" colspan="7">`;
+      res += noiDungLe;
+      res += `<div>${infoDL}${infoDL && infoAL ? " | " : ""}${infoAL}</div>`;
+      res += `</td></tr>`;
+    }
     // Ngày Lễ
+
 
 
     // Ca dao tục ngữ
