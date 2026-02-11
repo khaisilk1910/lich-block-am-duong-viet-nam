@@ -79,6 +79,8 @@
   // Mảng emoji riêng
   const CHI_EMOJI = ["🐭","🐂","🐯","🐱","🐲","🐍","🐴","🐐","🐵","🐔","🐶","🐷"];
   const TUAN = ["Chủ Nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"];
+  const TUAN_EN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
   const GIO_HD = ["110100101100","001101001011","110011010010","101100110100","001011001101","010010110011"]; // Ty..Hoi
 
   const TIETKHI = [
@@ -1678,10 +1680,7 @@
   function getThanSat(lunarDate) {
 
 		// Thập nhị trực
-	  const TRUC_ORDER = [
-	    "Kiến","Trừ","Mãn","Bình","Định","Chấp",
-	    "Phá","Nguy","Thành","Thu","Khai","Bế"
-	  ];
+	  const TRUC_ORDER = ["Kiến","Trừ","Mãn","Bình","Định","Chấp","Phá","Nguy","Thành","Thu","Khai","Bế"];
     const st_index = getSunLongitude(lunarDate.jd, 7);
     const month_chi_list = [3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,0,0,1,1,2,2,3];
     const month_chi_index = month_chi_list[st_index];
@@ -1716,20 +1715,11 @@
 			thongTin = "Không có dữ liệu cho ngày này.";
 		}
 
-    
-    const EMOJI_TRUC = {
-      "Kiến":"🚪","Trừ":"✂️","Mãn":"🌕","Bình":"⚖️",
-      "Định":"📜","Chấp":"✍️","Phá":"💥","Nguy":"⚠️",
-      "Thành":"🏰","Thu":"🌾","Khai":"🔑","Bế":"🔒"
-    };
 
-    const EMOJI_SAO = {
-      "Giác":"🐉","Cang":"🦄","Đê":"🏞️","Phòng":"🏠","Tâm":"❤️","Vĩ":"🦚","Cơ":"🧵","Đẩu":"🛶",
-      "Ngưu":"🐂","Nữ":"👩","Hư":"🌫️","Nguy":"⚠️","Thất":"7️⃣","Bích":"💎","Khuê":"📚","Lâu":"🏯",
-      "Vị":"🍽️","Mão":"🐇","Tất":"🧦","Chủy":"👄","Sâm":"🌱","Tỉnh":"💧","Quỷ":"👹","Liễu":"🌿",
-      "Tinh":"⭐","Trương":"📜","Dực":"🪽","Chẩn":"🩺"
-    };
-    
+    const EMOJI_TRUC = {"Kiến":"🚪","Trừ":"✂️","Mãn":"🌕","Bình":"⚖️","Định":"📜","Chấp":"✍️","Phá":"💥","Nguy":"⚠️","Thành":"🏰","Thu":"🌾","Khai":"🔑","Bế":"🔒"};
+
+    const EMOJI_SAO = {"Giác":"🐉","Cang":"🦄","Đê":"🏞️","Phòng":"🏠","Tâm":"❤️","Vĩ":"🦚","Cơ":"🧵","Đẩu":"🛶","Ngưu":"🐂","Nữ":"👩","Hư":"🌫️","Nguy":"⚠️","Thất":"7️⃣","Bích":"💎","Khuê":"📚","Lâu":"🏯","Vị":"🍽️","Mão":"🐇","Tất":"🧦","Chủy":"👄","Sâm":"🌱","Tỉnh":"💧","Quỷ":"👹","Liễu":"🌿","Tinh":"⭐","Trương":"📜","Dực":"🪽","Chẩn":"🩺"};
+
     return {
       truc: { 
         name: trucName, 
@@ -1757,24 +1747,26 @@
 
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
+      .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
+      .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
+      .thang_EN { text-align:center; font-size:clamp(60%,70%,80%); line-height:120%; font-weight:bold; padding-top: 10px; font-style: italic; }
+      .todayduonglich { text-align:center; vertical-align: middle; font-size:clamp(460%,480%,500%); line-height:150%; font-weight:bold; }
+
       .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
       .homnay{ background-color:#FFF000 }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
+
       .tennam{ text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
       .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
-      .thangnam{ text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px;}
       .thangnam_amlich, .ThangNgayGioTiet1 { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
       .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
-      .todayduonglich{ text-align:center; font-size:clamp(420%,460%,480%); line-height:100%; font-weight:bold; }
       .thutrongtuan{ text-align:center; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .ngayamlich{ text-align:center; font-size:clamp(220%,240%,260%); font-weight:bold; height: 30px; padding-top: 16px; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
 
       /* --- BẮT ĐẦU ĐOẠN CẦN THÊM --- */
       :host { display: block; }
-      /* .lunar-card svg { width: 100% !important; height: auto !important; max-width: 200px; margin: 0 auto; display: block; } */
-      .toggle-content { display: none; }
-      .toggle-content.show { display: table-row; }
+
       .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
       /* --- KẾT THÚC ĐOẠN CẦN THÊM --- */
 
@@ -1782,24 +1774,24 @@
       
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
       .toggle-btn-container { padding: 4px 0; }
-      
       .toggle-content { display:none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
       .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
-      .thang{ font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
+
+
       .tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; }
-      .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .tenthang { padding: 4px 0; }
       .ngaytuan, .ngaytuan_t7, .ngaytuan_cn{ width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
       .ngaythang { padding-top: 10px; }
 
-			.svg-cell { vertical-align: bottom; text-align: center; height: 55px; align-items: center; justify-content: center; }
 
       .am, .am2{ color:blue; text-align:right; padding-right:3px; font-size:65%; }
       .t2t6, .t7, .cn{ text-align:center; font-size:125%; }
-      .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
       .homnay{ font-weight:bold; }
 
+      .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
+      .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
 			
+			.svg-cell { vertical-align: bottom; text-align: center; height: 55px; align-items: center; justify-content: center; }
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
 			@keyframes marquee-horizontal {
 				0% {
@@ -1819,6 +1811,7 @@
 					transform: scaleX(1);
 				}
 			}
+
     `;
 
     // --- PHẦN 2: CSS MÀU SẮC CHO CHẾ ĐỘ 'NORMAL' (MẶC ĐỊNH) ---
@@ -1961,12 +1954,13 @@
 
 
 
-// 1. KHAI BÁO BIẾN TOÀN CỤC ĐỂ LƯU TRẠNG THÁI
-// 
+
+// Lưu trạng thái khi Xem lịch tháng khi chuyển tháng năm không bị đóng 
   if (typeof window.isCalendarExpanded === 'undefined') {
       window.isCalendarExpanded = false;
   }
 
+// Hiển thị
   function printTable(mm, yy, today, bgrOpacity){
     const jd = jdn(today.getDate(), mm, yy);
     const currentMonthArr = getMonth(mm, yy);
@@ -1993,39 +1987,66 @@
         backgroundStyle = `background: linear-gradient(rgba(0, 0, 0, ${overlayAlpha}), rgba(0, 0, 0, ${overlayAlpha})), url('${bgUrl}') no-repeat center center; background-size:cover;`;
     }
 
-    // 2. XÁC ĐỊNH TRẠNG THÁI HIỂN THỊ DỰA VÀO BIẾN TOÀN CỤC
-    // Nếu đang mở -> thêm class 'show', nút là 'Thu gọn'
-    // Nếu đang đóng -> không thêm class, nút là 'Xem lịch'
+
     const extraClass = window.isCalendarExpanded ? ' show' : '';
     const btnText = window.isCalendarExpanded ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
 
     res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
     res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
-    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} năm ${yy}</td></tr>`;
+    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} | ${yy}</td></tr>`;
 
-    // ... (Phần SVG và thông tin chi tiết giữ nguyên không đổi) ...
-    // [Đoạn code giữa giữ nguyên để tiết kiệm không gian hiển thị]
-    
-    // ... Phần code SVG/Con giáp/Tiết khí giữ nguyên như cũ ...
+    const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    res += `<tr><td colspan="7" class="thang_EN">${showthangarray_EN[mm]} | ${yy}</td></tr>`;
+
+
+
     const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
     const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
     const lunarYearIndex = (currentLunarDate.year + 8) % 12;
     const svgNgay = getSvgConGiap(lunarDayIndex);
     const svgThang = getSvgConGiap(lunarMonthIndex);
     const svgNam = getSvgConGiap(lunarYearIndex);
-    
+
     res += `<tr>`;
-    res += `<td class="svg-cell" colspan="2" style="transform: scaleX(-1);">${svgNgay}</td>`; 
+    res += `<td class="svg-cell" colspan="2" style="transform: scaleX(-1);">${svgNgay}</td>`;
+
     res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
+
     res += `<td class="svg-cell" colspan="2">${svgThang}</td>`;
     res += `</tr>`;
 
-    res += `<tr><td class="thutrongtuan" colspan="7"><div style="margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div></td></tr>`;
-    
+
+    // Ca dao tục ngữ
+    const _todayObj = new Date();
+    const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
+    let _randomIdx = Math.floor(Math.abs(Math.sin(_dateSeed)) * CA_DAO_TUC_NGU.length);
+    let cadaotucngu_random = CA_DAO_TUC_NGU[_randomIdx];
+    if (cadaotucngu_random) {
+        cadaotucngu_random = cadaotucngu_random.replace(/\n/g, '<br>');
+    } else {
+        cadaotucngu_random = ""; 
+    }
+    res += `<tr><td class="cadaotucngu" colspan="7" >${cadaotucngu_random}</td></tr>`;
+    // Ca dao tục ngữ
+
+
+    res += `<tr>
+      <td class="thutrongtuan" colspan="3">
+        <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
+      </td>
+      <td class="thutrongtuan">
+        <div style="margin:0 auto; width:20%; border-radius:6px; background-color:rgba(204,255,204,.5);">|</div>
+      </td>
+      <td class="thutrongtuan" colspan="3">
+        <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
+      </td>
+    </tr>`;
+
     res += `<tr>`;
     res += `<td width="34%" colspan="2">`;
 
     const showthangarray = ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Chạp"];
+
     let thangAm = showthangarray[currentLunarDate.month-1] || ("Tháng " + currentLunarDate.month);
     if (currentLunarDate.leap===1) thangAm += " (Nhuận)";
 
@@ -2073,24 +2094,13 @@
     res += `</td>`;
     res += `</tr>`;
 
-    // Ca dao tục ngữ
-    const _todayObj = new Date();
-    const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
-    let _randomIdx = Math.floor(Math.abs(Math.sin(_dateSeed)) * CA_DAO_TUC_NGU.length);
-    let cadaotucngu_random = CA_DAO_TUC_NGU[_randomIdx];
-    if (cadaotucngu_random) {
-        cadaotucngu_random = cadaotucngu_random.replace(/\n/g, '<br>');
-    } else {
-        cadaotucngu_random = ""; 
-    }
-    res += `<tr><td class="cadaotucngu" colspan="7" >${cadaotucngu_random}</td></tr>`;
 
-    // 3. SỬA NÚT BẤM: Cập nhật biến window.isCalendarExpanded khi click
+    // Nút Xem thêm
     res += `<tr><td colspan="7" class="toggle-btn-container">
       <button class="toggle-btn" onclick="
         const rows = [...this.closest('table').querySelectorAll('.toggle-content')];
         const isHidden = rows.every(r => !r.classList.contains('show'));
-        
+
         // Cập nhật trạng thái toàn cục
         window.isCalendarExpanded = isHidden;
 
@@ -2103,7 +2113,7 @@
       ">${btnText}</button>
     </td></tr>`;
 
-    // Gọi printHead (Cần sửa cả printHead để nhận trạng thái)
+    // Hiển thị control lịch tháng
     res += printHead(mm, yy, extraClass); 
 
     for (let i=0;i<6;i++){
