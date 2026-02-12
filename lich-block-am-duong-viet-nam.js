@@ -1760,7 +1760,7 @@
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
 
-      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); border-radius: 6px; }
+      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
       .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 46px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
@@ -1781,7 +1781,7 @@
       .thang_am_lich, .nam_am_lich { color:rgba(255,255,153,1); width: 38%; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(16px, 1.8vw, 20px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
 
 
-      .ngayamlich { color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; border-radius: 6px; }
+      .ngayamlich { color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
 
 
       .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(6px, 0.8vw, 10px); padding: 1px auto; margin: 6px auto 1px auto; }
@@ -1856,10 +1856,12 @@
         .toggle-btn, .nav-btn {
             border: none !important;
         }
-        .nav-btn:hover, .toggle-btn:hover, .todayduonglich:hover, ngayamlich:hover {
+        .nav-btn:hover, .toggle-btn:hover {
             background-color: rgba(255, 255, 255, 0.2) !important;
         }
-
+        .todayduonglich:hover, .ngayamlich:hover {
+            color: rgba(255, 255, 0, 1) !important; text-shadow: 0 8px 16px rgba(255, 200, 0, 0.5)!important;
+        }
         /* 5. Làm nổi bật ngày hôm nay bằng một lớp nền mờ thay vì màu vàng */
         .homnay {
             background-color: rgba(255, 255, 255, 0.15) !important;
@@ -1991,7 +1993,7 @@
 
 
     // Ngày Dương To
-    res += `<tr><td class="todayduonglich" colspan="7" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</td></tr>`;
+    res += `<tr><td colspan="7"><div class="todayduonglich" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td></tr>`;
     // Ngày Dương To
 
 
@@ -2087,8 +2089,8 @@
 
 
     // Ngày Âm Lịch
-    res += `<td width="50%" colspan="3"  onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">`;
-    res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
+    res += `<td width="50%" colspan="3" >`;
+    res += `<div class="ngayamlich" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span>`;
     res += `</td>`;
     // Ngày Âm Lịch
