@@ -1797,9 +1797,11 @@
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
 
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
-      .toggle-btn-container { padding: 4px 0; }
+      .toggle-btn-container { padding: 10px 0; }
       .toggle-content { display:none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
       .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
+      
+      
       .tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .ngaytuan, .ngaytuan_t7, .ngaytuan_cn{ width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
       .ngaythang { padding-top: 10px; }
@@ -1869,7 +1871,7 @@
         }
 
         /* 6. Thêm các đường kẻ phân cách cho chế độ transparent */
-        .giohoangdao, .toggle-btn-container, .navi-l, .navi-r, .tenthang, .ngaytuan, .ngaytuan_t7, .ngaytuan_cn {
+        .giohoangdao, .navi-l, .navi-r, .tenthang, .ngaytuan, .ngaytuan_t7, .ngaytuan_cn {
             border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
       `;
@@ -1969,7 +1971,6 @@
     const btnText = window.isCalendarExpanded ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
 
 
-//    res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
     res += `<div style="${backgroundStyle} border-radius: 16px;">`;
     res += `<table class="thang" border="0" border-radius: 16px; cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
 
@@ -1982,7 +1983,7 @@
 
 
     // Phân cách
-    res += `<tr><td colspan="7" class="phan_cach">────────  ⟡  ────────</td></tr>`;
+    res += `<tr><td colspan="7" class="phan_cach">──────  ⟡  ──────</td></tr>`;
     // Phân cách
 
 
@@ -1993,7 +1994,6 @@
 
     // Ngày Lễ
     let noiDungLe = "";
-    // Âm lịch
     if (currentLunarDate.day === 1) {
       noiDungLe += `<div style="padding-bottom:8px;">Mùng Một</div>`;
     } else if (currentLunarDate.day === 15) {
@@ -2084,7 +2084,7 @@
 
 
     // Ngày Âm Lịch
-    res += `<td width="50%" colspan="3">`;
+    res += `<td width="50%" colspan="3"  onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span>`;
     res += `</td>`;
@@ -2146,9 +2146,6 @@
     res += '</table></div>';
     return res;
   }
-
-
-
 
 
 
@@ -2221,7 +2218,6 @@
 
       // --- PHẦN CODE TẠO KHUNG POPUP (Chỉ chạy 1 lần) ---
       if (!document.getElementById('ha-lich-popup')) {
-        // Chèn HTML popup vào thẳng body để không bị lỗi hiển thị
         document.body.insertAdjacentHTML('beforeend', `
           <div id="ha-lich-popup" class="ha-popup" onclick="window.haClosePopup()">
             <div class="ha-popup-box" onclick="event.stopPropagation()">
