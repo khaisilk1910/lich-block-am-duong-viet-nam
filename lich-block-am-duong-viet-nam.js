@@ -1785,7 +1785,12 @@
       .ngayamlich{ color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
 
 
-      .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
+      .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(9px, 0.9vw, 14px); line-height:120%; padding: 2px 2px; margin: 4px auto; }
+      .ThangNgayGioTiet_after { font-family: 'Playfair Display', serif; color:rgba(255,255,153,1); text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; padding: 2px 2px; margin: 4px auto; }
+
+
+
+
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
 
       .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
@@ -1794,20 +1799,15 @@
       .toggle-btn-container { padding: 4px 0; }
       .toggle-content { display:none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
       .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
-
-
       .tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .ngaytuan, .ngaytuan_t7, .ngaytuan_cn{ width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
       .ngaythang { padding-top: 10px; }
-
-
       .am, .am2{ color:blue; text-align:right; padding-right:3px; font-size:65%; }
       .t2t6, .t7, .cn{ text-align:center; font-size:125%; }
       .homnay{ font-weight:bold; }
-
       .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-			
+		
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
 			@keyframes marquee-horizontal {
 				0% {
@@ -1841,15 +1841,15 @@
         }
 
         /* 2. Chuyển màu chữ mặc định (vốn là đen, xanh, tím) thành trắng */
-        .thang_top, .ThangNgayGioTiet, .thutrongtuan, .t2t6,
+        .thang_top, .thutrongtuan, .t2t6,
          .tenthang, .navi-r, .ngaytuan, .toggle-btn, .viecnenlam b, .viecnentranh b,
         .cat_tinh b, .hung_tinh b, .giohoangdao {
             color: #ffffff !important;
         }
-        .am, .am2, .ThangNgayGioTiet1, .ngayamlich { color: rgba(255,255,153,1) !important; font-weight: bold !important; }
+        .am, .am2, .ngayamlich { color: rgba(255,255,153,1) !important; font-weight: bold !important; }
 
         /* 3. Xóa bỏ bóng chữ (text-shadow) để dễ đọc hơn */
-        .thongtin_letet, .ThangNgayGioTiet1, .ngayamlich {
+        .thongtin_letet {
              text-shadow: none !important;
         }
 
@@ -2077,24 +2077,23 @@
     res += `<tr>`;
 
     res += `<td width="25%" colspan="2">`;
-    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Tháng </i>${getMonthCanChi(currentLunarDate)}</div>`;
-    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Ngày </i>${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
-    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Giờ đầu </i>${getCanHour0(jd)} ${CHI[0]}</div>`;
-    res += `<div class="ThangNgayGioTiet1" style="text-align:center;"><i class="ThangNgayGioTiet">Tiết </i>${TIETKHI[getSunLongitude(jd+1, 7.0)]}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──────  Tháng  ──────</div><div class="ThangNgayGioTiet_after">${getMonthCanChi(currentLunarDate)}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──────  Ngày  ──────</div><div class="ThangNgayGioTiet_after">${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
     res += `</td>`;
 
 
-    // Block Tháng Ngày Năm
+    // Ngày Âm Lịch
     res += `<td width="50%" colspan="3">`;
     res += `<div class="ngayamlich">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span>`;
     res += `</td>`;
-    // Block Tháng Ngày Năm
+    // Ngày Âm Lịch
 
 
     // Hoàng Đạo
     res += `<td width="25%" colspan="2">`;
-    res += `<div>Test</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──────  Giờ đầu  ──────</div><div class="ThangNgayGioTiet_after">${getCanHour0(jd)} ${CHI[0]}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──────  Tiết  ──────</div><div class="ThangNgayGioTiet_after">${TIETKHI[getSunLongitude(jd+1, 7.0)]}</div>`;
     res += `</td>`;
     // Hoàng Đạo
 
