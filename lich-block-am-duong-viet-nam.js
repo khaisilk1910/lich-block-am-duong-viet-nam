@@ -1752,12 +1752,12 @@
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
-      .ngan_cach { color:rgba(255, 255, 255, 0.6); font-size:clamp(80%,90%,100%);  vertical-align: bottom; }
-      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size:28px; vertical-align: bottom; }
+      .ngan_cach { color:rgba(255, 255, 255, 0.6); font-size:clamp(80%,90%,100%); text-align:center; vertical-align: bottom; }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size:28px; text-align:center; vertical-align: bottom; }
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; vertical-align: bottom; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.6); vertical-align: middle; text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; padding-top: 8px; padding-bottom: 8px; }
 
-      .todayduonglich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(620%,660%,700%); line-height:130%; font-weight:bold; }
+      .todayduonglich { color:#fff; font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(620%,660%,700%); line-height:100%; font-weight:bold; }
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
       .thutrongtuan { text-align:center; vertical-align: middle; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
