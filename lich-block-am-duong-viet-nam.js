@@ -1969,9 +1969,11 @@
     const extraClass = window.isCalendarExpanded ? ' show' : '';
     const btnText = window.isCalendarExpanded ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
 
+
 //    res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
     res += `<div style="${backgroundStyle} border-radius: 16px;">`;
     res += `<table class="thang" border="0" border-radius: 16px; cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
+
 
     // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -1979,29 +1981,15 @@
     res += `<tr><td colspan="7" class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
     // Tháng Năm Top
 
+
     // Phân cách
     res += `<tr><td colspan="7" class="phan_cach">────────  ⟡  ────────</td></tr>`;
     // Phân cách
 
 
-    const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
-    const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
-    const lunarYearIndex = (currentLunarDate.year + 8) % 12;
-    const svgNgay = getSvgConGiap(lunarDayIndex);
-    const svgThang = getSvgConGiap(lunarMonthIndex);
-    const svgNam = getSvgConGiap(lunarYearIndex);
-
-    res += `<tr>`;
-    res += `<td class="svg-cell" colspan="2" style="transform: scaleX(-1);">${svgNgay}</td>`;
-
     // Ngày Dương To
-    res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
+    res += `<tr><td class="todayduonglich" colspan="7">${today.getDate()}</td></tr>`;
     // Ngày Dương To
-
-    res += `<td class="svg-cell" colspan="2">${svgThang}</td>`;
-    res += `</tr>`;
-
-
 
 
     // Ngày Lễ
@@ -2042,6 +2030,12 @@
 
 
     // Thứ VI | EN
+    const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
+    const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
+    const lunarYearIndex = (currentLunarDate.year + 8) % 12;
+    const svgNgay = getSvgConGiap(lunarDayIndex);
+    const svgThang = getSvgConGiap(lunarMonthIndex);
+    const svgNam = getSvgConGiap(lunarYearIndex);
     res += `<tr >
       <td colspan="3">
         <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
