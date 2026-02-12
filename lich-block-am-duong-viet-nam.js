@@ -1785,8 +1785,8 @@
       .ngayamlich{ color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
 
 
-      .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(9px, 0.9vw, 14px); line-height:120%; padding: 2px 2px; margin: 4px auto; }
-      .ThangNgayGioTiet_after { font-family: 'Playfair Display', serif; color:rgba(255,255,153,1); text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; padding: 2px 2px; margin: 4px auto; }
+      .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(6px, 0.8vw, 10px); padding: 2px 2px; margin: 4px auto; }
+      .ThangNgayGioTiet_after { font-family: 'Playfair Display', serif; color:rgba(255,255,153,1); text-align:center; font-size: clamp(10px, 1vw, 16px); font-weight:bold; padding: 2px 2px; margin: 4px auto; }
 
 
 
@@ -2077,8 +2077,8 @@
     res += `<tr>`;
 
     res += `<td width="25%" colspan="2">`;
-    res += `<div class="ThangNgayGioTiet_before">──────  Tháng  ──────</div><div class="ThangNgayGioTiet_after">${getMonthCanChi(currentLunarDate)}</div>`;
-    res += `<div class="ThangNgayGioTiet_before">──────  Ngày  ──────</div><div class="ThangNgayGioTiet_after">${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──⟡  Tháng  ⟡──</div><div class="ThangNgayGioTiet_after">${getMonthCanChi(currentLunarDate)}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──⟡  Ngày  ⟡──</div><div class="ThangNgayGioTiet_after">${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}</div>`;
     res += `</td>`;
 
 
@@ -2092,8 +2092,8 @@
 
     // Hoàng Đạo
     res += `<td width="25%" colspan="2">`;
-    res += `<div class="ThangNgayGioTiet_before">──────  Giờ đầu  ──────</div><div class="ThangNgayGioTiet_after">${getCanHour0(jd)} ${CHI[0]}</div>`;
-    res += `<div class="ThangNgayGioTiet_before">──────  Tiết  ──────</div><div class="ThangNgayGioTiet_after">${TIETKHI[getSunLongitude(jd+1, 7.0)]}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──⟡  Giờ đầu  ⟡──</div><div class="ThangNgayGioTiet_after">${getCanHour0(jd)} ${CHI[0]}</div>`;
+    res += `<div class="ThangNgayGioTiet_before">──⟡  Tiết  ⟡──</div><div class="ThangNgayGioTiet_after">${TIETKHI[getSunLongitude(jd+1, 7.0)]}</div>`;
     res += `</td>`;
     // Hoàng Đạo
 
