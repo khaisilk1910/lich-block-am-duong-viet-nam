@@ -1794,24 +1794,22 @@
 
 
 
-      .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
-      .viecnenlam, .viecnentranh, .cat_tinh, .hung_tinh { text-align:left; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:150%;}
-
-
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
       .toggle-btn-container { padding: 0px auto; margin: 0px auto 10px auto; }
       .toggle-content { display:none; opacity:0; transform: translateY(-10px); transition: opacity 0.4s ease, transform 0.4s ease; }
       .toggle-content.show { display:table-row; opacity:1; transform: translateY(0); }
       
-      
-      .tenthang{ text-align:center; font-size:125%; line-height:100%; font-weight:bold; padding: 4px 0; }
-      .ngaytuan, .ngaytuan_t7, .ngaytuan_cn{ width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
-      .ngaythang { padding-top: 10px; }
-      .am, .am2{ color:blue; text-align:right; padding-right:3px; font-size:65%; }
-      .t2t6, .t7, .cn{ text-align:center; font-size:125%; }
-      .homnay{ font-weight:bold; }
       .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+      
+      .tenthang { text-align:center; font-size:125%; line-height:100%; font-weight:bold; padding: 4px 0; }
+      .ngaytuan, .ngaytuan_t7, .ngaytuan_cn { width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
+      .ngaythang { padding-top: 10px; }
+      .am, .am2 { color:blue; text-align:right; padding-right:3px; font-size:65%; }
+      .t2t6 { text-align:center; font-size:125%; }
+      .t7 { color:green; text-align:center; font-size:125%; }
+      .cn { color:red; text-align:center; font-size:125%; }
+      .homnay { font-weight:bold; }
 		
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
 			@keyframes marquee-horizontal {
