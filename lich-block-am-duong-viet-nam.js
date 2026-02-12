@@ -1744,7 +1744,7 @@
   const DAYNAMES = ["T2","T3","T4","T5","T6","T7","CN"];
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
 
-  function printStyle(today, currentLunarDate, backgroundType = 'normal'){
+  function printStyle(today, currentLunarDate, backgroundType = 'transparent'){
     const formatthutrongtuan = TUAN[(currentLunarDate.jd + 1) % 7];
     let res = "";
     res += '<style>\n';
@@ -1752,17 +1752,19 @@
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
-      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size:28px; }
-      .ngan_cach { color: rgba(255, 255, 255, 0.6); width:1px; }
-      .thangnam { font-family: 'Be Vietnam Pro', sans-serif; text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
-      .thang_EN { color:#fff; text-align:center; font-size:clamp(80%,90%,100%); line-height:100%; padding-top: 5px; font-style: italic; }
+      .ngan_cach { color:rgba(255, 255, 255, 0.6); font-size:clamp(80%,90%,100%);  vertical-align: bottom; }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size:28px; vertical-align: bottom; }
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; vertical-align: bottom; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.6); vertical-align: middle; text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; padding-top: 8px; padding-bottom: 8px; }
+
       .todayduonglich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(620%,660%,700%); line-height:130%; font-weight:bold; }
+
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
       .thutrongtuan { text-align:center; vertical-align: middle; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .thutrongtuan_EN { vertical-align: middle; border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:160%; }
       .svg_today { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:100%; border-radius: 50%; }
 
-      .cadaotucngu{color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
+      .cadaotucngu{ font-family: 'Playfair Display', serif; color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
       .homnay{ background-color:#FFF000; }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
@@ -1821,58 +1823,18 @@
 
     `;
 
-    // --- PHẦN 2: CSS MÀU SẮC CHO CHẾ ĐỘ 'NORMAL' (MẶC ĐỊNH) ---
-    res += `
-      .tennam{ color:#000; background-color:#CCC }
-      .thongtin_letet{ text-shadow:-1px 0 yellow,0 1px yellow,1px 0 yellow,0 -1px yellow; color:#f00 }
-      .thangnam{ color:#000; background-color:rgba(204,255,204,.5); }
-      .thangnam_amlich{ color:#000 }
-      .ThangNgayGioTiet{ color:#000 }
-      .ThangNgayGioTiet1{ text-shadow:-1px 0 yellow,0 1px yellow,1px 0 yellow,0 -1px yellow; color:#00f }
-      .todayduonglich{ color:${(formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#008000':'#ff0'))}; text-shadow:-3px 0 blue,0 3px blue,3px 0 blue,0 -3px blue }
-      .thutrongtuan{ color:${(formatthutrongtuan==='Chủ Nhật'?'#f00':(formatthutrongtuan==='Thứ Bảy'?'#008000':'#000'))} }
-      .ngayamlich{ color:#00f; text-shadow:-2px 0 yellow,0 2px yellow,2px 0 yellow,0 -2px yellow; }
-      .giohoangdao{ color:#fff; background-color:rgba(0,0,255,.5)}
-      .viecnenlam{ color:#00ffff; background-color:rgba(0,0,255,.5)}
-      .viecnentranh{ color:#ff0000; background-color:rgba(0,0,255,.5)}
-      .cat_tinh{ color:#00ff00; background-color:rgba(0,0,255,.5)}
-      .hung_tinh{ color:#ff0000; background-color:rgba(0,0,255,.5)}
-      .toggle-btn { color:#fff; background-color: rgba(0,0,255,0.2); }
-      .navi-l{ color:red } .navi-r{ color:#330033 }
-      .tenthang{ color:#330033; background-color:#CCFFCC }
-      .navi-l,.navi-r{ background-color:#CCFFCC }
-      .ngaytuan{ color:#330033; background-color:#FFFFCC }
-      .ngaytuan_t7{ color:green; background-color:#FFFFCC }
-      .ngaytuan_cn{ color:#f00; background-color:#FFFFCC }
-      .ngaythang{ background-color:#FDFDF0 }
-      .homnay{ background-color:#FFF000 }
-      .tet{ background-color:#FFCC99 }
-      .am{ color:blue }
-      .am2{ color:#004080 }
-      .t2t6{ color:black }
-      .t7{ color:green }
-      .cn{ color:red }
-      .nav-btn { background-color: rgba(128, 128, 128,0.3); }
-      .nav-btn:hover { background-color: rgba(128, 128, 128,0.6); }
-
-      .giohoangdao { border-bottom: 1px solid rgba(0,0,255,0.2); }
-      .toggle-btn-container { border-bottom: 1px solid rgba(0,0,255,0.2); }
-      .navi-l, .navi-r, .tenthang { border-bottom: 1px solid #a2bda2; }
-      .ngaytuan, .ngaytuan_t7, .ngaytuan_cn { border-bottom: 1px solid #dedeac; }
-    `;
-
     // --- PHẦN 3: GHI ĐÈ CSS NẾU LÀ CHẾ ĐỘ 'TRANSPARENT' ---
     if (backgroundType === 'transparent') {
       res += `
         /* 1. Xóa tất cả hình nền và màu nền */
-        .lunar-card > div:first-child, .thangnam, .giohoangdao, .viecnenlam, .viecnentranh,
+        .lunar-card > div:first-child, .thang_top, .giohoangdao, .viecnenlam, .viecnentranh,
         .cat_tinh, .hung_tinh, .tenthang, .navi-l, .navi-r, .ngaytuan, .ngaytuan_t7,
         .ngaytuan_cn, .ngaythang, .tet, .homnay, .nav-btn, .toggle-btn, .thutrongtuan div {
             background: transparent !important;
         }
 
         /* 2. Chuyển màu chữ mặc định (vốn là đen, xanh, tím) thành trắng */
-        .tennam, .thangnam, .thangnam_amlich, .ThangNgayGioTiet, .thutrongtuan, .t2t6,
+        .tennam, .thang_top, .thangnam_amlich, .ThangNgayGioTiet, .thutrongtuan, .t2t6,
          .tenthang, .navi-r, .ngaytuan, .toggle-btn, .viecnenlam b, .viecnentranh b,
         .cat_tinh b, .hung_tinh b, .giohoangdao {
             color: #ffffff !important;
@@ -2001,12 +1963,15 @@
     res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
     res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
 
-
-
+    // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} <span class="ngan_cach">❖</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
+    res += `<tr><td colspan="7" class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
+    // Tháng Năm Top
 
+    // Phân cách
+    res += `<tr><td colspan="7" class="phan_cach">────────  ⟡  ────────</td></tr>`;
+    // Phân cách
 
 
     const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
