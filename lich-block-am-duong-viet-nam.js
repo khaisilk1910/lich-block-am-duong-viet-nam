@@ -1761,8 +1761,9 @@
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
+      .thongtin_letet{ font-family: 'Playfair Display', serif; color:#ffff99; line-height: 1.2; padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
 
-      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color:#ffff99; line-height: 1.4; padding: 12px 16px;; margin:10px 20px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color:#ffff99; line-height: 1.2; padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
 
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
@@ -1774,7 +1775,6 @@
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
       .tennam{ text-align:center; font-size:150%; line-height:120%; font-weight:bold; }
-      .thongtin_letet{ text-align:center; margin-left:auto; margin-right:auto; font-size:clamp(70%,80%,90%); font-weight:bold; }
       .thangnam_amlich, .ThangNgayGioTiet1 { text-align:right; font-size:clamp(60%,80%,90%); font-weight:bold; }
       .ThangNgayGioTiet{ text-align:right; font-size:clamp(50%,60%,70%); font-weight:bold; }
       .giohoangdao{ text-align:center; font-size:clamp(60%,65%,70%); font-weight:bold; line-height:140%; padding-bottom: 8px; }
