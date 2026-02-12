@@ -1999,7 +1999,7 @@
 
 
     // Ngày Dương To
-    res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp vào để xem chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td></tr>`;
+    res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td></tr>`;
     // Ngày Dương To
 
 
@@ -2096,7 +2096,7 @@
 
     // Ngày Âm Lịch
     res += `<td width="50%" colspan="3" >`;
-    res += `<div class="ngayamlich" title="Nhấp vào để xem chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${currentLunarDate.day}</div>`;
+    res += `<div class="ngayamlich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span>`;
     res += `</td>`;
     // Ngày Âm Lịch
@@ -2248,7 +2248,7 @@
         style.innerHTML = `
           .ha-popup { position: fixed !important; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 99999 !important; display: none; justify-content: center; align-items: flex-end; backdrop-filter: blur(4px); }
           .ha-popup.show { display: flex !important; }
-          .ha-popup-box { background: var(--card-background-color, #fff); color: var(--primary-text-color, #000); width: 100%; max-width: 500px; max-height: 85%; border-radius: 18px 18px 0 0; padding: 20px; overflow: auto; animation: slideUp 0.3s ease; margin-bottom: 0; }
+          .ha-popup-box { background: linear-gradient(180deg, #1a1a1a, #000) !important; color: #fff !important; width: 100%; max-width: 500px; max-height: 85%; border-radius: 18px 18px 0 0; padding: 20px; overflow: auto; animation: slideUp 0.3s ease; margin-bottom: 0; }
           @media (min-width: 600px) { .ha-popup { align-items: center; } .ha-popup-box { border-radius: 18px; margin-bottom: auto; width: 400px; } }
           .ha-popup-header { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.2em; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
           .ha-popup-close { font-size: 24px; cursor: pointer; padding: 5px; }
