@@ -1772,9 +1772,12 @@
       .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.4; font-weight:bold; padding: 6px 6px;; margin: 0 auto; }
 
 
+      .svg_td { text-align:center; }
+      .svg_circle_divider { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-size:14px; }
+
+
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
-      .svg_today { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:100%; border-radius: 50%; }
 
       .homnay{ background-color:#FFF000; }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
@@ -2042,8 +2045,8 @@
       <td colspan="3">
         <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
-      <td>
-        <div  class="thutrongtuan" class="svg_today" >|</div>
+      <td class="svg_td" >
+        <div class="svg_circle_divider" >|</div>
       </td>
       <td colspan="3">
         <div class="thutrongtuan">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
