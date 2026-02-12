@@ -1405,9 +1405,6 @@
   };
 
 
-
-
-
   // ===== Core astronomy helpers =====
   function jdn(dd, mm, yy){
     let a = INT((14 - mm) / 12);
@@ -1749,7 +1746,7 @@
     let res = "";
     res += '<style>\n';
 
-    // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
+    // --- CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
       :host { display: block; }
       .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
@@ -1763,7 +1760,7 @@
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
 
-      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
+      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); border-radius: 6px; }
 
       .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 46px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
@@ -1784,14 +1781,11 @@
       .thang_am_lich, .nam_am_lich { color:rgba(255,255,153,1); width: 38%; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(16px, 1.8vw, 20px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
 
 
-      .ngayamlich{ color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
+      .ngayamlich { color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; border-radius: 6px; }
 
 
       .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(6px, 0.8vw, 10px); padding: 1px auto; margin: 6px auto 1px auto; }
       .ThangNgayGioTiet_after { font-family: 'Playfair Display', serif; color:rgba(255,255,153,1); text-align:center; font-size: clamp(10px, 1vw, 16px); font-weight:bold; padding: 1px auto; margin: 1px auto 6px auto; }
-
-
-
 
 
       .toggle-btn { display:block; width:100%; border:none; padding: 4px 0; border-radius:6px; cursor:pointer; font-weight:bold; font-size:clamp(60%,65%,70%); transition:all 0.3s ease; margin: 0; }
@@ -1804,11 +1798,13 @@
       
       .tenthang { text-align:center; font-size:125%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .ngaytuan, .ngaytuan_t7, .ngaytuan_cn { width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
+      .ngaytuan_t7 { color:green; width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
+      .ngaytuan_cn { color:red; width:14%; text-align:center; font-size: 90%; padding: 6px 0; }
       .ngaythang { padding-top: 10px; }
       .am, .am2 { color:blue; text-align:right; padding-right:3px; font-size:65%; }
       .t2t6 { text-align:center; font-size:125%; }
-      .t7, .ngaytuan_t7 { color:green; text-align:center; font-size:125%; }
-      .cn, .ngaytuan_cn { color:red; text-align:center; font-size:125%; }
+      .t7 { color:green; text-align:center; font-size:125%; }
+      .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
@@ -1833,7 +1829,7 @@
 
     `;
 
-    // --- PHẦN 3: GHI ĐÈ CSS NẾU LÀ CHẾ ĐỘ 'TRANSPARENT' ---
+    // --- GHI ĐÈ CSS NẾU LÀ CHẾ ĐỘ 'TRANSPARENT' ---
     if (backgroundType === 'transparent') {
       res += `
         /* 1. Xóa tất cả hình nền và màu nền */
@@ -1860,7 +1856,7 @@
         .toggle-btn, .nav-btn {
             border: none !important;
         }
-        .nav-btn:hover, .toggle-btn:hover {
+        .nav-btn:hover, .toggle-btn:hover, .todayduonglich:hover, ngayamlich:hover {
             background-color: rgba(255, 255, 255, 0.2) !important;
         }
 
@@ -1880,6 +1876,8 @@
     return res;
   }
 
+
+    // --- Tạo header trong lịch tháng ---
   function printHead(mm, yy, extraClass){
     if (typeof extraClass === 'undefined') {
          extraClass = (typeof window.isCalendarExpanded !== 'undefined' && window.isCalendarExpanded) ? ' show' : '';
@@ -1888,7 +1886,7 @@
     let res = "";
     const monthName = mm+"/"+yy;
     res += `<tr class="toggle-content${extraClass}"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
-    res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset;cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
+    res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset; cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
     res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button><button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
     res += `<tr class="toggle-content${extraClass}">`;
     for (let i=0;i<=6;i++){
@@ -1899,11 +1897,17 @@
     res += '</tr>';
     return res;
   }
+    // --- Tạo header trong lịch tháng ---
 
+
+    // --- Tạo Ô Trống trong lịch tháng ---
   function printEmptyCell(){
     return '<td class="ngaythang"><div class="cn">&nbsp;</div><div class="am">&nbsp;</div></td>';
   }
-
+    // --- Tạo Ô Trống trong lịch tháng ---
+  
+  
+    // --- Tạo Ô các ngày trong lịch tháng ---
   function printCell(lunarDate, solarDate, solarMonth, solarYear, today){
     let cellClass = "ngaythang";
     let solarClass = "t2t6";
@@ -1918,7 +1922,6 @@
     }
 	// Kiểm tra nếu là tháng 1 Âm lịch và ngày từ 1 đến 3
     if (lunarDate.month === 1 && lunarDate.day >= 1 && lunarDate.day <= 3){cellClass = "tet_cell";}
-    // if (lunarDate.day === 1 && lunarDate.month === 1){ cellClass = "tet"; }
     if (lunarDate.leap === 1){ lunarClass = "am2"; }
 
     let lunar = lunarDate.day;
@@ -1930,7 +1933,7 @@
       `<div style="font-size:50%;" class="${lunarClass}">${lunar}</div>`+
       `</td>`;
   }
-
+    // --- Tạo Ô các ngày trong lịch tháng ---
 
 
 
