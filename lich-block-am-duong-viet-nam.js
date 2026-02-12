@@ -1753,7 +1753,7 @@
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
-      .ngan_cach { color:rgba(255, 255, 255, 0.75); font-size:16px; text-align:center; }
+      .ngan_cach { color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.9vw, 16px); text-align:center; }
 
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
 
