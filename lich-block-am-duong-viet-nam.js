@@ -1759,7 +1759,7 @@
 
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
 
-      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; padding-top: 6px; padding-bottom: 6px; }
+      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.9vw, 16px); font-weight:bold; padding-top: 6px; padding-bottom: 6px; }
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 12px rgba(0,0,0,0.28); }
 
