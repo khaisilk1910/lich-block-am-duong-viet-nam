@@ -1761,9 +1761,9 @@
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
-      .thongtin_letet{ font-family: 'Playfair Display', serif; color:#ffff99; line-height: 1.2; padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+      .thongtin_letet{ font-family: 'Playfair Display', serif; color:#ffff99; line-height: 1.2; padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:1px solid rgba(255,255,255,0.25); box-shadow: 0 12px 28px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4); }
 
-      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color:#ffff99; line-height: 1.2; padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color:#ffff99; line-height: 1.2; padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:1px solid rgba(255,255,255,0.25); box-shadow: 0 12px 28px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4); }
 
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
