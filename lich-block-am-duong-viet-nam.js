@@ -1769,11 +1769,13 @@
       .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: 1.2; padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
 
-      .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.4; font-weight:bold; padding: 6px 6px;; margin: 0 auto; }
+      .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 0 auto; border-bottom-right-radius: 16px; border-top-right-radius: 16px; }
+      .thutrongtuan_EN { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 0 auto; border-bottom-left-radius: 16px; border-top-left-radius: 16px; }
 
 
       .svg_td { text-align:center; }
-      .svg_circle_divider { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-size:14px; }
+      .svg_circle_divider { width:80px; height:80px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-size:14px; }
+			.svg-cell { vertical-align: middle; text-align: center; height: 60px; align-items: center; justify-content: center; }
 
 
 
@@ -1808,7 +1810,6 @@
       .navi-l,.navi-r{ color:#fff; text-align:center; font-size:75%; line-height:100%; font-weight:bold; padding: 4px 0; }
       .nav-btn { color:#fff; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; font-weight: bold; }
 			
-			.svg-cell { vertical-align: bottom; text-align: center; height: 55px; align-items: center; justify-content: center; }
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
 			@keyframes marquee-horizontal {
 				0% {
@@ -2046,10 +2047,10 @@
         <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
       <td class="svg_td" >
-        <div class="svg_circle_divider" >|</div>
+        <div class="svg_circle_divider" ><span class="svg-cell">${svgNgay}</span></div>
       </td>
       <td colspan="3">
-        <div class="thutrongtuan">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
+        <div class="thutrongtuan_EN">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
     </tr>`;
     // Thứ VI | EN
