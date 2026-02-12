@@ -1774,8 +1774,8 @@
 
 
       .svg_td { text-align:center; width:clamp(50px, 8vw, 80px); }
-      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin-bottom: 10px; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
-			.svg-cell { vertical-align: middle; text-align: center; height:90%; width:90%; align-items: center; justify-content: center; }
+      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
+			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center;  }
 
 
 
