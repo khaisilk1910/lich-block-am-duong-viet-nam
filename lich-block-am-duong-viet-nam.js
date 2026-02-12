@@ -1754,21 +1754,22 @@
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
-
-      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
-
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
-
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.9vw, 16px); font-weight:bold; padding-top: 6px; padding-bottom: 6px; }
 
-      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 12px rgba(0,0,0,0.28); }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+
+      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
+
+
+      .cadaotucngu{ font-family: 'Playfair Display', serif; color:#ffff99; padding: 10px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 2px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
       .thutrongtuan { text-align:center; vertical-align: middle; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .thutrongtuan_EN { vertical-align: middle; border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:160%; }
       .svg_today { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:100%; border-radius: 50%; }
 
-      .cadaotucngu{ font-family: 'Playfair Display', serif; color:#ffff99; font-style: italic; padding: 10px; text-align:center; font-size:clamp(70%,80%,90%); font-weight:bold;}
       .homnay{ background-color:#FFF000; }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
