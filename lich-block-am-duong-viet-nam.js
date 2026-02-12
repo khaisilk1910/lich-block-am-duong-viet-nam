@@ -1785,8 +1785,8 @@
       .ngayamlich{ color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
 
 
-      .ThangNgayGioTiet_before { display:flex; font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(6px, 0.8vw, 10px); padding: 1px auto; margin: 6px auto 1px auto; }
-      .ThangNgayGioTiet_after { display:flex; font-family: 'Playfair Display', serif; color:rgba(255,255,153,1); text-align:center; font-size: clamp(10px, 1vw, 16px); font-weight:bold; padding: 1px auto; margin: 1px auto 6px auto; }
+      .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(6px, 0.8vw, 10px); padding: 1px auto; margin: 6px auto 1px auto; }
+      .ThangNgayGioTiet_after { font-family: 'Playfair Display', serif; color:rgba(255,255,153,1); text-align:center; font-size: clamp(10px, 1vw, 16px); font-weight:bold; padding: 1px auto; margin: 1px auto 6px auto; }
 
 
 
