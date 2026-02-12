@@ -2024,7 +2024,12 @@
     }
     // Ngày Lễ
 
-
+    const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
+    const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
+    const lunarYearIndex = (currentLunarDate.year + 8) % 12;
+    const svgNgay = getSvgConGiap(lunarDayIndex);
+    const svgThang = getSvgConGiap(lunarMonthIndex);
+    const svgNam = getSvgConGiap(lunarYearIndex);
     // Ca dao tục ngữ
     const _todayObj = new Date();
     const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
@@ -2035,17 +2040,11 @@
     } else {
         cadaotucngu_random = ""; 
     }
-    res += `<tr><td colspan="7" ><div class="cadaotucngu" >${cadaotucngu_random}<span class="year-svg-container">${svgNam}</span></div></td></tr>`;
+    res += `<tr><td colspan="7" ><div class="cadaotucngu">${cadaotucngu_random}<span class="year-svg-container">${svgNam}</span></div></td></tr>`;
     // Ca dao tục ngữ
 
 
     // Thứ VI | EN
-    const lunarDayIndex = (currentLunarDate.jd + 1) % 12;
-    const lunarMonthIndex = (currentLunarDate.month + 1) % 12;
-    const lunarYearIndex = (currentLunarDate.year + 8) % 12;
-    const svgNgay = getSvgConGiap(lunarDayIndex);
-    const svgThang = getSvgConGiap(lunarMonthIndex);
-    const svgNam = getSvgConGiap(lunarYearIndex);
     res += `<tr >
       <td colspan="3">
         <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
