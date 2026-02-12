@@ -1764,9 +1764,9 @@
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
-      .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: clamp(1.1, 1.5vw, 1.6); padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+      .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
-      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: clamp(1.1, 1.5vw, 1.6); padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: 1.5; padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
 
       .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin-right: 2px; border-bottom-right-radius: 16px; border-top-right-radius: 16px; }
@@ -1778,10 +1778,13 @@
 			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center;  }
 
 
-      .thang_am_lich { width: 40%; font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
+      .thang_am_lich { color:rgba(255,255,153,1); width: 38%; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(16px, 1.8vw, 22px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
 
 
-      .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
+      .ngayamlich{ color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(110px, 14vw, 140px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
+
+
+
 
       .homnay{ background-color:#FFF000; }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
@@ -2097,7 +2100,7 @@
 
 
     // Hoàng Đạo
-    res += `<td width="25%" class="thongtin_letet" colspan="2">`;
+    res += `<td width="25%" colspan="2">`;
     res += `<div>Test</div>`;
     res += `</td>`;
     // Hoàng Đạo
@@ -2106,7 +2109,7 @@
 
 
     // Năm Âm Lịch
-    res += `<tr class="ThangNgayGioTiet1" ><td class="thutrongtuan" colspan="7">${getYearCanChi(currentLunarDate.year)}</td></tr>`;
+    res += `<tr><td colspan="7"><div class="thang_am_lich">${getYearCanChi(currentLunarDate.year)}</div></td></tr>`;
     // Năm Âm Lịch
 
 
