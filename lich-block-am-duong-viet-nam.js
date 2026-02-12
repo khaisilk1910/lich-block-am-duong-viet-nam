@@ -1753,9 +1753,11 @@
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
-      .ngan_cach { color:rgba(255, 255, 255, 0.75); font-size:clamp(80%,90%,100%); text-align:center; vertical-align: bottom; }
-      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(18px, 2vw, 24px); text-align:center; vertical-align: bottom; text-shadow: 0 6px 12px rgba(0,0,0,0.28); }
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; vertical-align: bottom; font-size: clamp(10px, 0.9vw, 15px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+      .ngan_cach { color:rgba(255, 255, 255, 0.75); font-size:16px; text-align:center; }
+
+      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
+
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
 
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; padding-top: 6px; padding-bottom: 6px; }
 
