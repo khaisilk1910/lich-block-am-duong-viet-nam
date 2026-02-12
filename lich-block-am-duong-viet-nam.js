@@ -1751,8 +1751,8 @@
 
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
-      .nam_top { color:#fff; font-size:14px; }
-      .ngan_cach { color: rgba(255, 255, 255, 0.15); width:1px; }
+      .nam_top { color:#fff; font-size:28px; }
+      .ngan_cach { color: rgba(255, 255, 255, 0.6); width:1px; }
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
       .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
       .thang_EN { color:#fff; text-align:center; font-size:clamp(80%,90%,100%); line-height:100%; padding-top: 5px; font-style: italic; }
@@ -2005,7 +2005,7 @@
 
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} <div class="ngan_cach">|</div> <div class="nam_top">${yy}</div> <div class="ngan_cach">|</div> ${monthNameEN}</td></tr>`;
+    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} <span class="ngan_cach">|</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">|</span> ${monthNameEN}</td></tr>`;
 
 
 
