@@ -1807,8 +1807,8 @@
       .ngaythang { padding-top: 10px; }
       .am, .am2 { color:blue; text-align:right; padding-right:3px; font-size:65%; }
       .t2t6 { text-align:center; font-size:125%; }
-      .t7 { color:green; text-align:center; font-size:125%; }
-      .cn { color:red; text-align:center; font-size:125%; }
+      .t7, .ngaytuan_t7 { color:green; text-align:center; font-size:125%; }
+      .cn, .ngaytuan_cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
 			.year-svg-container { position: absolute; left:5%; top: 180px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
