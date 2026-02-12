@@ -1752,10 +1752,12 @@
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
-      .ngan_cach { color:rgba(255, 255, 255, 0.6); font-size:clamp(80%,90%,100%); text-align:center; vertical-align: bottom; }
-      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size:28px; text-align:center; vertical-align: bottom; }
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; vertical-align: bottom; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
-      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.6); vertical-align: middle; text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; padding-top: 8px; padding-bottom: 8px; }
+
+      .ngan_cach { color:rgba(255, 255, 255, 0.75); font-size:clamp(80%,90%,100%); text-align:center; vertical-align: bottom; }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(34px, 3.2vw, 48px); text-align:center; vertical-align: bottom; text-shadow: 0 6px 14px rgba(0,0,0,0.28); }
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; vertical-align: bottom; font-size: clamp(14px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+
+      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size:clamp(80%,90%,100%); font-weight:bold; padding-top: 6px; padding-bottom: 6px; }
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 14px rgba(0,0,0,0.28); }
 
