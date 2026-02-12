@@ -1774,8 +1774,8 @@
 
 
       .svg_td { text-align:center; width:70px; }
-      .svg_circle_divider { width:50px; height:70px; border-radius:70%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-size:14px; }
-			.svg-cell { vertical-align: middle; text-align: center; height: 55px; align-items: center; justify-content: center; }
+      .svg_circle_divider { width:65px; height:65px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); }
+			.svg-cell { vertical-align: middle; text-align: center; height: 60px; align-items: center; justify-content: center; }
 
 
 
