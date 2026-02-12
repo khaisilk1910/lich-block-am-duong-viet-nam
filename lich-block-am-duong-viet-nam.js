@@ -1773,9 +1773,9 @@
       .thutrongtuan_EN { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin-left: 5px; border-bottom-left-radius: 16px; border-top-left-radius: 16px; }
 
 
-      .svg_td { text-align:center; width:60px; }
-      .svg_circle_divider { width:50px; height:50px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-size:14px; }
-			.svg-cell { vertical-align: middle; text-align: center; height: 45px; align-items: center; justify-content: center; }
+      .svg_td { text-align:center; width:70px; }
+      .svg_circle_divider { width:50px; height:70px; border-radius:70%; border:1px solid rgba(255,255,255,0.4); display:flex; align-items:center; justify-content:center; margin:auto; background:rgba(255,255,255,0.08); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-size:14px; }
+			.svg-cell { vertical-align: middle; text-align: center; height: 55px; align-items: center; justify-content: center; }
 
 
 
