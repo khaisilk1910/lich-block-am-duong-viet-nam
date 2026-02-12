@@ -1753,7 +1753,7 @@
     res += `
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
-      .ngan_cach { color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.9vw, 16px); text-align:center; }
+      .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
 
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
 
@@ -1964,8 +1964,9 @@
     const extraClass = window.isCalendarExpanded ? ' show' : '';
     const btnText = window.isCalendarExpanded ? 'Thu gọn 🔼' : 'Xem lịch tháng 🔽';
 
-    res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
-    res += `<table class="thang" border="0" cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
+//    res += `<div style="${backgroundStyle} border-top-left-radius: 16px; border-top-right-radius: 16px;">`;
+    res += `<div style="${backgroundStyle} border-radius: 16px;">`;
+    res += `<table class="thang" border="0" border-radius: 16px; cellpadding="1" cellspacing="2" width="${PRINT_OPTS.tableWidth}">`;
 
     // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
