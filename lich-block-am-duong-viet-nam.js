@@ -1807,7 +1807,7 @@
       .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
-			.year-svg-container { position: absolute; top: -17px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
+			.year-svg-container { position: absolute; transform: translateY(-100%); width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
       
       @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } }
 
