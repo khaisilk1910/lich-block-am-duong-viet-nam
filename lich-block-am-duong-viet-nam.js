@@ -1999,7 +1999,7 @@
 
 
     // Ngày Dương To
-    res += `<tr><td colspan="7"><div class="todayduonglich" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td></tr>`;
+    res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp vào để xem chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td></tr>`;
     // Ngày Dương To
 
 
@@ -2051,7 +2051,7 @@
         <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
       <td class="svg_td" >
-        <div class="svg_circle_divider" ><span class="svg-cell">${svgNgay}</span></div>
+        <div class="svg_circle_divider"><span class="svg-cell" title="Ngày ${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}">${svgNgay}</span></div>
       </td>
       <td colspan="3">
         <div class="thutrongtuan_EN">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
@@ -2096,7 +2096,7 @@
 
     // Ngày Âm Lịch
     res += `<td width="50%" colspan="3" >`;
-    res += `<div class="ngayamlich" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${currentLunarDate.day}</div>`;
+    res += `<div class="ngayamlich" title="Nhấp vào để xem chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${currentLunarDate.day}</div>`;
     res += `<span class="year-svg-container">${svgNam}</span>`;
     res += `</td>`;
     // Ngày Âm Lịch
