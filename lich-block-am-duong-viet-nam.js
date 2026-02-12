@@ -1892,7 +1892,7 @@
     }
 
     let res = "";
-    const monthName = mm+"/"+yy;
+    const monthName = mm+" | "+yy;
     res += `<tr class="toggle-content${extraClass}"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
     res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset; cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
     res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button><button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
@@ -2437,7 +2437,15 @@
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Ngày:</td>
-                    <td style="text-align:right;"><b style="color:#ffff99;">${canChiNgayStr}</b> - Tháng <b style="color:#ffff99;">${canChiThang}</b> - Năm <b style="color:#ffff99;">${canChiNam}</b></td>
+                    <td style="text-align:right;"><b style="color:#ffff99;">${canChiNgayStr}</b></td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
+                    <td style="padding:6px 0; opacity:0.8;">Tháng:</td>
+                    <td style="text-align:right;"><b style="color:#ffff99;">${canChiThang}</b></td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
+                    <td style="padding:6px 0; opacity:0.8;">Năm:</td>
+                    <td style="text-align:right;"><b style="color:#ffff99;">${canChiNam}</b></td>
                 </tr>
                 <tr style="border-bottom: 1px solid rgba(125,125,125,0.2);">
                     <td style="padding:6px 0; opacity:0.8;">Tiết khí:</td>
@@ -2494,7 +2502,7 @@
                 <div style="margin-bottom: 6px;">
                     <span style="font-weight:bold; font-size:1.05em;">${thanSat.sao.emoji || '✨'} Nhị Thập Bát Tú: 
                         <span style="background-color:${bgDanhGia}; color:#fff; padding:2px 10px; border-radius:12px;">${thanSat.sao.name}</span>
-                    </span>
+                    </span><br>
                     <span style="font-style:italic; color:#ffff99; font-size:0.9em;"> (${thanSat.sao.info.tenNgay || ""})</span>
                 </div>
                 
