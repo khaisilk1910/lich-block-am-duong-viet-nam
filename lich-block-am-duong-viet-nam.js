@@ -1834,7 +1834,7 @@
         /* 1. Xóa tất cả hình nền và màu nền */
         .lunar-card > div:first-child, .thang_top, .giohoangdao, .viecnenlam, .viecnentranh,
         .cat_tinh, .hung_tinh, .tenthang, .navi-l, .navi-r, .ngaytuan, .ngaytuan_t7,
-        .ngaytuan_cn, .ngaythang, .tet, .homnay, .nav-btn, .toggle-btn, .thutrongtuan div {
+        .ngaytuan_cn, .ngaythang, .tet, .homnay, .nav-btn, .toggle-btn {
             background: transparent !important;
         }
 
