@@ -1764,7 +1764,7 @@
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
-      .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.2; padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+      .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: clamp(1, 1.2vw, 1.2); padding: 6px 6px;; margin:10px 40px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
       .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: clamp(1, 1.2vw, 1.2); padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
@@ -1777,6 +1777,8 @@
       .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
 			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center;  }
 
+
+      .thang_am_lich { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px 60px; border-bottom-right-radius: 16px; border-top-right-radius: 16px; }
 
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
@@ -2072,7 +2074,7 @@
       }
     }
     if (daysInLunarMonth === 29) { thangAm += " (T)"; } else if (daysInLunarMonth === 30) { thangAm += " (Đ)"; }
-    res += `<tr class="ThangNgayGioTiet1" ><td class="thutrongtuan" colspan="7">${thangAm}</td></tr>`;
+    res += `<tr><td colspan="7"><div class="thang_am_lich"> ${thangAm}</div></td></tr>`;
     // Tháng Âm Lịch
 
 
