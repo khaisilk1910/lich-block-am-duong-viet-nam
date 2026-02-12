@@ -1762,7 +1762,7 @@
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(90px, 12vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
 
-      .cadaotucngu{ font-family: 'Playfair Display', serif; color:#ffff99; line-height: 1;  margin-top: 10px; padding: 10px; margin-left: 20px; margin-right: 20px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color:#ffff99; line-height: 1.4; padding: 12px 16px;; margin:10px 20px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; background-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
 
 
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
@@ -1990,7 +1990,9 @@
     res += `<tr>`;
     res += `<td class="svg-cell" colspan="2" style="transform: scaleX(-1);">${svgNgay}</td>`;
 
+    // Ngày Dương To
     res += `<td class="todayduonglich" colspan="3">${today.getDate()}</td>`;
+    // Ngày Dương To
 
     res += `<td class="svg-cell" colspan="2">${svgThang}</td>`;
     res += `</tr>`;
@@ -2035,7 +2037,7 @@
     } else {
         cadaotucngu_random = ""; 
     }
-    res += `<tr><td class="cadaotucngu" colspan="7" >${cadaotucngu_random}</td></tr>`;
+    res += `<tr><td colspan="7" ><div class="cadaotucngu" >${cadaotucngu_random}</div></td></tr>`;
     // Ca dao tục ngữ
 
 
