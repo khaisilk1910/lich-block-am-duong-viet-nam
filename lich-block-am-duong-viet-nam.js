@@ -1986,7 +1986,7 @@
 
 
     // Ngày Dương To
-    res += `<tr><td class="todayduonglich" colspan="7" onclick="window.haShowDayPopup(${dd},${mm},${yy})">${today.getDate()}</td></tr>`;
+    res += `<tr><td class="todayduonglich" colspan="7" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</td></tr>`;
     // Ngày Dương To
 
 
