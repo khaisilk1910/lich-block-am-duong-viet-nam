@@ -1863,10 +1863,10 @@
             color: rgba(255, 255, 0, 1) !important; text-shadow: 0 8px 16px rgba(255, 200, 0, 0.5)!important;
         }
         .svg_circle_divider:hover {
-            text-shadow: 0 8px 16px rgba(255, 200, 0, 0.3)!important;
+            box-shadow: 0 0px 12px rgba(255,200,0,0.5), inset 0 0.4px 0 rgba(255,200,0,0.25);
         }
         .svg-cell:hover {
-            transform: scale(1.3);
+            transform: scale(1.8);
         }
         /* 5. Làm nổi bật ngày hôm nay bằng một lớp nền mờ thay vì màu vàng */
         .homnay {
