@@ -1757,7 +1757,7 @@
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
-      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.9vw, 16px); font-weight:bold; padding-top: 6px; padding-bottom: 6px; }
+      .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
@@ -1769,9 +1769,11 @@
       .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: 1.2; padding: 6px 6px;; margin:10px 28px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
 
+      .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.4; font-weight:bold; padding: 6px 6px;; margin: 0 auto; }
+
+
+
       .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
-      .thutrongtuan { text-align:center; vertical-align: middle; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
-      .thutrongtuan_EN { vertical-align: middle; border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:160%; }
       .svg_today { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:100%; border-radius: 50%; }
 
       .homnay{ background-color:#FFF000; }
@@ -2006,23 +2008,19 @@
     } else if (currentLunarDate.day === 15) {
       noiDungLe += `<div style="padding-bottom:8px;">Ngày Rằm</div>`;
     }
-    // Dương lịch
     const d_m = `${today.getDate()}/${mm}`;
     const idxDL = NGAY_LE_DL.indexOf(d_m);
     const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : "";
-    // Âm lịch đặc biệt
     const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
     const idxAL = NGAY_LE_AL.indexOf(d_m_al);
     const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : "";
-    // Nếu có ít nhất 1 nội dung
     if (noiDungLe || infoDL || infoAL) {
-      res += `<tr><td class="thongtin_letet" colspan="7">`;
+      res += `<tr><td colspan="7">`;
       res += noiDungLe;
-      res += `<div>${infoDL}${infoDL && infoAL ? " | " : ""}${infoAL}</div>`;
+      res += `<div class="thongtin_letet">${infoDL}${infoDL && infoAL ? " | " : ""}${infoAL}</div>`;
       res += `</td></tr>`;
     }
     // Ngày Lễ
-
 
 
     // Ca dao tục ngữ
@@ -2040,15 +2038,15 @@
 
 
     // Thứ VI | EN
-    res += `<tr class="thutrongtuan_EN" >
-      <td class="thutrongtuan" colspan="3">
-        <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
+    res += `<tr >
+      <td colspan="3">
+        <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
-      <td class="thutrongtuan">
-        <div class="svg_today" >|</div>
+      <td>
+        <div  class="thutrongtuan" class="svg_today" >|</div>
       </td>
-      <td class="thutrongtuan" colspan="3">
-        <div style="margin:0 auto; width:40%; border-radius:6px; background-color:rgba(204,255,204,.5);">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
+      <td colspan="3">
+        <div class="thutrongtuan">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
     </tr>`;
     // Thứ VI | EN
