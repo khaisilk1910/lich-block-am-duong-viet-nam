@@ -1751,13 +1751,13 @@
 
     // --- PHẦN 1: CSS NỀN TẢNG (BỐ CỤC, KÍCH THƯỚC) DÙNG CHUNG CHO CẢ 2 CHẾ ĐỘ ---
     res += `
-      .nam_top { color:#fff; font-size:28px; }
-      .ngan_cach { color: rgba(255, 255, 255, 0.6); width:1px; }
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
-      .thangnam { text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size:28px; }
+      .ngan_cach { color: rgba(255, 255, 255, 0.6); width:1px; }
+      .thangnam { font-family: 'Be Vietnam Pro', sans-serif; text-align:center; font-size:clamp(80%,90%,100%); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 10px; }
       .thang_EN { color:#fff; text-align:center; font-size:clamp(80%,90%,100%); line-height:100%; padding-top: 5px; font-style: italic; }
-      .todayduonglich { text-align:center; vertical-align: middle; font-size:clamp(620%,660%,700%); line-height:130%; font-weight:bold; }
-      .ngayamlich { text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
+      .todayduonglich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(620%,660%,700%); line-height:130%; font-weight:bold; }
+      .ngayamlich { font-family: 'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size:clamp(540%,560%,580%); line-height:100%; font-weight:bold; }
       .thutrongtuan { text-align:center; vertical-align: middle; font-size:clamp(90%,100%,120%); line-height:160%; font-weight:bold; }
       .thutrongtuan_EN { vertical-align: middle; border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:160%; }
       .svg_today { border: 1px solid rgba(255, 255, 255, 0.2); background-color: rgba(255, 255, 255, 0.15); line-height:100%; border-radius: 50%; }
@@ -2005,7 +2005,7 @@
 
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} <span class="ngan_cach">|</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">|</span> ${monthNameEN}</td></tr>`;
+    res += `<tr><td colspan="7" class="thangnam">Tháng ${mm} <span class="ngan_cach">❖</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
 
 
 
