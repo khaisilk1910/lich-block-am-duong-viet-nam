@@ -1775,7 +1775,7 @@
       
       .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
       
-			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center;  }
+			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center; transition: transform 0.3s ease; }
 
 
       .thang_am_lich, .nam_am_lich { color:rgba(255,255,153,1); width: 38%; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(16px, 1.8vw, 20px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
@@ -1859,8 +1859,14 @@
         .nav-btn:hover, .toggle-btn:hover {
             background-color: rgba(255, 255, 255, 0.2) !important;
         }
-        .todayduonglich:hover, .ngayamlich:hover {
+        .todayduonglich:hover, .ngayamlich:hover, .svg_circle_divider:hover {
             color: rgba(255, 255, 0, 1) !important; text-shadow: 0 8px 16px rgba(255, 200, 0, 0.5)!important;
+        }
+        .svg_circle_divider:hover {
+            text-shadow: 0 8px 16px rgba(255, 200, 0, 0.3)!important;
+        }
+        .svg-cell:hover {
+            transform: scale(1.3);
         }
         /* 5. Làm nổi bật ngày hôm nay bằng một lớp nền mờ thay vì màu vàng */
         .homnay {
