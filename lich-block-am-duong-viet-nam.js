@@ -116,16 +116,16 @@
 // 9 - Hoa đào
 // 10 - Hoa mai
 	const svg_tet = [
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 10@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 9@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 8@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 7@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 6@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 5@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 4@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 3@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 2@3840x.png" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 1@3840x.png" style="width:100%; height:100%;">`
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 10@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 9@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 8@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 7@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 6@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 5@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 4@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 3@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 2@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/images/lich-block-am-duong-viet-nam/Asset 1@3840x.png" style="width:100%; height:100%;">`
   ];
 // ===== SVG Tết =====
 // 1 - Cậu bé áo xanh cầm bao lì xì
@@ -1795,9 +1795,9 @@
 
       .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_left_tet { left: 12px; position: absolute; bottom: 0; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
+      .show_left_tet { left: 20%; position: absolute; bottom: -10px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_right_tet { right: 12px; position: absolute; bottom: 0; display: flex; width: 18%; align-items: center; justify-content: center; z-index: 100; }
+      .show_right_tet { right: 25%; position: absolute; bottom: -10px; display: flex; width: 22%; align-items: center; justify-content: center; z-index: 100; }
 
       .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
