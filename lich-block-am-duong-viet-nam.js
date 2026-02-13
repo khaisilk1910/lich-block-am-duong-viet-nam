@@ -1839,7 +1839,7 @@
 
       .svg_td { text-align:center; width:clamp(50px, 8vw, 80px); }
       
-      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
+      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 0px 16px rgba(182,215,168,0.8), inset 0 2px 0 rgba(182,215,168,0.3); }
       
 			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center; transition: transform 0.3s ease; }
 
@@ -1908,7 +1908,7 @@
             color: rgba(255, 255, 0, 1) !important; text-shadow: 0 8px 16px rgba(255, 200, 0, 0.5)!important;
         }
         .svg_circle_divider:hover {
-            box-shadow: 0 0px 12px rgba(255,200,0,0.5), inset 0 0.4px 0 rgba(255,200,0,0.25);
+            box-shadow: 0 0px 16px rgba(255,200,0,0.8), inset 0 0.5px 0 rgba(255,200,0,0.4);
         }
         .svg-cell:hover {
             transform: scale(1.8);
@@ -1945,7 +1945,7 @@
     }
 
     let res = "";
-    const monthName = mm+" | "+yy;
+    const monthName = mm+" ⟡ "+yy;
     res += `<tr class="toggle-content${extraClass}"><td colspan="2" class="navi-l"><button id="prev-year" class="nav-btn">&lt;&lt;</button>  <button id="prev-month" class="nav-btn">&lt;</button></td>`;
     res += `<td colspan="3" class="tenthang"><button id="reset-today" style="all:unset; cursor:pointer;" class="nav-btn">${monthName}</button></td>`;
     res += `<td colspan="2" class="navi-r"><button id="next-month" class="nav-btn">&gt;</button><button id="next-year" class="nav-btn">&gt;&gt;</button></td></tr>`;
@@ -2054,7 +2054,7 @@
     // 8 - Bánh chưng xúc xích canh
     // 9 - Hoa đào gốc bên phải
     // 10 - Hoa mai gốc bên trái 
-    res += `<td colspan="7"><div class="thang_top">Tháng ${mm}<span class="ngan_cach"> ❖ </span><span class="nam_top"> ${yy} </span><span class="ngan_cach"> ❖ </span> ${monthNameEN}`;
+    res += `<td colspan="7"><div class="thang_top">Tháng ${mm}<span class="ngan_cach"> ❖ </span><span class="nam_top">${yy}</span><span class="ngan_cach"> ❖ </span> ${monthNameEN}`;
     let selected_svg_tet_dao = "";
     let selected_svg_tet_mai = "";
     // Kiểm tra nếu là tháng 12 từ ngày 23 trở đi
