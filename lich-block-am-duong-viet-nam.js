@@ -116,16 +116,16 @@
 // 9 - Hoa đào
 // 10 - Hoa mai
 	const svg_tet = [
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 10.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 9.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 8.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 7.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 6.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 5.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 4.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 3.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 2.svg" style="width:100%; height:100%;">`,
-    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 1.svg" style="width:100%; height:100%;">`
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 10@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 9@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 8@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 7@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 6@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 5@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 4@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 3@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 2@3840x.png" style="width:100%; height:100%;">`,
+    `<img src="/local/community/lich-block-am-duong-viet-nam/SVG/Asset 1@3840x.png" style="width:100%; height:100%;">`
   ];
 // ===== SVG Tết =====
 // 1 - Cậu bé áo xanh cầm bao lì xì
