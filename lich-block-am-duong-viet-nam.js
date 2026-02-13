@@ -2029,7 +2029,7 @@
     // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr>`
+    res += `<tr>`;
     // ===== SVG Tết =====
     // 1 - Cậu bé áo xanh cầm bao lì xì
     // 2 - Cô bé áo xanh cầm bao lì xì
