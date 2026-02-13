@@ -2047,8 +2047,8 @@
     // Kiểm tra nếu là tháng 12 từ ngày 23 trở đi
     // HOẶC nếu là tháng 1 từ ngày 1 đến ngày 3
     if ((lunarDate.month === 12 && lunarDate.day >= 23) || (lunarDate.month === 1 && lunarDate.day <= 3)) {
-      selected_svg_tet_dao = svg_tet[8];
-      selected_svg_tet_mai = svg_tet[9];
+      selected_svg_tet_dao = svg_tet[8] || "";
+      selected_svg_tet_mai = svg_tet[9] || "";
       res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`
       res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`
     }
@@ -2069,14 +2069,14 @@
     // Logic chọn hình ảnh cho 3 ngày đầu năm
     if (lunarDate.month === 1) {
         if (lunarDate.day === 1) {
-            selected_svg_tet_left = svg_tet[5];
-            selected_svg_tet_right = svg_tet[0];
+            selected_svg_tet_left = svg_tet[5] || "";
+            selected_svg_tet_right = svg_tet[0] || "";
         } else if (lunarDate.day === 2) {
-            selected_svg_tet_left = svg_tet[6];
-            selected_svg_tet_right = svg_tet[1];
+            selected_svg_tet_left = svg_tet[6] || "";
+            selected_svg_tet_right = svg_tet[1] || "";
         } else if (lunarDate.day === 3) {
-            selected_svg_tet_left = svg_tet[7];
-            selected_svg_tet_right = svg_tet[3];
+            selected_svg_tet_left = svg_tet[7] || "";
+            selected_svg_tet_right = svg_tet[3] || "";
         }
         // Chỉ chèn HTML nếu đúng 3 ngày đầu năm
         if (selected_svg_tet_left && selected_svg_tet_right) {
