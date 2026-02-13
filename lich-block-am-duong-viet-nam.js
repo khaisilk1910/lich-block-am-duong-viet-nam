@@ -1797,15 +1797,14 @@
 
       .show_left_tet, .show_right_tet { position: absolute; bottom: 0; display: flex; width: 30%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_left_tet { left: 0; }
+      .show_left_tet { left: 10px; }
 
-      .show_right_tet { right: 0; }
+      .show_right_tet { right: 10px; }
 
       .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
-
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
 
 
@@ -1839,7 +1838,7 @@
 
       .svg_td { text-align:center; width:clamp(50px, 8vw, 80px); }
       
-      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 0px 16px rgba(182,215,168,0.8), inset 0 2px 0 rgba(182,215,168,0.3); }
+      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); box-shadow: 0 0px 16px rgba(182,215,168,0.8), inset 0 1px 0 rgba(182,215,168,0.3); }
       
 			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center; transition: transform 0.3s ease; }
 
@@ -2090,6 +2089,17 @@
         } else if (currentLunarDate.day === 3) {
             selected_svg_tet_left = svg_tet[7] || "";
             selected_svg_tet_right = svg_tet[3] || "";
+        }
+        // Chỉ chèn HTML nếu đúng 3 ngày đầu năm
+        if (selected_svg_tet_left && selected_svg_tet_right) {
+            res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
+            res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
+        }
+    }
+    if (currentLunarDate.month === 12) {
+        if (currentLunarDate.day === 26) {
+            selected_svg_tet_left = svg_tet[5] || "";
+            selected_svg_tet_right = svg_tet[0] || "";
         }
         // Chỉ chèn HTML nếu đúng 3 ngày đầu năm
         if (selected_svg_tet_left && selected_svg_tet_right) {
