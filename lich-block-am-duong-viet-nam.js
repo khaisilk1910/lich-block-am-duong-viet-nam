@@ -1795,11 +1795,9 @@
 
       .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_left_tet, .show_right_tet { position: absolute; bottom: 0; display: flex; width: 30%; align-items: center; justify-content: center; z-index: 100; }
+      .show_left_tet { left: 12px; position: absolute; bottom: 0; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_left_tet { left: 10px; }
-
-      .show_right_tet { right: 10px; }
+      .show_right_tet { right: 12px; position: absolute; bottom: 0; display: flex; width: 18%; align-items: center; justify-content: center; z-index: 100; }
 
       .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
@@ -1838,7 +1836,7 @@
 
       .svg_td { text-align:center; width:clamp(50px, 8vw, 80px); }
       
-      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); box-shadow: 0 0px 16px rgba(182,215,168,0.8), inset 0 1px 0 rgba(182,215,168,0.3); }
+      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
       
 			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center; transition: transform 0.3s ease; }
 
