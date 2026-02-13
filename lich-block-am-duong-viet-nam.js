@@ -1803,6 +1803,40 @@
 
       .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
+
+      /* ===== LỒNG ĐÈN ĐUNG ĐƯA NHẸ MẶC ĐỊNH ===== */
+      .show_dao_tet svg,
+      .show_mai_tet svg {
+        transform-origin: top center;
+        animation: lanternSwingSoft 4s ease-in-out infinite;
+      }
+
+      /* Khi hover -> rung mạnh hơn */
+      .show_dao_tet svg:hover,
+      .show_mai_tet svg:hover {
+        animation: lanternSwingStrong 1.2s ease-in-out infinite;
+      }
+
+      /* Rung nhẹ mặc định */
+      @keyframes lanternSwingSoft {
+        0%   { transform: rotate(0deg); }
+        25%  { transform: rotate(1.5deg); }
+        50%  { transform: rotate(-1.5deg); }
+        75%  { transform: rotate(1deg); }
+        100% { transform: rotate(0deg); }
+      }
+
+      /* Hover rung mạnh hơn */
+      @keyframes lanternSwingStrong {
+        0%   { transform: rotate(0deg); }
+        20%  { transform: rotate(6deg); }
+        40%  { transform: rotate(-5deg); }
+        60%  { transform: rotate(4deg); }
+        80%  { transform: rotate(-3deg); }
+        100% { transform: rotate(0deg); }
+      }
+
+
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
