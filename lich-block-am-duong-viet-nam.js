@@ -2112,25 +2112,34 @@
     // Ngày Lễ
     let noiDungLe = "";
     if (currentLunarDate.day === 1) {
-      noiDungLe += `Mùng Một`;
+        noiDungLe = `Mùng Một`;
     } else if (currentLunarDate.day === 15) {
-      noiDungLe += `Ngày Rằm`;
+        noiDungLe = `Ngày Rằm`;
     }
+
     const d_m = `${today.getDate()}/${mm}`;
     const idxDL = NGAY_LE_DL.indexOf(d_m);
     const infoDL = idxDL !== -1 ? NGAY_LE_DL_STRING[idxDL] : "";
+
     const d_m_al = `${currentLunarDate.day}/${currentLunarDate.month}`;
     const idxAL = NGAY_LE_AL.indexOf(d_m_al);
     const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : "";
-    if (noiDungLe || infoDL || infoAL) {
-      res += `<tr><td colspan="7">`;
-      res += noiDungLe;
-      res += `<div class="thongtin_letet">${infoDL}${infoDL && infoAL ? " | " : ""}${infoAL}</div>`;
-      res += `</td></tr>`;
+
+    // Gom tất cả các thông tin vào một mảng để xử lý dấu gạch đứng (|) cho mượt
+    let displayArray = [];
+    if (noiDungLe) displayArray.push(noiDungLe);
+    if (infoDL) displayArray.push(infoDL);
+    if (infoAL) displayArray.push(infoAL);
+
+    if (displayArray.length > 0) {
+        res += `<tr><td colspan="7">`;
+        // Chỉ tạo div khi có nội dung và nối chúng bằng dấu " | "
+        res += `<div class="thongtin_letet">${displayArray.join(" | ")}</div>`;
+        res += `</td></tr>`;
     }
     // Ngày Lễ
 
-	  
+
     // Ca dao tục ngữ
     const _todayObj = new Date();
     const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
