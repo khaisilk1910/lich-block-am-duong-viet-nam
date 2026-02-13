@@ -1801,49 +1801,17 @@
 
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
-      .show_mai_tet {
-        position: absolute;
-        top: 0;             /* Sát mép trên */
-        left: 0;            /* Sát mép trái */
-        display: flex;
-        text-align: center;
-        height: 25%;        /* Điều chỉnh lại % để không che hết tờ lịch */
-        width: 25%;         /* Điều chỉnh lại % tùy kích thước bạn muốn */
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s ease;
-        z-index: 100;        /* Đảm bảo nằm trên các lớp khác */
-      }
-      .show_dao_tet {
-        position: absolute;
-        top: 0;             /* Sát mép trên */
-        right: 0;            /* Sát mép trái */
-        display: flex;
-        text-align: center;
-        height: 25%;        /* Điều chỉnh lại % để không che hết tờ lịch */
-        width: 25%;         /* Điều chỉnh lại % tùy kích thước bạn muốn */
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s ease;
-        z-index: 100;        /* Đảm bảo nằm trên các lớp khác */
-      }
-      .show_left_tet, .show_right_tet {
-          position: absolute;
-          top: 0;             /* Sát mép trên */
-          display: flex;
-          height: 35%;        /* Kích thước vừa phải */
-          width: 35%;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.3s ease;
-          z-index: 100;
-      }
-      .show_left_tet {
-          left: 0;
-      }
-      .show_right_tet {
-          right: 0;
-      }
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; height: 25%; width: 25%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; height: 25%; width: 25%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_left_tet, .show_right_tet { position: absolute; bottom: 0; display: flex; height: 35%; width: 35%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_left_tet { left: 0; }
+
+      .show_right_tet { right: 0; }
+
+      .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
@@ -1909,7 +1877,7 @@
       .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
-	  .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
+      .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
       
       @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } }
 
@@ -2082,22 +2050,18 @@
     // 8 - Bánh chưng xúc xích canh
     // 9 - Hoa đào gốc bên phải
     // 10 - Hoa mai gốc bên trái 
-    res += `<td colspan="7" class="thang_top">Tháng ${mm} 
-      <span class="ngan_cach">❖</span>
-      <span class="nam_top">${yy}</span>
-      <span class="ngan_cach">❖</span> ${monthNameEN}`;
-
-      let selected_svg_tet_dao = "";
-      lett selected_svg_tet_mai = "";
-      // Kiểm tra nếu là tháng 12 từ ngày 23 trở đi
-      // HOẶC nếu là tháng 1 từ ngày 1 đến ngày 3
-      if ((lunarDate.month === 12 && lunarDate.day >= 23) || (lunarDate.month === 1 && lunarDate.day <= 3)) {
-        selected_svg_tet_dao = svg_tet[8];
-        selected_svg_tet_mai = svg_tet[9];
-        res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`
-        res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`
-      }
-    res += `</td></tr>`;
+    res += `<td colspan="7"><div class="thang_top">Tháng ${mm}<span class="ngan_cach"> ❖ </span><span class="nam_top"> ${yy} </span><span class="ngan_cach"> ❖ </span> ${monthNameEN}`;
+    let selected_svg_tet_dao = "";
+    let selected_svg_tet_mai = "";
+    // Kiểm tra nếu là tháng 12 từ ngày 23 trở đi
+    // HOẶC nếu là tháng 1 từ ngày 1 đến ngày 3
+    if ((lunarDate.month === 12 && lunarDate.day >= 23) || (lunarDate.month === 1 && lunarDate.day <= 3)) {
+      selected_svg_tet_dao = svg_tet[8];
+      selected_svg_tet_mai = svg_tet[9];
+      res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`
+      res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`
+    }
+    res += `</div</td></tr>`;
     // Tháng Năm Top
 
 
@@ -2108,24 +2072,27 @@
 
     // Ngày Dương To
     res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
-      let selected_svg_tet_left = "";
-      let selected_svg_tet_right = "";
-      if (lunarDate.month === 1 && lunarDate.day === 1) {
-        selected_svg_tet_left = svg_tet[5];
-        selected_svg_tet_right = svg_tet[0];
-        res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
-        res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
-      } else if (lunarDate.month === 1 && lunarDate.day === 2) {
-        selected_svg_tet_left = svg_tet[6];
-        selected_svg_tet_right = svg_tet[1];
-        res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
-        res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
-      } else if (lunarDate.month === 1 && lunarDate.day === 3) {
-        selected_svg_tet_left = svg_tet[7];
-        selected_svg_tet_right = svg_tet[3];
-        res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
-        res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
-      }
+
+    let selected_svg_tet_left = "";
+    let selected_svg_tet_right = "";
+    // Logic chọn hình ảnh cho 3 ngày đầu năm
+    if (lunarDate.month === 1) {
+        if (lunarDate.day === 1) {
+            selected_svg_tet_left = svg_tet[5];
+            selected_svg_tet_right = svg_tet[0];
+        } else if (lunarDate.day === 2) {
+            selected_svg_tet_left = svg_tet[6];
+            selected_svg_tet_right = svg_tet[1];
+        } else if (lunarDate.day === 3) {
+            selected_svg_tet_left = svg_tet[7];
+            selected_svg_tet_right = svg_tet[3];
+        }
+        // Chỉ chèn HTML nếu đúng 3 ngày đầu năm
+        if (selected_svg_tet_left && selected_svg_tet_right) {
+            res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
+            res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
+        }
+    }
     res += `</div></td></tr>`;
     // Ngày Dương To
 
