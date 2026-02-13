@@ -1793,11 +1793,11 @@
 
       .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 24%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_left_tet { left: 20%; position: absolute; bottom: -10px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
+      .show_left_tet { left: 8%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_right_tet { right: 25%; position: absolute; bottom: -10px; display: flex; width: 22%; align-items: center; justify-content: center; z-index: 100; }
+      .show_right_tet { right: 13%; position: absolute; bottom: -11px; display: flex; width: 22%; align-items: center; justify-content: center; z-index: 100; }
 
       .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
