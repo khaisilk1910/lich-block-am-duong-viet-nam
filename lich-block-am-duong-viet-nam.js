@@ -2049,8 +2049,8 @@
     if ((lunarDate.month === 12 && lunarDate.day >= 23) || (lunarDate.month === 1 && lunarDate.day <= 3)) {
       selected_svg_tet_dao = svg_tet[8] || "";
       selected_svg_tet_mai = svg_tet[9] || "";
-      res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`
-      res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`
+      res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`;
+      res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`;
     }
     res += `</div</td></tr>`;
     // Tháng Năm Top
