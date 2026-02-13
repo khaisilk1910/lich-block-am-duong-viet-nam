@@ -2052,7 +2052,7 @@
       res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`;
       res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`;
     }
-    res += `</div</td></tr>`;
+    res += `</div></td></tr>`;
     // Tháng Năm Top
 
 
