@@ -1791,11 +1791,11 @@
 
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
-      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 30%; align-items: center; justify-content: center; z-index: 100; }
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 30%; align-items: center; justify-content: center; z-index: 100; }
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
 
-      .show_left_tet, .show_right_tet { position: absolute; bottom: 0; display: flex; height: 35%; width: 35%; align-items: center; justify-content: center; z-index: 100; }
+      .show_left_tet, .show_right_tet { position: absolute; bottom: 0; display: flex; width: 30%; align-items: center; justify-content: center; z-index: 100; }
 
       .show_left_tet { left: 0; }
 
