@@ -2087,8 +2087,8 @@
       <span class="nam_top">${yy}</span>
       <span class="ngan_cach">❖</span> ${monthNameEN}`;
 
-      const selected_svg_tet_dao = "";
-      const selected_svg_tet_mai = "";
+      let selected_svg_tet_dao = "";
+      lett selected_svg_tet_mai = "";
       // Kiểm tra nếu là tháng 12 từ ngày 23 trở đi
       // HOẶC nếu là tháng 1 từ ngày 1 đến ngày 3
       if ((lunarDate.month === 12 && lunarDate.day >= 23) || (lunarDate.month === 1 && lunarDate.day <= 3)) {
@@ -2108,8 +2108,8 @@
 
     // Ngày Dương To
     res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
-      const selected_svg_tet_left = "";
-      const selected_svg_tet_right = "";
+      let selected_svg_tet_left = "";
+      let selected_svg_tet_right = "";
       if (lunarDate.month === 1 && lunarDate.day === 1) {
         selected_svg_tet_left = svg_tet[5];
         selected_svg_tet_right = svg_tet[0];
