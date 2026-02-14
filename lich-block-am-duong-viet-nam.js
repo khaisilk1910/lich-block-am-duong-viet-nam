@@ -1847,7 +1847,7 @@
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
-      .show_mai_tet { transform-box: fill-box; transform-origin: 40px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
+      .show_mai_tet { transform-box: fill-box; transform-origin: 0% 35%; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
       .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { max-width: 100%; max-height: 100%; }
 
