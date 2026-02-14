@@ -1975,11 +1975,8 @@
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
     res += `<tr><td colspan="3" class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
-    res += `<td colspan="1" class="thang_top"><span class="nam_top">${yy}</span>`;
+    res += `<td colspan="1" class="nam_top">${yy}`;
     res += `<td colspan="3" class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
-    
-    
-    
     // Tháng Năm Top
 
 
