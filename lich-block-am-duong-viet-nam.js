@@ -2068,17 +2068,7 @@
     const monthNameEN = showthangarray_EN[mm - 1];
     res += `<tr>`;
     res += `<td colspan="7"><div class="thang_top">Tháng ${mm}<span class="ngan_cach"> ❖ </span><span class="nam_top">${yy}</span><span class="ngan_cach"> ❖ </span> ${monthNameEN}`;
-    
-    // ===== SVG Tết =====
-    let selected_svg_tet_dao = "";
-    let selected_svg_tet_mai = "";
-    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
-      selected_svg_tet_dao = svg_tet[0] || "";
-      selected_svg_tet_mai = svg_tet[1] || "";
-      res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`;
-      res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`;
-    }
-    // ===== SVG Tết =====
+
     
     res += `</div></td></tr>`;
     // Tháng Năm Top
@@ -2091,8 +2081,8 @@
 
     // Ngày Dương To
     res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
-    
 
+    
     res += `</div></td></tr>`;
     // Ngày Dương To
 
