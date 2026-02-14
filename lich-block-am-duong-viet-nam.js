@@ -1787,7 +1787,7 @@
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
-      .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
+      .show_mai_tet { transform-box: fill-box; transform-origin: 40px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
       .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { max-width: 100%; max-height: 100%; }
 
@@ -1898,6 +1898,15 @@
         
         
         
+        .show_mai_tet { width: 40%; }
+
+        .show_dao_tet { width: 40%; }
+
+        .show_left_tet {width: 25%; }
+
+        .show_right_tet {height: 50%; }
+      
+      
         .show_dao_tet:hover, .show_mai_tet:hover { animation: lanternSwingStrong 1.2s ease-in-out infinite; }
 
         @keyframes lanternSwingSoft { 0% { transform: rotate(0deg); } 25% { transform: rotate(1.5deg); } 50% { transform: rotate(-1.5deg); }75% { transform: rotate(1deg); } 100% { transform: rotate(0deg); } }
