@@ -39,15 +39,6 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
    - Quay lại HACS và nhập ô tìm kiếm `Lịch Block Âm Dương Việt Nam` và Tải về
      
      <img width="1658" height="326" alt="image" src="https://github.com/user-attachments/assets/70917f4b-5ff1-4bd6-b4f9-6e1e9acd4d86" />
-     
-   - Tải file ảnh hình nền:
-      - Truy cập: `https://github.com/khaisilk1910/lich-block-am-duong-viet-nam/tree/main/images`
-        
-      - Tải tất cả các ảnh trong thư mục `images` về máy
-        
-      - Tạo mới folder `images` trong `\config\www\community\lich-block-am-duong-viet-nam\` và dán tất cả các file ảnh vào thư mục `images`
-        <img width="1063" height="242" alt="image" src="https://github.com/user-attachments/assets/6546c7f0-b80e-4798-a773-76dfb384d019" />
-        <img width="1255" height="284" alt="image" src="https://github.com/user-attachments/assets/1a16e47a-9a9e-408e-b90b-b63ca520500d" />
         
    - Sau đó quay trở lại Dashboard mà bạn muốn thêm một thẻ mới.
      
