@@ -1737,6 +1737,7 @@
   }
 
 
+
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
   const style = 'style="width:100%; height:100%;"';
@@ -2029,7 +2030,7 @@
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
     res += `<tr><td colspan="3">`;
-    res += `<div  class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
+    res += `<div class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
         // ===== SVG Tết =====
     // --- XỬ LÝ HOA MAI ---
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
@@ -2044,7 +2045,7 @@
     }
     // ===== SVG Tết =====
     res += `</div>`;
-    res += `</td></tr>`;
+    res += `</td>`;
     
     res += `<td colspan="1" class="nam_top">${yy}`;
     
