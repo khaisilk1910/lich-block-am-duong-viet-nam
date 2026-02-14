@@ -1876,10 +1876,69 @@
 
       .svg_td { text-align:center; width:clamp(50px, 8vw, 80px); }
       
-      .svg_circle_divider { width: 90%; aspect-ratio: 1/1; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; margin: 0 auto; background:rgba(255,255,255,0.18); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); }
-      
-			.svg-cell { display:flex; text-align: center; height:80%; width:80%; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+      /* --- KHUNG TRÒN BÊN NGOÀI --- */
+      .svg_circle_divider { 
+        /* Kích thước & Hình dáng */
+        width: 90%; 
+        aspect-ratio: 1/1; 
+        border-radius: 50%; 
+        
+        /* Layout: Dùng flex-end để con vật nằm sát đáy, hỗ trợ hiệu ứng chui lên */
+        display: flex; 
+        align-items: flex-end; /* Sửa từ center -> flex-end để hiệu ứng mọc từ dưới lên chuẩn hơn */
+        justify-content: center; 
+        margin: 0 auto; 
+        
+        /* Hiệu ứng kính (Glassmorphism) */
+        background: rgba(255, 255, 255, 0.18); 
+        backdrop-filter: blur(4px); 
+        -webkit-backdrop-filter: blur(4px); 
+        border: 1px solid rgba(255, 255, 255, 0.2); 
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 0.4px 0 rgba(255, 255, 255, 0.35); 
+        
+        /* QUAN TRỌNG: Ẩn phần thừa để tạo hiệu ứng chui từ dưới lên */
+        position: relative; 
+        overflow: hidden; 
+      }
 
+      /* --- HÌNH ẢNH BÊN TRONG --- */
+      .svg-cell { 
+        /* Kích thước */
+        width: 80%; 
+        height: 80%; 
+        object-fit: contain; /* Giữ tỷ lệ ảnh */
+        
+        /* Layout */
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        
+        /* Animation Setup */
+        transform-origin: bottom center; /* Lắc lư từ chân */
+        will-change: transform; /* Tối ưu hiệu năng cho trình duyệt */
+        
+        /* --- CHUỖI ANIMATION --- */
+        animation: 
+          /* 1. Bật lên: Chạy 0.8s */
+          popup-bouncy 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+          
+          /* 2. Lắc lư: Chạy 3s, CHỜ 0.8s (delay) rồi mới bắt đầu */
+          wiggle-continuous 3s ease-in-out 0.8s infinite;
+      }
+
+      /* --- PHẦN BẮT BUỘC PHẢI CÓ (KEYFRAMES) --- */
+      /* Nếu thiếu đoạn này animation sẽ không chạy */
+
+      @keyframes popup-bouncy {
+          0% { transform: translateY(110%); opacity: 0; } /* Bắt đầu từ dưới đáy */
+          100% { transform: translateY(0); opacity: 1; }  /* Kết thúc ở vị trí chuẩn */
+      }
+
+      @keyframes wiggle-continuous {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(-5deg); } /* Nghiêng trái nhẹ */
+          75% { transform: rotate(5deg); }  /* Nghiêng phải nhẹ */
+      }
 
       .thang_am_lich, .nam_am_lich { position: relative; overflow: visible; color:rgba(255,255,153,1); width: 38%; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(16px, 1.8vw, 20px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
 
@@ -1910,7 +1969,7 @@
       .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
-	  .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
+      .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
       
       @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } }
 
