@@ -1740,7 +1740,8 @@
 
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
-  const style = 'style="width:100%; height:100%;"';
+//  const style = 'style="width:100%; height:100%;"';
+  const style = 'style="width:100%;"';
   // Helper function to create the IMG tag
   const getImg = (path) => `<img src="${basePath}/${path}" ${style}>`;
   // 1. Dao & Mai
@@ -1777,31 +1778,32 @@
 
 
 
-      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 38%; align-items: center; justify-content: center; z-index: 100; }
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 38%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 34%; align-items: center; justify-content: center; z-index: 100; }
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 34%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
+      .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; width: 20%; align-items: center; justify-content: center; z-index: 100; }
+      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; width: 20%; align-items: center; justify-content: center; z-index: 5; }
 
       .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
-      
-      
-      
+
+
 
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
-      .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; bottom: -5px; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; right: -10px; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
-      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; left: -10px; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; padding: 0 10px; width: 1%; color:#fff; bottom: -5px; margin:5px 5px 0px 5px; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
+      
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
+      
+      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); position: relative; overflow: visible; }
 
@@ -1824,7 +1826,7 @@
       .thang_am_lich, .nam_am_lich { position: relative; overflow: visible; color:rgba(255,255,153,1); width: 38%; font-family: 'Playfair Display', serif; background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(16px, 1.8vw, 20px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin: 10px auto; border-radius: 8px; }
 
 
-      .ngayamlich { color:rgba(255,255,153,1); font-family:'Bebas Neue', sans-serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
+      .ngayamlich { color:rgba(255,255,153,1); font-family: 'Playfair Display', serif; text-align:center; vertical-align: middle; font-size: clamp(90px, 12vw, 120px); letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); margin: 10px auto; }
 
 
       .ThangNgayGioTiet_before { font-family:'Bebas Neue', sans-serif; font-style:italic; color:#fff; text-align:center; font-size: clamp(6px, 0.8vw, 10px); padding: 1px auto; margin: 6px auto 1px auto; }
