@@ -19,8 +19,10 @@
 - Lưu ý không đổi tên, đã cố định 24 ảnh, nếu muốn ảnh khác hãy copy vào và đổi tên giống như ban đầu
 ```
 type: custom:lich-block-am-duong-viet-nam
-background: transparent 
-background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+background: transparent
+background_opacity: 0.9
+grid_options:
+  columns: full
 ```
 
 ## Hướng dẫn:
@@ -45,8 +47,10 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
    - Vào Edit Dashboard
     ```
    type: custom:lich-block-am-duong-viet-nam
-   background: transparent 
-   background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+   background: transparent
+   background_opacity: 0.9
+   grid_options:
+     columns: full
    ```
     
      <img width="172" height="110" alt="image" src="https://github.com/user-attachments/assets/2447c0e3-0b85-4351-a8ed-51643e3e766c" />
@@ -88,8 +92,10 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
 - Thêm thẻ mới và điền
  ```
 type: custom:lich-block-am-duong-viet-nam
-background: transparent 
-background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+background: transparent
+background_opacity: 0.9
+grid_options:
+  columns: full
 ```
   <img width="1020" height="768" alt="image" src="https://github.com/user-attachments/assets/2aa98f8f-461a-4397-99a3-cf0fdc22755a" />
   
