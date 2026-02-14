@@ -1369,7 +1369,67 @@
       "Yêu nhau yêu cả đường đi ghét nhau ghét cả tông chi họ hàng",
       "Yêu nhau cau sáu bổ ba, ghét nhau cau sáu bổ ra làm mười"
   ];
+
+  /**
+   * Hàm lấy nội dung ngẫu nhiên không trùng lặp trong ngày
+   * @param {Array} sourceArray - Mảng chứa danh sách (VD: CA_DAO_TUC_NGU)
+   * @param {String} storageKey - Tên key để lưu vào localStorage (để tránh trùng với các tính năng khác)
+   * @returns {String} Nội dung đã được format xuống dòng
+   */
+  function getUniqueDailyContent(sourceArray, storageKey = 'cadao_tracker') {
+    // 1. Kiểm tra dữ liệu đầu vào
+    if (!sourceArray || sourceArray.length === 0) return "";
+
+    const _todayObj = new Date();
+    const _dateStr = _todayObj.getFullYear() + "" + (_todayObj.getMonth() + 1) + "" + _todayObj.getDate();
+    
+    // 2. Lấy dữ liệu từ LocalStorage
+    let storedData;
+    try {
+        storedData = JSON.parse(localStorage.getItem(storageKey)) || {};
+    } catch (e) {
+        storedData = {};
+    }
+
+    // 3. Reset nếu sang ngày mới
+    if (storedData.date !== _dateStr) {
+        storedData = {
+            date: _dateStr,
+            shownIndices: []
+        };
+    }
+
+    // 4. Lọc ra các index chưa hiển thị
+    const totalItems = sourceArray.length;
+    const availableIndices = [];
+
+    for (let i = 0; i < totalItems; i++) {
+        if (!storedData.shownIndices.includes(i)) {
+            availableIndices.push(i);
+        }
+    }
+
+    // 5. Chọn index ngẫu nhiên
+    let _selectedIndex;
+    if (availableIndices.length === 0) {
+        // Nếu đã xem hết thì reset lại vòng lặp ngay trong ngày
+        _selectedIndex = Math.floor(Math.random() * totalItems);
+        storedData.shownIndices = [_selectedIndex];
+    } else {
+        const randomPointer = Math.floor(Math.random() * availableIndices.length);
+        _selectedIndex = availableIndices[randomPointer];
+        storedData.shownIndices.push(_selectedIndex);
+    }
+
+    // 6. Lưu lại trạng thái
+    localStorage.setItem(storageKey, JSON.stringify(storedData));
+
+    // 7. Xử lý format văn bản (xuống dòng) và trả về
+    let content = sourceArray[_selectedIndex];
+    return content ? content.replace(/\n/g, '<br>') : "";
+  }
   // ===== Ca dao tục ngữ =====
+
 
 
   // ===== Cát tinh / Hung tinh / Thần sát =====
@@ -2051,15 +2111,10 @@
     
     res += `<td colspan="3">`;
     res += `<div  class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}`;
-        // ===== SVG Tết =====
-    // --- XỬ LÝ HOA TẾT (Đào/Mai) ---
-    // Kiểm tra thời gian: 23 tháng Chạp -> Mùng 3 Tết
+    // ===== SVG Tết =====
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
-        // Mặc định lấy Đào (index 0). Nếu muốn ngẫu nhiên Đào hoặc Mai thì dùng dòng dưới:
-        // const tetFlower = svg_tet[Math.floor(Math.random() * svg_tet.length)]; 
-        const tetFlower = svg_tet[0]; // Lấy ảnh đầu tiên (Đào)
-        // Chỉ thêm vào nếu có ảnh
+        const tetFlower = svg_tet[0];
         if (tetFlower) {
             res += `<div class="show_dao_tet">${tetFlower}</div>`;
         }
@@ -2080,30 +2135,20 @@
     // --- XỬ LÝ ẢNH TRANG TRÍ 2 BÊN (TRÁI/PHẢI) ---
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
-      
-      // 1. Lấy index ngẫu nhiên
       const idxLeft = Math.floor(Math.random() * svg_tet_left.length);
       let idxRight = Math.floor(Math.random() * svg_tet_right.length);
-
-      // 2. Xử lý trùng lặp: Nếu random ra 2 số giống nhau thì bên phải tự cộng thêm 1
       if (idxLeft === idxRight) {
         idxRight = (idxRight + 1) % svg_tet_right.length;
       }
-
-      // 3. Lấy nội dung ảnh từ mảng
       const imgLeft = svg_tet_left[idxLeft];
       const imgRight = svg_tet_right[idxRight];
-
-      // 4. Render vào HTML (chỉ khi cả 2 ảnh đều tồn tại)
       if (imgLeft && imgRight) {
         res += `<div class="show_left_tet">${imgLeft}</div>`;
         res += `<div class="show_right_tet">${imgRight}</div>`;
       }
     }
 
-
     res += `</div></td></tr>`;
-    
     // Ngày Dương To
 
 
@@ -2123,7 +2168,6 @@
     const idxAL = NGAY_LE_AL.indexOf(d_m_al);
     const infoAL = idxAL !== -1 ? NGAY_LE_AL_STRING[idxAL] : "";
 
-    // Gom tất cả các thông tin vào một mảng để xử lý dấu gạch đứng (|) cho mượt
     let displayArray = [];
     if (noiDungLe) displayArray.push(noiDungLe);
     if (infoDL) displayArray.push(infoDL);
@@ -2136,18 +2180,20 @@
         res += `</td></tr>`;
     }
     // Ngày Lễ
-	  
+
+
     // Ca dao tục ngữ
-    const _todayObj = new Date();
-    const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
-    let _randomIdx = Math.floor(Math.abs(Math.sin(_dateSeed)) * CA_DAO_TUC_NGU.length);
-    let cadaotucngu_random = CA_DAO_TUC_NGU[_randomIdx];
-    if (cadaotucngu_random) {
-        cadaotucngu_random = cadaotucngu_random.replace(/\n/g, '<br>');
-    } else {
-        cadaotucngu_random = ""; 
-    }
-    res += `<tr><td colspan="7" ><div class="cadaotucngu">${cadaotucngu_random}</div></td></tr>`;
+//    const _todayObj = new Date();
+//    const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
+//    let _randomIdx = Math.floor(Math.abs(Math.sin(_dateSeed)) * CA_DAO_TUC_NGU.length);
+//    let cadaotucngu_random = CA_DAO_TUC_NGU[_randomIdx];
+//    if (cadaotucngu_random) {
+//        cadaotucngu_random = cadaotucngu_random.replace(/\n/g, '<br>');
+//    } else {
+//        cadaotucngu_random = ""; 
+//    }
+//    res += `<tr><td colspan="7" ><div class="cadaotucngu">${cadaotucngu_random}</div></td></tr>`;
+    res += `<tr><td colspan="7" ><div class="cadaotucngu">${getUniqueDailyContent(CA_DAO_TUC_NGU)}</div></td></tr>`;
     // Ca dao tục ngữ
 
 
@@ -2160,13 +2206,12 @@
     const svgNam = getSvgConGiap(lunarYearIndex);
     // --- XỬ LÝ MÀU SẮC THỨ ---
     const dayIndex = (currentLunarDate.jd + 1) % 7;
-    let styleColor = ""; // Mặc định không set màu (theo CSS gốc)
-
+    let styleColor = "";
     if (dayIndex === 0) {
         // Chủ Nhật -> Màu Đỏ
         styleColor = 'style="color: #ff3333;"'; 
     } else if (dayIndex === 6) {
-        // Thứ 7 -> Màu Xanh lá (dùng màu sáng chút để nổi trên nền tối)
+        // Thứ 7 -> Màu Xanh lá
         styleColor = 'style="color: #00e600;"'; 
     }
     // -------------------------
