@@ -2109,8 +2109,8 @@
       if (randomIndexLeft === randomIndexRight) {
         randomIndexRight = (randomIndexRight + 1) % svg_tet_right.length;
       }
-      let selected_svg_tet_left = svg_tet_left[randomIndexLeft] || "";
-      let selected_svg_tet_right = svg_tet_right[randomIndexRight] || "";
+      selected_svg_tet_left = svg_tet_left[randomIndexLeft] || "";
+      selected_svg_tet_right = svg_tet_right[randomIndexRight] || "";
       if (selected_svg_tet_left && selected_svg_tet_right) {
         res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
         res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
