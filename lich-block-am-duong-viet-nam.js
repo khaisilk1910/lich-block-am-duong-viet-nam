@@ -1740,7 +1740,7 @@
 
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
-  const style = 'style="width:100%; height:100%;"';
+  const style = 'style="width:120%; height:120%;"';
   // Helper function to create the IMG tag
   const getImg = (path) => `<img src="${basePath}/${path}" ${style}>`;
   // 1. Dao & Mai
@@ -2164,15 +2164,27 @@
     const svgNgay = getSvgConGiap(lunarDayIndex);
     const svgThang = getSvgConGiap(lunarMonthIndex);
     const svgNam = getSvgConGiap(lunarYearIndex);
+    // --- XỬ LÝ MÀU SẮC THỨ ---
+    const dayIndex = (currentLunarDate.jd + 1) % 7;
+    let styleColor = ""; // Mặc định không set màu (theo CSS gốc)
+
+    if (dayIndex === 0) {
+        // Chủ Nhật -> Màu Đỏ
+        styleColor = 'style="color: #ff3333;"'; 
+    } else if (dayIndex === 6) {
+        // Thứ 7 -> Màu Xanh lá (dùng màu sáng chút để nổi trên nền tối)
+        styleColor = 'style="color: #00e600;"'; 
+    }
+    // -------------------------
     res += `<tr >
       <td colspan="3">
-        <div class="thutrongtuan" >${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
+        <div class="thutrongtuan" ${styleColor}>${TUAN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
       <td class="svg_td" >
         <div class="svg_circle_divider"><span class="svg-cell" title="Ngày ${CAN[(jd + 9) % 10]} ${CHI[(jd+1)%12]}">${svgNgay}</span></div>
       </td>
       <td colspan="3">
-        <div class="thutrongtuan_EN">${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
+        <div class="thutrongtuan_EN" ${styleColor}>${TUAN_EN[(currentLunarDate.jd + 1) % 7]}</div>
       </td>
     </tr>`;
     // Thứ VI | EN
