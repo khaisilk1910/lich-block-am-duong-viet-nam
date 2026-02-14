@@ -1740,7 +1740,7 @@
 
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
-  const style = 'style="width:120%; height:120%;"';
+  const style = 'style="width:100%; height:auto;"';
   // Helper function to create the IMG tag
   const getImg = (path) => `<img src="${basePath}/${path}" ${style}>`;
   // 1. Dao & Mai
@@ -1792,8 +1792,8 @@
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
       .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img {
-        width: 100% !important;  /* Bắt buộc rộng theo khung chứa */
-        height: auto !important; /* Chiều cao tự động theo tỷ lệ (không bị ép theo dòng chữ) */
+        width: 100%;  /* Bắt buộc rộng theo khung chứa */
+        height: auto; /* Chiều cao tự động theo tỷ lệ (không bị ép theo dòng chữ) */
         display: block;
       }
 
@@ -1873,7 +1873,7 @@
         }
 
         /* 2. Chuyển màu chữ mặc định (vốn là đen, xanh, tím) thành trắng */
-        .thang_top, .thutrongtuan, .t2t6,
+        .thang_top, .t2t6,
          .tenthang, .navi-r, .ngaytuan, .toggle-btn, .viecnenlam b, .viecnentranh b,
         .cat_tinh b, .hung_tinh b, .giohoangdao {
             color: #ffffff !important;
