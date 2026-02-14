@@ -45,14 +45,11 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
    - Vào Edit Dashboard
      
      <img width="172" height="110" alt="image" src="https://github.com/user-attachments/assets/2447c0e3-0b85-4351-a8ed-51643e3e766c" />
-     
-   - Thêm thẻ mới và điền
-     ```
-     type: custom:lich-block-am-duong-viet-nam
-     ```
-     
-     <img width="1020" height="768" alt="image" src="https://github.com/user-attachments/assets/2aa98f8f-461a-4397-99a3-cf0fdc22755a" />
-
+   ```
+   type: custom:lich-block-am-duong-viet-nam
+   background: transparent 
+   background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+   ```
    - Để xem lịch các tháng, các năm nhấn dấu **<< <** hoặc **> >>**
      
      <img width="505" height="541" alt="image" src="https://github.com/user-attachments/assets/16f9fab1-c6eb-49b7-97fb-dfb23f9ffeb3" />
