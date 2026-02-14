@@ -6,16 +6,20 @@
 - Hiện giờ hoàng đạo,... ngày tháng năm theo can chi lịch âm.
 - Hiển thị tháng Đủ *(Đ)* hoặc Thiếu *(T)*, tháng *Nhuận* Âm Lịch
 
-<img width="504" height="652" alt="image" src="https://github.com/user-attachments/assets/6b422b15-4524-4375-b9ad-778c2c498323" /><img width="504" height="652" alt="image" src="https://github.com/user-attachments/assets/79a03233-76eb-41ef-bcf4-c3f979e3a477" />
+<img width="568" height="745" alt="image" src="https://github.com/user-attachments/assets/d1f69af0-ed9b-48a1-9072-ab72ec1a643b" />
+
 
 
 
 
 ## Thêm card vào lovelace:
 Để được như minh họa bên trên nên dùng theme Black và cài thêm từ HACS (iOS Themes)[https://github.com/basnijholt/lovelace-ios-themes]
+- Tải và copy toàn bộ thư mục và ảnh trong `www/images/lich-block-am-duong-viet-nam/`
+- Lưu toàn bộ ảnh theo đúng đường dẫn `www/images/lich-block-am-duong-viet-nam/`
+- Lưu ý không đổi tên, đã cố định 24 ảnh, nếu muốn ảnh khác hãy copy vào và đổi tên giống như ban đầu
 ```
 type: custom:lich-block-am-duong-viet-nam
-background: transparent # Hai chế độ normal(mặc định) và transparent
+background: transparent 
 background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
 ```
 
