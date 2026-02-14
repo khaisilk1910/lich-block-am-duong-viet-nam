@@ -2092,32 +2092,7 @@
     // Ngày Dương To
     res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
     
-    // Random lấy ảnh hiển thị
-    let selected_svg_tet_left = "";
-    let selected_svg_tet_right = "";
-    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
-      // 1. Tạo "hạt giống" (seed) dựa trên Ngày và Giờ để hình ảnh cố định trong 1 tiếng
-      // Nếu bạn muốn ngẫu nhiên HOÀN TOÀN mỗi lần load, hãy bỏ dòng 'seed' và dùng Math.random() trực tiếp.
-      let now = new Date();
-      let seed = now.getDate() + now.getHours(); 
-      // 2. Hàm lấy index ngẫu nhiên dựa trên seed (để đồng bộ 1h) hoặc ngẫu nhiên thực sự
-      // Ở đây mình dùng Math.random() để ưu tiên tính "mới mẻ" mỗi lần load như bạn muốn
-      let randomIndexLeft = Math.floor(Math.random() * svg_tet_left.length);
-      let randomIndexRight = Math.floor(Math.random() * svg_tet_right.length);
 
-      // 3. Đảm bảo bên phải không trùng hình với bên trái (nếu 2 list giống hệt nhau)
-      if (randomIndexLeft === randomIndexRight) {
-        randomIndexRight = (randomIndexRight + 1) % svg_tet_right.length;
-      }
-      selected_svg_tet_left = svg_tet_left[randomIndexLeft] || "";
-      selected_svg_tet_right = svg_tet_right[randomIndexRight] || "";
-      if (selected_svg_tet_left && selected_svg_tet_right) {
-        res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
-        res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
-      }
-    }
-    
-    
     res += `</div></td></tr>`;
     // Ngày Dương To
 
