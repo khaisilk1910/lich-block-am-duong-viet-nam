@@ -1737,6 +1737,28 @@
   }
 
 
+  // ===== SVG Tết Config =====
+  const basePath = "/local/images/lich-block-am-duong-viet-nam";
+  const style = 'style="width:100%; height:100%;"';
+  // Helper function to create the IMG tag
+  const getImg = (path) => `<img src="${basePath}/${path}" ${style}>`;
+  // 1. Dao & Mai
+  const svg_tet = [
+    getImg("dao.png"),
+    getImg("mai.png")
+  ];
+  // 2. Helper to generate numbered lists (1 to 24)
+  const generateList = (side, count) => 
+    Array.from({ length: count }, (_, i) => 
+      getImg(`${side}/${side} (${i + 1}).png`)
+    );
+  // Generate Left and Right arrays
+  const svg_tet_left = generateList("left", 24);
+  const svg_tet_right = generateList("right", 24);
+  // ===== SVG Tết Config =====
+
+
+
   // ===== UI helpers (render month table) =====
   const DAYNAMES = ["T2","T3","T4","T5","T6","T7","CN"];
   const PRINT_OPTS = { fontSize: "13pt", tableWidth: "100%" };
@@ -1752,16 +1774,35 @@
       .ha-popup { position: fixed !important; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; }
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
+
+
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 28%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 24%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; width: 20%; align-items: center; justify-content: center; z-index: 100; }
+
+      .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
+
+      .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
+      
+      .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
+      
+      
+      
+
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
 
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; bottom: -5px; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; right: -10px; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
-      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; left: -10px; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; right: -10px; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
+      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; left: -10px; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
 
-      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
+      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); position: relative; overflow: visible; }
 
       .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 50px 0px 50px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
@@ -1853,6 +1894,19 @@
         .svg-cell:hover {
             transform: scale(1.8);
         }
+        
+        
+        
+        .show_dao_tet:hover, .show_mai_tet:hover { animation: lanternSwingStrong 1.2s ease-in-out infinite; }
+
+        @keyframes lanternSwingSoft { 0% { transform: rotate(0deg); } 25% { transform: rotate(1.5deg); } 50% { transform: rotate(-1.5deg); }75% { transform: rotate(1deg); } 100% { transform: rotate(0deg); } }
+
+
+        @keyframes lanternSwingStrong { 0% { transform: rotate(0deg); } 20% { transform: rotate(6deg); } 40% { transform: rotate(-5deg); } 60% { transform: rotate(4deg); } 80% { transform: rotate(-3deg); } 100% { transform: rotate(0deg); } }
+
+        
+        
+        
         /* 5. Làm nổi bật ngày hôm nay bằng một lớp nền mờ thay vì màu vàng */
         .homnay {
             background-color: rgba(255, 255, 255, 0.15) !important;
@@ -1974,11 +2028,45 @@
     // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="3" class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
+    res += `<tr><td colspan="3">`;
+    res += `<div  class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
+        // ===== SVG Tết =====
+    // --- XỬ LÝ HOA MAI ---
+    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
+        (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+        
+        const maiImg = svg_tet[1]; // Index 1 là hoa Mai
+        
+        // Kiểm tra nếu có ảnh thì mới thêm vào HTML
+        if (maiImg) {
+            res += `<div class="show_mai_tet">${maiImg}</div>`;
+        }
+    }
+    // ===== SVG Tết =====
+    res += `</div>`;
+    res += `</td></tr>`;
+    
     res += `<td colspan="1" class="nam_top">${yy}`;
-    res += `<td colspan="3" class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
+    
+    res += `<td colspan="3">`;
+    res += `<div  class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}`;
+        // ===== SVG Tết =====
+    // --- XỬ LÝ HOA TẾT (Đào/Mai) ---
+    // Kiểm tra thời gian: 23 tháng Chạp -> Mùng 3 Tết
+    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
+        (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+        // Mặc định lấy Đào (index 0). Nếu muốn ngẫu nhiên Đào hoặc Mai thì dùng dòng dưới:
+        // const tetFlower = svg_tet[Math.floor(Math.random() * svg_tet.length)]; 
+        const tetFlower = svg_tet[0]; // Lấy ảnh đầu tiên (Đào)
+        // Chỉ thêm vào nếu có ảnh
+        if (tetFlower) {
+            res += `<div class="show_dao_tet">${tetFlower}</div>`;
+        }
+    }
+    // ===== SVG Tết =====
+    res += `</div>`;
+    res += `</td></tr>`;
     // Tháng Năm Top
-
 
     // Phân cách
     res += `<tr><td colspan="7" class="phan_cach">──────  ⟡  ──────</td></tr>`;
@@ -1986,7 +2074,35 @@
 
 
     // Ngày Dương To
-    res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td></tr>`;
+    res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
+    
+    // --- XỬ LÝ ẢNH TRANG TRÍ 2 BÊN (TRÁI/PHẢI) ---
+    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
+        (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+      
+      // 1. Lấy index ngẫu nhiên
+      const idxLeft = Math.floor(Math.random() * svg_tet_left.length);
+      let idxRight = Math.floor(Math.random() * svg_tet_right.length);
+
+      // 2. Xử lý trùng lặp: Nếu random ra 2 số giống nhau thì bên phải tự cộng thêm 1
+      if (idxLeft === idxRight) {
+        idxRight = (idxRight + 1) % svg_tet_right.length;
+      }
+
+      // 3. Lấy nội dung ảnh từ mảng
+      const imgLeft = svg_tet_left[idxLeft];
+      const imgRight = svg_tet_right[idxRight];
+
+      // 4. Render vào HTML (chỉ khi cả 2 ảnh đều tồn tại)
+      if (imgLeft && imgRight) {
+        res += `<div class="show_left_tet">${imgLeft}</div>`;
+        res += `<div class="show_right_tet">${imgRight}</div>`;
+      }
+    }
+
+
+    res += `</div></td></tr>`;
+    
     // Ngày Dương To
 
 
