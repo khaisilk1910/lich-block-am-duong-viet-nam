@@ -1740,8 +1740,7 @@
 
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
-//  const style = 'style="width:100%; height:100%;"';
-  const style = 'style=""';
+  const style = 'style="width:100%; height:100%;"';
   // Helper function to create the IMG tag
   const getImg = (path) => `<img src="${basePath}/${path}" ${style}>`;
   // 1. Dao & Mai
@@ -1786,12 +1785,17 @@
 
       .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; width: 20%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; }
+      /* .show_dao_tet svg, .show_mai_tet svg, .show_left_tet svg, .show_right_tet svg { max-width: 100%; max-height: 100%; } */
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
-
+      
+      .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img {
+        width: 100% !important;  /* Bắt buộc rộng theo khung chứa */
+        height: auto !important; /* Chiều cao tự động theo tỷ lệ (không bị ép theo dòng chữ) */
+        display: block;
+      }
 
 
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
