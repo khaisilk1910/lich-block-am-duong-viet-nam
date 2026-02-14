@@ -1881,7 +1881,7 @@
         aspect-ratio: 1/1;
         border-radius: 50%;
         display: flex;
-        align-items: center
+        align-items: center;
         justify-content: center;
         margin: 0 auto;
         background: rgba(255, 255, 255, 0.18);
@@ -1890,7 +1890,7 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 0.4px 0 rgba(255, 255, 255, 0.35);
         position: relative; 
-        overflow: hidden; 
+        overflow: visible; 
       }
 
       .svg-cell {
