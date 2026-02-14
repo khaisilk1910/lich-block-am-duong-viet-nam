@@ -1777,13 +1777,13 @@
 
 
 
-      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: clamp(120px, 4vw, 160px); align-items: center; justify-content: center; z-index: 5; }
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: clamp(100px, 4vw, 140px); align-items: center; justify-content: center; z-index: 5; }
 
-      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: clamp(120px, 4vw, 160px); align-items: center; justify-content: center; z-index: 5; }
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: clamp(100px, 4vw, 140px); align-items: center; justify-content: center; z-index: 5; }
 
       .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; height: 60px; align-items: center; justify-content: center; z-index: 5; }
+      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; height: 100px; align-items: center; justify-content: center; z-index: 5; }
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
