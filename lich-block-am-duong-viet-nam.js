@@ -1740,9 +1740,8 @@
 
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
-  const style = 'style="width:100%; height:100%;"';
   // Helper function to create the IMG tag
-  const getImg = (path) => `<img src="${basePath}/${path}" ${style}>`;
+  const getImg = (path) => `<img src="${basePath}/${path}">`;
   // 1. Dao & Mai
   const svg_tet = [
     getImg("dao.png"),
