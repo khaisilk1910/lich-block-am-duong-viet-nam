@@ -43,13 +43,14 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
    - Sau đó quay trở lại Dashboard mà bạn muốn thêm một thẻ mới.
      
    - Vào Edit Dashboard
-     
-     <img width="172" height="110" alt="image" src="https://github.com/user-attachments/assets/2447c0e3-0b85-4351-a8ed-51643e3e766c" />
-   ```
+    ```
    type: custom:lich-block-am-duong-viet-nam
    background: transparent 
    background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
    ```
+    
+     <img width="172" height="110" alt="image" src="https://github.com/user-attachments/assets/2447c0e3-0b85-4351-a8ed-51643e3e766c" />
+  
    - Để xem lịch các tháng, các năm nhấn dấu **<< <** hoặc **> >>**
      
      <img width="505" height="541" alt="image" src="https://github.com/user-attachments/assets/16f9fab1-c6eb-49b7-97fb-dfb23f9ffeb3" />
@@ -77,14 +78,6 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
 - Tiếp theo điền đường dẫn đến file **lich-block-am-duong-viet-nam.js** là **/local/lich-block-am-duong-viet-nam/lich-block-am-duong-viet-nam.js** và lựa chọn như hình ảnh
   
   <img width="568" height="495" alt="image" src="https://github.com/user-attachments/assets/b1b952d2-0630-4ca8-8fac-527a6fcf0db6" />
-
-- Tải file ảnh hình nền:
-   - Truy cập: `https://github.com/khaisilk1910/lich-block-am-duong-viet-nam/tree/main/images`
-   - Tải tất cả các ảnh trong thư mục `images` về máy
-   - Tạo mới folder `images` trong `\config\www\community\lich-block-am-duong-viet-nam\` và dán tất cả các file ảnh vào thư mục `images`
-     
-     <img width="1063" height="242" alt="image" src="https://github.com/user-attachments/assets/6546c7f0-b80e-4798-a773-76dfb384d019" />
-     <img width="1255" height="284" alt="image" src="https://github.com/user-attachments/assets/1a16e47a-9a9e-408e-b90b-b63ca520500d" />
      
 - Sau đó quay trở lại Dashboard mà bạn muốn thêm một thẻ mới.
   
@@ -92,8 +85,12 @@ background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt ho�
   
   <img width="172" height="110" alt="image" src="https://github.com/user-attachments/assets/2447c0e3-0b85-4351-a8ed-51643e3e766c" />
   
-- Thêm thẻ mới và điền **type: custom:lich-block-am-duong-viet-nam**
-  
+- Thêm thẻ mới và điền
+ ```
+type: custom:lich-block-am-duong-viet-nam
+background: transparent 
+background_opacity: 0.6 #0 là có màu nền, 1 là màu nền trong suốt hoàn toàn
+```
   <img width="1020" height="768" alt="image" src="https://github.com/user-attachments/assets/2aa98f8f-461a-4397-99a3-cf0fdc22755a" />
   
 - Để xem lịch các tháng, các năm nhấn dấu **<< <** hoặc **> >>**
