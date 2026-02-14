@@ -1783,7 +1783,7 @@
 
       .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; height: clamp(120px, 12vh, 160px); align-items: center; justify-content: center; z-index: 5; }
+      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; height: clamp(120px, 14vh, 180px); align-items: center; justify-content: center; z-index: 5; }
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
