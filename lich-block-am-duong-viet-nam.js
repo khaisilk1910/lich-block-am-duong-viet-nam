@@ -1758,7 +1758,8 @@
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
       .nam_top { font-family: 'Bebas Neue', sans-serif; color:#fff; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:center; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
+      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; }
 
       .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); }
 
@@ -1973,7 +1974,12 @@
     // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="7" class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span> <span class="nam_top">${yy}</span> <span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
+    res += `<tr><td colspan="3" class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
+    res += `<td colspan="1" class="thang_top"><span class="nam_top">${yy}</span>`;
+    res += `<td colspan="3" class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}</td></tr>`;
+    
+    
+    
     // Tháng Năm Top
 
 
