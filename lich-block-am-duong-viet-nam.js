@@ -105,64 +105,23 @@
 
 
 // ===== SVG Tết =====
-	const svg_tet = [
-    `<img src="/local/images/lich-block-am-duong-viet-nam/dao.png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/mai.png" style="width:100%; height:100%;">`
-  ];
-  
-	const svg_tet_left = [
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (1).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (2).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (3).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (4).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (5).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (6).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (7).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (8).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (9).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (10).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (11).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (12).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (13).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (14).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (15).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (16).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (17).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (18).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (19).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (20).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (21).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (22).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (23).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/left/left (24).png" style="width:100%; height:100%;">`
-  ];
-  
-	const svg_tet_right = [
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (1).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (2).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (3).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (4).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (5).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (6).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (7).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (8).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (9).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (10).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (11).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (12).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (13).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (14).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (15).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (16).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (17).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (18).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (19).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (20).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (21).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (22).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (23).png" style="width:100%; height:100%;">`,
-    `<img src="/local/images/lich-block-am-duong-viet-nam/right/right (24).png" style="width:100%; height:100%;">`
-  ];
+// ===== CẤU HÌNH ẢNH TẾT (Đã tối ưu) =====
+  const IMG_PATH = "/local/images/lich-block-am-duong-viet-nam";
+  const IMG_STYLE = 'style="width:100%; height:100%; object-fit: contain;"'; // Thêm object-fit để ảnh không bị méo
+
+  // Hàm tạo thẻ img nhanh
+  const mkImg = (p) => `<img src="${IMG_PATH}/${p}" ${IMG_STYLE}>`;
+
+  // 1. Đào & Mai
+  const svg_tet = [ mkImg("dao.png"), mkImg("mai.png") ];
+
+  // 2. Hàm tạo danh sách tự động (Tránh lỗi gõ tay)
+  const genList = (name, count) => Array.from({length: count}, (_, i) => mkImg(`${name}/${name} (${i+1}).png`));
+
+  // Tạo mảng Left và Right (Tự động chạy từ 1 đến 24)
+  const svg_tet_left = genList("left", 24);
+  const svg_tet_right = genList("right", 24);
+  // ==========================================
 // ===== SVG Tết =====
 
 
@@ -2068,7 +2027,17 @@
     const monthNameEN = showthangarray_EN[mm - 1];
     res += `<tr>`;
     res += `<td colspan="7"><div class="thang_top">Tháng ${mm}<span class="ngan_cach"> ❖ </span><span class="nam_top">${yy}</span><span class="ngan_cach"> ❖ </span> ${monthNameEN}`;
-
+    
+    // ===== SVG Tết =====
+    let selected_svg_tet_dao = "";
+    let selected_svg_tet_mai = "";
+    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+      selected_svg_tet_dao = svg_tet[0] || "";
+      selected_svg_tet_mai = svg_tet[1] || "";
+      res += `<div class="show_dao_tet">${selected_svg_tet_dao}</div>`;
+      res += `<div class="show_mai_tet">${selected_svg_tet_mai}</div>`;
+    }
+    // ===== SVG Tết =====
     
     res += `</div></td></tr>`;
     // Tháng Năm Top
@@ -2081,7 +2050,31 @@
 
     // Ngày Dương To
     res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
+    
+    // Random lấy ảnh hiển thị
+    let selected_svg_tet_left = "";
+    let selected_svg_tet_right = "";
+    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+      // 1. Tạo "hạt giống" (seed) dựa trên Ngày và Giờ để hình ảnh cố định trong 1 tiếng
+      // Nếu bạn muốn ngẫu nhiên HOÀN TOÀN mỗi lần load, hãy bỏ dòng 'seed' và dùng Math.random() trực tiếp.
+      let now = new Date();
+      let seed = now.getDate() + now.getHours(); 
+      // 2. Hàm lấy index ngẫu nhiên dựa trên seed (để đồng bộ 1h) hoặc ngẫu nhiên thực sự
+      // Ở đây mình dùng Math.random() để ưu tiên tính "mới mẻ" mỗi lần load như bạn muốn
+      let randomIndexLeft = Math.floor(Math.random() * svg_tet_left.length);
+      let randomIndexRight = Math.floor(Math.random() * svg_tet_right.length);
 
+      // 3. Đảm bảo bên phải không trùng hình với bên trái (nếu 2 list giống hệt nhau)
+      if (randomIndexLeft === randomIndexRight) {
+        randomIndexRight = (randomIndexRight + 1) % svg_tet_right.length;
+      }
+      selected_svg_tet_left = svg_tet_left[randomIndexLeft] || "";
+      selected_svg_tet_right = svg_tet_right[randomIndexRight] || "";
+      if (selected_svg_tet_left && selected_svg_tet_right) {
+        res += `<div class="show_left_tet">${selected_svg_tet_left}</div>`;
+        res += `<div class="show_right_tet">${selected_svg_tet_right}</div>`;
+      }
+    }
     
     res += `</div></td></tr>`;
     // Ngày Dương To
