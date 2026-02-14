@@ -1740,8 +1740,9 @@
 
   // ===== SVG Tết Config =====
   const basePath = "/local/images/lich-block-am-duong-viet-nam";
+  const styleIMG = "style="width:100%; height:100%;"";
   // Helper function to create the IMG tag
-  const getImg = (path) => `<img src="${basePath}/${path}">`;
+  const getImg = (path) => `<img src="${basePath}/${path}" ${styleIMG}>`;
   // 1. Dao & Mai
   const svg_tet = [
     getImg("dao.png"),
@@ -1788,7 +1789,7 @@
       
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
-      .show_mai_tet svg, .show_dao_tet svg, .show_right_tet svg, .show_left_tet svg { max-width: 100% !important; max-height: 100% !important; }
+      .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { max-width: 100%; max-height: 100%; }
 
 
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
