@@ -14,7 +14,7 @@
 
 ## Thêm card vào lovelace:
 Để được như minh họa bên trên nên dùng theme Black và cài thêm từ HACS (iOS Themes)[https://github.com/basnijholt/lovelace-ios-themes]
-- Tải và copy toàn bộ thư mục và ảnh trong `www/images/lich-block-am-duong-viet-nam/`
+- Tải và copy toàn bộ thư mục và ảnh trong `[www/images/lich-block-am-duong-viet-nam/](https://github.com/khaisilk1910/lich-block-am-duong-viet-nam/tree/main/www/images/lich-block-am-duong-viet-nam)`
 - Lưu toàn bộ ảnh theo đúng đường dẫn `www/images/lich-block-am-duong-viet-nam/`
 - Lưu ý không đổi tên, đã cố định 24 ảnh, nếu muốn ảnh khác hãy copy vào và đổi tên giống như ban đầu
 ```
