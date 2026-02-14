@@ -1788,7 +1788,7 @@
       
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
-      .show_mai_tet svg, .show_dao_tet svg, .show_right_tet svg, .show_left_tet svg { max-width: 100% !important; max-height: auto !important; }
+      .show_mai_tet svg, .show_dao_tet svg, .show_right_tet svg, .show_left_tet svg { max-width: 100% !important; max-height: 100% !important; }
 
 
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
