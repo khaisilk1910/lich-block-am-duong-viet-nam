@@ -1777,9 +1777,9 @@
 
 
 
-      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 38%; align-items: center; justify-content: center; z-index: 5; }
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: 30%; align-items: center; justify-content: center; z-index: 5; }
 
-      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 34%; align-items: center; justify-content: center; z-index: 5; }
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: 30%; align-items: center; justify-content: center; z-index: 5; }
 
       .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 5; }
 
@@ -1789,7 +1789,7 @@
       
       .show_mai_tet { transform-box: fill-box; transform-origin: 20px 100px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
-      .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { max-width: 100%; max-height: 100%; }
+      .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { max-width: 100% !important; max-height: auto !important; }
 
 
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
