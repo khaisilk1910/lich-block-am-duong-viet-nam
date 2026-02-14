@@ -111,7 +111,8 @@ grid_options:
 
 ## Hình ảnh minh họa
 
-<img width="172" height="371" alt="image" src="https://github.com/user-attachments/assets/049fdd1a-9810-4d1e-a171-fe299564f494" />
+<img width="172" height="371" alt="image" src="https://github.com/user-attachments/assets/049fdd1a-9810-4d1e-a171-fe299564f494" /><img width="172" height="371" alt="image" src="https://github.com/user-attachments/assets/12593799-48ca-4d4b-9f85-797428fb3a4c" />
+
 
 
 
