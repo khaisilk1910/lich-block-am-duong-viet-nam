@@ -1836,14 +1836,17 @@
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
 
+      .td_tet_left { text-align:left; line-height: 0.9; align-items: flex-end; justify-content: left; position: relative; overflow: visible; }
 
-      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: clamp(110px, 4vw, 150px); align-items: center; justify-content: center; z-index: 5; }
+      .td_tet_right { text-align:right; line-height: 0.9; align-items: flex-end; justify-content: right; position: relative; overflow: visible; }
+      
+      .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: clamp(100px, 3.5vw, 140px); align-items: center; justify-content: center; z-index: 5; }
 
-      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: clamp(110px, 4vw, 140px); align-items: center; justify-content: center; z-index: 5; }
+      .show_dao_tet { position: absolute; top: 0; right: 0; display: flex; text-align: center; width: clamp(100px, 3.5vw, 140px); align-items: center; justify-content: center; z-index: 5; }
 
-      .show_left_tet { left: 5%; position: absolute; bottom: -11px; display: flex; width: 25%; align-items: center; justify-content: center; z-index: 5; }
+      .show_left_tet { position: absolute; bottom: -11px; display: flex; width: 25%; align-items: flex-end; justify-content: center; z-index: 5; }
 
-      .show_right_tet { right: 10%; position: absolute; bottom: -11px; display: flex; height: clamp(120px, 14vh, 180px); align-items: center; justify-content: center; z-index: 5; }
+      .show_right_tet { position: absolute; bottom: -11px; display: flex; height: clamp(100px, 11vh, 150px); align-items: flex-end; justify-content: center; z-index: 5; }
 
       .show_dao_tet { transform-box: fill-box; transform-origin: 100px 20px; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
@@ -1858,12 +1861,12 @@
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
       .nam_top { font-family: 'Bebas Neue', sans-serif; padding: 0 5px; color:#fff; bottom: -8px; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
-      
+
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
-      
+
       .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
 
-      .todayduonglich{ color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); position: relative; overflow: visible; }
+      .todayduonglich { color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); position: relative; overflow: visible; }
 
       .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 50px 0px 50px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
@@ -1871,6 +1874,7 @@
 
 
       .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin-right: 2px; border-bottom-right-radius: 16px; border-top-right-radius: 16px; }
+      
       .thutrongtuan_EN { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin-left: 2px; border-bottom-left-radius: 16px; border-top-left-radius: 16px; }
 
 
@@ -1949,9 +1953,39 @@
       .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
-      .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
+      /*.year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; } */
       
-      @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } }
+      /* @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } } */
+
+
+      .year-svg-container { position: absolute; display: inline-block; top: -36px; width: 35px; height: 35px; animation: horse_walking_roundtrip 10s linear infinite; }
+      
+      @keyframes horse_walking_roundtrip {
+        /* GIAI ĐOẠN 1: ĐI TỪ TRÁI SANG PHẢI */
+        0% {
+          transform: translateX(-100px) scaleX(1); /* Bắt đầu bên trái, nhìn sang phải */
+        }
+        45% {
+          transform: translateX(100px) scaleX(1);  /* Đến bên phải */
+        }
+        
+        /* GIAI ĐOẠN 2: QUAY ĐẦU */
+        50% {
+          transform: translateX(100px) scaleX(-1); /* Lật ngược hình ảnh tại chỗ */
+        }
+        
+        /* GIAI ĐOẠN 3: ĐI TỪ PHẢI VỀ TRÁI */
+        95% {
+          transform: translateX(-100px) scaleX(-1); /* Về lại bên trái */
+        }
+        
+        /* GIAI ĐOẠN 4: QUAY ĐẦU LẠI BAN ĐẦU */
+        100% {
+          transform: translateX(-100px) scaleX(1);  /* Lật lại nhìn sang phải */
+        }
+      }
+
+
 
     `;
 
@@ -2168,27 +2202,37 @@
     // Phân cách
 
 
-    // Ngày Dương To
-    res += `<tr><td colspan="7"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}`;
-    
-    // --- XỬ LÝ ẢNH TRANG TRÍ 2 BÊN (TRÁI/PHẢI) ---
-    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
-        (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+    res += `<tr>`;
+    // Tết Trái
+    let res_left = "";
+    let res_right = "";
+    if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
+      // Xử lý riêng cho LEFT
       const idxLeft = Math.floor(Math.random() * svg_tet_left.length);
-      let idxRight = Math.floor(Math.random() * svg_tet_right.length);
-      if (idxLeft === idxRight) {
-        idxRight = (idxRight + 1) % svg_tet_right.length;
-      }
       const imgLeft = svg_tet_left[idxLeft];
+      if (imgLeft) {
+          res_left = `<div class="show_left_tet">${imgLeft}</div>`;
+      }
+      // Xử lý riêng cho RIGHT
+      const idxRight = Math.floor(Math.random() * svg_tet_right.length);
       const imgRight = svg_tet_right[idxRight];
-      if (imgLeft && imgRight) {
-        res += `<div class="show_left_tet">${imgLeft}</div>`;
-        res += `<div class="show_right_tet">${imgRight}</div>`;
+      if (imgRight) {
+          res_right = `<div class="show_right_tet">${imgRight}</div>`;
       }
     }
+    res += `<td colspan="2" class="td_tet_left">${res_left}</td>`;
+    // Tết Trái
 
-    res += `</div></td></tr>`;
     // Ngày Dương To
+    res += `<td colspan="3"><div class="todayduonglich" title="Nhấp xem thêm chi tiết" onclick="window.haShowDayPopup(${today.getDate()},${mm},${yy})">${today.getDate()}</div></td>`;
+    // Ngày Dương To
+
+    // Tết Phải
+    res += `<td colspan="2" class="td_tet_right">${res_right}</td>`;
+    // Tết Phải
+    
+    res += `</tr>`;
+
 
 
     // Ngày Lễ
