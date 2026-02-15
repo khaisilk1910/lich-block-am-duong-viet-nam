@@ -1838,11 +1838,11 @@
 
       .td_tet_left { line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
 
-      .show_left_tet { position: absolute; left: 50%; transform: translateX(-50%); bottom: -11px; display: flex; width: 80%; align-items: flex-end; justify-content: center; z-index: 3; }
+      .show_left_tet { position: absolute; left: 50%; transform: translateX(-50%); bottom: -11px; display: flex; width: 85%; align-items: flex-end; justify-content: center; z-index: 3; }
 
       .td_tet_right { line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
 
-      .show_right_tet { position: absolute; left: 50%; transform: translateX(-50%); bottom: -11px; display: flex; height: 80%; align-items: flex-end; justify-content: center; z-index: 3; }
+      .show_right_tet { position: absolute; left: 50%; transform: translateX(-50%); bottom: -11px; display: flex; width: 80%; align-items: flex-end; justify-content: center; z-index: 3; }
       
       .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: clamp(100px, 3.5vw, 140px); align-items: center; justify-content: center; z-index: 3; }
 
