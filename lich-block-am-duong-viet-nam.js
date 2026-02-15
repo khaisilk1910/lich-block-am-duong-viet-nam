@@ -1836,7 +1836,7 @@
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
 
-      .td_tet_left { text-align:left; line-height: 0.9; align-items: flex-end; justify-content: left; position: relative; overflow: visible; }
+      .td_tet_left { text-align:left; line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
 
       .show_left_tet { position: absolute; bottom: -11px; display: flex; width: 90%; align-items: flex-end; justify-content: center; z-index: 5; }
 
@@ -1953,37 +1953,9 @@
       .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
-      /*.year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; } */
+      .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
       
-      /* @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } } */
-
-
-      .year-svg-container { position: absolute; display: inline-block; top: -36px; width: 35px; height: 35px; animation: horse_walking_roundtrip 10s linear infinite; }
-      
-      @keyframes horse_walking_roundtrip {
-        /* GIAI ĐOẠN 1: ĐI TỪ TRÁI SANG PHẢI */
-        0% {
-          transform: translateX(-100px) scaleX(1); /* Bắt đầu bên trái, nhìn sang phải */
-        }
-        45% {
-          transform: translateX(100px) scaleX(1);  /* Đến bên phải */
-        }
-        
-        /* GIAI ĐOẠN 2: QUAY ĐẦU */
-        50% {
-          transform: translateX(100px) scaleX(-1); /* Lật ngược hình ảnh tại chỗ */
-        }
-        
-        /* GIAI ĐOẠN 3: ĐI TỪ PHẢI VỀ TRÁI */
-        95% {
-          transform: translateX(-100px) scaleX(-1); /* Về lại bên trái */
-        }
-        
-        /* GIAI ĐOẠN 4: QUAY ĐẦU LẠI BAN ĐẦU */
-        100% {
-          transform: translateX(-100px) scaleX(1);  /* Lật lại nhìn sang phải */
-        }
-      }
+      @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } }
 
 
 
