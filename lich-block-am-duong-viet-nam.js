@@ -1836,11 +1836,11 @@
       .tet_cell{ background-color: #ff3333; color: white; border-radius: 8px;}
 
 
-      .td_tet_left { text-align:left; line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
+      .td_tet_left { line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
 
       .show_left_tet { position: absolute; bottom: -11px; display: flex; width: 90%; align-items: flex-end; justify-content: center; z-index: 5; }
 
-      .td_tet_right { text-align:right; line-height: 0.9; align-items: flex-end; justify-content: right; position: relative; overflow: visible; }
+      .td_tet_right { line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
 
       .show_right_tet { position: absolute; bottom: -11px; display: flex; height: 80%; align-items: flex-end; justify-content: center; z-index: 5; }
       
@@ -2137,13 +2137,10 @@
     res += `<tr><td colspan="3">`;
     res += `<div class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
         // ===== SVG Tết =====
-    // --- XỬ LÝ HOA MAI ---
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
         
-        const maiImg = svg_tet[1]; // Index 1 là hoa Mai
-        
-        // Kiểm tra nếu có ảnh thì mới thêm vào HTML
+        const maiImg = svg_tet[1];
         if (maiImg) {
             res += `<div class="show_mai_tet">${maiImg}</div>`;
         }
@@ -2152,7 +2149,7 @@
     res += `</div>`;
     res += `</td>`;
     
-    res += `<td colspan="1" class="nam_top">${yy}`;
+    res += `<td colspan="1" class="nam_top">${yy}</td>`;
     
     res += `<td colspan="3">`;
     res += `<div  class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}`;
