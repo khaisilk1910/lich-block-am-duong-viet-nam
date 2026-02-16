@@ -1842,7 +1842,7 @@
 
       .td_tet_right { line-height: 0.9; align-items: flex-end; justify-content: center; position: relative; overflow: visible; }
 
-      .show_right_tet { position: absolute; left: 50%; transform: translateX(-50%); bottom: -11px; display: flex; width: 70%; align-items: flex-end; justify-content: center; z-index: 3; }
+      .show_right_tet { position: absolute; left: 50%; transform: translateX(-50%); bottom: -11px; display: flex; width: 75%; align-items: flex-end; justify-content: center; z-index: 3; }
       
       .show_mai_tet { position: absolute; top: 0; left: 0; display: flex; text-align: center; width: clamp(100px, 3.5vw, 140px); align-items: center; justify-content: center; z-index: 3; }
 
@@ -1852,7 +1852,7 @@
       
       .show_mai_tet { transform-box: fill-box; transform-origin: 0% 35%; animation: lanternSwingSoft 4s ease-in-out infinite; }
       
-      .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { margin: 0 auto; display: block; height: auto !important; max-height: 80vh !important; max-width: 100% !important; width: auto !important; }
+      .show_mai_tet img, .show_dao_tet img, .show_right_tet img, .show_left_tet img { margin: 0 auto; display: block; height: auto !important; max-height: 70vh !important; max-width: 100% !important; width: auto !important; }
 
 
       .thang { font-size:${PRINT_OPTS.fontSize}; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed; background-color:transparent; }
