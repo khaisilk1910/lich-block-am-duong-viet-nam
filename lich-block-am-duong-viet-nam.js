@@ -1953,9 +1953,87 @@
       .cn { color:red; text-align:center; font-size:125%; }
       .homnay { font-weight:bold; }
 		
-      .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; }
+      /* .year-svg-container { position: absolute; top: -36px; width: 35px; height: 35px; animation: marquee-horizontal 8s ease-in-out infinite; } */
       
-      @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } }
+      /* @keyframes marquee-horizontal { 0% { left: 0%; transform: scaleX(-1); } 49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 50% { left: calc(100% - 35px); transform: scaleX(1); } 100% { left: 0%; transform: scaleX(1); } } */
+
+
+      /* --- 1. Container chính (Thêm overflow visible để hiển thị bụi bay ra ngoài khung) --- */
+      .year-svg-container { 
+          position: absolute; 
+          top: -36px; 
+          width: 35px; 
+          height: 35px; 
+          /* Animation di chuyển gốc của bạn */
+          animation: marquee-horizontal 8s ease-in-out infinite; 
+          /* Quan trọng: Để bóng và bụi không bị cắt mất khi bay ra ngoài khung 35x35 */
+          overflow: visible; 
+      }
+
+      /* --- 2. Tạo BÓNG ĐỔ (Shadow) bên dưới --- */
+      .year-svg-container::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;      /* Đặt thấp hơn chân một chút */
+          left: 15%;         /* Canh giữa */
+          width: 70%;        /* Chiều rộng bóng nhỏ hơn con vật một chút */
+          height: 4px;       /* Độ dẹt của bóng */
+          background: rgba(0, 0, 0, 0.25); /* Màu đen mờ */
+          border-radius: 50%; /* Hình bầu dục */
+          filter: blur(2px);  /* Làm nhòe biên bóng */
+          z-index: -1;        /* Nằm dưới con vật */
+          /* Animation bóng co giãn nhẹ khi di chuyển cho sinh động (tuỳ chọn) */
+          animation: shadow-pulse 0.5s infinite alternate;
+      }
+
+      /* --- 3. Tạo BỤI KHÓI (Dust) bay phía sau --- */
+      .year-svg-container::before {
+          content: '';
+          position: absolute;
+          bottom: 2px;
+          right: -5px; /* Đặt phía sau đuôi (khi scaleX(-1) thì nó sẽ thành phía sau) */
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.6);
+          /* Tạo thêm 2 hạt bụi nhỏ nữa bằng box-shadow để không tốn thêm thẻ div */
+          box-shadow: 
+              -5px -2px 0 -1px rgba(255, 255, 255, 0.4),
+              -3px 5px 0 -1px rgba(255, 255, 255, 0.5);
+          /* Hiệu ứng bay mờ dần */
+          animation: dust-trail 0.6s infinite linear;
+          z-index: -2;
+          opacity: 0; /* Mặc định ẩn, chỉ hiện khi animation chạy */
+      }
+
+      /* --- 4. Các Keyframes Animation --- */
+
+      /* Animation di chuyển gốc của bạn (Giữ nguyên) */
+      @keyframes marquee-horizontal { 
+          0% { left: 0%; transform: scaleX(-1); } 
+          49.9% { left: calc(100% - 35px); transform: scaleX(-1); } 
+          50% { left: calc(100% - 35px); transform: scaleX(1); } 
+          100% { left: 0%; transform: scaleX(1); } 
+      }
+
+      /* Animation cho bụi bay ra sau và tan biến */
+      @keyframes dust-trail {
+          0% {
+              transform: translate(0, 0) scale(1);
+              opacity: 0.8;
+          }
+          100% {
+              /* Bay ngược về phía sau (trục X dương vì đang bị lật) và lên trên một chút */
+              transform: translate(15px, -5px) scale(0.2); 
+              opacity: 0;
+          }
+      }
+
+      /* Animation phụ cho bóng (nhấp nháy nhẹ theo nhịp chạy) */
+      @keyframes shadow-pulse {
+          from { transform: scaleX(1); opacity: 0.25; }
+          to { transform: scaleX(1.2); opacity: 0.15; }
+      }
 
 
 
@@ -2235,16 +2313,6 @@
 
 
     // Ca dao tục ngữ
-//    const _todayObj = new Date();
-//    const _dateSeed = _todayObj.getFullYear() * 10000 + (_todayObj.getMonth() + 1) * 100 + _todayObj.getDate();
-//    let _randomIdx = Math.floor(Math.abs(Math.sin(_dateSeed)) * CA_DAO_TUC_NGU.length);
-//    let cadaotucngu_random = CA_DAO_TUC_NGU[_randomIdx];
-//    if (cadaotucngu_random) {
-//        cadaotucngu_random = cadaotucngu_random.replace(/\n/g, '<br>');
-//    } else {
-//        cadaotucngu_random = ""; 
-//    }
-//    res += `<tr><td colspan="7" ><div class="cadaotucngu">${cadaotucngu_random}</div></td></tr>`;
     res += `<tr><td colspan="7" ><div class="cadaotucngu">${getUniqueDailyContent(CA_DAO_TUC_NGU)}</div></td></tr>`;
     // Ca dao tục ngữ
 
