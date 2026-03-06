@@ -1367,7 +1367,100 @@
       "Yêu nên tốt, ghét nên xấu",
       "Yêu nhau lắm, cắn nhau đau",
       "Yêu nhau yêu cả đường đi ghét nhau ghét cả tông chi họ hàng",
-      "Yêu nhau cau sáu bổ ba, ghét nhau cau sáu bổ ra làm mười"
+      "Yêu nhau cau sáu bổ ba, ghét nhau cau sáu bổ ra làm mười",
+		"Ăn bữa nay lo bữa mai.",
+		"Ăn no rửng mỡ.",
+		"Ăn xổi ở thì.",
+		"Ăn bát cơm dẻo nhớ nẻo đường đi.",
+		"Ăn không nên đọi, nói không nên lời.",
+		"Ở đâu âu đó.",
+		"Ở sao cho vừa lòng người.",
+		"Ở sao cho phải đạo làm người.",
+		"Ở sao cho trọn nghĩa tình.",
+		"Ở đời có đức mặc sức mà ăn.",
+		"Ở đời có vay có trả.",
+		"Ở hiền thì lại gặp hiền.",
+		"Ở sao cho được lòng nhau.",
+		"Ở sao cho khỏi tiếng đời.",
+		"Ở sao cho trọn trước sau.",
+		"Anh hùng khó qua ải mỹ nhân.",
+		"Anh hùng không qua khỏi ải tình.",
+		"Anh em cốt nhục đồng bào.",
+		"Anh em thuận thảo là nhà ấm êm.",
+		"Anh em hòa thuận hai thân vui vầy.",
+		"Anh em như bát nước đầy.",
+		"Cha mẹ hiền lành để đức cho con.",
+		"Cha nào con nấy.",
+		"Cha mẹ nuôi con biển hồ lai láng.",
+		"Cha mẹ nuôi con bằng trời bằng bể.",
+		"Con cái là lộc trời cho.",
+		"Con người có trước có sau.",
+		"Con dại cái mang, con sang cái nhờ.",
+		"Con hơn cha là phúc đức.",
+		"Con hiền cháu thảo.",
+		"Có ăn có học mới nên người.",
+		"Có làm thì mới có ăn.",
+		"Không làm thì chỉ có ăn cám.",
+		"Có chí thì nên, có gan thì làm.",
+		"Có công thì hưởng.",
+		"Có vay có trả mới toại lòng nhau.",
+		"Có tiền thì nói cũng hay.",
+		"Có thực mới vực được đạo.",
+		"Có thờ có thiêng, có kiêng có lành.",
+		"Có trước có sau mới toại lòng người.",
+		"Có đức mặc sức mà ăn.",
+		"Có phúc thì hưởng.",
+		"Có tài mà cậy chi tài.",
+		"Có chí làm quan, có gan làm giàu.",
+		"Có của thì lo giữ của.",
+		"Có bệnh thì vái tứ phương.",
+		"Có tiếng mà không có miếng.",
+		"Có ăn có để.",
+		"Có mới nới cũ.",
+		"Có bột mới gột nên hồ.",
+		"Đầu xuôi thì đuôi lọt.",
+		"Đầu năm mua muối, cuối năm mua vôi.",
+		"Đêm dài lắm mộng.",
+		"Đêm tháng năm chưa nằm đã sáng.",
+		"Đất lề quê thói.",
+		"Đất chật người đông.",
+		"Đất lành chim đậu.",
+		"Đất tốt trồng cây rườm rà.",
+		"Đói ăn rau, đau uống thuốc.",
+		"Đói thì đầu gối phải bò.",
+		"Đói lòng ăn nửa trái sim.",
+		"Đói khổ mới biết thương nhau.",
+		"Đường dài mới biết ngựa hay.",
+		"Đường xa mới biết sức người.",
+		"Đi cho biết đó biết đây.",
+		"Đi một bước học một điều khôn.",
+		"Đi nhiều biết lắm.",
+		"Đi cho rộng, học cho cao.",
+		"Đi đâu cũng nhớ quê nhà.",
+		"Đi đâu cũng nhớ ngày về.",
+		"Đi cho biết sự đời.",
+		"Đi với bụt mặc áo cà sa.",
+		"Gần nhà xa ngõ.",
+		"Gần gũi thì thương.",
+		"Gần chùa gọi bụt bằng anh.",
+		"Gần thì thương xa thì nhớ.",
+		"Gần vua như gần cọp.",
+		"Gần quan được lộc.",
+		"Gần sông thì mát.",
+		"Gần nhà thì chẳng thấy thương.",
+		"Gieo nhân nào gặt quả nấy.",
+		"Gieo trồng thì gặt hái.",
+		"Gieo hạt lành gặt quả ngọt.",
+		"Gieo gió ắt gặt bão.",
+		"Giữ lấy đạo làm người.",
+		"Giữ mình trong sạch.",
+		"Giữ miệng hơn giữ vàng.",
+		"Giữ chữ tín hơn giữ vàng.",
+		"Giữ lửa gia đình.",
+		"Giữ đạo vợ chồng.",
+		"Giữ gìn gia phong.",
+		"Giữ vẹn nghĩa tình.",
+		"Giữ lòng ngay thẳng.",
   ];
 
   /**
@@ -1860,17 +1953,17 @@
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
-      .nam_top { font-family: 'Bebas Neue', sans-serif; padding: 0 5px; color:#fff; bottom: -8px; font-size: clamp(18px, 1.9vw, 24px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; padding: 0 5px; color:#fff; bottom: -8px; font-size: clamp(18px, 1.9vw, 24px); font-weight:bold; text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
 
-      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
+      .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
 
-      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
+      .thang_top_EN { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:left; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
 
       .todayduonglich { color:#fff; font-family:'Bebas Neue', sans-serif; text-align:center; font-size: clamp(140px, 17vw, 170px); line-height: 0.9; letter-spacing: 3px; font-weight: 600; text-shadow: 0 6px 10px rgba(0,0,0,0.28); position: relative; overflow: visible; }
 
-      .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 50px 0px 50px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+      .thongtin_letet{ font-family: 'Playfair Display', serif; color:rgba(255,0,0,1); line-height: 1.5; padding: 6px 6px;; margin:10px 30px 0px 30px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
-      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: 1.5; padding: 6px 6px;; margin:10px 50px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+      .cadaotucngu{ font-family: 'Playfair Display', serif; font-style:italic; color: rgba(255,255,153,1); text-shadow: 0 2px 6px rgba(255, 200, 0, 0.35); line-height: 1.5; padding: 6px 6px;; margin:10px 30px; text-align:center; font-size: clamp(12px, 1.1vw, 18px); letter-spacing: 0.7px; border-radius: 8px; background: rgba(255,255,255,0.18); border-radius:14px; border:0.4px solid rgba(255,255,255,0.15); box-shadow: 0 2px 8px rgba(0,0,0,0.12), inset 0 0.4px 0 rgba(255,255,255,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 
 
       .thutrongtuan { font-family: 'Playfair Display', serif; color: rgba(255,255,255,1); background: rgba(255,255,255,0.18); text-align:center; vertical-align: middle; font-size: clamp(19px, 2.1vw, 26px); line-height: 1.1; font-weight:bold; padding: 6px 6px;; margin-right: 2px; border-bottom-right-radius: 16px; border-top-right-radius: 16px; }
@@ -2214,7 +2307,7 @@
     const monthNameEN = showthangarray_EN[mm - 1];
     res += `<tr><td colspan="7">`;
 	res += `<div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%;">`;
-    res += `<div class="thang_top" style="text-align: right; padding-right: 15px;">Tháng ${mm} <span class="ngan_cach">❖</span>`;
+    res += `<div class="thang_top" style="text-align: right; padding-right: 8px;">Tháng ${mm} <span class="ngan_cach">❖</span>`;
         // ===== SVG Tết =====
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
@@ -2229,7 +2322,7 @@
     
     res += `<div class="nam_top" style="padding: 12px 5px 0 5px; margin: 0;">${yy}</div>`;
     
-    res += `<div  class="thang_top_EN" style="text-align: left; padding-left: 15px;"><span class="ngan_cach">❖</span> ${monthNameEN}`;
+    res += `<div  class="thang_top_EN" style="text-align: left; padding-left: 8px;"><span class="ngan_cach">❖</span> ${monthNameEN}`;
     // ===== SVG Tết =====
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
