@@ -1860,7 +1860,7 @@
       .ngan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); font-size: clamp(10px, 0.8vw, 14px); text-align:center; }
       .phan_cach { font-family: 'Be Vietnam Pro', sans-serif; color:rgba(255, 255, 255, 0.75); vertical-align: middle; text-align:center; font-size: clamp(10px, 0.8vw, 14px); padding-top: 6px; padding-bottom: 6px; }
 
-      .nam_top { font-family: 'Bebas Neue', sans-serif; padding: 0 5px; color:#fff; bottom: -8px; font-size: clamp(19px, 2.1vw, 26px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
+      .nam_top { font-family: 'Bebas Neue', sans-serif; padding: 0 5px; color:#fff; bottom: -8px; font-size: clamp(18px, 1.9vw, 24px); text-align:center; text-shadow: 0 2px 4px rgba(0,0,0,0.28); }
 
       .thang_top { font-family: 'Be Vietnam Pro', sans-serif; color:#fff; text-align:right; font-size: clamp(12px, 1.1vw, 18px); line-height:120%; font-weight:bold; border-top-left-radius: 16px; border-top-right-radius: 16px; padding-top: 15px; position: relative; overflow: visible; }
 
