@@ -2212,8 +2212,9 @@
     // Tháng Năm Top
     const showthangarray_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const monthNameEN = showthangarray_EN[mm - 1];
-    res += `<tr><td colspan="3">`;
-    res += `<div class="thang_top">Tháng ${mm} <span class="ngan_cach">❖</span>`;
+    res += `<tr><td colspan="7">`;
+	res += `<div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%;">`;
+    res += `<div class="thang_top" style="text-align: right; padding-right: 15px;">Tháng ${mm} <span class="ngan_cach">❖</span>`;
         // ===== SVG Tết =====
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
@@ -2225,12 +2226,10 @@
     }
     // ===== SVG Tết =====
     res += `</div>`;
-    res += `</td>`;
     
-    res += `<td colspan="1" class="nam_top">${yy}</td>`;
+    res += `<div class="nam_top" style="padding: 12px 5px 0 5px; margin: 0;">${yy}</div>`;
     
-    res += `<td colspan="3">`;
-    res += `<div  class="thang_top_EN"><span class="ngan_cach">❖</span> ${monthNameEN}`;
+    res += `<div  class="thang_top_EN" style="text-align: left; padding-left: 15px;"><span class="ngan_cach">❖</span> ${monthNameEN}`;
     // ===== SVG Tết =====
     if ((currentLunarDate.month === 12 && currentLunarDate.day >= 23) || 
         (currentLunarDate.month === 1 && currentLunarDate.day <= 3)) {
@@ -2240,6 +2239,7 @@
         }
     }
     // ===== SVG Tết =====
+	res += `</div>`;
     res += `</div>`;
     res += `</td></tr>`;
     // Tháng Năm Top
